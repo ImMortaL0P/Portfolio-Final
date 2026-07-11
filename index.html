@@ -4,7 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Archives | K Mangalam</title>
-    
+    <meta name="description" content="Kumar Mangalam — designer, developer & visual artist. Graphic design, photography, motion graphics and brand identity work.">
+    <meta name="theme-color" content="#0f0b08">
+    <meta property="og:title" content="The Archives | K Mangalam">
+    <meta property="og:description" content="Creating & curating digital masterpieces — graphic design, photography, motion graphics and brand identity.">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Manrope:wght@200;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -48,7 +54,7 @@
         .noise-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: 9990; opacity: 0.05;
-            background-image: url("https://www.transparenttextures.com/patterns/asfalt-light.png");
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
         }
 
         .vignette {
@@ -198,8 +204,10 @@
         
         /* Creative GIF: Glitch Overlay */
         .deco-glitch {
-            position: absolute; left: 0; top: 100px; width: 150px; opacity: 0.15;
+            position: absolute; left: 0; top: 100px; width: 150px; height: 150px; opacity: 0.15;
             mix-blend-mode: color-dodge; pointer-events: none;
+            background: repeating-linear-gradient(115deg, var(--gold-accent) 0px, var(--gold-accent) 2px, transparent 2px, transparent 14px);
+            filter: blur(0.5px);
         }
 
         .category-header {
@@ -345,7 +353,9 @@
         /* Creative GIF: Retro Disc */
         .deco-disc {
             position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-            width: 300px; opacity: 0.1; mix-blend-mode: lighten; pointer-events: none;
+            width: 300px; height: 300px; border-radius: 50%; opacity: 0.15; mix-blend-mode: lighten; pointer-events: none;
+            background: radial-gradient(circle, var(--gold-accent) 0%, transparent 70%);
+            border: 1px solid var(--gold-dim);
         }
 
         .footer-cta {
@@ -372,6 +382,19 @@
             .container { padding: 0 20px; }
             .footer-cta { font-size: 3rem; }
             .contact-panel { padding: 30px; width: 100%; height: 100vh; }
+        }
+
+        /* Restore a normal cursor on touch/coarse-pointer devices */
+        @media (pointer: coarse) {
+            *, *::before, *::after { cursor: auto !important; }
+            .cursor-dot, .cursor-circle { display: none; }
+        }
+
+        /* Respect reduced-motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .reveal-on-scroll { transition: none; opacity: 1; transform: none; }
+            #canvas-bg { display: none; }
         }
     </style>
 </head>
@@ -510,7 +533,7 @@
 
     <main class="container portfolio-section">
         
-        <img src="https://imgs.search.brave.com/xqOSlmZgQPsyztBJ3_ecDo1CWAdz_SyG7t6Y8yP_pzQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/YW5pbWF0ZWRpbWFn/ZXMub3JnL2RhdGEv/bWVkaWEvMjA5L2Fu/aW1hdGVkLWNhdC1p/bWFnZS0wMDcyLmdp/Zg.gif" class="deco-glitch" alt="Glitch">
+        <div class="deco-glitch" aria-hidden="true"></div>
 
         <div id="graphics" class="reveal-on-scroll">
             <div class="category-header">
@@ -519,15 +542,15 @@
             </div>
             <div class="bento-grid">
                 <div class="art-card big hover-trigger" onclick="openModal('graphic1')">
-                    <div class="card-img-wrap"><img src="Baba Yaga.png" class="card-img"></div>
+                    <div class="card-img-wrap"><img src="assets/baba-yaga.webp" class="card-img" loading="lazy" decoding="async" alt="The Pastel Vector Posters"></div>
                     <div class="card-info"><h3 class="card-title">The Pastel Vector Posters</h3><span class="card-meta">Print / Creatives</span></div>
                 </div>
                 <div class="art-card standard hover-trigger" onclick="openModal('graphic2')">
-                    <div class="card-img-wrap"><img src="Alleviate.png" class="card-img"></div>
+                    <div class="card-img-wrap"><img src="assets/alleviate.webp" class="card-img" loading="lazy" decoding="async" alt="One Worders Series"></div>
                     <div class="card-info"><h3 class="card-title">One Worders Series</h3><span class="card-meta">Poster Series</span></div>
                 </div>
                 <div class="art-card standard hover-trigger" onclick="openModal('graphic3')">
-                    <div class="card-img-wrap"><img src="Gloom copy.webp" class="card-img"></div>
+                    <div class="card-img-wrap"><img src="assets/gloom-thumb.webp" class="card-img" loading="lazy" decoding="async" alt="Modern HyperRealism"></div>
                     <div class="card-info"><h3 class="card-title">Modern HyperRealism</h3><span class="card-meta">Creative Series</span></div>
                 </div>
             </div>
@@ -540,11 +563,11 @@
             </div>
             <div class="bento-grid">
                 <div class="art-card big hover-trigger" onclick="openModal('photo1')">
-                    <div class="card-img-wrap"><img src="DSC_5855.jpg" class="card-img"></div>
+                    <div class="card-img-wrap"><img src="assets/dsc-5855.webp" class="card-img" loading="lazy" decoding="async" alt="Streets of Patna"></div>
                     <div class="card-info"><h3 class="card-title">Streets of Patna</h3><span class="card-meta">Street Series</span></div>
                 </div>
                 <div class="art-card big hover-trigger" onclick="openModal('photo2')">
-                    <div class="card-img-wrap"><img src="DSC_2295.jpg" class="card-img"></div>
+                    <div class="card-img-wrap"><img src="assets/dsc-2295.webp" class="card-img" loading="lazy" decoding="async" alt="Silhouettes"></div>
                     <div class="card-info"><h3 class="card-title">B&W</h3><span class="card-meta">Silhoutte Series</span></div>
                 </div>
             </div>
@@ -558,18 +581,17 @@
             <div class="bento-grid">
                 <div class="art-card big hover-trigger" onclick="openModal('video1')">
                     <div class="card-img-wrap">
-                        <img src="shoew.gif" class="card-img">
+                        <video class="card-img lazy-video" data-src="assets/showreel.mp4" poster="assets/showreel-poster.jpg" loop muted playsinline preload="none"></video>
                     </div>
                     <div class="card-info"><h3 class="card-title">Kinetic Showreel '25</h3><span class="card-meta">Motion Graphics</span></div>
                 </div>
                 <div class="art-card big hover-trigger" onclick="openModal('clients')">
                     <div class="client-split">
                         <div class="client-half">
-                            <img src="SP 1 F.png" class="card-img" style="filter: brightness(0.4);">
+                            <img src="assets/sp-1.webp" class="card-img" loading="lazy" decoding="async" style="filter: brightness(0.4);" alt="SP Services brand identity">
                             <div class="client-logo">SP<br>SERVICES</div>
                         </div>
-                        <div class="client-half">
-                            <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2668" class="card-img" style="filter: brightness(0.4);">
+                        <div class="client-half" style="background: linear-gradient(135deg, #241b12, #0f0b08);">
                             <div class="client-logo">Lax<br>confectionery</div>
                         </div>
                     </div>
@@ -582,7 +604,10 @@
     <div class="modal-wrap" id="projectModal">
         <div class="modal-panel project-panel">
             <button class="modal-close hover-trigger" onclick="closeModal('projectModal')">×</button>
-            <div class="modal-visual"><img id="mHero" src="" alt=""></div>
+            <div class="modal-visual">
+                <img id="mHero" alt="" style="display:none;">
+                <video id="mHeroVideo" autoplay loop muted playsinline style="display:none; width:100%; height:100%; object-fit:cover;"></video>
+            </div>
             <div class="modal-details">
                 <span class="accent-text" style="font-size: 0.9rem; margin-bottom: 20px;">Project Details</span>
                 <h2 id="mTitle" style="font-size: 3rem; margin-bottom: 30px; line-height: 1.1;">Title</h2>
@@ -590,7 +615,7 @@
                 <div style="margin-top: 50px;">
                     <span class="accent-text" style="font-size: 0.8rem;">Additional Views</span>
                     <div class="modal-gallery-grid">
-                        <img id="mImg1" src=""><img id="mImg2" src=""><img id="mImg3" src="">
+                        <img id="mImg1" alt="" loading="lazy"><img id="mImg2" alt="" loading="lazy"><img id="mImg3" alt="" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -637,7 +662,7 @@
     </div>
 
     <footer id="contact">
-        <img src="" class="deco-disc" alt="">
+        <div class="deco-disc" aria-hidden="true"></div>
 
         <div class="container">
             <p style="color: var(--gold-accent); margin-bottom: 20px; letter-spacing: 2px;">READY TO COLLABORATE?</p>
@@ -670,58 +695,59 @@
             'graphic1': {
                 title: "The Pastel Vector Posters",
                 desc: "A complete reimagining of the classic style posters, giving a tint of retro and modernism at once.",
-                hero: "Baba Yaga.png",
-                g1: "Leo Caprio copy.png",
-                g2: "Tony Stark copy.png",
-                g3: "novak final copy.jpg"
+                hero: "assets/baba-yaga.webp",
+                g1: "assets/leo-caprio.webp",
+                g2: "assets/tony-stark.webp",
+                g3: "assets/novak.webp"
             },
             'graphic2': {
                 title: "One Worders Series",
                 desc: "Poster series exploring the fusion of realism and illustrated elements.",
-                hero: "Alleviate.png",
-                g1: "Solitude copy.png",
-                g2: "Fitoor copy.png",
-                g3: "car california.png"
+                hero: "assets/alleviate.webp",
+                g1: "assets/solitude.webp",
+                g2: "assets/fitoor.webp",
+                g3: "assets/car-california.webp"
             },
             'graphic3': {
                 title: "Modern HyperRealism",
                 desc: "Real life subjects blended with surreal and abstract elements to create striking visuals.",
-                hero: "Gloom.png",
-                g1: "Earth Composite.png",
-                g2: "comp.jpg",
-                g3: "Bird Silhoutte wide signature.jpg"
+                hero: "assets/gloom.webp",
+                g1: "assets/earth-composite.webp",
+                g2: "assets/comp.webp",
+                g3: "assets/bird-silhouette.webp"
             },
             'photo1': {
                 title: "Streets of Patna",
                 desc: "Shot on Nikon D3300, D5300, Cannon 80 D. A journey through streets of Patna, settlements & people like never seen before.",
-                hero: "DSC_5855.jpg",
-                g1: "DSC_6490.jpg",
-                g2: "DSC_0241.jpg",
-                g3: "DSC_0257.jpg"
+                hero: "assets/dsc-5855.webp",
+                g1: "assets/dsc-6490.webp",
+                g2: "assets/dsc-0241.webp",
+                g3: "assets/dsc-0257.webp"
             },
             'photo2': {
                 title: "Silhouttes",
                 desc: "When light meets shadow. A black and white exploration of forms, contrasts, and the beauty of simplicity.",
-                hero: "DSC_2295.jpg",
-                g1: "DSC_1612.jpg",
-                g2: "IMG_1291-2.jpg",
-                g3: "DSC_1814.jpg"
+                hero: "assets/dsc-2295.webp",
+                g1: "assets/dsc-1612.webp",
+                g2: "assets/img-1291.webp",
+                g3: "assets/dsc-1814.webp"
             },
             'video1': {
                 title: "Kinetic Reel 2025",
                 desc: "A high-energy compilation of my best motion work, featuring 3D renders, kinetic typography, and VFX.",
-                hero: "shoew.gif",
-                g1: "Xordium Gif.gif",
-                g2: "prakrida reveal.gif",
-                g3: "Team Ashwa Teaser.gif"
+                hero: "assets/showreel.mp4",
+                heroType: "video",
+                g1: "assets/xordium-poster.jpg",
+                g2: "assets/prakrida-poster.jpg",
+                g3: "assets/team-ashwa-poster.jpg"
             },
             'clients': {
                 title: "Client Showcase",
                 desc: "SP Services underwent a complete brand identity transformation to establish a professional presence in the financial recovery sector. The project included a refined logo, stationery suite, business cards, corporate signage, and brand applications.",
-                hero: "SP 2 F.png",
-                g1: "SP 1 F.png",
-                g2: "SP 3 F.png",
-                g3: "SP 4 F.png"
+                hero: "assets/sp-2.webp",
+                g1: "assets/sp-1.webp",
+                g2: "assets/sp-3.webp",
+                g3: "assets/sp-4.webp"
             }
         };
 
@@ -763,6 +789,7 @@
         });
 
         // --- 5. PARTICLE SYSTEM (Stardust) ---
+        const skipMotion = window.matchMedia('(pointer: coarse), (prefers-reduced-motion: reduce)').matches;
         const canvas = document.getElementById('canvas-bg');
         const ctx = canvas.getContext('2d');
         let particlesArray;
@@ -808,24 +835,41 @@
             requestAnimationFrame(animateParticles);
         }
 
-        initParticles();
-        animateParticles();
-        
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+        if (!skipMotion) {
             initParticles();
-        });
+            animateParticles();
 
-        window.addEventListener('mousemove', (e) => {
-            particlesArray.forEach(p => {
-                let dx = e.clientX - p.x;
-                let dy = e.clientY - p.y;
-                let distance = Math.sqrt(dx*dx + dy*dy);
-                if (distance < 100) {
-                    p.x -= dx/10; p.y -= dy/10;
-                }
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                initParticles();
             });
+
+            window.addEventListener('mousemove', (e) => {
+                particlesArray.forEach(p => {
+                    let dx = e.clientX - p.x;
+                    let dy = e.clientY - p.y;
+                    let distance = Math.sqrt(dx*dx + dy*dy);
+                    if (distance < 100) {
+                        p.x -= dx/10; p.y -= dy/10;
+                    }
+                });
+            });
+        }
+
+        // --- 5b. LAZY VIDEO LOADING ---
+        document.querySelectorAll('.lazy-video').forEach((vid) => {
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        if (!vid.src) vid.src = vid.dataset.src;
+                        vid.play().catch(() => {});
+                    } else {
+                        vid.pause();
+                    }
+                });
+            }, { threshold: 0.25 });
+            io.observe(vid);
         });
 
         // --- 6. SCROLL PROGRESS & ANIMATIONS ---
@@ -854,7 +898,23 @@
             if(!data) return;
             document.getElementById('mTitle').innerText = data.title;
             document.getElementById('mDesc').innerText = data.desc;
-            document.getElementById('mHero').src = data.hero;
+
+            const mHero = document.getElementById('mHero');
+            const mHeroVideo = document.getElementById('mHeroVideo');
+            if (data.heroType === 'video') {
+                mHero.style.display = 'none';
+                mHero.removeAttribute('src');
+                mHeroVideo.src = data.hero;
+                mHeroVideo.style.display = 'block';
+                mHeroVideo.load();
+            } else {
+                mHeroVideo.pause();
+                mHeroVideo.style.display = 'none';
+                mHeroVideo.removeAttribute('src');
+                mHero.src = data.hero;
+                mHero.style.display = 'block';
+            }
+
             document.getElementById('mImg1').src = data.g1;
             document.getElementById('mImg2').src = data.g2;
             document.getElementById('mImg3').src = data.g3;
@@ -868,7 +928,10 @@
         }
 
         function closeModal(modalId) {
-            if(modalId === 'projectModal') projectModal.classList.remove('open');
+            if(modalId === 'projectModal') {
+                projectModal.classList.remove('open');
+                document.getElementById('mHeroVideo').pause();
+            }
             if(modalId === 'contactModal') contactModal.classList.remove('open');
             document.body.style.overflow = 'auto';
         }
