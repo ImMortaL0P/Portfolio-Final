@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writings — Mangalam</title>
+    <meta name="theme-color" content="#120a10">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================
+           1. CORE VARIABLES & RESET
+           ========================================= */
+        :root {
+            --bg: #120a10;
+            --surface: #1e1218;
+            --surface-2: #291721;
+            --cream: #f7ede1;
+            --cream-dim: #b3a196;
+            --ink: #120a10;
+            --lime: #ff6b4a;
+            --pink: #ffb703;
+            --violet: #d94fd4;
+            --border-w: 3px;
+            --container: 1400px;
+            --easing: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--cream);
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 0.95;
+            text-transform: uppercase;
+        }
+
+        img { max-width: 100%; display: block; }
+        a { color: inherit; text-decoration: none; }
+
+        .container { max-width: var(--container); margin: 0 auto; padding: 0 40px; position: relative; }
+        .flex { display: flex; justify-content: space-between; align-items: center; }
+
+        ::selection { background: var(--lime); color: var(--ink); }
+
+        /* =========================================
+           2. AMBIENT BACKGROUND
+           ========================================= */
+        .noise-overlay {
+            position: fixed; inset: 0; pointer-events: none; z-index: 9990; opacity: 0.05; mix-blend-mode: overlay;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+        }
+
+        /* =========================================
+           3. CUSTOM CURSOR
+           ========================================= */
+        .cursor-dot {
+            width: 9px; height: 9px; background: #fff; mix-blend-mode: difference;
+            position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
+            border-radius: 50%; pointer-events: none; z-index: 99999;
+        }
+        .cursor-ring {
+            width: 42px; height: 42px; border: 2px solid #fff; mix-blend-mode: difference;
+            position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
+            border-radius: 50%; pointer-events: none; z-index: 99999;
+            transition: width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s;
+        }
+        body.hovering .cursor-ring { width: 76px; height: 76px; background: #fff; border-color: #fff; opacity: 0.6; }
+
+        /* =========================================
+           4. NAVIGATION
+           ========================================= */
+        nav { position: fixed; top: 0; width: 100%; padding: 26px 0; z-index: 100; mix-blend-mode: difference;}
+        .logo { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em; text-transform: uppercase; color: var(--cream); }
+        .logo span { color: var(--lime); }
+        .menu-btn {
+            display: flex; align-items: center; gap: 12px; background: transparent; border: 2px solid var(--cream);
+            color: var(--cream); padding: 12px 22px; font-family: 'Space Grotesk', sans-serif; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; border-radius: 999px;
+        }
+        .menu-btn .bars { display: flex; flex-direction: column; gap: 3px; }
+        .menu-btn .bars span { width: 16px; height: 2px; background: var(--cream); display: block; }
+
+        /* Fullscreen overlay menu */
+        .menu-overlay {
+            position: fixed; inset: 0; background: var(--lime); color: var(--ink); z-index: 20000;
+            transform: translateY(-100%); transition: transform 0.6s var(--easing);
+            display: flex; flex-direction: column; justify-content: space-between; padding: 40px 0 60px;
+        }
+        .menu-overlay.open { transform: translateY(0); }
+        .menu-close {
+            position: absolute; top: 26px; right: 40px; background: none; border: none; color: var(--ink);
+            font-size: 2.4rem; line-height: 1; z-index: 2;
+        }
+        .menu-links { display: flex; flex-direction: column; gap: 6px; }
+        .menu-links a {
+            font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; text-transform: uppercase;
+            font-size: clamp(2.6rem, 9vw, 6rem); letter-spacing: -0.02em; transition: transform 0.35s var(--easing), color 0.35s;
+            display: inline-block;
+        }
+        .menu-links a:hover { transform: translateX(20px); color: var(--cream); }
+        .menu-footer { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; }
+        .menu-footer a { font-weight: 700; text-transform: uppercase; font-size: 0.85rem; border-bottom: 2px solid var(--ink); padding-bottom: 2px; }
+        .menu-socials { display: flex; gap: 24px; }
+
+        /* =========================================
+           5. JOURNAL HEADER
+           ========================================= */
+        .journal-header {
+            padding: 200px 0 100px;
+            text-align: center;
+        }
+        
+        .journal-title {
+            font-size: clamp(3rem, 10vw, 8rem);
+            margin-bottom: 30px;
+        }
+
+        .journal-subtitle {
+            font-size: 1.2rem;
+            color: var(--cream-dim);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        /* =========================================
+           6. MINIMALIST GRID (MASONRY-LIKE)
+           ========================================= */
+        .journal-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 120px 80px;
+            padding-bottom: 150px;
+        }
+
+        .journal-post {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Offset for masonry effect */
+        .journal-post:nth-child(even) {
+            margin-top: 100px;
+        }
+
+        .post-image-wrapper {
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            background: var(--surface);
+        }
+
+        .post-image-wrapper.portrait {
+            padding-top: 125%; /* 4:5 aspect ratio */
+        }
+        
+        .post-image-wrapper.landscape {
+            padding-top: 75%; /* 4:3 aspect ratio */
+        }
+        
+        .post-image-wrapper.square {
+            padding-top: 100%; /* 1:1 aspect ratio */
+        }
+
+        .post-img {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 1.2s var(--easing);
+            filter: grayscale(20%);
+        }
+
+        .journal-post:hover .post-img {
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
+
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(245,241,230,0.15);
+            padding-bottom: 12px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--cream-dim);
+            font-weight: 700;
+        }
+
+        .post-title {
+            font-size: 2.2rem;
+            line-height: 1.1;
+            transition: color 0.3s;
+        }
+
+        .journal-post:hover .post-title {
+            color: var(--lime);
+        }
+
+        .post-excerpt {
+            color: var(--cream-dim);
+            font-size: 1.05rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            opacity: 0.8;
+        }
+
+        /* =========================================
+           7. FOOTER
+           ========================================= */
+        footer { padding: 70px 0 50px; border-top: 2px solid rgba(245,241,230,0.15); text-align: center; }
+        .copyright { color: var(--cream-dim); font-size: 0.8rem; }
+
+        @media (max-width: 1024px) {
+            .journal-grid { grid-template-columns: 1fr; gap: 80px; }
+            .journal-post:nth-child(even) { margin-top: 0; }
+        }
+
+        @media (pointer: coarse) {
+            *, *::before, *::after { cursor: auto !important; }
+            .cursor-dot, .cursor-ring { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="noise-overlay"></div>
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+
+    <nav>
+        <div class="container flex">
+            <a href="index.html" class="logo hover-trigger">MANGALAM<span>.</span></a>
+            <button class="menu-btn hover-trigger" onclick="toggleMenu(true)">
+                <span class="bars"><span></span><span></span><span></span></span>
+                Menu
+            </button>
+        </div>
+    </nav>
+
+    <div class="menu-overlay" id="menuOverlay">
+        <button class="menu-close hover-trigger" onclick="toggleMenu(false)">×</button>
+        <div class="container">
+            <div class="menu-links">
+                <a href="index.html#work" class="hover-trigger" onclick="toggleMenu(false)">Work</a>
+                <a href="index.html#about" class="hover-trigger" onclick="toggleMenu(false)">About</a>
+                <a href="writings.html" class="hover-trigger" onclick="toggleMenu(false)">WRITINGS</a>
+                <a href="index.html" class="hover-trigger" onclick="toggleMenu(false)">Contact</a>
+            </div>
+        </div>
+        <div class="container menu-footer">
+            <span>kumarmangalam.patna@gmail.com</span>
+            <div class="menu-socials">
+                <a href="https://www.linkedin.com/in/kumar-mangalam-362a77176/" class="hover-trigger">LinkedIn</a>
+                <a href="https://www.behance.net/kumarmangalam1" class="hover-trigger">Behance</a>
+                <a href="#" class="hover-trigger">Instagram</a>
+            </div>
+        </div>
+    </div>
+
+    <header class="journal-header container">
+        <h1 class="journal-title">Writings</h1>
+        <p class="journal-subtitle">A collection of thoughts, visual essays, and experiments in design, photography, and motion.</p>
+    </header>
+
+    <main class="container">
+        <div class="journal-grid">
+            <!-- Post 1 -->
+            <a href="#" class="journal-post hover-trigger">
+                <div class="post-image-wrapper portrait">
+                    <img src="assets/baba-yaga.webp" alt="Visual Storytelling" class="post-img" loading="lazy">
+                </div>
+                <div class="post-meta">
+                    <span>Oct 12, 2023</span>
+                    <span>Photography</span>
+                </div>
+                <h2 class="post-title">The Art of Shadows in Portraiture</h2>
+                <p class="post-excerpt">Exploring how the absence of light defines the mood and narrative of a portrait. A deep dive into chiaroscuro and modern cinematic lighting techniques.</p>
+            </a>
+
+            <!-- Post 2 -->
+            <a href="#" class="journal-post hover-trigger">
+                <div class="post-image-wrapper landscape">
+                    <img src="assets/typo-hero.jpg" alt="Typography" class="post-img" loading="lazy">
+                </div>
+                <div class="post-meta">
+                    <span>Sep 28, 2023</span>
+                    <span>Design</span>
+                </div>
+                <h2 class="post-title">Brutalism in Modern Web Typography</h2>
+                <p class="post-excerpt">Why large, unapologetic typefaces are dominating digital spaces, and how to balance them with minimalist layouts to create striking user experiences.</p>
+            </a>
+
+            <!-- Post 3 -->
+            <a href="#" class="journal-post hover-trigger">
+                <div class="post-image-wrapper square">
+                    <img src="assets/alleviate.webp" alt="Motion Graphics" class="post-img" loading="lazy">
+                </div>
+                <div class="post-meta">
+                    <span>Aug 15, 2023</span>
+                    <span>Motion</span>
+                </div>
+                <h2 class="post-title">Fluidity: Animating with Purpose</h2>
+                <p class="post-excerpt">Motion should never be an afterthought. This essay breaks down the principles of adding meaningful, physics-based animations to brand identities.</p>
+            </a>
+
+            <!-- Post 4 -->
+            <a href="#" class="journal-post hover-trigger">
+                <div class="post-image-wrapper portrait">
+                    <img src="assets/solitude.webp" alt="Solitude" class="post-img" loading="lazy">
+                </div>
+                <div class="post-meta">
+                    <span>Jul 02, 2023</span>
+                    <span>Visual Art</span>
+                </div>
+                <h2 class="post-title">Finding Silence in a Loud Medium</h2>
+                <p class="post-excerpt">In an era of hyper-stimulation, how can designers create moments of pause? A look at negative space, muted palettes, and the power of doing less.</p>
+            </a>
+            
+            <!-- Post 5 -->
+            <a href="#" class="journal-post hover-trigger">
+                <div class="post-image-wrapper landscape">
+                    <img src="assets/mockup-hero.jpg" alt="Mockups" class="post-img" loading="lazy">
+                </div>
+                <div class="post-meta">
+                    <span>Jun 18, 2023</span>
+                    <span>Branding</span>
+                </div>
+                <h2 class="post-title">Beyond the Flat Logo</h2>
+                <p class="post-excerpt">How photorealistic mockups bridge the gap between abstract design and tangible brand identity, bringing life to early-stage concepts.</p>
+            </a>
+            
+            <!-- Post 6 -->
+            <a href="#" class="journal-post hover-trigger">
+                <div class="post-image-wrapper square">
+                    <img src="assets/gloom-thumb.webp" alt="Editorial" class="post-img" loading="lazy">
+                </div>
+                <div class="post-meta">
+                    <span>May 10, 2023</span>
+                    <span>Editorial</span>
+                </div>
+                <h2 class="post-title">The Return of Print Aesthetics</h2>
+                <p class="post-excerpt">Digital design is increasingly borrowing from traditional print layouts. From visible grids to serif typefaces, examining the analog revival on the web.</p>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="copyright">&copy; 2023 Mangalam. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Custom Cursor
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorRing = document.querySelector('.cursor-ring');
+        
+        if (window.matchMedia("(pointer: fine)").matches) {
+            window.addEventListener('mousemove', (e) => {
+                cursorDot.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+                cursorRing.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+            });
+
+            document.querySelectorAll('.hover-trigger').forEach(el => {
+                el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+                el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+            });
+        }
+
+        // Mobile Menu Toggle
+        function toggleMenu(show) {
+            const overlay = document.getElementById('menuOverlay');
+            if (show) {
+                overlay.classList.add('open');
+            } else {
+                overlay.classList.remove('open');
+            }
+        }
+    </script>
+</body>
+</html>
