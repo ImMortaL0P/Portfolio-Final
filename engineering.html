@@ -100,11 +100,12 @@
 
         /* Fullscreen overlay menu */
         .menu-overlay {
+            opacity: 0; pointer-events: none;
             position: fixed; inset: 0; background: var(--lime); color: var(--ink); z-index: 20000;
-            transform: translateY(-100%); transition: transform 0.6s var(--easing);
+            transform: translateY(-100%); transition: transform 0.6s var(--easing), opacity 0.6s var(--easing);
             display: flex; flex-direction: column; justify-content: space-between; padding: 40px 0 60px;
         }
-        .menu-overlay.open { transform: translateY(0); }
+        .menu-overlay.open { transform: translateY(0); opacity: 1; pointer-events: all; }
         .menu-close {
             position: absolute; top: 26px; right: 40px; background: none; border: none; color: var(--ink);
             font-size: 2.4rem; line-height: 1; z-index: 2;
@@ -295,8 +296,10 @@
         <h2 class="section-title" style="color: var(--cream); margin-top: 40px; margin-bottom: 20px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 2rem;">Work Experience & Internships</h2>
         <div class="journal-grid" style="padding-bottom: 80px;">
             <a href="eng-jspl.html" class="journal-post hover-trigger">
-                <div class="post-image-wrapper landscape">
-                    <img src="assets/engineering-custom.png" alt="JSPL" class="post-img" loading="lazy">
+                <div class="post-image-wrapper landscape" style="position: relative; overflow: hidden; background: #000;">
+                    <iframe src="https://www.youtube.com/embed/UvGwIFVUK7M?autoplay=1&mute=1&controls=0&loop=1&playlist=UvGwIFVUK7M&rel=0&showinfo=0" 
+                            style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 150%; height: 150%; pointer-events: none;" 
+                            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                 </div>
                 <div class="post-meta">
                     <span>July 2023 - Dec 2024</span>
@@ -307,8 +310,10 @@
             </a>
 
             <a href="eng-sail.html" class="journal-post hover-trigger">
-                <div class="post-image-wrapper portrait">
-                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="SAIL & EIL" class="post-img" loading="lazy">
+                <div class="post-image-wrapper landscape" style="position: relative; overflow: hidden; background: #000;">
+                    <iframe src="https://www.youtube.com/embed/d-OoVwyyZXU?autoplay=1&mute=1&controls=0&loop=1&playlist=d-OoVwyyZXU&rel=0&showinfo=0&end=39" 
+                            style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 150%; height: 150%; pointer-events: none;" 
+                            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                 </div>
                 <div class="post-meta">
                     <span>May 2022 - July 2022</span>
@@ -323,7 +328,7 @@
         <div class="journal-grid">
             <a href="eng-fintabula.html" class="journal-post hover-trigger">
                 <div class="post-image-wrapper square">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="FinTabula" class="post-img" loading="lazy">
+                    <img src="assets/fintabula.jpg" alt="FinTabula" class="post-img" loading="lazy">
                 </div>
                 <div class="post-meta">
                     <span>2024 - Present</span>
@@ -335,7 +340,7 @@
 
             <a href="eng-whatsapp.html" class="journal-post hover-trigger">
                 <div class="post-image-wrapper landscape">
-                    <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=800&q=80" alt="WhatsApp Agent" class="post-img" loading="lazy">
+                    <img src="assets/whatsapp_hero.png" alt="WhatsApp Agent" class="post-img" loading="lazy">
                 </div>
                 <div class="post-meta">
                     <span>2024 - Present</span>
@@ -347,7 +352,7 @@
 
             <a href="eng-scm.html" class="journal-post hover-trigger">
                 <div class="post-image-wrapper portrait">
-                    <img src="https://images.unsplash.com/photo-1586528116311-ad8c738759be?auto=format&fit=crop&w=800&q=80" alt="SCM Mission Control" class="post-img" loading="lazy">
+                    <img src="assets/scm_hero.png" alt="SCM Mission Control" class="post-img" loading="lazy">
                 </div>
                 <div class="post-meta">
                     <span>2024 - Present</span>
@@ -359,7 +364,7 @@
 
             <a href="eng-tools101.html" class="journal-post hover-trigger">
                 <div class="post-image-wrapper landscape">
-                    <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=800&q=80" alt="Tools 101" class="post-img" loading="lazy">
+                    <img src="assets/tools_automation.jpg" alt="Tools 101" class="post-img" loading="lazy">
                 </div>
                 <div class="post-meta">
                     <span>2024 - Present</span>
@@ -371,7 +376,7 @@
 
             <a href="eng-pdf-bot.html" class="journal-post hover-trigger">
                 <div class="post-image-wrapper square">
-                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80" alt="PDF Bot" class="post-img" loading="lazy">
+                    <img src="assets/telegram_drive.jpg" alt="PDF Bot" class="post-img" loading="lazy">
                 </div>
                 <div class="post-meta">
                     <span>2024</span>
@@ -379,18 +384,6 @@
                 </div>
                 <h2 class="post-title">Telegram to Google Drive Sync</h2>
                 <p class="post-excerpt">An asynchronous Python script built with Telethon that safely extracts PDF documents from targeted Telegram channels and streams them directly into Google Drive via API.</p>
-            </a>
-
-            <a href="eng-jspl-sheet.html" class="journal-post hover-trigger">
-                <div class="post-image-wrapper landscape">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="JSPL Sheet API" class="post-img" loading="lazy">
-                </div>
-                <div class="post-meta">
-                    <span>Nov 2024</span>
-                    <span>Backend Scripting</span>
-                </div>
-                <h2 class="post-title">Google Sheets Automated Reporting</h2>
-                <p class="post-excerpt">An automated backend service that synchronizes large-scale internal SQL database records into structured, actionable Google Sheets reports for Senior Management using the Google API.</p>
             </a>
         </div>
     </main>

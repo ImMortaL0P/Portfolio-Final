@@ -39,8 +39,8 @@
         .menu-btn { display: flex; align-items: center; gap: 12px; background: transparent; border: 2px solid var(--cream); color: var(--cream); padding: 12px 22px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; border-radius: 999px; }
         .menu-btn .bars { display: flex; flex-direction: column; gap: 3px; }
         .menu-btn .bars span { width: 16px; height: 2px; background: var(--cream); display: block; }
-        .menu-overlay { position: fixed; inset: 0; background: var(--lime); color: var(--ink); z-index: 20000; transform: translateY(-100%); transition: transform 0.6s var(--easing); display: flex; flex-direction: column; justify-content: space-between; padding: 40px 0 60px; }
-        .menu-overlay.open { transform: translateY(0); }
+        .menu-overlay { opacity: 0; pointer-events: none; position: fixed; inset: 0; background: var(--lime); color: var(--ink); z-index: 20000; transform: translateY(-100%); transition: transform 0.6s var(--easing); display: flex; flex-direction: column; justify-content: space-between; padding: 40px 0 60px; }
+        .menu-overlay.open { opacity: 1; pointer-events: all; transform: translateY(0); }
         .menu-close { position: absolute; top: 26px; right: 40px; background: none; border: none; color: var(--ink); font-size: 2.4rem; line-height: 1; z-index: 2; }
         .menu-links { display: flex; flex-direction: column; gap: 6px; }
         .menu-links a { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; text-transform: uppercase; font-size: clamp(2.6rem, 9vw, 6rem); letter-spacing: -0.02em; transition: transform 0.35s var(--easing), color 0.35s; display: inline-block; }
@@ -99,40 +99,33 @@
         </div>
     </div>
 
-    <header class="article-hero" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80');">
+    <header class="article-hero" style="background-image: url('assets/fintabula.jpg');">
         <div class="article-hero-content">
-            <h1 class="article-title">A sound of Thunder:<br>The Software Project of Chaos</h1>
-            <div class="article-meta">2024 - Present • Software Project</div>
+            <h1 class="article-title">FinTabula</h1>
+            <div class="article-meta">2024 - Present • AI Engineering</div>
         </div>
     </header>
 
     <main class="article-body">
-        <p>Chaos theory says within the apparent randomness of chaotic complex systems, there are underlying patterns, interconnectedness, constant feedback loops, repetition, self-similarity, fractals, and self-organization. The butterfly effect, an underlying principle of chaos, describes how a small change in one state of a deterministic nonlinear system can result in large differences in a later state (there is sensitive dependence on initial conditions).</p>
+
+        <h3>Financial Statement Table Extractor</h3>
+        <p>FinTabula is a modern, light, and beautiful web application built to automate the tedious process of extracting tabular data from financial statements (Balance Sheets, Income Statements, Cash Flow Statements) stored in PDF format. Built with FastAPI and a modern frontend, it bridges the gap between unstructured document data and structured analytical pipelines.</p>
         
-        <figure class="article-image hover-trigger" style="background-image: url('assets/nathan.jpg');" aria-label="Chaos abstract"></figure>
+        <figure class="article-image hover-trigger" style="background-image: url('assets/fintabula.jpg');" aria-label="FinTabula Dashboard"></figure>
 
-        <p>“A Sound of Thunder" is a science fiction short story by American writer Ray Bradbury, first published in Collier's magazine in the June 28, 1952. This story is often credited with the origin of the term Butterfly Effect. The plot of the story goes as in the year 2055, time travel has become a practical reality, and the company Time Safari Inc. offers wealthy adventurers the chance to travel back in time to hunt extinct species such as dinosaurs. A hunter named Eckels pays $10,000 to join a hunting party that will travel back 66 million years to a guided safari to kill a Tyrannosaurus rex. When the party arrives in the past, Travis (the hunting guide) and Lesperance (Travis's assistant) warn Eckels and the two other hunters, Billings and Kramer, about the necessity of minimizing the events they change before they go back, since even the smallest alterations to the distant past could snowball into catastrophic changes in history. Travis explains that the hunters are obliged to stay on a levitating path to avoid disrupting the environment, that any deviation will be punished with hefty fines, and that prior to the hunt, Time Safari scouts had been sent back to select and tag their prey, which would have died within minutes anyway, and whose death has been calculated to have minimal effect on the future.</p>
+        <h3>Dual Extraction Engines</h3>
+        <p>FinTabula offers unparalleled flexibility through its dual-engine architecture:</p>
+        <ul>
+            <li style="color: var(--cream-dim); margin-bottom: 10px;"><strong>Local Engine:</strong> Powered by <code>pdfplumber</code>, this engine parses vector-text PDF statements locally for instant, privacy-first, and zero-cost extraction. It precisely calculates bounding boxes and infers table structures based on strict coordinates.</li>
+            <li style="color: var(--cream-dim);"><strong>Gemini AI Engine:</strong> Utilizing Google's Gemini 1.5 Flash multi-modal vision model, this engine intelligently scans and reconstructs complex, multi-page, or scanned (image-only) tables. It excels in semantic parsing, preventing word splits in dense columns, handling hierarchical headers, and perfectly mapping footnotes across margins.</li>
+        </ul>
 
-        <figure class="article-image hover-trigger" style="background-image: url('assets/daniele.jpg');" aria-label="Portfolio Image"></figure>
+        <h3>Interactive Spreadsheet Editor</h3>
+        <p>Beyond extraction, FinTabula features a sleek, dark-themed browser spreadsheet grid. It allows users to preview extracted sheets, double-click to edit cell values directly in the browser, add/remove rows and columns, and rename or delete sheets before generating the final export.</p>
 
-        <p>Although Eckels is initially excited about the hunt, when the monstrous beast approaches, he loses his nerve. He panics and runs back to the time machine through the forest. The hunting party then kills the T-Rex and returns to the future. Travis asks the people at the company if everything was ok and they nod in affirmation, but things don’t feel the same to anyone, the words of English were spelled differently, the president was someone else. Eckels panics and searches himself for all the things he could have disturbed in the past, that’s when he finds in his mud laden boots a butterfly, beautiful and crushed, but dead. Somehow, the death of this little butterfly has resulted into catastrophic changes in future. Eckels begs Travis to take him back to the past so he could fix things he ruined, but Travis objects saying it could only result in further more paradoxes. On hearing this Eckels sits down and starts to cry, eyes closed, when he hears Travis taking the safety off from his rifle & when he opens his eyes, all he could hear was “a sound of thunder”.</p>
-
-        <p>The phrase ‘A butterfly flaps its wings in Tokyo and a Tornado occurs in Texas’ is a common phrase that shows how this theory has fascinated people for generations.</p>
-
-        <div class="article-quote">
-            “If this intellect were vast enough to submit the data to analysis<br>Then the future, just like the past would be present before its eyes”<br>
-            <span style="font-size: 1rem; font-style: normal; color: var(--cream-dim);">— P S Laplace</span>
-        </div>
-
-        <p>The butterfly effect showed that the predictability of any chaotic systems can only be accurate if the number of variables at play will be very less and the initial condition for each variable is accurate to every single decimal place, and this means accuracy till infiniteth decimal places, which is practically impossible. This is the reason why it is easier to predict the motion of celestial bodies than it is to predict the weather on the planet for 1 week, there are just too many variables at play, say pressure, moisture, wind speed, particulate presence etc.</p>
+        <h3>Premium Data Export</h3>
+        <p>The application outputs beautifully styled Excel workbooks featuring zebra striping for readability, bold navy-filled headers, auto-fitted column widths, and intelligent cell alignment (numbers right, text left), ensuring the data is instantly presentation-ready.</p>
         
-        <figure class="article-image hover-trigger" style="background-image: url('assets/emrah.jpg');" aria-label="Unpredictability"></figure>
-
-        <p>Chaos Theory, however, tells us that if chaotic systems are left to repeat themselves over time, we would notice the underlying patterns, fractals, deterministic properties, which can be predicted by taking the correct initial conditions over the right time scale.</p>
-        <p>The butterfly effect and chaos theory together somewhat makes the possibility of Time Travel to be possible in future just a fantasy. But still humans are a very young species, may in the future acquire the skills for producing all the variables with perfect accuracies and found a way to break the 2nd Law of Thermodynamics, to make the time travel possible.</p>
-        <p>Until then, humans must find a way to keep their civilization going and the chaos theory will keep serving us in the same way it is now, in cryptography algorithms, biological sciences and so on.</p>
-
-        <div class="article-author">— K. Mangalam</div>
     </main>
 
     <footer>
