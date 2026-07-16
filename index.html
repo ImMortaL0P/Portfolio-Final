@@ -457,8 +457,9 @@
         .client-split { display: flex; flex-direction: column; height: 100%; }
         .client-half {
             flex: 1; position: relative; overflow: hidden; border-bottom: 2px solid var(--cream);
-            display: flex; align-items: center; justify-content: center;
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
         }
+        .client-half .card-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
         .client-half:last-child { border: none; }
         .client-logo {
             position: relative; z-index: 2; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800;
@@ -721,10 +722,11 @@
         <button class="menu-close hover-trigger" onclick="toggleMenu(false)">×</button>
         <div class="container">
             <div class="menu-links">
-                <a href="#work" class="hover-trigger" onclick="toggleMenu(false)">Work</a>
-                <a href="#about" class="hover-trigger" onclick="toggleMenu(false)">About</a>
-                <a href="writings.html" class="hover-trigger">WRITINGS</a>
-                <a href="#" class="hover-trigger" onclick="toggleMenu(false); openContactModal();">Contact</a>
+                <a href="index.html#work" class="hover-trigger" onclick="toggleMenu(false)">Work</a>
+                <a href="index.html#about" class="hover-trigger" onclick="toggleMenu(false)">About</a>
+                <a href="engineering.html" class="hover-trigger" onclick="toggleMenu(false)">ENGINEERING</a>
+                <a href="writings.html" class="hover-trigger" onclick="toggleMenu(false)">WRITINGS</a>
+                <a href="index.html" class="hover-trigger" onclick="toggleMenu(false)">Contact</a>
             </div>
         </div>
         <div class="container menu-footer">
@@ -859,18 +861,18 @@
                     </div>
                     <div class="card-info"><h3 class="card-title">Kinetic Showreel '25</h3><span class="card-meta">Motion Graphics</span></div>
                 </div>
-                <div class="art-card big hover-trigger" onclick="openModal('clients')">
+                <div class="art-card big" style="cursor: default;">
                     <div class="client-split">
-                        <div class="client-half">
+                        <div class="client-half hover-trigger" onclick="openModal('clients')">
                             <img src="assets/sp-1.webp" class="card-img" loading="lazy" decoding="async" style="filter: brightness(0.4);" alt="SP Services brand identity">
                             <div class="client-logo">SP<br>SERVICES</div>
                         </div>
-                        <div class="client-half">
+                        <div class="client-half hover-trigger" onclick="openModal('brush')">
                             <img src="assets/brush-landing.jpg" class="card-img" loading="lazy" decoding="async" style="filter: brightness(0.5);" alt="Brush Production work">
                             <div class="client-logo">Brush<br>Production</div>
                         </div>
                     </div>
-                    <div class="card-info" style="pointer-events: none;"><h3 class="card-title">Client Selects</h3></div>
+                    <div class="card-info" style="pointer-events: none; z-index: 5;"><h3 class="card-title">Client Selects</h3></div>
                 </div>
             </div>
         </div>
@@ -1116,12 +1118,20 @@
                 g3: "assets/team-ashwa-poster.jpg"
             },
             'clients': {
-                title: "Client Showcase",
+                title: "SP Services Showcase",
                 desc: "SP Services underwent a complete brand identity transformation to establish a professional presence in the financial recovery sector. The project included a refined logo, stationery suite, business cards, corporate signage, and brand applications.",
                 hero: "assets/sp-2.webp",
                 g1: "assets/sp-1.webp",
                 g2: "assets/sp-3.webp",
                 g3: "assets/sp-4.webp"
+            },
+            'brush': {
+                title: "Brush Production",
+                desc: "Brush Production is your one-step solution for print media! We deliver a broad range of high-quality posters and prints catering to vibrant tastes, from Anime and Movies to modern and vintage arts.",
+                hero: "assets/brush-landing.jpg",
+                g1: "assets/brush-2.jpg",
+                g2: "assets/brush-3.jpg",
+                g3: "assets/brush-4.jpg"
             },
             'typo1': {
                 title: "Brutal Type Posters",

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>So tell me, how does a RBMK reactor core explode? — Mangalam</title>
+    <title>A sound of Thunder: The Work Experience of Chaos — Mangalam</title>
     <meta name="theme-color" content="#120a10">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,6 +25,7 @@
         .flex { display: flex; justify-content: space-between; align-items: center; }
         ::selection { background: var(--lime); color: var(--ink); }
 
+        /* Cursor & Nav (Copied from writings.html) */
         .cursor-dot { width: 9px; height: 9px; background: #fff; mix-blend-mode: difference; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; pointer-events: none; z-index: 99999; }
         .cursor-ring { width: 42px; height: 42px; border: 2px solid #fff; mix-blend-mode: difference; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; pointer-events: none; z-index: 99999; transition: width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s; }
         body.hovering .cursor-ring { width: 76px; height: 76px; background: #fff; border-color: #fff; opacity: 0.6; }
@@ -45,6 +46,7 @@
         .menu-links a { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; text-transform: uppercase; font-size: clamp(2.6rem, 9vw, 6rem); letter-spacing: -0.02em; transition: transform 0.35s var(--easing), color 0.35s; display: inline-block; }
         .menu-links a:hover { transform: translateX(20px); color: var(--cream); }
         
+        /* Article Layout */
         .article-hero { position: relative; width: 100%; height: 80vh; display: flex; align-items: center; justify-content: center; background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover; border-bottom: 1px solid rgba(245,241,230,0.1); }
         .article-hero::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.4); z-index: 1; }
         .article-hero-content { text-align: center; padding: 0 40px; position: relative; z-index: 2; }
@@ -59,8 +61,11 @@
         
         .article-image { position: relative; width: 100vw; height: 500px; margin: 80px 0 80px calc(-50vw + 50%); background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover; box-shadow: inset 0 0 100px rgba(0,0,0,0.2); }
         .article-image::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.1); pointer-events: none; }
-        
+        .article-image figcaption { font-size: 0.85rem; color: var(--cream-dim); text-align: center; margin-top: 15px; font-family: 'Space Grotesk', sans-serif; position: absolute; bottom: -30px; width: 100%; }
+
         .article-author { margin-top: 60px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--cream-dim); text-align: right; }
+        
+        /* Footer */
         footer { padding: 60px 0; border-top: 1px solid rgba(245,241,230,0.15); text-align: center; color: var(--cream-dim); font-size: 0.9rem; }
         
         @media (pointer: coarse) { *, *::before, *::after { cursor: auto !important; } .cursor-dot, .cursor-ring { display: none; } }
@@ -72,7 +77,7 @@
     <nav>
         <div class="container flex">
             <div class="nav-left">
-                <a href="writings.html" class="back-btn hover-trigger">← Back</a>
+                <a href="engineering.html" class="back-btn hover-trigger">← Back</a>
                 <a href="index.html" class="logo hover-trigger">MANGALAM<span>.</span></a>
             </div>
             <button class="menu-btn hover-trigger" onclick="toggleMenu(true)">
@@ -94,42 +99,38 @@
         </div>
     </div>
 
-    <header class="article-hero" style="background-image: url('assets/reactorChernobly.jpg');">
+    <header class="article-hero" style="background-image: url('assets/engineering-custom.png');">
         <div class="article-hero-content">
-            <h1 class="article-title">So tell me, how does a<br>RBMK reactor explode?</h1>
-            <div class="article-meta">Aug 20, 2021 • History</div>
+            <h1 class="article-title">A sound of Thunder:<br>The Work Experience of Chaos</h1>
+            <div class="article-meta">July 2023 - December 2024 • Work Experience</div>
         </div>
     </header>
 
     <main class="article-body">
-        <h2>Chernobyl Disaster</h2>
-        <p><em>Chernobyl disaster is till date the most severe nuclear disaster ever happened in the recorded history of mankind. Many people still believe the nuclear reactor number 4 in the Vladimir I Lenin Nuclear power station exploded because the reactor became a nuke and a nuclear explosion took place. This is not exactly true, though the nuclear reaction spiraled out of control, it did not cause the explosion or the catastrophe. This is the science behind the Chernobyl Disaster.</em></p>
+        <p>Chaos theory says within the apparent randomness of chaotic complex systems, there are underlying patterns, interconnectedness, constant feedback loops, repetition, self-similarity, fractals, and self-organization. The butterfly effect, an underlying principle of chaos, describes how a small change in one state of a deterministic nonlinear system can result in large differences in a later state (there is sensitive dependence on initial conditions).</p>
         
-        <figure class="article-image hover-trigger" style="background-image: url('assets/maskChernobly.jpg');" aria-label="Chernobyl Mask"></figure>
+        <figure class="article-image hover-trigger" style="background-image: url('assets/nathan.jpg');" aria-label="Chaos abstract"></figure>
 
-        <p>The central component which can be rightfully credited as the main culprit in the disaster is Graphite. The reactor type used in Chernobyl was RBMK-1000 (Reaktor Bolshoy Moshchnosti Kanalniy). The designers of the RBMK claimed it to be the “safest” as it cannot cause any explosion. Although, on later research it was revealed that it had some key flaws which can pileup to become catastrophic like the active removal of decay heat, the graphite displacer ends of control rods, positive void coefficient and the fact that this reactor type was very unstable at lower power levels.</p>
+        <p>“A Sound of Thunder" is a science fiction short story by American writer Ray Bradbury, first published in Collier's magazine in the June 28, 1952. This story is often credited with the origin of the term Butterfly Effect. The plot of the story goes as in the year 2055, time travel has become a practical reality, and the company Time Safari Inc. offers wealthy adventurers the chance to travel back in time to hunt extinct species such as dinosaurs. A hunter named Eckels pays $10,000 to join a hunting party that will travel back 66 million years to a guided safari to kill a Tyrannosaurus rex. When the party arrives in the past, Travis (the hunting guide) and Lesperance (Travis's assistant) warn Eckels and the two other hunters, Billings and Kramer, about the necessity of minimizing the events they change before they go back, since even the smallest alterations to the distant past could snowball into catastrophic changes in history. Travis explains that the hunters are obliged to stay on a levitating path to avoid disrupting the environment, that any deviation will be punished with hefty fines, and that prior to the hunt, Time Safari scouts had been sent back to select and tag their prey, which would have died within minutes anyway, and whose death has been calculated to have minimal effect on the future.</p>
 
-        <figure class="article-image hover-trigger" style="background-image: url('assets/deadcatChernobly.jpg');" aria-label="Radiation Concept"></figure>
+        <figure class="article-image hover-trigger" style="background-image: url('assets/daniele.jpg');" aria-label="Portfolio Image"></figure>
 
-        <p>RBMK is a generation-II graphite-moderated light water cooled reactor. Now the question is what is a moderator in nuclear reactor. When an atom splits, it releases neutrons at near the speed of light. At this speed it becomes highly unlikely that the neutrons will strike the next atom. Thus a neutron flux moderator (the name moderator because it moderates the neutron speed) is introduced in the reaction (in our case graphite), the neutrons slow down as they bounce around inside the moderator until they travel slowly enough to split more atoms. Each Graphite block has a hole down the center which contains the pipes for the fuel channels and control rods. Water (the coolant) flows inside these channels at very high pressure.</p>
-        
-        <p>Now, what are control rods? In simple terms, they are the on off switch and a way to set and control the power level of a reactor. The control rods are made of very strong neutron poisons (materials which are strong neutron absorbers) like Cadmium, Hafnium, Indium or in our case, Boron. If all the rods are inside the core, they’ll kill the nuclear chain reaction and if 80% of them are withdrawn, the reactor runs at full speed for which it was designed. When the control rods are withdrawn they leave an empty space in the channels, the lower end of the controls, made of Graphite, were made to fill this void (graphite is an efficient steam displacer and also increases reactivity since it’s also a neutron flux moderator). Ideally this part should be made out of Boron, but the Graphite made the reactor cheaper and control rods twice efficient.</p>
-        
-        <p>Due to this design flaw, the control rods caused momentary power surge precisely when the control rods were meant to kill the reaction. To make matters worse, the graphite tips were not made long enough to reach the base of the reactor, and hence some void was still left in the base when they were inserted. These all were not very critical if the reactor was functioning normally, but then the safety test came in the picture which made it all go down in catastrophe. The safety test was to simulate a blackout condition in which the pumps pumping fresh coolant water in the reactor would die, and till the backup generators came up online it would be too late. So to see if it is possible to use the energy from the dying turbine of the reactor to keep the pumps online till the backup generators came back online. For this the reactor had to be kept in low power mode (700MJ instead of ideal 3200MJ) to simulate a blackout condition.</p>
+        <p>Although Eckels is initially excited about the hunt, when the monstrous beast approaches, he loses his nerve. He panics and runs back to the time machine through the forest. The hunting party then kills the T-Rex and returns to the future. Travis asks the people at the company if everything was ok and they nod in affirmation, but things don’t feel the same to anyone, the words of English were spelled differently, the president was someone else. Eckels panics and searches himself for all the things he could have disturbed in the past, that’s when he finds in his mud laden boots a butterfly, beautiful and crushed, but dead. Somehow, the death of this little butterfly has resulted into catastrophic changes in future. Eckels begs Travis to take him back to the past so he could fix things he ruined, but Travis objects saying it could only result in further more paradoxes. On hearing this Eckels sits down and starts to cry, eyes closed, when he hears Travis taking the safety off from his rifle & when he opens his eyes, all he could hear was “a sound of thunder”.</p>
 
-        <figure class="article-image hover-trigger" style="background-image: url('assets/towerChernobly.jpg');" aria-label="Roentegn"></figure>
-
-        <p>One more factor came into play because of instability of RBMK at low power levels, Xenon. Xenon is a very strong neutron poison and at full power reactor burns this Xenon away. The test was postponed on the day it was meant to take place and this caused severe xenon poisoning in the core, which went beyond recovery, the only solution left to raise the power from this situation, safely, was to shut down the reactor and re-start it after 24Hrs, a basic reactor rule, to never start a reactor which has been poisoned. But the staffs decided to proceed with the test. To bring the power up to desired test levels, the controllers decided to pull out all control rods from the reactor, but the poisoning was so strong that the best they could do was 500MJ, still they proceeded with the test. The pumps were shut down to proceed with the test, now the reactivity of the reactor was unchecked with fresh coolant, no control rods, hence the reactivity instantly swung back to highly reactive side and power began to rise.</p>
-        
-        <p>There was something in the RBMK reactors called the positive void coefficient, which basically means that with more steam, the reactivity increases. Now whatever amount of coolant was left in the reactor channels instantly evaporated, the xenon burned away and the reactivity began to spiral out of control. The operators on seeing this panicked and pressed the AZ-5 button, the kill switch of the reactor, but as soon as the control rods began to insert back, their graphite tips touched the fuel channels, and the reactivity spiked, evaporating all the then remaining liquid in the hydraulic channels of the control rods fixing them in the same position, endlessly increasing the reactivity. Within minutes the reactivity evaporated every last drop of water in the reactor, increasing the pressure so much, that it blew the reactor lid off, exposing the fissioning core to oxygen, and hence, the explosion.</p>
-        
-        <p>Who is to be blamed for this? Operators? Definitely. Design Engineers? For sure. Government for the cover up? Yes! But at the end, the fact that an RBMK core can’t explode by its own, unless its pushed to the edge, was true, even though the Chernobyl explosion was due to gases and water vapor, and not nuclear. There were so many lies involved, that Professor Valery Legasov (scientist in the Central Committee of the Soviet Union to handle the crisis) in his voice notes, before committing suicide, said –</p>
+        <p>The phrase ‘A butterfly flaps its wings in Tokyo and a Tornado occurs in Texas’ is a common phrase that shows how this theory has fascinated people for generations.</p>
 
         <div class="article-quote">
-            “When the truth offends, we lie and lie, until we can no longer remember it is even there. But it is still there. Every lie we tell incurs a debt to the truth. Sooner or later, that debt is paid. I ask now, what is the cost of Lies?”
+            “If this intellect were vast enough to submit the data to analysis<br>Then the future, just like the past would be present before its eyes”<br>
+            <span style="font-size: 1rem; font-style: normal; color: var(--cream-dim);">— P S Laplace</span>
         </div>
 
-        <h4>So now you know, how does a RBMK reactor core explodes.</h4>
+        <p>The butterfly effect showed that the predictability of any chaotic systems can only be accurate if the number of variables at play will be very less and the initial condition for each variable is accurate to every single decimal place, and this means accuracy till infiniteth decimal places, which is practically impossible. This is the reason why it is easier to predict the motion of celestial bodies than it is to predict the weather on the planet for 1 week, there are just too many variables at play, say pressure, moisture, wind speed, particulate presence etc.</p>
+        
+        <figure class="article-image hover-trigger" style="background-image: url('assets/emrah.jpg');" aria-label="Unpredictability"></figure>
+
+        <p>Chaos Theory, however, tells us that if chaotic systems are left to repeat themselves over time, we would notice the underlying patterns, fractals, deterministic properties, which can be predicted by taking the correct initial conditions over the right time scale.</p>
+        <p>The butterfly effect and chaos theory together somewhat makes the possibility of Time Travel to be possible in future just a fantasy. But still humans are a very young species, may in the future acquire the skills for producing all the variables with perfect accuracies and found a way to break the 2nd Law of Thermodynamics, to make the time travel possible.</p>
+        <p>Until then, humans must find a way to keep their civilization going and the chaos theory will keep serving us in the same way it is now, in cryptography algorithms, biological sciences and so on.</p>
 
         <div class="article-author">— K. Mangalam</div>
     </main>
