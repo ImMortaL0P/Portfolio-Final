@@ -132,9 +132,13 @@
         const cursorDot = document.querySelector('.cursor-dot');
         const cursorRing = document.querySelector('.cursor-ring');
         if (window.matchMedia("(pointer: fine)").matches) {
-            window.addEventListener('mousemove', (e) => {
-                cursorDot.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-                cursorRing.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+                        window.addEventListener('mousemove', (e) => {
+                cursorDot.style.left = `${e.clientX}px`;
+                cursorDot.style.top = `${e.clientY}px`;
+                setTimeout(() => {
+                    cursorRing.style.left = `${e.clientX}px`;
+                    cursorRing.style.top = `${e.clientY}px`;
+                }, 50);
             });
             document.querySelectorAll('.hover-trigger').forEach(el => {
                 el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
