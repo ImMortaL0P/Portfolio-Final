@@ -216,7 +216,7 @@
         .hero-inner { 
             position: relative; z-index: 2; max-width: 900px;
             opacity: 0; filter: blur(20px); transform: scale(1.05);
-            animation: pageUnblur 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 2.6s;
+            animation: pageUnblur 2.0s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 3.0s;
         }
         @keyframes pageUnblur {
             100% { opacity: 1; filter: blur(0); transform: scale(1); }
@@ -224,15 +224,15 @@
         .badge {
             display: inline-flex; align-items: center; gap: 10px; padding: 10px 20px; border: 2px solid var(--lime);
             border-radius: 999px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;
-            margin-bottom: 30px; opacity: 0; animation: fadeUp 0.8s forwards 2.5s;
+            margin-bottom: 30px; opacity: 0; animation: fadeUp 1.2s forwards 2.7s;
         }
         .badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--lime); animation: pulse 1.6s infinite; }
 
         .hero-title { font-size: clamp(3rem, 10vw, 7.5rem); margin-bottom: 24px; }
         .hero-title .line { display: block; opacity: 0; }
-        .hero-title .line:nth-child(1) { animation: fadeUp 0.9s forwards 2.7s; color: var(--cream); }
+        .hero-title .line:nth-child(1) { animation: fadeUp 1.2s forwards 3.1s; color: var(--cream); }
         .hero-title .line.snake-wrapper { 
-            animation: fadeUp 0.9s forwards 2.9s; 
+            animation: fadeUp 1.2s forwards 3.5s; 
             position: relative;
             height: 1.1em;
             display: block;
@@ -264,9 +264,9 @@
 
         .hero-desc {
             max-width: 560px; font-size: 1.15rem; color: var(--cream-dim); margin-bottom: 44px;
-            opacity: 0; animation: fadeUp 0.9s forwards 3.1s;
+            opacity: 0; animation: fadeUp 1.2s forwards 3.9s;
         }
-        .hero-cta-row { display: flex; gap: 20px; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.9s forwards 3.3s; }
+        .hero-cta-row { display: flex; gap: 20px; flex-wrap: wrap; opacity: 0; animation: fadeUp 1.2s forwards 4.3s; }
 
         .polaroid-parallax {
             position: absolute; inset: 0; pointer-events: none;
@@ -275,7 +275,7 @@
         .polaroid-enter {
             position: absolute; inset: 0; pointer-events: none;
             opacity: 0; filter: blur(15px);
-            animation: polaroidEnter 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            animation: polaroidEnter 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
         @keyframes polaroidEnter {
             0% { opacity: 0; filter: blur(15px); transform: translateY(60px) scale(0.9); }
@@ -739,14 +739,14 @@
 
     <header class="hero">
 
-        <div class="polaroid-parallax" style="--speed: 0.15"><div class="polaroid-enter" style="animation-delay: 2.5s"><div class="polaroid p1 hover-trigger" aria-hidden="true"><img src="assets/baba-yaga.webp" loading="lazy" alt=""></div></div></div>
-        <div class="polaroid-parallax" style="--speed: -0.1"><div class="polaroid-enter" style="animation-delay: 2.6s"><div class="polaroid p2 hover-trigger" aria-hidden="true"><img src="assets/dsc-5855.webp" loading="lazy" alt=""></div></div></div>
-        <div class="polaroid-parallax" style="--speed: 0.08"><div class="polaroid-enter" style="animation-delay: 2.7s"><div class="polaroid p3 hover-trigger" aria-hidden="true"><img src="assets/alleviate.webp" loading="lazy" alt=""></div></div></div>
-        <div class="polaroid-parallax" style="--speed: -0.15"><div class="polaroid-enter" style="animation-delay: 2.8s"><div class="polaroid p4 hover-trigger" aria-hidden="true"><img src="assets/gloom-thumb.webp" loading="lazy" alt=""></div></div></div>
-        <div class="polaroid-parallax" style="--speed: 0.12"><div class="polaroid-enter" style="animation-delay: 2.9s"><div class="polaroid p5 hover-trigger" aria-hidden="true"><img src="assets/typo-hero.jpg" loading="lazy" alt=""></div></div></div>
-        <div class="polaroid-parallax" style="--speed: -0.08"><div class="polaroid-enter" style="animation-delay: 3.0s"><div class="polaroid p6 hover-trigger" aria-hidden="true"><img src="assets/leo-caprio.webp" loading="lazy" alt=""></div></div></div>
-        <div class="polaroid-parallax" style="--speed: 0.2"><div class="polaroid-enter" style="animation-delay: 3.1s"><div class="polaroid p7 hover-trigger" aria-hidden="true"><img src="assets/mockup-hero.jpg" loading="lazy" alt=""></div></div></div>
-        <div class="polaroid-parallax" style="--speed: -0.12"><div class="polaroid-enter" style="animation-delay: 3.2s"><div class="polaroid p8 hover-trigger" aria-hidden="true"><img src="assets/solitude.webp" loading="lazy" alt=""></div></div></div>
+        <div class="polaroid-parallax" style="--speed: 0.15"><div class="polaroid-enter" style="animation-delay: 3.0s"><div class="polaroid p1 hover-trigger" aria-hidden="true"><img src="assets/baba-yaga.webp" loading="lazy" alt=""></div></div></div>
+        <div class="polaroid-parallax" style="--speed: -0.1"><div class="polaroid-enter" style="animation-delay: 3.2s"><div class="polaroid p2 hover-trigger" aria-hidden="true"><img src="assets/dsc-5855.webp" loading="lazy" alt=""></div></div></div>
+        <div class="polaroid-parallax" style="--speed: 0.08"><div class="polaroid-enter" style="animation-delay: 3.4s"><div class="polaroid p3 hover-trigger" aria-hidden="true"><img src="assets/alleviate.webp" loading="lazy" alt=""></div></div></div>
+        <div class="polaroid-parallax" style="--speed: -0.15"><div class="polaroid-enter" style="animation-delay: 3.6s"><div class="polaroid p4 hover-trigger" aria-hidden="true"><img src="assets/gloom-thumb.webp" loading="lazy" alt=""></div></div></div>
+        <div class="polaroid-parallax" style="--speed: 0.12"><div class="polaroid-enter" style="animation-delay: 3.8s"><div class="polaroid p5 hover-trigger" aria-hidden="true"><img src="assets/typo-hero.jpg" loading="lazy" alt=""></div></div></div>
+        <div class="polaroid-parallax" style="--speed: -0.08"><div class="polaroid-enter" style="animation-delay: 4.0s"><div class="polaroid p6 hover-trigger" aria-hidden="true"><img src="assets/leo-caprio.webp" loading="lazy" alt=""></div></div></div>
+        <div class="polaroid-parallax" style="--speed: 0.2"><div class="polaroid-enter" style="animation-delay: 4.2s"><div class="polaroid p7 hover-trigger" aria-hidden="true"><img src="assets/mockup-hero.jpg" loading="lazy" alt=""></div></div></div>
+        <div class="polaroid-parallax" style="--speed: -0.12"><div class="polaroid-enter" style="animation-delay: 4.4s"><div class="polaroid p8 hover-trigger" aria-hidden="true"><img src="assets/solitude.webp" loading="lazy" alt=""></div></div></div>
 
         <div class="container">
             <div class="hero-inner">
@@ -865,8 +865,9 @@
                             <img src="assets/sp-1.webp" class="card-img" loading="lazy" decoding="async" style="filter: brightness(0.4);" alt="SP Services brand identity">
                             <div class="client-logo">SP<br>SERVICES</div>
                         </div>
-                        <div class="client-half" style="background: linear-gradient(135deg, var(--violet), var(--surface));">
-                            <div class="client-logo">Lax<br>confectionery</div>
+                        <div class="client-half">
+                            <img src="assets/brush-landing.jpg" class="card-img" loading="lazy" decoding="async" style="filter: brightness(0.5);" alt="Brush Production work">
+                            <div class="client-logo">Brush<br>Production</div>
                         </div>
                     </div>
                     <div class="card-info" style="pointer-events: none;"><h3 class="card-title">Client Selects</h3></div>

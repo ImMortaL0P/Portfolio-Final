@@ -85,6 +85,9 @@
            4. NAVIGATION
            ========================================= */
         nav { position: fixed; top: 0; width: 100%; padding: 26px 0; z-index: 100; mix-blend-mode: difference;}
+        .nav-left { display: flex; align-items: center; gap: 30px; }
+        .back-btn { font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--cream-dim); transition: 0.3s var(--easing); display: flex; align-items: center; gap: 6px; }
+        .back-btn:hover { color: var(--lime); transform: translateX(-4px); }
         .logo { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em; text-transform: uppercase; color: var(--cream); }
         .logo span { color: var(--lime); }
         .menu-btn {
@@ -250,7 +253,10 @@
 
     <nav>
         <div class="container flex">
-            <a href="index.html" class="logo hover-trigger">MANGALAM<span>.</span></a>
+            <div class="nav-left">
+                <a href="index.html" class="back-btn hover-trigger">← Back</a>
+                <a href="index.html" class="logo hover-trigger">MANGALAM<span>.</span></a>
+            </div>
             <button class="menu-btn hover-trigger" onclick="toggleMenu(true)">
                 <span class="bars"><span></span><span></span><span></span></span>
                 Menu
@@ -286,81 +292,42 @@
     <main class="container">
         <div class="journal-grid">
             <!-- Post 1 -->
-            <a href="#" class="journal-post hover-trigger">
+            <a href="blog-chaos.html" class="journal-post hover-trigger">
                 <div class="post-image-wrapper portrait">
-                    <img src="assets/baba-yaga.webp" alt="Visual Storytelling" class="post-img" loading="lazy">
+                    <img src="assets/forest-on-head.jpg" alt="A sound of Thunder" class="post-img" loading="lazy">
                 </div>
                 <div class="post-meta">
-                    <span>Oct 12, 2023</span>
-                    <span>Photography</span>
+                    <span>Jun 28, 2055</span>
+                    <span>Science</span>
                 </div>
-                <h2 class="post-title">The Art of Shadows in Portraiture</h2>
-                <p class="post-excerpt">Exploring how the absence of light defines the mood and narrative of a portrait. A deep dive into chiaroscuro and modern cinematic lighting techniques.</p>
+                <h2 class="post-title">A sound of Thunder: The Science of Chaos</h2>
+                <p class="post-excerpt">Chaos theory says within the apparent randomness of chaotic complex systems, there are underlying patterns, interconnectedness, constant feedback loops, repetition, self-similarity, fractals, and self-organization.</p>
             </a>
 
             <!-- Post 2 -->
-            <a href="#" class="journal-post hover-trigger">
+            <a href="blog-steel.html" class="journal-post hover-trigger">
                 <div class="post-image-wrapper landscape">
-                    <img src="assets/typo-hero.jpg" alt="Typography" class="post-img" loading="lazy">
+                    <img src="assets/newspaperChernobly.jpg" alt="Transforming Iron to Steel" class="post-img" loading="lazy">
                 </div>
                 <div class="post-meta">
-                    <span>Sep 28, 2023</span>
-                    <span>Design</span>
+                    <span>Aug 24, 2021</span>
+                    <span>Engineering</span>
                 </div>
-                <h2 class="post-title">Brutalism in Modern Web Typography</h2>
-                <p class="post-excerpt">Why large, unapologetic typefaces are dominating digital spaces, and how to balance them with minimalist layouts to create striking user experiences.</p>
+                <h2 class="post-title">The Art of Transforming Iron to Steel</h2>
+                <p class="post-excerpt">Continuous Casting of Steel. Chernobyl disaster is till date the most severe nuclear disaster ever happened in the recorded history of mankind. The central component which can be rightfully credited as the main culprit in the disaster is Graphite.</p>
             </a>
 
             <!-- Post 3 -->
-            <a href="#" class="journal-post hover-trigger">
+            <a href="blog-chernobyl.html" class="journal-post hover-trigger">
                 <div class="post-image-wrapper square">
-                    <img src="assets/alleviate.webp" alt="Motion Graphics" class="post-img" loading="lazy">
+                    <img src="assets/reactorChernobly.jpg" alt="Chernobyl Disaster" class="post-img" loading="lazy">
                 </div>
                 <div class="post-meta">
-                    <span>Aug 15, 2023</span>
-                    <span>Motion</span>
+                    <span>Aug 20, 2021</span>
+                    <span>History</span>
                 </div>
-                <h2 class="post-title">Fluidity: Animating with Purpose</h2>
-                <p class="post-excerpt">Motion should never be an afterthought. This essay breaks down the principles of adding meaningful, physics-based animations to brand identities.</p>
-            </a>
-
-            <!-- Post 4 -->
-            <a href="#" class="journal-post hover-trigger">
-                <div class="post-image-wrapper portrait">
-                    <img src="assets/solitude.webp" alt="Solitude" class="post-img" loading="lazy">
-                </div>
-                <div class="post-meta">
-                    <span>Jul 02, 2023</span>
-                    <span>Visual Art</span>
-                </div>
-                <h2 class="post-title">Finding Silence in a Loud Medium</h2>
-                <p class="post-excerpt">In an era of hyper-stimulation, how can designers create moments of pause? A look at negative space, muted palettes, and the power of doing less.</p>
-            </a>
-            
-            <!-- Post 5 -->
-            <a href="#" class="journal-post hover-trigger">
-                <div class="post-image-wrapper landscape">
-                    <img src="assets/mockup-hero.jpg" alt="Mockups" class="post-img" loading="lazy">
-                </div>
-                <div class="post-meta">
-                    <span>Jun 18, 2023</span>
-                    <span>Branding</span>
-                </div>
-                <h2 class="post-title">Beyond the Flat Logo</h2>
-                <p class="post-excerpt">How photorealistic mockups bridge the gap between abstract design and tangible brand identity, bringing life to early-stage concepts.</p>
-            </a>
-            
-            <!-- Post 6 -->
-            <a href="#" class="journal-post hover-trigger">
-                <div class="post-image-wrapper square">
-                    <img src="assets/gloom-thumb.webp" alt="Editorial" class="post-img" loading="lazy">
-                </div>
-                <div class="post-meta">
-                    <span>May 10, 2023</span>
-                    <span>Editorial</span>
-                </div>
-                <h2 class="post-title">The Return of Print Aesthetics</h2>
-                <p class="post-excerpt">Digital design is increasingly borrowing from traditional print layouts. From visible grids to serif typefaces, examining the analog revival on the web.</p>
+                <h2 class="post-title">So tell me, how does a RBMK reactor core explode?</h2>
+                <p class="post-excerpt">Chernobyl disaster is till date the most severe nuclear disaster ever happened in the recorded history of mankind. Many people still believe the nuclear reactor number 4 exploded because the reactor became a nuke. This is not exactly true.</p>
             </a>
         </div>
     </main>
