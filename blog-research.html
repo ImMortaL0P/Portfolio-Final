@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Through Research Methodology — Mangalam</title>
+    <meta name="theme-color" content="#120a10">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #120a10; --surface: #1e1218; --cream: #f7ede1; --cream-dim: #b3a196;
+            --ink: #120a10; --lime: #ff6b4a; --easing: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--cream); font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; line-height: 1.8; font-size: 1.15rem; }
+        h1, h2, h3, h4 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
+        a { color: inherit; text-decoration: none; }
+        img { max-width: 100%; display: block; border-radius: 4px; }
+        
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 40px; position: relative; }
+        .flex { display: flex; justify-content: space-between; align-items: center; }
+        ::selection { background: var(--lime); color: var(--ink); }
+
+        .cursor-dot { width: 9px; height: 9px; background: #fff; mix-blend-mode: difference; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; pointer-events: none; z-index: 99999; }
+        .cursor-ring { width: 42px; height: 42px; border: 2px solid #fff; mix-blend-mode: difference; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; pointer-events: none; z-index: 99999; transition: width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s; }
+        body.hovering .cursor-ring { width: 76px; height: 76px; background: #fff; border-color: #fff; opacity: 0.6; }
+        
+        nav { position: fixed; top: 0; width: 100%; padding: 26px 0; z-index: 100; mix-blend-mode: difference; }
+        .nav-left { display: flex; align-items: center; gap: 30px; }
+        .back-btn { font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--cream-dim); transition: 0.3s var(--easing); display: flex; align-items: center; gap: 6px; }
+        .back-btn:hover { color: var(--lime); transform: translateX(-4px); }
+        .logo { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em; text-transform: uppercase; color: var(--cream); }
+        .logo span { color: var(--lime); }
+        .menu-btn { display: flex; align-items: center; gap: 12px; background: transparent; border: 2px solid var(--cream); color: var(--cream); padding: 12px 22px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; border-radius: 999px; }
+        .menu-btn .bars { display: flex; flex-direction: column; gap: 3px; }
+        .menu-btn .bars span { width: 16px; height: 2px; background: var(--cream); display: block; }
+        .menu-overlay { opacity: 0; pointer-events: none; position: fixed; inset: 0; background: var(--lime); color: var(--ink); z-index: 20000; transform: translateY(-100%); transition: transform 0.6s var(--easing); display: flex; flex-direction: column; justify-content: space-between; padding: 40px 0 60px; overflow-y: auto; }
+        .menu-overlay.open { opacity: 1; pointer-events: all; transform: translateY(0); }
+        .menu-close { position: absolute; top: 26px; right: 40px; background: none; border: none; color: var(--ink); font-size: 2.4rem; line-height: 1; z-index: 2; }
+        .menu-links { display: flex; flex-direction: column; gap: clamp(16px, 4.2vh, 42px); }
+        .menu-links a { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; text-transform: uppercase; font-size: clamp(2.15rem, 7.2vw, 5rem); line-height: 0.92; letter-spacing: -0.02em; transition: transform 0.35s var(--easing), color 0.35s; display: inline-block; }
+        .menu-links a:hover { transform: translateX(20px); color: var(--cream); }
+        
+        .article-hero { position: relative; width: 100%; height: 80vh; display: flex; align-items: center; justify-content: center; background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover; border-bottom: 1px solid rgba(245,241,230,0.1); }
+        .article-hero::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.4); z-index: 1; }
+        .article-hero-content { text-align: center; padding: 0 40px; position: relative; z-index: 2; }
+        .article-title { font-size: clamp(3rem, 7vw, 6rem); color: #fff; text-shadow: 0 4px 20px rgba(0,0,0,0.5); text-transform: uppercase; margin-bottom: 20px; }
+        .article-meta { font-size: 1rem; color: var(--cream); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        
+        .article-body { max-width: 800px; margin: 80px auto 120px; padding: 0 40px; color: var(--cream); }
+        .article-body p { margin-bottom: 30px; }
+        .article-body h2, .article-body h3 { margin: 60px 0 30px; color: var(--lime); font-size: 2.5rem; }
+        .article-body h4 { font-size: 1.8rem; color: var(--cream); font-style: italic; margin-bottom: 20px; font-weight: 400; }
+        .article-quote { font-family: 'Bricolage Grotesque', sans-serif; font-size: 2rem; font-style: italic; color: var(--lime); border-left: 4px solid var(--lime); padding-left: 30px; margin: 60px 0; line-height: 1.3; }
+        
+        .article-image { position: relative; width: 100vw; height: 500px; margin: 80px 0 80px calc(-50vw + 50%); background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover; box-shadow: inset 0 0 100px rgba(0,0,0,0.2); }
+        .article-image::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.1); pointer-events: none; }
+        
+        .article-author { margin-top: 60px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--cream-dim); text-align: right; }
+        footer { padding: 60px 0; border-top: 1px solid rgba(245,241,230,0.15); text-align: center; color: var(--cream-dim); font-size: 0.9rem; }
+        
+        @media (pointer: coarse) { *, *::before, *::after { cursor: auto !important; } .cursor-dot, .cursor-ring { display: none; } }
+    </style>
+</head>
+<body>
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+    <nav>
+        <div class="container flex">
+            <div class="nav-left">
+                <a href="writings.html" class="back-btn hover-trigger">← Back</a>
+                <a href="index.html" class="logo hover-trigger">MANGALAM<span>.</span></a>
+            </div>
+            <button class="menu-btn hover-trigger" onclick="toggleMenu(true)">
+                <span class="bars"><span></span><span></span><span></span></span>
+                Menu
+            </button>
+        </div>
+    </nav>
+    <div class="menu-overlay" id="menuOverlay">
+        <button class="menu-close hover-trigger" onclick="toggleMenu(false)">×</button>
+        <div class="container">
+            <div class="menu-links">
+                <a href="index.html#work" class="hover-trigger" onclick="toggleMenu(false)">Work</a>
+                <a href="index.html#about" class="hover-trigger" onclick="toggleMenu(false)">About</a>
+                <a href="engineering.html" class="hover-trigger" onclick="toggleMenu(false)">ENGINEERING</a>
+                <a href="writings.html" class="hover-trigger" onclick="toggleMenu(false)">WRITINGS</a>
+                <a href="resume.html" class="hover-trigger" onclick="toggleMenu(false)">RESUME</a>
+                <a href="index.html#contact" class="hover-trigger" onclick="toggleMenu(false)">Contact</a>
+            </div>
+        </div>
+    </div>
+
+    <header class="article-hero" style="background-image: url('https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+        <div class="article-hero-content">
+            <h1 class="article-title">Learning Through<br>Research Methodology</h1>
+            <div class="article-meta">Jul 18, 2026 • Research & Academia</div>
+        </div>
+    </header>
+
+    <main class="article-body">
+        <h2>Why Research Methodology Matters</h2>
+        <p><em>Research methodology is not just a chapter in a thesis—it is a way of thinking. It is the discipline of asking the right questions, structuring inquiry, and building knowledge brick by brick. For anyone who has ever tried to learn something deeply, the methodology behind the learning matters as much as the subject itself.</em></p>
+        
+        <figure class="article-image hover-trigger" style="background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=1600&q=80');" aria-label="Library and Research"></figure>
+
+        <p>The first thing research teaches you is humility. You enter thinking you know enough to ask a question, and within hours of reading, you realize you barely understand the landscape. The literature review alone—that painstaking process of reading what others have written, mapping their arguments, identifying gaps—rewires how you process information. You stop skimming. You start interrogating every claim for its evidence.</p>
+
+        <p>Then comes the framework. Choosing between qualitative and quantitative approaches, deciding on your sample, designing your instruments—these are not bureaucratic formalities. They are decisions that shape the integrity of everything that follows. A poorly designed survey doesn't just give you bad data; it gives you confident bad data, which is far more dangerous.</p>
+
+        <figure class="article-image hover-trigger" style="background-image: url('https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=1600&q=80');" aria-label="Books and Study"></figure>
+        
+        <p>What surprised me most was how transferable these skills are. The same rigor I learned from structuring a research paper—hypothesis, methodology, analysis, conclusion—is the same rigor I now apply to design briefs, engineering problems, and even personal decisions. Research methodology doesn't just teach you how to study a subject; it teaches you how to think about thinking.</p>
+        
+        <p>Data analysis, perhaps the most intimidating phase for newcomers, is where the real revelations happen. Numbers don't lie, but they also don't speak for themselves. Learning to interpret data—to see patterns, to question outliers, to resist the temptation of confirmation bias—is a skill that extends far beyond academia. It is, fundamentally, the skill of honest observation.</p>
+
+        <figure class="article-image hover-trigger" style="background-image: url('https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1600&q=80');" aria-label="Notes and Writing"></figure>
+
+        <p>And then there is the writing. Academic writing is often criticized for being dry, but at its best, it is an exercise in precision. Every sentence must earn its place. Every claim must be supported. Every conclusion must acknowledge its limitations. This discipline—this refusal to overstate—has made me a better communicator in every medium I work in.</p>
+        
+        <p>Research methodology, in the end, is not about producing papers. It is about cultivating a mindset: one that values evidence over opinion, structure over impulse, and depth over speed. It is a way of learning that, once internalized, changes how you see everything.</p>
+
+        <div class="article-quote">
+            "The goal of research is not to confirm what you already believe, but to discover what you have not yet imagined. The methodology is the compass; the curiosity is the fuel."
+        </div>
+
+        <h4>So now you know, the quiet power of learning through research.</h4>
+
+        <div class="article-author">— K. Mangalam</div>
+    </main>
+
+    <footer>
+        <div class="container">&copy; 2026 Mangalam. All rights reserved.</div>
+    </footer>
+
+    <script>
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorRing = document.querySelector('.cursor-ring');
+        if (window.matchMedia("(pointer: fine)").matches) {
+                        window.addEventListener('mousemove', (e) => {
+                cursorDot.style.left = `${e.clientX}px`;
+                cursorDot.style.top = `${e.clientY}px`;
+                setTimeout(() => {
+                    cursorRing.style.left = `${e.clientX}px`;
+                    cursorRing.style.top = `${e.clientY}px`;
+                }, 50);
+            });
+            document.querySelectorAll('.hover-trigger').forEach(el => {
+                el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+                el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+            });
+        }
+        function toggleMenu(show) {
+            const overlay = document.getElementById('menuOverlay');
+            if (show) overlay.classList.add('open');
+            else overlay.classList.remove('open');
+        }
+    </script>
+</body>
+</html>
