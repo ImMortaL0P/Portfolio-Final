@@ -28,7 +28,7 @@
             --violet: #d94fd4;
             --teal: #2ec4b6;
             --terracotta: #e76f51;
-            --paper: #fdfdfc;
+            --paper: #fefefe;
             --border-w: 3px;
             --container: 1200px;
             --easing: cubic-bezier(0.16, 1, 0.3, 1);
@@ -184,7 +184,6 @@
         }
         .hero-photo-wrap img {
             width: 100%; max-width: 560px;
-            filter: drop-shadow(0 22px 18px rgba(18,10,16,0.1));
             opacity: 0; transform: translateY(30px);
             animation: fadeUp 1.3s var(--easing) forwards 0.5s;
         }
@@ -299,6 +298,49 @@
         }
 
         /* =========================================
+           6b. RECOGNITION & INVOLVEMENT
+           ========================================= */
+        .recognition-section { padding: 0 0 140px; }
+        .rec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+
+        .rec-card {
+            background: var(--surface); border: 2px solid rgba(247,237,225,0.1); border-radius: 4px;
+            padding: 26px 28px; position: relative; overflow: hidden;
+            opacity: 0; transform: translateY(36px) scale(0.98);
+            transition: opacity 0.7s var(--easing), transform 0.7s var(--easing), border-color 0.4s var(--easing), box-shadow 0.4s var(--easing);
+        }
+        .rec-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--accent); }
+        .rec-card.active { opacity: 1; transform: translateY(0) scale(1); }
+        .rec-card:hover { transform: translateY(-4px); border-color: rgba(247,237,225,0.2); box-shadow: 8px 8px 0 var(--accent); }
+
+        .rec-card:nth-child(1) { transition-delay: 0s; }
+        .rec-card:nth-child(2) { transition-delay: 0.06s; }
+        .rec-card:nth-child(3) { transition-delay: 0.12s; }
+        .rec-card:nth-child(4) { transition-delay: 0.18s; }
+        .rec-card:nth-child(5) { transition-delay: 0.24s; }
+        .rec-card:nth-child(6) { transition-delay: 0.3s; }
+        .rec-card:nth-child(7) { transition-delay: 0.36s; }
+        .rec-card:nth-child(8) { transition-delay: 0.42s; }
+        .rec-card:nth-child(9) { transition-delay: 0.48s; }
+        .rec-card:nth-child(10) { transition-delay: 0.54s; }
+
+        .rec-tag {
+            display: inline-block; font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.4px;
+            color: var(--accent); margin-bottom: 10px;
+        }
+        .rec-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.15rem; text-transform: none; letter-spacing: -0.01em; margin-bottom: 4px; }
+        .rec-org {
+            color: var(--cream-dim); font-size: 0.78rem; font-weight: 700; margin-bottom: 14px;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .rec-desc { color: var(--cream-dim); font-size: 0.92rem; line-height: 1.55; }
+        .rec-desc strong { color: var(--cream); font-weight: 700; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .rec-card { transition: none; opacity: 1; transform: none; }
+        }
+
+        /* =========================================
            7. CTA + FOOTER
            ========================================= */
         .cta-section { padding: 20px 0 120px; text-align: center; }
@@ -375,7 +417,7 @@
             <div class="hero-copy">
                 <span class="hero-eyebrow"><span class="dot"></span>Available for freelance &amp; full-time</span>
                 <h1 class="hero-name">Kumar<br>Mangalam</h1>
-                <p class="hero-role">Mechanical Engineer · Graphic Designer & Animator · Content Developer</p>
+                <p class="hero-role">Mechanical Engineer · Graphic Designer & Animator · Content Developer & Published Researcher</p>
                 <p class="hero-desc">Mechanical Engineering graduate with a Computer Science minor — over a year and a half of experience in process control, manufacturing operations and data-driven optimization, alongside a parallel life in graphic design, photography and competitive programming.</p>
                 <div class="hero-cta-row">
                     <a href="assets/kumar-mangalam-resume.pdf" download class="btn-solid hover-trigger">Download Résumé ↓</a>
@@ -413,171 +455,35 @@
     <section class="container timeline-section">
         <div class="section-head reveal-on-scroll">
             <span class="idx">Journey</span>
-            <p>Education, work experience, awards, leadership and activities — in order, as they happened.</p>
+            <p>Education and work experience — most recent first.</p>
         </div>
 
         <div class="timeline" id="timeline">
             <div class="timeline-progress" id="timelineProgress"></div>
 
             <div class="tl-item" style="--accent: var(--teal);">
-                <div class="tl-year">2017</div>
+                <div class="tl-year">2027–2029</div>
                 <div class="tl-dot"></div>
                 <div class="tl-card">
                     <span class="tl-tag">Education</span>
-                    <h3 class="tl-title">Class X (ICSE) — 92.33%</h3>
-                    <div class="tl-org">St. Xavier's High School, Patna</div>
+                    <h3 class="tl-title">MBA</h3>
+                    <div class="tl-org">Indian Institute of Management, Tiruchirappalli</div>
                     <ul class="tl-points">
-                        <li><strong>Best Student in English Literature Award</strong>, Batch of 2017.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="tl-item" style="--accent: var(--violet);">
-                <div class="tl-year">2017–2019</div>
-                <div class="tl-dot"></div>
-                <div class="tl-card">
-                    <span class="tl-tag">Leadership</span>
-                    <h3 class="tl-title">Founder &amp; Mentor</h3>
-                    <div class="tl-org">St. Michael's High School, Patna</div>
-                    <ul class="tl-points">
-                        <li>Mentored <strong>30+ students</strong> in camps and throughout the academic year in graphic designing, photography and filmmaking.</li>
-                        <li>Spearheaded teams to represent school in <strong>4+ filmmaking and photography competitions</strong>.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="tl-item" style="--accent: var(--pink);">
-                <div class="tl-year">2018</div>
-                <div class="tl-dot"></div>
-                <div class="tl-card">
-                    <span class="tl-tag">Award</span>
-                    <h3 class="tl-title">Most Creative Student</h3>
-                    <div class="tl-org">St. Michael's High School, Patna</div>
-                    <ul class="tl-points">
-                        <li>Created and led the first-of-its-kind Photography &amp; Design Society — <strong>Pixy Lens and Pixel Artists</strong> — producing <strong>300+ creatives</strong> in the form of banners, posters, flyers and certificates over two years.</li>
-                        <li>Designed the Jubilee Logo and Flag to commemorate the Post Centenary Diamond Jubilee of SMHS and the Jesuit Society.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="tl-item" style="--accent: var(--pink);">
-                <div class="tl-year">2018</div>
-                <div class="tl-dot"></div>
-                <div class="tl-card">
-                    <span class="tl-tag">Award</span>
-                    <h3 class="tl-title">Zonal Gold Medal — SOF</h3>
-                    <div class="tl-org">National Cyber Olympiad</div>
-                    <ul class="tl-points">
-                        <li>Ranked <strong>11 / 4000+</strong> at Zonal Level (IIT KGP Khitiz), conducted by the Science Olympiad Foundation.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="tl-item" style="--accent: var(--teal);">
-                <div class="tl-year">2019</div>
-                <div class="tl-dot"></div>
-                <div class="tl-card">
-                    <span class="tl-tag">Education</span>
-                    <h3 class="tl-title">Class XII (CBSE) — 84.60%</h3>
-                    <div class="tl-org">St. Michael's High School, Patna</div>
-                    <ul class="tl-points">
-                        <li><strong>Student Council Member</strong>, Session 2018–2019.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="tl-item" style="--accent: var(--terracotta);">
-                <div class="tl-year">2019–2022</div>
-                <div class="tl-dot"></div>
-                <div class="tl-card">
-                    <span class="tl-tag">Activity</span>
-                    <h3 class="tl-title">Internal Hackathons — SIH</h3>
-                    <div class="tl-org">Smart India Hackathon</div>
-                    <ul class="tl-points">
-                        <li><strong>Runner-up</strong> in the college round of SIH Hackathon 2020 (RFID-based smart parking system).</li>
-                        <li><strong>4th Position</strong> in 2022 (Random Encryption Generation).</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="tl-item" style="--accent: var(--violet);">
-                <div class="tl-year">2021–2022</div>
-                <div class="tl-dot"></div>
-                <div class="tl-card">
-                    <span class="tl-tag">Leadership</span>
-                    <h3 class="tl-title">Vice President &amp; Co-Manager</h3>
-                    <div class="tl-org">Birla Institute of Technology, Mesra</div>
-                    <ul class="tl-points">
-                        <li>Led a team of <strong>30+ individuals</strong> organizing <strong>10+ technical events</strong> over a year; started and published a bimonthly technical newsletter.</li>
-                        <li>Founded and co-managed <strong>BITP Esports</strong> across 6 competitive games, with <strong>40+ esports athletes</strong>.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="tl-item" style="--accent: var(--terracotta);">
-                <div class="tl-year">2021–2023</div>
-                <div class="tl-dot"></div>
-                <div class="tl-card">
-                    <span class="tl-tag">Activity</span>
-                    <h3 class="tl-title">Core-Member, Event Management</h3>
-                    <div class="tl-org">Birla Institute of Technology, Mesra</div>
-                    <ul class="tl-points">
-                        <li>Spearheaded teams of Sponsorship, Content, Event Management, Design and Publicity across <strong>4+ Major &amp; 9+ Minor Techno Cultural Festivals</strong>.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="tl-item" style="--accent: var(--terracotta);">
-                <div class="tl-year">2021–2023</div>
-                <div class="tl-dot"></div>
-                <div class="tl-card">
-                    <span class="tl-tag">Activity</span>
-                    <h3 class="tl-title">Table-Tennis Team</h3>
-                    <div class="tl-org">Birla Institute of Technology, Mesra</div>
-                    <ul class="tl-points">
-                        <li>Ranked <strong>4th / 200+ students</strong>; College Team member, played in <strong>6+ inter &amp; intra college tournaments</strong>.</li>
-                        <li><strong>1 / 5 Teams</strong> in the Table Tennis Team Event at Elegante, IIM Bodh Gaya 2023.</li>
+                        <li>Incoming batch, <strong>2027–2029</strong>.</li>
                     </ul>
                 </div>
             </div>
 
             <div class="tl-item" style="--accent: var(--lime);">
-                <div class="tl-year">May–Jul '22</div>
+                <div class="tl-year">Jul '25–Jan '26</div>
                 <div class="tl-dot"></div>
                 <div class="tl-card">
                     <span class="tl-tag">Experience</span>
-                    <h3 class="tl-title">Summer Intern</h3>
-                    <div class="tl-org">SAIL &amp; EIL</div>
+                    <h3 class="tl-title">Project Management Intern</h3>
+                    <div class="tl-org">iQuanta</div>
                     <ul class="tl-points">
-                        <li>Assisted in <strong>3 Diesel-Electric Locomotive Maintenance</strong> (RITES) in the TRM Dept. of Rourkela Steel Plant, SAIL.</li>
-                        <li>Worked in the Rotating Equipment Division of EIL, Delhi — studied and drafted Process Data Sheets for procurement of pumps.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="tl-item" style="--accent: var(--teal);">
-                <div class="tl-year">2023</div>
-                <div class="tl-dot"></div>
-                <div class="tl-card">
-                    <span class="tl-tag">Education</span>
-                    <h3 class="tl-title">B.Tech, Mechanical Engineering — 8.43/10</h3>
-                    <div class="tl-org">Birla Institute of Technology, Mesra, Ranchi</div>
-                    <ul class="tl-points">
-                        <li><strong>Minor Specialisation in CSE</strong>, graduation with distinction.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="tl-item" style="--accent: var(--violet);">
-                <div class="tl-year">2023</div>
-                <div class="tl-dot"></div>
-                <div class="tl-card">
-                    <span class="tl-tag">Leadership</span>
-                    <h3 class="tl-title">Publicity and Design Head</h3>
-                    <div class="tl-org">Birla Institute of Technology, Mesra</div>
-                    <ul class="tl-points">
-                        <li>Led a team of <strong>50+ individuals</strong> for the Annual Sports Fest's Design &amp; Merchandising needs.</li>
-                        <li>Achieved a footfall of <strong>20,000+</strong> in a 3-day span, with <strong>8+ event sponsors</strong> and <strong>100,000+ social media engagements</strong>.</li>
+                        <li>Oversaw YouTube video creation and editing, promotion and outreach.</li>
+                        <li>Led team automating and optimizing the organization's WhatsApp Community, implementing result-delivery optimisation.</li>
                     </ul>
                 </div>
             </div>
@@ -598,46 +504,137 @@
                 </div>
             </div>
 
-            <div class="tl-item" style="--accent: var(--pink);">
-                <div class="tl-year">2024</div>
+            <div class="tl-item" style="--accent: var(--teal);">
+                <div class="tl-year">2023</div>
                 <div class="tl-dot"></div>
                 <div class="tl-card">
-                    <span class="tl-tag">Award</span>
-                    <h3 class="tl-title">Employee of the Month</h3>
-                    <div class="tl-org">JSPL — Jindal Steel &amp; Power Ltd.</div>
+                    <span class="tl-tag">Education</span>
+                    <h3 class="tl-title">B.Tech, Mechanical Engineering — 8.43/10</h3>
+                    <div class="tl-org">Birla Institute of Technology, Mesra, Ranchi</div>
                     <ul class="tl-points">
-                        <li><strong>1 / 200+ employees</strong> to receive the award (April 2024), for commissioning and process improvement on the new twin strand caster and gains in quality &amp; yield of production.</li>
-                        <li>Received the <strong>Shabbash award</strong> for record-time re-startup of production after the CCM's first capital shutdown.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="tl-item" style="--accent: var(--terracotta);">
-                <div class="tl-year">2025</div>
-                <div class="tl-dot"></div>
-                <div class="tl-card">
-                    <span class="tl-tag">Activity</span>
-                    <h3 class="tl-title">Community Educator / NSS</h3>
-                    <div class="tl-org">Social Warriors NGO, Patna</div>
-                    <ul class="tl-points">
-                        <li>Served as a community educator, delivering skills, basic education and training to underprivileged children across town — <strong>240+ hours</strong>.</li>
-                        <li>Active in campaigns such as Covid Relief, Bihar Flood Relief and Pre-RD Camp.</li>
+                        <li><strong>Minor Specialisation in CSE</strong>, graduation with distinction.</li>
                     </ul>
                 </div>
             </div>
 
             <div class="tl-item" style="--accent: var(--lime);">
-                <div class="tl-year">Jul '25–Jan '26</div>
+                <div class="tl-year">May–Jul '22</div>
                 <div class="tl-dot"></div>
                 <div class="tl-card">
                     <span class="tl-tag">Experience</span>
-                    <h3 class="tl-title">Project Management Intern</h3>
-                    <div class="tl-org">iQuanta</div>
+                    <h3 class="tl-title">Summer Intern</h3>
+                    <div class="tl-org">SAIL &amp; EIL</div>
                     <ul class="tl-points">
-                        <li>Oversaw YouTube video creation and editing, promotion and outreach.</li>
-                        <li>Led team automating and optimizing the organization's WhatsApp Community, implementing result-delivery optimisation.</li>
+                        <li>Assisted in <strong>3 Diesel-Electric Locomotive Maintenance</strong> (RITES) in the TRM Dept. of Rourkela Steel Plant, SAIL.</li>
+                        <li>Worked in the Rotating Equipment Division of EIL, Delhi — studied and drafted Process Data Sheets for procurement of pumps.</li>
                     </ul>
                 </div>
+            </div>
+
+            <div class="tl-item" style="--accent: var(--teal);">
+                <div class="tl-year">2019</div>
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <span class="tl-tag">Education</span>
+                    <h3 class="tl-title">Class XII (CBSE) — 84.60%</h3>
+                    <div class="tl-org">St. Michael's High School, Patna</div>
+                    <ul class="tl-points">
+                        <li><strong>Student Council Member</strong>, Session 2018–2019.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tl-item" style="--accent: var(--teal);">
+                <div class="tl-year">2017</div>
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <span class="tl-tag">Education</span>
+                    <h3 class="tl-title">Class X (ICSE) — 92.33%</h3>
+                    <div class="tl-org">St. Xavier's High School, Patna</div>
+                    <ul class="tl-points">
+                        <li><strong>Best Student in English Literature Award</strong>, Batch of 2017.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ RECOGNITION & INVOLVEMENT ============ -->
+    <section class="container recognition-section">
+        <div class="section-head reveal-on-scroll">
+            <span class="idx">Beyond the Job</span>
+            <p>Awards, honours and the activities that filled the margins outside the day job.</p>
+        </div>
+
+        <div class="rec-grid" id="recGrid">
+            <div class="rec-card" style="--accent: var(--terracotta);">
+                <span class="rec-tag">Activity</span>
+                <h3 class="rec-title">Community Educator / NSS</h3>
+                <div class="rec-org">Social Warriors NGO, Patna · 2025</div>
+                <p class="rec-desc"><strong>240+ hours</strong> educating underprivileged children; active in Covid Relief, Bihar Flood Relief and Pre-RD Camp campaigns.</p>
+            </div>
+
+            <div class="rec-card" style="--accent: var(--pink);">
+                <span class="rec-tag">Award</span>
+                <h3 class="rec-title">Employee of the Month</h3>
+                <div class="rec-org">JSPL — Jindal Steel &amp; Power Ltd. · 2024</div>
+                <p class="rec-desc"><strong>1 / 200+ employees</strong> honoured for commissioning the new twin strand caster; also won the Shabbash award for record-time re-startup.</p>
+            </div>
+
+            <div class="rec-card" style="--accent: var(--violet);">
+                <span class="rec-tag">Leadership</span>
+                <h3 class="rec-title">Publicity and Design Head</h3>
+                <div class="rec-org">Birla Institute of Technology, Mesra · 2023</div>
+                <p class="rec-desc">Led a team of <strong>50+ individuals</strong> for the Annual Sports Fest's Design &amp; Merchandising; <strong>20,000+ footfall</strong> and <strong>8+ sponsors</strong> in 3 days.</p>
+            </div>
+
+            <div class="rec-card" style="--accent: var(--terracotta);">
+                <span class="rec-tag">Activity</span>
+                <h3 class="rec-title">Core-Member, Event Management</h3>
+                <div class="rec-org">Birla Institute of Technology, Mesra · 2021–2023</div>
+                <p class="rec-desc">Spearheaded Sponsorship, Content &amp; Design teams across <strong>4+ Major and 9+ Minor</strong> techno-cultural festivals.</p>
+            </div>
+
+            <div class="rec-card" style="--accent: var(--terracotta);">
+                <span class="rec-tag">Activity</span>
+                <h3 class="rec-title">Table-Tennis Team</h3>
+                <div class="rec-org">Birla Institute of Technology, Mesra · 2021–2023</div>
+                <p class="rec-desc"><strong>4th / 200+ students</strong>; college team member across 6+ tournaments, 1/5 teams at Elegante, IIM Bodh Gaya.</p>
+            </div>
+
+            <div class="rec-card" style="--accent: var(--violet);">
+                <span class="rec-tag">Leadership</span>
+                <h3 class="rec-title">Vice President &amp; Co-Manager</h3>
+                <div class="rec-org">Birla Institute of Technology, Mesra · 2021–2022</div>
+                <p class="rec-desc">Led <strong>30+ individuals</strong> across <strong>10+ technical events</strong>; founded and co-managed BITP Esports with <strong>40+ athletes</strong>.</p>
+            </div>
+
+            <div class="rec-card" style="--accent: var(--terracotta);">
+                <span class="rec-tag">Activity</span>
+                <h3 class="rec-title">Internal Hackathons — SIH</h3>
+                <div class="rec-org">Smart India Hackathon · 2019–2022</div>
+                <p class="rec-desc"><strong>Runner-up</strong> in SIH 2020 (RFID smart parking); <strong>4th position</strong> in 2022 (Random Encryption Generation).</p>
+            </div>
+
+            <div class="rec-card" style="--accent: var(--pink);">
+                <span class="rec-tag">Award</span>
+                <h3 class="rec-title">Most Creative Student</h3>
+                <div class="rec-org">St. Michael's High School · 2018</div>
+                <p class="rec-desc">Founded <strong>Pixy Lens &amp; Pixel Artists</strong>, producing 300+ creatives; designed the school's Jubilee Logo &amp; Flag.</p>
+            </div>
+
+            <div class="rec-card" style="--accent: var(--pink);">
+                <span class="rec-tag">Award</span>
+                <h3 class="rec-title">Zonal Gold Medal — SOF</h3>
+                <div class="rec-org">National Cyber Olympiad · 2018</div>
+                <p class="rec-desc">Ranked <strong>11 / 4000+</strong> at Zonal Level (IIT KGP Khitiz).</p>
+            </div>
+
+            <div class="rec-card" style="--accent: var(--violet);">
+                <span class="rec-tag">Leadership</span>
+                <h3 class="rec-title">Founder &amp; Mentor</h3>
+                <div class="rec-org">St. Michael's High School · 2017–2019</div>
+                <p class="rec-desc">Mentored <strong>30+ students</strong> in graphic design, photography and filmmaking; led teams into <strong>4+ competitions</strong>.</p>
             </div>
         </div>
     </section>
@@ -716,6 +713,18 @@
             });
         }, { threshold: 0.25, rootMargin: '0px 0px -10% 0px' });
         tlItems.forEach(el => tlIo.observe(el));
+
+        // Recognition cards reveal (staggered via CSS transition-delay)
+        const recCards = document.querySelectorAll('.rec-card');
+        const recIo = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    recIo.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        recCards.forEach(el => recIo.observe(el));
 
         const timeline = document.getElementById('timeline');
         const progress = document.getElementById('timelineProgress');
