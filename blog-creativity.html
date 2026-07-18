@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why I Call Creativity a Process, and Its Hidden Toll — Mangalam</title>
+    <meta name="theme-color" content="#120a10">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #120a10; --surface: #1e1218; --cream: #f7ede1; --cream-dim: #b3a196;
+            --ink: #120a10; --lime: #ff6b4a; --easing: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--cream); font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; line-height: 1.8; font-size: 1.15rem; }
+        h1, h2, h3, h4 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
+        a { color: inherit; text-decoration: none; }
+        img { max-width: 100%; display: block; border-radius: 4px; object-fit: cover; }
+        
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 40px; position: relative; }
+        .flex { display: flex; justify-content: space-between; align-items: center; }
+        ::selection { background: var(--lime); color: var(--ink); }
+
+        .cursor-dot { width: 9px; height: 9px; background: #fff; mix-blend-mode: difference; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; pointer-events: none; z-index: 99999; }
+        .cursor-ring { width: 42px; height: 42px; border: 2px solid #fff; mix-blend-mode: difference; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; pointer-events: none; z-index: 99999; transition: width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s; }
+        body.hovering .cursor-ring { width: 76px; height: 76px; background: #fff; border-color: #fff; opacity: 0.6; }
+        
+        nav { position: fixed; top: 0; width: 100%; padding: 26px 0; z-index: 100; mix-blend-mode: difference; }
+        .nav-left { display: flex; align-items: center; gap: 30px; }
+        .back-btn { font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--cream-dim); transition: 0.3s var(--easing); display: flex; align-items: center; gap: 6px; }
+        .back-btn:hover { color: var(--lime); transform: translateX(-4px); }
+        .logo { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em; text-transform: uppercase; color: var(--cream); }
+        .logo span { color: var(--lime); }
+        .menu-btn { display: flex; align-items: center; gap: 12px; background: transparent; border: 2px solid var(--cream); color: var(--cream); padding: 12px 22px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; border-radius: 999px; }
+        .menu-btn .bars { display: flex; flex-direction: column; gap: 3px; }
+        .menu-btn .bars span { width: 16px; height: 2px; background: var(--cream); display: block; }
+        .menu-overlay { opacity: 0; pointer-events: none; position: fixed; inset: 0; background: var(--lime); color: var(--ink); z-index: 20000; transform: translateY(-100%); transition: transform 0.6s var(--easing); display: flex; flex-direction: column; justify-content: space-between; padding: 40px 0 60px; overflow-y: auto; }
+        .menu-overlay.open { opacity: 1; pointer-events: all; transform: translateY(0); }
+        .menu-close { position: absolute; top: 26px; right: 40px; background: none; border: none; color: var(--ink); font-size: 2.4rem; line-height: 1; z-index: 2; }
+        .menu-links { display: flex; flex-direction: column; gap: clamp(16px, 4.2vh, 42px); }
+        .menu-links a { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; text-transform: uppercase; font-size: clamp(2.15rem, 7.2vw, 5rem); line-height: 0.92; letter-spacing: -0.02em; transition: transform 0.35s var(--easing), color 0.35s; display: inline-block; }
+        .menu-links a:hover { transform: translateX(20px); color: var(--cream); }
+        
+        /* Editorial Layout Styles */
+        .editorial-header {
+            padding: 160px 40px 80px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .editorial-title {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+        .editorial-meta {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--cream-dim);
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .editorial-meta span {
+            display: inline-block;
+        }
+        
+        .editorial-body {
+            max-width: 1200px;
+            margin: 0 auto 120px;
+            padding: 0 40px;
+        }
+        
+        /* Narrow Text Block */
+        .text-block {
+            max-width: 680px;
+            margin: 0 auto 60px;
+        }
+        .text-block p {
+            margin-bottom: 24px;
+            color: var(--cream);
+            font-size: 1.1rem;
+        }
+        
+        /* Q&A Interview Style */
+        .qa-block {
+            margin-bottom: 40px;
+        }
+        .qa-question {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-weight: 800;
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: var(--lime);
+        }
+        .qa-answer {
+            color: var(--cream-dim);
+            margin-bottom: 24px;
+        }
+
+        /* Image Layouts */
+        .img-full {
+            width: 100%;
+            height: auto;
+            margin: 60px 0;
+        }
+        .img-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 60px 0;
+        }
+        .img-grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin: 60px 0;
+        }
+        .img-caption {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--cream-dim);
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        footer { padding: 60px 0; border-top: 1px solid rgba(245,241,230,0.15); text-align: center; color: var(--cream-dim); font-size: 0.9rem; }
+        
+        @media (pointer: coarse) { *, *::before, *::after { cursor: auto !important; } .cursor-dot, .cursor-ring { display: none; } }
+        @media (max-width: 768px) {
+            .img-grid-2, .img-grid-3 { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+    <nav>
+        <div class="container flex">
+            <div class="nav-left">
+                <a href="writings.html" class="back-btn hover-trigger">← Back</a>
+                <a href="index.html" class="logo hover-trigger">MANGALAM<span>.</span></a>
+            </div>
+            <button class="menu-btn hover-trigger" onclick="toggleMenu(true)">
+                <span class="bars"><span></span><span></span><span></span></span>
+                Menu
+            </button>
+        </div>
+    </nav>
+    <div class="menu-overlay" id="menuOverlay">
+        <button class="menu-close hover-trigger" onclick="toggleMenu(false)">×</button>
+        <div class="container">
+            <div class="menu-links">
+                <a href="index.html#work" class="hover-trigger" onclick="toggleMenu(false)">Work</a>
+                <a href="index.html#about" class="hover-trigger" onclick="toggleMenu(false)">About</a>
+                <a href="engineering.html" class="hover-trigger" onclick="toggleMenu(false)">ENGINEERING</a>
+                <a href="writings.html" class="hover-trigger" onclick="toggleMenu(false)">WRITINGS</a>
+                <a href="resume.html" class="hover-trigger" onclick="toggleMenu(false)">RESUME</a>
+                <a href="index.html#contact" class="hover-trigger" onclick="toggleMenu(false)">Contact</a>
+            </div>
+        </div>
+    </div>
+
+    <header class="editorial-header">
+        <h1 class="editorial-title">Why I Call Creativity a Process, and Its Hidden Toll</h1>
+        <div class="editorial-meta">
+            <span>Personal Essay</span>
+            <span>Jul 18, 2026</span>
+            <span>Written By K. Mangalam</span>
+        </div>
+    </header>
+
+    <main class="editorial-body">
+        
+        <div class="text-block">
+            <p><strong>[PLACEHOLDER TEXT]</strong> Creativity is not a lightning bolt. It is not the romantic, effortless spark that people love to imagine—a sudden strike of genius that arrives fully formed. It is a process. A slow, grinding, often unglamorous process that demands more from you than talent ever could.</p>
+            <p>Over the years of designing, photographing, and building things from nothing, I've come to understand that the act of creating is as much about endurance as it is about inspiration. And that endurance comes at a cost no one really talks about.</p>
+        </div>
+
+        <!-- Full width Image -->
+        <div>
+            <img class="img-full hover-trigger" src="assets/creativity-process-cover.jpg" alt="Creativity as a Process — Minimal Art">
+            <div class="img-caption">The space between idea and execution is where the real work lives.</div>
+        </div>
+
+        <div class="text-block">
+            <div class="qa-block">
+                <div class="qa-question">What do you mean when you say creativity is a process?</div>
+                <div class="qa-answer">[PLACEHOLDER TEXT] "People see the finished poster, the final photograph, the polished reel—and they assume it appeared. But behind every piece is a trail of discarded drafts, 3 AM revisions, and moments where I genuinely questioned whether the idea was worth pursuing at all. The process is iteration. It's sitting with discomfort. It's trusting that the ugly first draft is a necessary step, not a failure."</div>
+            </div>
+
+            <div class="qa-block">
+                <div class="qa-question">What is the 'hidden toll' you refer to?</div>
+                <div class="qa-answer">[PLACEHOLDER TEXT] "The toll is what you pay when the work demands your full emotional presence. When you pour yourself into a design and someone dismisses it in two seconds. When you spend hours perfecting a frame and the light shifts. When you ship something personal and the silence that follows feels deafening. The toll is also physical—skipped meals, strained eyes, the weight of self-imposed deadlines. Nobody warns you that caring deeply about your craft can feel like carrying a stone uphill."</div>
+            </div>
+        </div>
+
+        <!-- 2 Column Grid -->
+        <div class="img-grid-2">
+            <img class="hover-trigger" src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=800&q=80" alt="Creative workspace">
+            <img class="hover-trigger" src="https://images.unsplash.com/photo-1456086272160-b28b0645b729?auto=format&fit=crop&w=800&q=80" alt="Hands working on art">
+        </div>
+
+        <div class="text-block">
+            <div class="qa-block">
+                <div class="qa-question">How do you keep going when the process feels overwhelming?</div>
+                <div class="qa-answer">[PLACEHOLDER TEXT] "I've learned to separate my identity from my output. A bad design day doesn't make me a bad designer. A rejected pitch doesn't erase everything I've built. I keep going because the process—however draining—is also where I feel most alive. There's a strange paradox in creative work: the thing that exhausts you is also the thing that gives you meaning."</div>
+            </div>
+        </div>
+
+        <!-- 3 Column Grid -->
+        <div class="img-grid-3">
+            <img class="hover-trigger" src="https://images.unsplash.com/photo-1504805572947-34fad45aed93?auto=format&fit=crop&w=600&q=80" alt="Creative process 1">
+            <img class="hover-trigger" src="https://images.unsplash.com/photo-1452587925148-ce544e77e70d?auto=format&fit=crop&w=600&q=80" alt="Creative process 2">
+            <img class="hover-trigger" src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=600&q=80" alt="Creative process 3">
+        </div>
+
+        <div class="text-block" style="text-align: center; margin-top: 80px;">
+            <p><em>[PLACEHOLDER TEXT] "If you're someone who creates—whether it's code, photographs, music, or words—know that the exhaustion you feel is not weakness. It's proof that you're doing something real. The toll is hidden because we've been taught to only celebrate the output. But the process? The process is where the art actually lives."</em></p>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="container">&copy; 2026 Mangalam. All rights reserved.</div>
+    </footer>
+
+    <script>
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorRing = document.querySelector('.cursor-ring');
+        if (window.matchMedia("(pointer: fine)").matches) {
+            window.addEventListener('mousemove', (e) => {
+                cursorDot.style.left = `${e.clientX}px`;
+                cursorDot.style.top = `${e.clientY}px`;
+                setTimeout(() => {
+                    cursorRing.style.left = `${e.clientX}px`;
+                    cursorRing.style.top = `${e.clientY}px`;
+                }, 50);
+            });
+            document.querySelectorAll('.hover-trigger').forEach(el => {
+                el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+                el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+            });
+        }
+        function toggleMenu(show) {
+            document.getElementById('menuOverlay').classList.toggle('open', show);
+            if (show) document.body.style.overflow = 'hidden';
+            else document.body.style.overflow = '';
+        }
+    </script>
+</body>
+</html>
