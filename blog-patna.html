@@ -38,11 +38,11 @@
         .menu-btn { display: flex; align-items: center; gap: 12px; background: transparent; border: 2px solid var(--cream); color: var(--cream); padding: 12px 22px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; border-radius: 999px; }
         .menu-btn .bars { display: flex; flex-direction: column; gap: 3px; }
         .menu-btn .bars span { width: 16px; height: 2px; background: var(--cream); display: block; }
-        .menu-overlay { opacity: 0; pointer-events: none; position: fixed; inset: 0; background: var(--lime); color: var(--ink); z-index: 20000; transform: translateY(-100%); transition: transform 0.6s var(--easing); display: flex; flex-direction: column; justify-content: space-between; padding: 40px 0 60px; }
+        .menu-overlay { opacity: 0; pointer-events: none; position: fixed; inset: 0; background: var(--lime); color: var(--ink); z-index: 20000; transform: translateY(-100%); transition: transform 0.6s var(--easing); display: flex; flex-direction: column; justify-content: space-between; padding: 40px 0 60px; overflow-y: auto; }
         .menu-overlay.open { opacity: 1; pointer-events: all; transform: translateY(0); }
         .menu-close { position: absolute; top: 26px; right: 40px; background: none; border: none; color: var(--ink); font-size: 2.4rem; line-height: 1; z-index: 2; }
-        .menu-links { display: flex; flex-direction: column; gap: 6px; }
-        .menu-links a { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; text-transform: uppercase; font-size: clamp(2.6rem, 9vw, 6rem); letter-spacing: -0.02em; transition: transform 0.35s var(--easing), color 0.35s; display: inline-block; }
+        .menu-links { display: flex; flex-direction: column; gap: clamp(16px, 4.2vh, 42px); }
+        .menu-links a { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; text-transform: uppercase; font-size: clamp(2.15rem, 7.2vw, 5rem); line-height: 0.92; letter-spacing: -0.02em; transition: transform 0.35s var(--easing), color 0.35s; display: inline-block; }
         .menu-links a:hover { transform: translateX(20px); color: var(--cream); }
         
         /* Editorial Layout Styles */
@@ -163,7 +163,7 @@
                 <a href="engineering.html" class="hover-trigger" onclick="toggleMenu(false)">ENGINEERING</a>
                 <a href="writings.html" class="hover-trigger" onclick="toggleMenu(false)">WRITINGS</a>
                 <a href="resume.html" class="hover-trigger" onclick="toggleMenu(false)">RESUME</a>
-                <a href="index.html" class="hover-trigger" onclick="toggleMenu(false)">Contact</a>
+                <a href="index.html#contact" class="hover-trigger" onclick="toggleMenu(false)">Contact</a>
             </div>
         </div>
     </div>
