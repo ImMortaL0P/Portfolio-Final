@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume - Mangalam</title>
+    <meta name="description" content="Kumar Mangalam — resume, career timeline and experience across engineering, design and leadership.">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================
+           1. CORE VARIABLES & RESET
+           ========================================= */
+        :root {
+            --bg: #120a10;
+            --surface: #1e1218;
+            --surface-2: #291721;
+            --cream: #f7ede1;
+            --cream-dim: #b3a196;
+            --ink: #120a10;
+            --lime: #ff6b4a;
+            --pink: #ffb703;
+            --violet: #d94fd4;
+            --teal: #2ec4b6;
+            --terracotta: #e76f51;
+            --paper: #fdfdfc;
+            --border-w: 3px;
+            --container: 1200px;
+            --easing: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--cream);
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 0.98;
+            text-transform: uppercase;
+        }
+
+        img { max-width: 100%; display: block; }
+        a { color: inherit; text-decoration: none; }
+
+        .container { max-width: var(--container); margin: 0 auto; padding: 0 40px; position: relative; }
+        .flex { display: flex; justify-content: space-between; align-items: center; }
+
+        ::selection { background: var(--lime); color: var(--ink); }
+
+        .noise-overlay {
+            position: fixed; inset: 0; pointer-events: none; z-index: 9990; opacity: 0.05; mix-blend-mode: overlay;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+        }
+
+        /* =========================================
+           2. CUSTOM CURSOR
+           ========================================= */
+        .cursor-dot {
+            width: 9px; height: 9px; background: #fff; mix-blend-mode: difference;
+            position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
+            border-radius: 50%; pointer-events: none; z-index: 99999;
+        }
+        .cursor-ring {
+            width: 42px; height: 42px; border: 2px solid #fff; mix-blend-mode: difference;
+            position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
+            border-radius: 50%; pointer-events: none; z-index: 99999;
+            transition: width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s;
+        }
+        body.hovering .cursor-ring { width: 76px; height: 76px; background: #fff; border-color: #fff; opacity: 0.6; }
+
+        /* =========================================
+           3. NAVIGATION (mix-blend-mode makes it read
+           correctly over both the white hero and the
+           dark body below)
+           ========================================= */
+        nav { position: fixed; top: 0; width: 100%; padding: 26px 0; z-index: 100; mix-blend-mode: difference; }
+        .nav-left { display: flex; align-items: center; gap: 30px; }
+        .back-btn { font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--cream-dim); transition: 0.3s var(--easing); display: flex; align-items: center; gap: 6px; }
+        .back-btn:hover { color: var(--lime); transform: translateX(-4px); }
+        .logo { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em; text-transform: uppercase; color: var(--cream); }
+        .logo span { color: var(--lime); }
+        .menu-btn {
+            display: flex; align-items: center; gap: 12px; background: transparent; border: 2px solid var(--cream);
+            color: var(--cream); padding: 12px 22px; font-family: 'Space Grotesk', sans-serif; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; border-radius: 999px;
+        }
+        .menu-btn .bars { display: flex; flex-direction: column; gap: 3px; }
+        .menu-btn .bars span { width: 16px; height: 2px; background: var(--cream); display: block; }
+
+        .menu-overlay {
+            opacity: 0; pointer-events: none;
+            position: fixed; inset: 0; background: var(--lime); color: var(--ink); z-index: 20000;
+            transform: translateY(-100%); transition: transform 0.6s var(--easing), opacity 0.6s var(--easing);
+            display: flex; flex-direction: column; justify-content: space-between; padding: 40px 0 60px;
+        }
+        .menu-overlay.open { transform: translateY(0); opacity: 1; pointer-events: all; }
+        .menu-close {
+            position: absolute; top: 26px; right: 40px; background: none; border: none; color: var(--ink);
+            font-size: 2.4rem; line-height: 1; z-index: 2;
+        }
+        .menu-links { display: flex; flex-direction: column; gap: 6px; }
+        .menu-links a {
+            font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; text-transform: uppercase;
+            font-size: clamp(2.6rem, 9vw, 6rem); letter-spacing: -0.02em; transition: transform 0.35s var(--easing), color 0.35s;
+            display: inline-block;
+        }
+        .menu-links a:hover { transform: translateX(20px); color: var(--cream); }
+        .menu-footer { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; }
+        .menu-footer a { font-weight: 700; text-transform: uppercase; font-size: 0.85rem; border-bottom: 2px solid var(--ink); padding-bottom: 2px; }
+        .menu-socials { display: flex; gap: 24px; }
+
+        /* =========================================
+           4. HERO — white, blends with the source image
+           ========================================= */
+        .hero-white {
+            background: var(--paper);
+            color: var(--ink);
+            position: relative;
+            padding: 170px 0 0;
+            overflow: hidden;
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            align-items: center;
+            gap: 40px;
+        }
+        .hero-copy { position: relative; z-index: 2; padding-bottom: 80px; }
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: 10px; padding: 8px 18px; border: 2px solid var(--ink);
+            border-radius: 999px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700;
+            margin-bottom: 28px; opacity: 0; animation: fadeUp 1s var(--easing) forwards 0.2s;
+        }
+        .hero-eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--lime); animation: pulse 1.6s infinite; }
+        .hero-name {
+            font-size: clamp(2.8rem, 6.4vw, 5.2rem);
+            margin-bottom: 18px;
+            opacity: 0; animation: fadeUp 1s var(--easing) forwards 0.4s;
+        }
+        .hero-role {
+            font-family: 'Space Grotesk', sans-serif; text-transform: none; font-weight: 700;
+            font-size: clamp(1.1rem, 2vw, 1.4rem); color: #4a3f38; margin-bottom: 26px; letter-spacing: -0.01em;
+            opacity: 0; animation: fadeUp 1s var(--easing) forwards 0.55s;
+        }
+        .hero-desc {
+            max-width: 520px; font-size: 1.05rem; color: #55483f; margin-bottom: 40px;
+            opacity: 0; animation: fadeUp 1s var(--easing) forwards 0.7s;
+        }
+        .hero-cta-row { display: flex; gap: 18px; flex-wrap: wrap; opacity: 0; animation: fadeUp 1s var(--easing) forwards 0.9s; }
+        .btn-solid {
+            display: inline-flex; align-items: center; gap: 10px; padding: 17px 32px;
+            background: var(--ink); color: var(--cream); border: var(--border-w) solid var(--ink);
+            font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 0.5px; font-size: 0.9rem; box-shadow: 6px 6px 0 var(--lime);
+            transition: transform 0.3s var(--easing), box-shadow 0.3s var(--easing);
+        }
+        .btn-solid:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0 var(--lime); }
+        .btn-outline {
+            display: inline-flex; align-items: center; gap: 10px; padding: 15px 30px;
+            background: transparent; color: var(--ink); border: 2px solid var(--ink);
+            font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 0.5px; font-size: 0.9rem; transition: 0.3s var(--easing);
+        }
+        .btn-outline:hover { background: var(--ink); color: var(--cream); }
+
+        .hero-photo-wrap {
+            position: relative; z-index: 1;
+            display: flex; justify-content: center; align-items: flex-end;
+            height: 100%;
+        }
+        .hero-photo-wrap img {
+            width: 100%; max-width: 560px;
+            filter: drop-shadow(0 22px 18px rgba(18,10,16,0.1));
+            opacity: 0; transform: translateY(30px);
+            animation: fadeUp 1.3s var(--easing) forwards 0.5s;
+        }
+
+        @keyframes fadeUp { 0% { opacity: 0; transform: translateY(24px); } 100% { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.4); } }
+
+        /* Seam: gradients the white hero down into the dark page */
+        .hero-seam {
+            position: relative;
+            height: 220px;
+            background: linear-gradient(to bottom, var(--paper) 0%, var(--paper) 15%, var(--bg) 100%);
+        }
+
+        @media (max-width: 900px) {
+            .hero-grid { grid-template-columns: 1fr; }
+            .hero-white { padding-top: 140px; }
+            .hero-photo-wrap { order: -1; }
+            .hero-photo-wrap img { max-width: 340px; margin: 0 auto; }
+            .hero-copy { padding-bottom: 40px; text-align: left; }
+        }
+
+        /* =========================================
+           5. PROFILE / SKILLS (dark)
+           ========================================= */
+        .profile-section { padding: 20px 0 90px; }
+        .profile-lede {
+            max-width: 820px; font-size: clamp(1.15rem, 2.4vw, 1.55rem); color: var(--cream); font-weight: 500;
+            line-height: 1.5;
+        }
+        .profile-lede span { color: var(--cream-dim); }
+        .skills-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 40px; }
+        .skill-chip {
+            display: inline-flex; align-items: center; padding: 10px 18px; border: 2px solid rgba(247,237,225,0.25);
+            border-radius: 999px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;
+            color: var(--cream-dim); transition: 0.3s var(--easing);
+        }
+        .skill-chip:hover { border-color: var(--lime); color: var(--cream); transform: translateY(-2px); }
+
+        /* =========================================
+           6. TIMELINE
+           ========================================= */
+        .timeline-section { padding: 40px 0 140px; position: relative; }
+        .section-head { margin-bottom: 60px; display: flex; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
+        .section-head .idx { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(2.2rem, 5.5vw, 3.6rem); font-weight: 800; }
+        .section-head p { color: var(--cream-dim); max-width: 440px; padding-bottom: 8px; }
+
+        .timeline { position: relative; }
+        .timeline::before {
+            content: ''; position: absolute; left: 158px; top: 0; bottom: 0; width: 2px;
+            background: linear-gradient(to bottom, transparent, rgba(247,237,225,0.22) 4%, rgba(247,237,225,0.22) 96%, transparent);
+        }
+        .timeline-progress {
+            position: absolute; left: 158px; top: 0; width: 2px; height: 0%;
+            background: linear-gradient(to bottom, var(--lime), var(--violet));
+            transition: height 0.15s linear;
+            box-shadow: 0 0 12px var(--lime);
+        }
+
+        .tl-item {
+            position: relative;
+            display: grid;
+            grid-template-columns: 158px 1fr;
+            gap: 36px;
+            padding-bottom: 64px;
+            opacity: 0; transform: translateY(40px);
+            transition: opacity 0.8s var(--easing), transform 0.8s var(--easing);
+        }
+        .tl-item.active { opacity: 1; transform: translateY(0); }
+        .tl-item:last-child { padding-bottom: 0; }
+
+        .tl-year {
+            font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 0.88rem;
+            color: var(--cream-dim); text-align: right; padding-top: 8px; padding-right: 18px; letter-spacing: -0.01em;
+            white-space: nowrap;
+        }
+        .tl-item.active .tl-year { color: var(--cream); }
+
+        .tl-dot {
+            position: absolute; left: 158px; top: 10px; width: 16px; height: 16px; border-radius: 50%;
+            background: var(--bg); border: 2px solid rgba(247,237,225,0.35); transform: translateX(-50%) scale(0.7);
+            transition: 0.5s var(--easing);
+        }
+        .tl-item.active .tl-dot { border-color: var(--accent); box-shadow: 0 0 0 5px rgba(255,255,255,0.04), 0 0 16px -2px var(--accent); transform: translateX(-50%) scale(1); background: var(--accent); }
+
+        .tl-card {
+            background: var(--surface); border: 2px solid rgba(247,237,225,0.1); border-radius: 4px;
+            padding: 28px 30px; position: relative; overflow: hidden;
+            transition: border-color 0.4s var(--easing), transform 0.4s var(--easing);
+        }
+        .tl-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--accent); }
+        .tl-item.active .tl-card { border-color: rgba(247,237,225,0.18); }
+        .tl-card:hover { transform: translateX(4px); }
+
+        .tl-tag {
+            display: inline-block; font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.4px;
+            color: var(--accent); margin-bottom: 10px;
+        }
+        .tl-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.35rem; text-transform: none; letter-spacing: -0.01em; margin-bottom: 4px; }
+        .tl-org { color: var(--cream-dim); font-size: 0.9rem; font-weight: 700; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .tl-points { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+        .tl-points li { position: relative; padding-left: 20px; color: var(--cream-dim); font-size: 0.95rem; line-height: 1.55; }
+        .tl-points li::before { content: '→'; position: absolute; left: 0; top: 0; color: var(--accent); font-weight: 700; }
+        .tl-points li strong { color: var(--cream); font-weight: 700; }
+
+        @media (max-width: 700px) {
+            .timeline::before, .timeline-progress { left: 8px; }
+            .tl-item { grid-template-columns: 1fr; gap: 10px; padding-left: 34px; }
+            .tl-dot { left: 8px; top: 4px; }
+            .tl-year { text-align: left; padding-top: 0; margin-bottom: 6px; }
+            .tl-card { padding: 22px; }
+        }
+
+        /* =========================================
+           7. CTA + FOOTER
+           ========================================= */
+        .cta-section { padding: 20px 0 120px; text-align: center; }
+        .cta-title { font-size: clamp(2.2rem, 7vw, 4.5rem); margin-bottom: 30px; }
+        .cta-title .out { color: transparent; -webkit-text-stroke: 1.5px var(--cream); }
+        .cta-row { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; margin-top: 10px; }
+        footer { padding: 70px 0 50px; border-top: 2px solid rgba(245,241,230,0.15); }
+        .footer-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .footer-row .socials { display: flex; gap: 24px; }
+        .footer-row .socials a { color: var(--cream-dim); font-weight: 700; text-transform: uppercase; font-size: 0.85rem; transition: color 0.3s; }
+        .footer-row .socials a:hover { color: var(--lime); }
+        .back-top {
+            width: 46px; height: 46px; border: 2px solid var(--cream); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: 0.3s var(--easing);
+        }
+        .back-top:hover { background: var(--cream); color: var(--ink); transform: translateY(-4px); }
+        .copyright { color: var(--cream-dim); font-size: 0.8rem; margin-top: 40px; text-align: center; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-eyebrow, .hero-name, .hero-role, .hero-desc, .hero-cta-row, .hero-photo-wrap img { animation: none; opacity: 1; transform: none; }
+            .tl-item { transition: none; opacity: 1; transform: none; }
+        }
+
+        @media (pointer: coarse) {
+            *, *::before, *::after { cursor: auto !important; }
+            .cursor-dot, .cursor-ring { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="noise-overlay"></div>
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+
+    <nav>
+        <div class="container flex">
+            <div class="nav-left">
+                <a href="index.html" class="back-btn hover-trigger">← Back</a>
+                <a href="index.html" class="logo hover-trigger">MANGALAM<span>.</span></a>
+            </div>
+            <button class="menu-btn hover-trigger" onclick="toggleMenu(true)">
+                <span class="bars"><span></span><span></span><span></span></span>
+                Menu
+            </button>
+        </div>
+    </nav>
+
+    <div class="menu-overlay" id="menuOverlay">
+        <button class="menu-close hover-trigger" onclick="toggleMenu(false)">×</button>
+        <div class="container">
+            <div class="menu-links">
+                <a href="index.html#work" class="hover-trigger" onclick="toggleMenu(false)">Work</a>
+                <a href="index.html#about" class="hover-trigger" onclick="toggleMenu(false)">About</a>
+                <a href="engineering.html" class="hover-trigger" onclick="toggleMenu(false)">ENGINEERING</a>
+                <a href="writings.html" class="hover-trigger" onclick="toggleMenu(false)">WRITINGS</a>
+                <a href="resume.html" class="hover-trigger" onclick="toggleMenu(false)">RESUME</a>
+                <a href="index.html" class="hover-trigger" onclick="toggleMenu(false)">Contact</a>
+            </div>
+        </div>
+        <div class="container menu-footer">
+            <span>kumarmangalam.patna@gmail.com</span>
+            <div class="menu-socials">
+                <a href="https://www.linkedin.com/in/kumar-mangalam-362a77176/" class="hover-trigger">LinkedIn</a>
+                <a href="https://www.behance.net/kumarmangalam1" class="hover-trigger">Behance</a>
+                <a href="#" class="hover-trigger">Instagram</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ HERO (white, blends with source photo) ============ -->
+    <header class="hero-white">
+        <div class="container hero-grid">
+            <div class="hero-copy">
+                <span class="hero-eyebrow"><span class="dot"></span>Available for freelance &amp; full-time</span>
+                <h1 class="hero-name">Kumar<br>Mangalam</h1>
+                <p class="hero-role">Mechanical Engineer · Process Control · Graphic Designer</p>
+                <p class="hero-desc">Mechanical Engineering graduate with a Computer Science minor — over a year and a half of experience in process control, manufacturing operations and data-driven optimization, alongside a parallel life in graphic design, photography and competitive programming.</p>
+                <div class="hero-cta-row">
+                    <a href="assets/kumar-mangalam-resume.pdf" download class="btn-solid hover-trigger">Download Résumé ↓</a>
+                    <a href="mailto:kumarmangalam.patna@gmail.com" class="btn-outline hover-trigger">Get In Touch</a>
+                </div>
+            </div>
+            <div class="hero-photo-wrap">
+                <img src="assets/resume-hero.jpg" alt="Kumar Mangalam — illustrated creative workspace portrait" loading="eager">
+            </div>
+        </div>
+    </header>
+    <div class="hero-seam" aria-hidden="true"></div>
+
+    <!-- ============ PROFILE + SKILLS ============ -->
+    <section class="container profile-section reveal-on-scroll">
+        <p class="profile-lede">Skilled in <span>C/C++ and Java</span>, fluent in data analysis with <span>Power BI, Looker Studio, Tableau and SQL</span> — active in competitive programming, with a keen interest in learning new technologies, graphic designing and photography.</p>
+        <div class="skills-row">
+            <span class="skill-chip">Process Control</span>
+            <span class="skill-chip">Data Analysis</span>
+            <span class="skill-chip">Power BI</span>
+            <span class="skill-chip">Tableau</span>
+            <span class="skill-chip">Looker Studio</span>
+            <span class="skill-chip">SQL</span>
+            <span class="skill-chip">C / C++</span>
+            <span class="skill-chip">Java</span>
+            <span class="skill-chip">Python</span>
+            <span class="skill-chip">Photoshop</span>
+            <span class="skill-chip">Illustrator</span>
+            <span class="skill-chip">After Effects</span>
+            <span class="skill-chip">Team Leadership</span>
+        </div>
+    </section>
+
+    <!-- ============ ANIMATED TIMELINE ============ -->
+    <section class="container timeline-section">
+        <div class="section-head reveal-on-scroll">
+            <span class="idx">Journey</span>
+            <p>Education, work experience, awards, leadership and activities — in order, as they happened.</p>
+        </div>
+
+        <div class="timeline" id="timeline">
+            <div class="timeline-progress" id="timelineProgress"></div>
+
+            <div class="tl-item" style="--accent: var(--teal);">
+                <div class="tl-year">2017</div>
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <span class="tl-tag">Education</span>
+                    <h3 class="tl-title">Class X (ICSE) — 92.33%</h3>
+                    <div class="tl-org">St. Xavier's High School, Patna</div>
+                    <ul class="tl-points">
+                        <li><strong>Best Student in English Literature Award</strong>, Batch of 2017.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tl-item" style="--accent: var(--violet);">
+                <div class="tl-year">2017–2019</div>
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <span class="tl-tag">Leadership</span>
+                    <h3 class="tl-title">Founder &amp; Mentor</h3>
+                    <div class="tl-org">St. Michael's High School, Patna</div>
+                    <ul class="tl-points">
+                        <li>Mentored <strong>30+ students</strong> in camps and throughout the academic year in graphic designing, photography and filmmaking.</li>
+                        <li>Spearheaded teams to represent school in <strong>4+ filmmaking and photography competitions</strong>.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tl-item" style="--accent: var(--pink);">
+                <div class="tl-year">2018</div>
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <span class="tl-tag">Award</span>
+                    <h3 class="tl-title">Most Creative Student</h3>
+                    <div class="tl-org">St. Michael's High School, Patna</div>
+                    <ul class="tl-points">
+                        <li>Created and led the first-of-its-kind Photography &amp; Design Society — <strong>Pixy Lens and Pixel Artists</strong> — producing <strong>300+ creatives</strong> in the form of banners, posters, flyers and certificates over two years.</li>
+                        <li>Designed the Jubilee Logo and Flag to commemorate the Post Centenary Diamond Jubilee of SMHS and the Jesuit Society.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tl-item" style="--accent: var(--pink);">
+                <div class="tl-year">2018</div>
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <span class="tl-tag">Award</span>
+                    <h3 class="tl-title">Zonal Gold Medal — SOF</h3>
+                    <div class="tl-org">National Cyber Olympiad</div>
+                    <ul class="tl-points">
+                        <li>Ranked <strong>11 / 4000+</strong> at Zonal Level (IIT KGP Khitiz), conducted by the Science Olympiad Foundation.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tl-item" style="--accent: var(--teal);">
+                <div class="tl-year">2019</div>
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <span class="tl-tag">Education</span>
+                    <h3 class="tl-title">Class XII (CBSE) — 84.60%</h3>
+                    <div class="tl-org">St. Michael's High School, Patna</div>
+                    <ul class="tl-points">
+                        <li><strong>Student Council Member</strong>, Session 2018–2019.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tl-item" style="--accent: var(--terracotta);">
+                <div class="tl-year">2019–2022</div>
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <span class="tl-tag">Activity</span>
+                    <h3 class="tl-title">Internal Hackathons — SIH</h3>
+                    <div class="tl-org">Smart India Hackathon</div>
+                    <ul class="tl-points">
+                        <li><strong>Runner-up</strong> in the college round of SIH Hackathon 2020 (RFID-based smart parking system).</li>
+                        <li><strong>4th Position</strong> in 2022 (Random Encryption Generation).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tl-item" style="--accent: var(--violet);">
+                <div class="tl-year">2021–2022</div>
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <span class="tl-tag">Leadership</span>
+                    <h3 class="tl-title">Vice President &amp; Co-Manager</h3>
+                    <div class="tl-org">Birla Institute of Technology, Mesra</div>
+                    <ul class="tl-points">
+                        <li>Led a team of <strong>30+ individuals</strong> organizing <strong>10+ technical events</strong> over a year; started and published a bimonthly technical newsletter.</li>
+                        <li>Founded and co-managed <strong>BITP Esports</strong> across 6 competitive games, with <strong>40+ esports athletes</strong>.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tl-item" style="--accent: var(--terracotta);">
+                <div class="tl-year">2021–2023</div>
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <span class="tl-tag">Activity</span>
+                    <h3 class="tl-title">Core-Member, Event Management</h3>
+                    <div class="tl-org">Birla Institute of Technology, Mesra</div>
+                    <ul class="tl-points">
+                        <li>Spearheaded teams of Sponsorship, Content, Event Management, Design and Publicity across <strong>4+ Major &amp; 9+ Minor Techno Cultural Festivals</strong>.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tl-item" style="--accent: var(--terracotta);">
+                <div class="tl-year">2021–2023</div>
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <span class="tl-tag">Activity</span>
+                    <h3 class="tl-title">Table-Tennis Team</h3>
+                    <div class="tl-org">Birla Institute of Technology, Mesra</div>
+                    <ul class="tl-points">
+                        <li>Ranked <strong>4th / 200+ students</strong>; College Team member, played in <strong>6+ inter &amp; intra college tournaments</strong>.</li>
+                        <li><strong>1 / 5 Teams</strong> in the Table Tennis Team Event at Elegante, IIM Bodh Gaya 2023.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tl-item" style="--accent: var(--lime);">
+                <div class="tl-year">May–Jul '22</div>
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <span class="tl-tag">Experience</span>
+                    <h3 class="tl-title">Summer Intern</h3>
+                    <div class="tl-org">SAIL &amp; EIL</div>
+                    <ul class="tl-points">
+                        <li>Assisted in <strong>3 Diesel-Electric Locomotive Maintenance</strong> (RITES) in the TRM Dept. of Rourkela Steel Plant, SAIL.</li>
+                        <li>Worked in the Rotating Equipment Division of EIL, Delhi — studied and drafted Process Data Sheets for procurement of pumps.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tl-item" style="--accent: var(--teal);">
+                <div class="tl-year">2023</div>
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <span class="tl-tag">Education</span>
+                    <h3 class="tl-title">B.Tech, Mechanical Engineering — 8.43/10</h3>
+                    <div class="tl-org">Birla Institute of Technology, Mesra, Ranchi</div>
+                    <ul class="tl-points">
+                        <li><strong>Minor Specialisation in CSE</strong>, graduation with distinction.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tl-item" style="--accent: var(--violet);">
+                <div class="tl-year">2023</div>
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <span class="tl-tag">Leadership</span>
+                    <h3 class="tl-title">Publicity and Design Head</h3>
+                    <div class="tl-org">Birla Institute of Technology, Mesra</div>
+                    <ul class="tl-points">
+                        <li>Led a team of <strong>50+ individuals</strong> for the Annual Sports Fest's Design &amp; Merchandising needs.</li>
+                        <li>Achieved a footfall of <strong>20,000+</strong> in a 3-day span, with <strong>8+ event sponsors</strong> and <strong>100,000+ social media engagements</strong>.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tl-item" style="--accent: var(--lime);">
+                <div class="tl-year">Jul '23–Dec '24</div>
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <span class="tl-tag">Experience</span>
+                    <h3 class="tl-title">Assistant Manager</h3>
+                    <div class="tl-org">JSPL — Jindal Steel &amp; Power Ltd.</div>
+                    <ul class="tl-points">
+                        <li>Led a team of <strong>20+ engineers &amp; operators</strong> overseeing daily shift operations; deployed in SMS, Slab Caster Operations and Caster 2 commissioning.</li>
+                        <li>Commissioned JSPL's <strong>first high-speed Twin Strand Slab Caster</strong> as its Control Room Engineer.</li>
+                        <li>Achieved <strong>highest casting speed (2.4 m/min)</strong>, <strong>longest SES ramping profile (980 mins)</strong> and <strong>fastest restranding (52 mins)</strong>.</li>
+                        <li>Improved process definition functions for better quality yield — <strong>9% yield increase</strong> and <strong>8% scrap reduction</strong>, YoY.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tl-item" style="--accent: var(--pink);">
+                <div class="tl-year">2024</div>
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <span class="tl-tag">Award</span>
+                    <h3 class="tl-title">Employee of the Month</h3>
+                    <div class="tl-org">JSPL — Jindal Steel &amp; Power Ltd.</div>
+                    <ul class="tl-points">
+                        <li><strong>1 / 200+ employees</strong> to receive the award (April 2024), for commissioning and process improvement on the new twin strand caster and gains in quality &amp; yield of production.</li>
+                        <li>Received the <strong>Shabbash award</strong> for record-time re-startup of production after the CCM's first capital shutdown.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tl-item" style="--accent: var(--terracotta);">
+                <div class="tl-year">2025</div>
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <span class="tl-tag">Activity</span>
+                    <h3 class="tl-title">Community Educator / NSS</h3>
+                    <div class="tl-org">Social Warriors NGO, Patna</div>
+                    <ul class="tl-points">
+                        <li>Served as a community educator, delivering skills, basic education and training to underprivileged children across town — <strong>240+ hours</strong>.</li>
+                        <li>Active in campaigns such as Covid Relief, Bihar Flood Relief and Pre-RD Camp.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tl-item" style="--accent: var(--lime);">
+                <div class="tl-year">Jul '25–Jan '26</div>
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <span class="tl-tag">Experience</span>
+                    <h3 class="tl-title">Project Management Intern</h3>
+                    <div class="tl-org">iQuanta</div>
+                    <ul class="tl-points">
+                        <li>Oversaw YouTube video creation and editing, promotion and outreach.</li>
+                        <li>Led team automating and optimizing the organization's WhatsApp Community, implementing result-delivery optimisation.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="container cta-section reveal-on-scroll">
+        <h2 class="cta-title">Let's build <span class="out">something</span> together.</h2>
+        <div class="cta-row">
+            <a href="assets/kumar-mangalam-resume.pdf" download class="btn-solid hover-trigger" style="background: var(--lime); color: var(--ink); border-color: var(--cream);">Download Résumé ↓</a>
+            <a href="mailto:kumarmangalam.patna@gmail.com" class="btn-outline hover-trigger" style="color: var(--cream); border-color: var(--cream);">Email Me</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-row">
+                <span class="logo hover-trigger">MANGALAM<span>.</span></span>
+                <div class="socials">
+                    <a href="#" class="hover-trigger">Instagram</a>
+                    <a href="https://www.linkedin.com/in/kumar-mangalam-362a77176/" class="hover-trigger">LinkedIn</a>
+                    <a href="https://www.behance.net/kumarmangalam1" class="hover-trigger">Behance</a>
+                </div>
+                <a href="#" class="back-top hover-trigger" aria-label="Back to top">↑</a>
+            </div>
+            <p class="copyright">&copy; 2026 KUMAR MANGALAM. ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Custom Cursor
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorRing = document.querySelector('.cursor-ring');
+
+        if (window.matchMedia("(pointer: fine)").matches) {
+            window.addEventListener('mousemove', (e) => {
+                cursorDot.style.left = `${e.clientX}px`;
+                cursorDot.style.top = `${e.clientY}px`;
+                setTimeout(() => {
+                    cursorRing.style.left = `${e.clientX}px`;
+                    cursorRing.style.top = `${e.clientY}px`;
+                }, 50);
+            });
+
+            document.querySelectorAll('.hover-trigger').forEach(el => {
+                el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+                el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+            });
+        }
+
+        // Mobile Menu Toggle
+        function toggleMenu(show) {
+            const overlay = document.getElementById('menuOverlay');
+            if (show) {
+                overlay.classList.add('open');
+            } else {
+                overlay.classList.remove('open');
+            }
+        }
+
+        // Generic scroll reveal
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => io.observe(el));
+
+        // Timeline items reveal + progress line tied to scroll
+        const tlItems = document.querySelectorAll('.tl-item');
+        const tlIo = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.25, rootMargin: '0px 0px -10% 0px' });
+        tlItems.forEach(el => tlIo.observe(el));
+
+        const timeline = document.getElementById('timeline');
+        const progress = document.getElementById('timelineProgress');
+        function updateTimelineProgress() {
+            const rect = timeline.getBoundingClientRect();
+            const vh = window.innerHeight;
+            const total = rect.height;
+            let filled = (vh * 0.65) - rect.top;
+            filled = Math.max(0, Math.min(filled, total));
+            progress.style.height = filled + 'px';
+        }
+        window.addEventListener('scroll', updateTimelineProgress, { passive: true });
+        window.addEventListener('resize', updateTimelineProgress);
+        updateTimelineProgress();
+    </script>
+</body>
+</html>
