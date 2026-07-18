@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>25 Years on This Planet: Lessons Taught by Time — Mangalam</title>
+    <meta name="theme-color" content="#120a10">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #120a10; --surface: #1e1218; --cream: #f7ede1; --cream-dim: #b3a196;
+            --ink: #120a10; --lime: #ff6b4a; --easing: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--cream); font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; line-height: 1.8; font-size: 1.15rem; }
+        h1, h2, h3, h4 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
+        a { color: inherit; text-decoration: none; }
+        img { max-width: 100%; display: block; border-radius: 4px; object-fit: cover; }
+        
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 40px; position: relative; }
+        .flex { display: flex; justify-content: space-between; align-items: center; }
+        ::selection { background: var(--lime); color: var(--ink); }
+
+        .cursor-dot { width: 9px; height: 9px; background: #fff; mix-blend-mode: difference; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; pointer-events: none; z-index: 99999; }
+        .cursor-ring { width: 42px; height: 42px; border: 2px solid #fff; mix-blend-mode: difference; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; pointer-events: none; z-index: 99999; transition: width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s; }
+        body.hovering .cursor-ring { width: 76px; height: 76px; background: #fff; border-color: #fff; opacity: 0.6; }
+        
+        nav { position: fixed; top: 0; width: 100%; padding: 26px 0; z-index: 100; mix-blend-mode: difference; }
+        .nav-left { display: flex; align-items: center; gap: 30px; }
+        .back-btn { font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--cream-dim); transition: 0.3s var(--easing); display: flex; align-items: center; gap: 6px; }
+        .back-btn:hover { color: var(--lime); transform: translateX(-4px); }
+        .logo { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em; text-transform: uppercase; color: var(--cream); }
+        .logo span { color: var(--lime); }
+        .menu-btn { display: flex; align-items: center; gap: 12px; background: transparent; border: 2px solid var(--cream); color: var(--cream); padding: 12px 22px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; border-radius: 999px; }
+        .menu-btn .bars { display: flex; flex-direction: column; gap: 3px; }
+        .menu-btn .bars span { width: 16px; height: 2px; background: var(--cream); display: block; }
+        .menu-overlay { opacity: 0; pointer-events: none; position: fixed; inset: 0; background: var(--lime); color: var(--ink); z-index: 20000; transform: translateY(-100%); transition: transform 0.6s var(--easing); display: flex; flex-direction: column; justify-content: space-between; padding: 40px 0 60px; overflow-y: auto; }
+        .menu-overlay.open { opacity: 1; pointer-events: all; transform: translateY(0); }
+        .menu-close { position: absolute; top: 26px; right: 40px; background: none; border: none; color: var(--ink); font-size: 2.4rem; line-height: 1; z-index: 2; }
+        .menu-links { display: flex; flex-direction: column; gap: clamp(16px, 4.2vh, 42px); }
+        .menu-links a { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; text-transform: uppercase; font-size: clamp(2.15rem, 7.2vw, 5rem); line-height: 0.92; letter-spacing: -0.02em; transition: transform 0.35s var(--easing), color 0.35s; display: inline-block; }
+        .menu-links a:hover { transform: translateX(20px); color: var(--cream); }
+        
+        /* Photo Journal Layout */
+        .journal-header {
+            padding: 160px 40px 60px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .journal-title {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+        .journal-meta {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--cream-dim);
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .journal-meta span { display: inline-block; }
+        
+        .journal-body {
+            max-width: 1200px;
+            margin: 0 auto 120px;
+            padding: 0 40px;
+        }
+
+        /* Photo Journal Entry */
+        .journal-entry {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 100px;
+        }
+        .journal-entry.reverse { direction: rtl; }
+        .journal-entry.reverse > * { direction: ltr; }
+
+        .journal-entry-img {
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .journal-entry-text { }
+        .journal-entry-number {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 5rem;
+            font-weight: 800;
+            color: var(--lime);
+            opacity: 0.25;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        .journal-entry-heading {
+            font-size: 1.6rem;
+            margin-bottom: 18px;
+            color: var(--cream);
+            text-transform: uppercase;
+        }
+        .journal-entry-body {
+            color: var(--cream-dim);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        /* Full-bleed image break */
+        .journal-fullbleed {
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            height: 500px;
+            object-fit: cover;
+            border-radius: 0;
+            margin-bottom: 100px;
+        }
+
+        /* Intro & Outro text */
+        .journal-intro {
+            max-width: 680px;
+            margin: 0 auto 80px;
+            text-align: center;
+        }
+        .journal-intro p {
+            color: var(--cream);
+            font-size: 1.15rem;
+            margin-bottom: 24px;
+        }
+
+        .journal-closing {
+            max-width: 680px;
+            margin: 40px auto 0;
+            text-align: center;
+            font-style: italic;
+            color: var(--cream-dim);
+            font-size: 1.2rem;
+            line-height: 1.8;
+            border-top: 1px solid rgba(245,241,230,0.15);
+            padding-top: 60px;
+        }
+
+        /* Mosaic grid */
+        .journal-mosaic {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            grid-template-rows: 280px 280px;
+            gap: 16px;
+            margin-bottom: 100px;
+        }
+        .journal-mosaic img {
+            width: 100%; height: 100%; object-fit: cover; border-radius: 6px;
+        }
+        .journal-mosaic img:first-child {
+            grid-row: 1 / 3;
+        }
+
+        footer { padding: 60px 0; border-top: 1px solid rgba(245,241,230,0.15); text-align: center; color: var(--cream-dim); font-size: 0.9rem; }
+        
+        @media (pointer: coarse) { *, *::before, *::after { cursor: auto !important; } .cursor-dot, .cursor-ring { display: none; } }
+        @media (max-width: 768px) {
+            .journal-entry { grid-template-columns: 1fr; }
+            .journal-entry.reverse { direction: ltr; }
+            .journal-mosaic { grid-template-columns: 1fr; grid-template-rows: auto; }
+            .journal-mosaic img:first-child { grid-row: auto; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+    <nav>
+        <div class="container flex">
+            <div class="nav-left">
+                <a href="writings.html" class="back-btn hover-trigger">← Back</a>
+                <a href="index.html" class="logo hover-trigger">MANGALAM<span>.</span></a>
+            </div>
+            <button class="menu-btn hover-trigger" onclick="toggleMenu(true)">
+                <span class="bars"><span></span><span></span><span></span></span>
+                Menu
+            </button>
+        </div>
+    </nav>
+    <div class="menu-overlay" id="menuOverlay">
+        <button class="menu-close hover-trigger" onclick="toggleMenu(false)">×</button>
+        <div class="container">
+            <div class="menu-links">
+                <a href="index.html#work" class="hover-trigger" onclick="toggleMenu(false)">Work</a>
+                <a href="index.html#about" class="hover-trigger" onclick="toggleMenu(false)">About</a>
+                <a href="engineering.html" class="hover-trigger" onclick="toggleMenu(false)">ENGINEERING</a>
+                <a href="writings.html" class="hover-trigger" onclick="toggleMenu(false)">WRITINGS</a>
+                <a href="resume.html" class="hover-trigger" onclick="toggleMenu(false)">RESUME</a>
+                <a href="index.html#contact" class="hover-trigger" onclick="toggleMenu(false)">Contact</a>
+            </div>
+        </div>
+    </div>
+
+    <header class="journal-header">
+        <h1 class="journal-title">25 Years on This Planet: Lessons Taught by Time</h1>
+        <div class="journal-meta">
+            <span>Photo Journal</span>
+            <span>Jul 18, 2026</span>
+            <span>By K. Mangalam</span>
+        </div>
+    </header>
+
+    <main class="journal-body">
+
+        <div class="journal-intro">
+            <p><strong>[PLACEHOLDER TEXT]</strong> Twenty-five is not old. But it is old enough to have been wrong about important things, to have lost people you thought would stay, and to have built something from the wreckage of plans that didn't survive contact with reality. This is not advice. This is a journal—a collection of photographs and the lessons that were quietly embedded in the years behind them.</p>
+        </div>
+
+        <!-- Entry 01 -->
+        <div class="journal-entry">
+            <img class="journal-entry-img hover-trigger" src="https://images.unsplash.com/photo-1500049242364-5f500807cdd7?auto=format&fit=crop&w=800&q=80" alt="Solitude and growth">
+            <div class="journal-entry-text">
+                <div class="journal-entry-number">01</div>
+                <h3 class="journal-entry-heading">Nobody is coming to save you</h3>
+                <p class="journal-entry-body">[PLACEHOLDER TEXT] The hardest lesson arrives quietly. No alarm, no event—just a slow realization that the rescue you were waiting for is not on its way. The mentor who would notice your potential, the opportunity that would fall into your lap, the moment everything would click. None of it comes without you moving first. At some point, you stop waiting and start building. That shift changes everything.</p>
+            </div>
+        </div>
+
+        <!-- Entry 02 -->
+        <div class="journal-entry reverse">
+            <img class="journal-entry-img hover-trigger" src="https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?auto=format&fit=crop&w=800&q=80" alt="Writing and reflection">
+            <div class="journal-entry-text">
+                <div class="journal-entry-number">02</div>
+                <h3 class="journal-entry-heading">Your taste will always outrun your skill</h3>
+                <p class="journal-entry-body">[PLACEHOLDER TEXT] You can see the gap. Between what you make and what you know is possible. Between the design in your head and the one on the screen. This gap is not a flaw—it is proof that your standards are higher than your current ability, and that is exactly the tension that drives growth. The danger is not in having the gap; it is in letting it convince you to stop.</p>
+            </div>
+        </div>
+
+        <!-- Full-bleed image break -->
+        <img class="journal-fullbleed hover-trigger" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1600&q=80" alt="Looking out into the distance">
+
+        <!-- Entry 03 -->
+        <div class="journal-entry">
+            <img class="journal-entry-img hover-trigger" src="https://images.unsplash.com/photo-1473830394358-91588751b241?auto=format&fit=crop&w=800&q=80" alt="Quiet moments">
+            <div class="journal-entry-text">
+                <div class="journal-entry-number">03</div>
+                <h3 class="journal-entry-heading">Silence teaches more than noise</h3>
+                <p class="journal-entry-body">[PLACEHOLDER TEXT] There was a year where I consumed everything—podcasts, videos, threads, courses—and produced almost nothing. Information without application is just entertainment wearing a productive costume. The real learning started when I closed the tabs and sat with my own thoughts. Silence is uncomfortable, but it is where clarity lives.</p>
+            </div>
+        </div>
+
+        <!-- Mosaic Grid -->
+        <div class="journal-mosaic">
+            <img class="hover-trigger" src="https://images.unsplash.com/photo-1502759683299-cdcd6974244f?auto=format&fit=crop&w=800&q=80" alt="Nature and time">
+            <img class="hover-trigger" src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80" alt="Morning light">
+            <img class="hover-trigger" src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=600&q=80" alt="Forest path">
+            <img class="hover-trigger" src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=600&q=80" alt="Sunset ridge">
+        </div>
+
+        <!-- Entry 04 -->
+        <div class="journal-entry reverse">
+            <img class="journal-entry-img hover-trigger" src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=800&q=80" alt="Books and learning">
+            <div class="journal-entry-text">
+                <div class="journal-entry-number">04</div>
+                <h3 class="journal-entry-heading">Most regrets come from inaction</h3>
+                <p class="journal-entry-body">[PLACEHOLDER TEXT] At twenty-five, the things I regret are never the risks I took—even the ones that failed spectacularly. The regrets are the conversations I didn't start, the projects I shelved because I wasn't "ready," the people I didn't reach out to because I assumed they wouldn't care. Action, even clumsy action, always beats elegant hesitation.</p>
+            </div>
+        </div>
+
+        <!-- Entry 05 -->
+        <div class="journal-entry">
+            <img class="journal-entry-img hover-trigger" src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80" alt="Mountains and perspective">
+            <div class="journal-entry-text">
+                <div class="journal-entry-number">05</div>
+                <h3 class="journal-entry-heading">Time is the only currency that matters</h3>
+                <p class="journal-entry-body">[PLACEHOLDER TEXT] You can earn more money. You can learn new skills. You can rebuild a reputation. But you cannot manufacture a single second. The people who understand this early live differently—not urgently, but intentionally. They say no more often. They protect their mornings. They spend time with people who make them feel more like themselves, not less.</p>
+            </div>
+        </div>
+
+        <!-- Full-bleed image break -->
+        <img class="journal-fullbleed hover-trigger" src="https://images.unsplash.com/photo-1490730141103-6cac27aaab94?auto=format&fit=crop&w=1600&q=80" alt="Sunset silhouette">
+
+        <!-- Entry 06 -->
+        <div class="journal-entry reverse">
+            <img class="journal-entry-img hover-trigger" src="https://images.unsplash.com/photo-1517960413843-0aee8e2b3285?auto=format&fit=crop&w=800&q=80" alt="Connections and solitude">
+            <div class="journal-entry-text">
+                <div class="journal-entry-number">06</div>
+                <h3 class="journal-entry-heading">Your circle will shrink, and that's the point</h3>
+                <p class="journal-entry-body">[PLACEHOLDER TEXT] At fifteen, you want to be liked by everyone. At twenty, you want to be liked by the right people. At twenty-five, you realize the "right people" are about four or five humans who show up when things are genuinely hard—not when it's convenient, not when it's fun, but when it's neither. Quality over quantity is not a platitude. It is a survival strategy.</p>
+            </div>
+        </div>
+
+        <div class="journal-closing">
+            <p>[PLACEHOLDER TEXT] "Twenty-five years is not a milestone. It is a checkpoint. A place to pause, look at the map, and acknowledge that you've been walking in roughly the right direction—even when it didn't feel like it. The lessons here are not finished. They are still being written, one frame at a time."</p>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="container">&copy; 2026 Mangalam. All rights reserved.</div>
+    </footer>
+
+    <script>
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorRing = document.querySelector('.cursor-ring');
+        if (window.matchMedia("(pointer: fine)").matches) {
+            window.addEventListener('mousemove', (e) => {
+                cursorDot.style.left = `${e.clientX}px`;
+                cursorDot.style.top = `${e.clientY}px`;
+                setTimeout(() => {
+                    cursorRing.style.left = `${e.clientX}px`;
+                    cursorRing.style.top = `${e.clientY}px`;
+                }, 50);
+            });
+            document.querySelectorAll('.hover-trigger').forEach(el => {
+                el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+                el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+            });
+        }
+        function toggleMenu(show) {
+            document.getElementById('menuOverlay').classList.toggle('open', show);
+            if (show) document.body.style.overflow = 'hidden';
+            else document.body.style.overflow = '';
+        }
+    </script>
+</body>
+</html>
