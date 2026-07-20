@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Why I Call Creativity a Process, and Its Hidden Toll — Mangalam</title>
+    <title>Why I Believe Creativity Is a Process Rather Than a Static Skill Set — Mangalam</title>
     <meta name="theme-color" content="#120a10">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -75,21 +75,22 @@
         .editorial-body {
             max-width: 1200px;
             margin: 0 auto 120px;
-            padding: 0 40px;
+            padding: 0 clamp(20px, 6vw, 100px);
         }
-        
-        /* Narrow Text Block */
+
+        /* Text Block — fills the available editorial width */
         .text-block {
-            max-width: 700px;
+            max-width: 100%;
             margin: 0 auto 60px;
         }
         .text-block p {
-            margin-bottom: 26px;
+            margin-bottom: 30px;
             color: var(--cream);
             font-size: 1.1rem;
         }
-        .text-block p strong {
+        .text-block p strong, .text-block p b {
             color: var(--lime);
+            font-weight: 700;
         }
 
         /* Image Layouts */
@@ -126,7 +127,6 @@
         }
         @media (max-width: 640px) {
             .editorial-header { padding: 130px 24px 60px; }
-            .editorial-body { padding: 0 24px; }
         }
     </style>
 </head>
@@ -160,7 +160,7 @@
     </div>
 
     <header class="editorial-header">
-        <h1 class="editorial-title">Why I Call Creativity a Process, and Its Hidden Toll</h1>
+        <h1 class="editorial-title">Why I Believe Creativity Is a Process Rather Than a Static Skill Set</h1>
         <div class="editorial-meta">
             <span>Personal Essay</span>
             <span>Jul 18, 2026</span>
@@ -171,8 +171,9 @@
     <main class="editorial-body">
         
         <div class="text-block">
-            <p><strong>[PLACEHOLDER TEXT]</strong> Creativity is not a lightning bolt. It is not the romantic, effortless spark that people love to imagine—a sudden strike of genius that arrives fully formed. It is a process. A slow, grinding, often unglamorous process that demands more from you than talent ever could.</p>
-            <p>Over the years of designing, photographing, and building things from nothing, I've come to understand that the act of creating is as much about endurance as it is about inspiration. And that endurance comes at a cost no one really talks about.</p>
+            <p><strong>If someone asked me when I became a creative person, I honestly wouldn't know what to say.</strong> There wasn't a day I woke up and decided I wanted to become a designer, an animator, or a photographer. There wasn't a grand realization or a life-changing moment. Looking back now, it feels more like <strong>I kept opening one door after another</strong> until, twelve years later, I found myself standing in a room full of cameras, editing timelines, animation keyframes, music tracks, color palettes, and countless unfinished ideas.</p>
+            <p>It all began in Class 8. Back then, my definition of creativity was surprisingly simple: PowerPoint. While most presentations were just slides filled with text, I found myself obsessing over how they looked and felt — experimenting with transitions, layering images with audio, timing animations to music, trying to make every presentation <strong>feel like a miniature experience instead of a classroom assignment.</strong></p>
+            <p>People noticed. Soon, friends started asking me to create presentation backdrops for their dance performances and dramas. What started as a fun experiment slowly became something others began relying on. And that's when I encountered <strong>my first creative limitation:</strong> PowerPoint simply wasn't built for everything I wanted to do.</p>
         </div>
 
         <!-- Full width Image -->
@@ -182,9 +183,13 @@
         </div>
 
         <div class="text-block">
-            <p><strong>What do you mean when you say creativity is a process?</strong> [PLACEHOLDER TEXT] People see the finished poster, the final photograph, the polished reel, and they assume it appeared. But behind every piece is a trail of discarded drafts, 3 AM revisions, and moments where I genuinely questioned whether the idea was worth pursuing at all. The process is iteration. It's sitting with discomfort. It's trusting that the ugly first draft is a necessary step, not a failure.</p>
+            <p><strong>That realization changed everything.</strong> Instead of trying to force an idea into a tool, I started looking for tools that could better express the idea. One piece of software led to another — video editing became motion graphics, motion graphics led to animation, photography entered somewhere along the journey, then came audio mixing, graphic design, and eventually cloud-based platforms like Canva and Figma. Fast forward to today, and I'm comfortable working across multiple creative applications. Whether it's a freelance project or something deeply personal, <strong>I have enough tools at my disposal to bring almost any idea to life.</strong></p>
 
-            <p><strong>What is the "hidden toll" you refer to?</strong> [PLACEHOLDER TEXT] The toll is what you pay when the work demands your full emotional presence — when you pour yourself into a design and someone dismisses it in two seconds, when you spend hours perfecting a frame and the light shifts, when you ship something personal and the silence that follows feels deafening. The toll is also physical: skipped meals, strained eyes, the weight of self-imposed deadlines. Nobody warns you that caring deeply about your craft can feel like carrying a stone uphill.</p>
+            <p><strong>But despite learning all this software over more than a decade, the one thing that has never changed is how every project begins.</strong> Not with a mouse. Not with a keyboard. Not even with a blank canvas. <strong>It begins with looking.</strong> Whenever I receive a new project, I almost instinctively find myself wandering through places like Unsplash, Pinterest, and Behance — scrolling through photographs, illustrations, typography, color palettes, layouts, and compositions, not to copy them, but to feed my imagination. To most people, it probably looks like procrastination. <strong>To me, it feels like work.</strong></p>
+
+            <p>Somewhere between the fiftieth photograph and the hundredth design, my mind quietly starts making connections that weren't there before. What if this composition met that lighting? What if this typography carried the mood of that photograph? What if this animation moved just a little slower? Ironically, after spending hours gathering inspiration, <strong>the final piece almost never resembles what I had imagined in the beginning</strong> — not even close. I'm usually happy with the result, sometimes it even exceeds my expectations, but it is rarely the design I had pictured in my head at the start.</p>
+
+            <p>For a long time, I found this frustrating. Now I think it's the most fascinating part of creating anything. Somewhere along the way, I realized creativity isn't about faithfully executing the first idea that appears in your mind — <strong>it's about allowing that idea to evolve.</strong> Every reference you save, every sketch you abandon, every color you replace, every transition you remove, every frame you adjust, every font you change: those aren't interruptions to creativity. <strong>They are creativity.</strong> The hours spent collecting inspiration are creativity. The confusion between five different ideas is creativity. The dozens of tiny alterations that slowly transform an ordinary concept into something uniquely yours — that is the creative process. The software only captures the final outcome. <strong>The real work happens long before you press the export button.</strong></p>
         </div>
 
         <!-- 2 Column Grid -->
@@ -194,7 +199,11 @@
         </div>
 
         <div class="text-block">
-            <p><strong>How do you keep going when the process feels overwhelming?</strong> [PLACEHOLDER TEXT] I've learned to separate my identity from my output. A bad design day doesn't make me a bad designer. A rejected pitch doesn't erase everything I've built. I keep going because the process — however draining — is also where I feel most alive. There's a strange paradox in creative work: the thing that exhausts you is also the thing that gives you meaning.</p>
+            <p><strong>But there is another side to creativity that rarely finds its way into conversations: the emotional cost.</strong> People often admire the finished photograph, the polished video, or the elegant design — they celebrate the outcome because that's the only part they ever see. Very few witness what happens before that. Creative burnout is unlike ordinary exhaustion. Sometimes you don't even realize you're burnt out — you keep opening Pinterest boards, keep scrolling through beautiful work made by incredibly talented people, you know exactly what needs to be done, yet nothing inside you moves. Ideas refuse to connect. Everything begins looking the same. <strong>And that silence inside your own imagination can be surprisingly loud.</strong></p>
+
+            <p>Over the years, I've noticed something about myself: <strong>some of the creative work I'm most proud of emerged during emotionally intense phases of my life.</strong> I'm not saying this is true for every creator — it's simply a pattern I've observed in my own journey. When life becomes emotionally complicated, my work somehow becomes emotionally richer too. During emotionally stable periods, I still create good work, but it rarely speaks to me in quite the same way.</p>
+
+            <p>That realization can become dangerous. Sometimes creators begin associating emotional intensity with creative excellence — you don't consciously decide to do it, it just happens, and <strong>you start wondering whether you're creating because you're emotional, or staying emotional because it helps you create.</strong> Deadlines make it even more complicated: when a project has to be delivered, you can't wait for inspiration forever, so you try to force emotions into existence, hoping they'll ignite something. Most of the time, they don't — instead, they leave you mentally exhausted. I think this is one of the quiet prices many creative people pay but rarely discuss. <strong>We celebrate inspiration. We don't talk enough about the emotional energy it quietly consumes.</strong></p>
         </div>
 
         <!-- 3 Column Grid -->
@@ -205,7 +214,7 @@
         </div>
 
         <div class="text-block" style="text-align: center; margin-top: 80px;">
-            <p><em>[PLACEHOLDER TEXT] "If you're someone who creates—whether it's code, photographs, music, or words—know that the exhaustion you feel is not weakness. It's proof that you're doing something real. The toll is hidden because we've been taught to only celebrate the output. But the process? The process is where the art actually lives."</em></p>
+            <p><em>After spending more than twelve years moving through animation, photography, design, editing, and countless creative experiments, I've stopped believing that creativity is something you either have or don't have. It's not a talent sitting inside you, waiting to be discovered. <strong>It's a process</strong> — a slow, unpredictable, deeply human process. A process of observing before creating. Of collecting before imagining. Of failing before refining. Of changing your mind a hundred times before arriving somewhere you never intended to go. Maybe that's why, after all these years, I still don't know exactly what my final design will look like when I begin. And honestly, I don't want to know anymore — because somewhere between the first spark of inspiration and the final exported file lies the part I love the most: <strong>the process itself.</strong></em></p>
         </div>
 
     </main>
