@@ -1050,32 +1050,40 @@
             const pctWrap = document.querySelector('.preloader-percent-wrap');
             const pctSpan = document.getElementById('preloaderPercent');
             const preloader = document.querySelector('.preloader');
-            const duration = 2200; // 2.2 seconds loading animation
-            let start = null;
-            let isLoaded = false;
-            let animationFinished = false;
+            
+            let currentVal = 0;
+            let targetVal = 0;
+            
+            const media = Array.from(document.querySelectorAll('img, video'));
+            const totalMedia = media.length;
+            let loadedMedia = 0;
 
-            function handleLoad() {
-                isLoaded = true;
-                const nextInput = document.querySelector('input[name="_next"]');
-                if (nextInput) nextInput.value = window.location.href;
-                
-                if (animationFinished) {
-                    hidePreloader();
-                }
-            }
-
-            if (document.readyState === 'complete') {
-                handleLoad();
+            if (totalMedia === 0) {
+                targetVal = 100;
             } else {
-                window.addEventListener('load', handleLoad);
+                media.forEach(m => {
+                    if (m.tagName === 'IMG') {
+                        if (m.complete) {
+                            loadedMedia++;
+                        } else {
+                            m.addEventListener('load', () => loadedMedia++);
+                            m.addEventListener('error', () => loadedMedia++);
+                        }
+                    } else if (m.tagName === 'VIDEO') {
+                        if (m.readyState >= 3) {
+                            loadedMedia++;
+                        } else {
+                            m.addEventListener('canplay', () => loadedMedia++);
+                            m.addEventListener('error', () => loadedMedia++);
+                        }
+                    }
+                });
             }
-
-            // easeOutQuart
-            function easeOut(x) { return 1 - Math.pow(1 - x, 4); }
 
             function hidePreloader() {
-                preloader.classList.add('hidden');
+                if (preloader) {
+                    preloader.classList.add('hidden');
+                }
                 if (window.location.hash === '#contact') {
                     setTimeout(() => {
                         if (typeof openContactModal === 'function') openContactModal();
@@ -1083,28 +1091,47 @@
                 }
             }
 
-            function tick(now) {
-                if (!start) start = now;
-                const progress = Math.min((now - start) / duration, 1);
-                const eased = easeOut(progress);
-                const currentVal = Math.floor(eased * 100);
+            function updateProgress() {
+                if (totalMedia > 0) {
+                    let mediaProgress = Math.floor((loadedMedia / totalMedia) * 100);
+                    if (document.readyState === 'complete') mediaProgress = 100;
+                    targetVal = Math.max(targetVal, mediaProgress);
+                } else if (document.readyState === 'complete') {
+                    targetVal = 100;
+                }
                 
-                pctSpan.textContent = currentVal;
-                pctWrap.setAttribute('data-text', currentVal + '%');
-                pctWrap.style.setProperty('--clip', (100 - (eased * 100)) + '%');
+                if (currentVal < targetVal) {
+                    currentVal += (targetVal - currentVal) * 0.1 + 0.5;
+                    if (currentVal > targetVal) currentVal = targetVal;
+                }
+                
+                let displayVal = Math.floor(currentVal);
+                if (displayVal > 100) displayVal = 100;
 
-                if (progress < 1) {
-                    requestAnimationFrame(tick);
+                if (pctSpan) pctSpan.textContent = displayVal;
+                if (pctWrap) {
+                    pctWrap.setAttribute('data-text', displayVal + '%');
+                    pctWrap.style.setProperty('--clip', (100 - displayVal) + '%');
+                }
+
+                if (displayVal >= 100 && document.readyState === 'complete') {
+                    setTimeout(hidePreloader, 400);
                 } else {
-                    setTimeout(() => {
-                        animationFinished = true;
-                        if (isLoaded) {
-                            hidePreloader();
-                        }
-                    }, 400); // Wait a bit after hitting 100% before sliding down
+                    requestAnimationFrame(updateProgress);
                 }
             }
-            requestAnimationFrame(tick);
+
+            const maxWait = setTimeout(() => { targetVal = 100; }, 6000);
+
+            window.addEventListener('load', () => { 
+                targetVal = 100; 
+                clearTimeout(maxWait);
+                
+                const nextInput = document.querySelector('input[name="_next"]');
+                if (nextInput) nextInput.value = window.location.href;
+            });
+            
+            requestAnimationFrame(updateProgress);
         })();
 
         // --- 2. DATA STORE ---
