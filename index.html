@@ -1046,15 +1046,42 @@
 
     <script>
         // --- 1. PRELOADER ---
-        window.onload = () => {
+        (function() {
             const pctWrap = document.querySelector('.preloader-percent-wrap');
             const pctSpan = document.getElementById('preloaderPercent');
             const preloader = document.querySelector('.preloader');
             const duration = 2200; // 2.2 seconds loading animation
             let start = null;
+            let isLoaded = false;
+            let animationFinished = false;
+
+            function handleLoad() {
+                isLoaded = true;
+                const nextInput = document.querySelector('input[name="_next"]');
+                if (nextInput) nextInput.value = window.location.href;
+                
+                if (animationFinished) {
+                    hidePreloader();
+                }
+            }
+
+            if (document.readyState === 'complete') {
+                handleLoad();
+            } else {
+                window.addEventListener('load', handleLoad);
+            }
 
             // easeOutQuart
             function easeOut(x) { return 1 - Math.pow(1 - x, 4); }
+
+            function hidePreloader() {
+                preloader.classList.add('hidden');
+                if (window.location.hash === '#contact') {
+                    setTimeout(() => {
+                        if (typeof openContactModal === 'function') openContactModal();
+                    }, 300);
+                }
+            }
 
             function tick(now) {
                 if (!start) start = now;
@@ -1070,17 +1097,15 @@
                     requestAnimationFrame(tick);
                 } else {
                     setTimeout(() => {
-                        preloader.classList.add('hidden');
-                        if (window.location.hash === '#contact') {
-                            setTimeout(() => openContactModal(), 300);
+                        animationFinished = true;
+                        if (isLoaded) {
+                            hidePreloader();
                         }
                     }, 400); // Wait a bit after hitting 100% before sliding down
                 }
             }
             requestAnimationFrame(tick);
-
-            document.querySelector('input[name="_next"]').value = window.location.href;
-        };
+        })();
 
         // --- 2. DATA STORE ---
         const db = {

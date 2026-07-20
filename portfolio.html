@@ -576,16 +576,39 @@
 
     <script>
         // --- 1. PRELOADER ---
-        window.onload = () => {
-            document.getElementById('loaderLine').style.width = '100%';
-            setTimeout(() => {
-                document.querySelector('.preloader').style.opacity = '0';
-                document.querySelector('.preloader').style.visibility = 'hidden';
-            }, 1000);
-            
-            // Set redirect URL for form
-            document.querySelector('input[name="_next"]').value = window.location.href;
-        };
+        (function() {
+            const loaderLine = document.getElementById('loaderLine');
+            if (loaderLine) {
+                // Start moving towards 90% while waiting for load
+                loaderLine.style.transition = 'width 5s ease-out';
+                loaderLine.style.width = '90%';
+            }
+
+            function handleLoad() {
+                if (loaderLine) {
+                    // Complete the line
+                    loaderLine.style.transition = 'width 0.5s ease-out';
+                    loaderLine.style.width = '100%';
+                }
+                setTimeout(() => {
+                    const preloader = document.querySelector('.preloader');
+                    if (preloader) {
+                        preloader.style.opacity = '0';
+                        preloader.style.visibility = 'hidden';
+                    }
+                }, 600);
+                
+                // Set redirect URL for form
+                const nextInput = document.querySelector('input[name="_next"]');
+                if (nextInput) nextInput.value = window.location.href;
+            }
+
+            if (document.readyState === 'complete') {
+                handleLoad();
+            } else {
+                window.addEventListener('load', handleLoad);
+            }
+        })();
 
         // --- 2. DATA STORE ---
         const db = {
