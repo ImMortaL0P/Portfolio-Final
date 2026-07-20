@@ -75,18 +75,22 @@
         .editorial-body {
             max-width: 1200px;
             margin: 0 auto 120px;
-            padding: 0 40px;
+            padding: 0 clamp(20px, 6vw, 100px);
         }
-        
-        /* Narrow Text Block */
+
+        /* Text Block — fills the available editorial width */
         .text-block {
-            max-width: 680px;
+            max-width: 100%;
             margin: 0 auto 60px;
         }
         .text-block p {
-            margin-bottom: 24px;
+            margin-bottom: 30px;
             color: var(--cream);
             font-size: 1.1rem;
+        }
+        .text-block p strong, .text-block p b {
+            color: var(--lime);
+            font-weight: 700;
         }
         
         /* Q&A Interview Style */
@@ -144,6 +148,9 @@
         @media (max-width: 768px) {
             .img-grid-2, .img-grid-3 { grid-template-columns: 1fr; }
         }
+        @media (max-width: 640px) {
+            .editorial-header { padding: 130px 24px 60px; }
+        }
     </style>
 </head>
 <body>
@@ -186,9 +193,7 @@
 
     <main class="editorial-body">
         <div class="text-block">
-            <p>For as long as I can remember, the debate between mountains and beaches has never really had a winner. Everyone seems to have a side. Personally, I've never been able to choose. Both have their own kind of magic.</p>
-            <p>But there is something about the mountains that is difficult to explain. They have a strange way of changing you. You arrive carrying the noise of everyday life, and somehow, without realizing it, you leave carrying a little more silence within yourself.</p>
-            <p>Over the years, I've found myself returning to the hills time and again. Shimla, Manali, Kullu, Kodaikanal, Rishikesh, Mussoorie—every place has left behind memories that refuse to fade. Yet the mountains never feel repetitive. Every visit feels like meeting an old friend who somehow has a new story to tell.</p>
+            <p>For as long as I can remember, the debate between mountains and beaches has never really had a winner. Everyone seems to have a side. Personally, I've never been able to choose — both have their own kind of magic. But there is something about the mountains that is difficult to explain. <strong>They have a strange way of changing you.</strong> You arrive carrying the noise of everyday life, and somehow, without realizing it, you leave carrying a little more silence within yourself. Over the years, I've found myself returning to the hills time and again — Shimla, Manali, Kullu, Kodaikanal, Rishikesh, Mussoorie — every place has left behind memories that refuse to fade. Yet the mountains never feel repetitive. Every visit feels like meeting an old friend who somehow has a new story to tell.</p>
         </div>
 
         <!-- Full width Image -->
@@ -198,18 +203,8 @@
         </div>
 
         <div class="text-block">
-            <p>So when my friends suggested another trip to Mussoorie and Landour in June 2025, the answer was obvious.</p>
-            <p>Some invitations are simply too good to refuse.</p>
-            <p>Before heading to Dehradun, two of us made a small detour to Haridwar. We walked to the ghats and took a holy dip in the Ganga. The first touch of the water was enough to send a shiver through my body. It was unbelievably cold. What amazed me even more was the thought that the river had already travelled hundreds of kilometres from its Himalayan source, yet it still carried that icy freshness.</p>
-            <p>Standing in the current, surrounded by pilgrims from every corner of the country, I realized that Haridwar is much more than a destination. It is an emotion carried forward by generations. Whether one is deeply religious or not, it is impossible to ignore the faith that fills the air.</p>
-            <p>From there, our journey truly began in Dehradun—the quiet gateway to the Himalayas.</p>
-            <p>Our first stop was Kuchu Pani, a natural stream cave where freezing water flowed through narrow rocky passages. We spent a couple of hours walking through the stream, clicking photographs and escaping the June heat. Curiously, those two hours felt unusually long, as though time itself had slowed down.</p>
-            <p>Later that day, we visited the Forest Research Institute (FRI), one of Dehradun's most iconic landmarks. Like many people, I associated it with Student of the Year, parts of which were filmed there. I expected a glamorous campus buzzing with activity.</p>
-            <p>Reality was far more beautiful.</p>
-            <p>Instead of a busy college, we found ourselves wandering through a peaceful estate lined with towering trees from species we had never seen before. The air carried the faint fragrance of camphor from the many camphor trees scattered across the campus, while birdsong replaced the usual city noise.</p>
-            <p>The institute houses several museums, but one, in particular, stayed with us—the Museum of the Life of Trees.</p>
-            <p>At its centre stood the cross-section of an ancient tree trunk. Hundreds of growth rings spread out from its core, each one representing another year the tree had lived. Labels marked different periods of its life. By the time it had fallen, the tree had witnessed nearly nine centuries of history.</p>
-            <p>Standing before it was strangely humbling.</p>
+            <p>So when my friends suggested another trip to Mussoorie and Landour in June 2025, the answer was obvious — <strong>some invitations are simply too good to refuse.</strong> Before heading to Dehradun, two of us made a small detour to Haridwar. We walked to the ghats and took a holy dip in the Ganga. The first touch of the water was enough to send a shiver through my body; it was unbelievably cold. What amazed me even more was the thought that the river had already travelled hundreds of kilometres from its Himalayan source, yet it still carried that icy freshness. Standing in the current, surrounded by pilgrims from every corner of the country, I realized that Haridwar is much more than a destination. It is an emotion carried forward by generations. Whether one is deeply religious or not, it is impossible to ignore the faith that fills the air. From there, our journey truly began in Dehradun—the quiet gateway to the Himalayas.</p>
+            <p>Our first stop was Kuchu Pani, a natural stream cave where freezing water flowed through narrow rocky passages. We spent a couple of hours walking through the stream, clicking photographs and escaping the June heat. Curiously, those two hours felt unusually long, as though time itself had slowed down. Later that day, we visited the Forest Research Institute (FRI), one of Dehradun's most iconic landmarks. Like many people, I associated it with Student of the Year, parts of which were filmed there, and I expected a glamorous campus buzzing with activity. <strong>Reality was far more beautiful.</strong> Instead of a busy college, we found ourselves wandering through a peaceful estate lined with towering trees from species we had never seen before. The air carried the faint fragrance of camphor from the many camphor trees scattered across the campus, while birdsong replaced the usual city noise. The institute houses several museums, but one, in particular, stayed with us—the Museum of the Life of Trees. At its centre stood the cross-section of an ancient tree trunk. Hundreds of growth rings spread out from its core, each one representing another year the tree had lived. Labels marked different periods of its life. By the time it had fallen, the tree had witnessed nearly nine centuries of history. Standing before it was strangely humbling.</p>
         </div>
 
         <!-- 2 Column Grid -->
@@ -219,16 +214,8 @@
         </div>
 
         <div class="text-block">
-            <p>We looked at those hundreds of rings and then thought about our own lives—barely twenty-five years long. Compared to the silent life of that tree, our existence felt incredibly small. It reminded us that while we often measure life through deadlines, promotions and achievements, nature measures it differently—through seasons, patience and time.</p>
-            <p>Perhaps that is why five hours disappeared inside FRI without any of us noticing. We wandered through its museums, shaded walkways and gardens, completely losing track of time. Ironically, the two hours at Kuchu Pani had felt longer than the entire afternoon at FRI.</p>
-            <p>The next morning, we finally drove up towards Mussoorie.</p>
-            <p>We stayed near Mall Road, the busiest part of the town. During the afternoon, it felt like any other popular hill station—shops filled with tourists, cafés serving steaming cups of coffee, and streets buzzing with people.</p>
-            <p>For a moment, I wondered if this visit would be any different from the others.</p>
-            <p>Then evening arrived.</p>
-            <p>Clouds slowly rolled over the hills, swallowing roads, buildings and entire valleys within minutes. Visibility dropped to barely a hundred metres. The distant lights disappeared into the mist, and suddenly, the town became quiet.</p>
-            <p>There were no blaring horns. No overwhelming traffic. No constant rush.</p>
-            <p>It felt as though we had stepped into another world, hidden behind a curtain of clouds.</p>
-            <p>Perhaps that is what mountains do best. They don't just offer breathtaking views—they gently silence everything that doesn't deserve your attention.</p>
+            <p>We looked at those hundreds of rings and then thought about our own lives—barely twenty-five years long. Compared to the silent life of that tree, our existence felt incredibly small. It reminded us that while we often measure life through deadlines, promotions and achievements, nature measures it differently—through seasons, patience and time. Perhaps that is why five hours disappeared inside FRI without any of us noticing. We wandered through its museums, shaded walkways and gardens, completely losing track of time. Ironically, the two hours at Kuchu Pani had felt longer than the entire afternoon at FRI.</p>
+            <p>The next morning, we finally drove up towards Mussoorie. We stayed near Mall Road, the busiest part of the town, and during the afternoon it felt like any other popular hill station—shops filled with tourists, cafés serving steaming cups of coffee, and streets buzzing with people. For a moment, I wondered if this visit would be any different from the others. <strong>Then evening arrived.</strong> Clouds slowly rolled over the hills, swallowing roads, buildings and entire valleys within minutes. Visibility dropped to barely a hundred metres. The distant lights disappeared into the mist, and suddenly, the town became quiet. There were no blaring horns, no overwhelming traffic, no constant rush — it felt as though we had stepped into another world, hidden behind a curtain of clouds. Perhaps that is what mountains do best: <strong>they don't just offer breathtaking views—they gently silence everything that doesn't deserve your attention.</strong></p>
         </div>
 
         <!-- 3 Column Grid -->
@@ -239,26 +226,9 @@
         </div>
 
         <div class="text-block">
-            <p>The following day, we headed to Landour and Lal Tibba, among the highest points around Mussoorie. A light drizzle welcomed us throughout the climb, making the roads glisten and filling the air with the earthy scent of rain.</p>
-            <p>On our way to the famous Landour Bakehouse, we passed Ruskin Bond's home.</p>
-            <p>One of my friends smiled and said, "Now it makes complete sense why he chose to spend his life here."</p>
-            <p>He was absolutely right.</p>
-            <p>There was something different about Landour. Nobody seemed to be in a hurry. People weren't rushing from one attraction to another. They simply sat on benches, walked through quiet lanes, admired the valleys and enjoyed the silence.</p>
-            <p>It almost felt like the town encouraged creativity.</p>
-            <p>When the noise around you disappears, your own thoughts finally become audible.</p>
-            <p>We spent hours wandering those peaceful roads before beginning our journey back home early the next morning.</p>
-            <p>Somewhere around five-thirty, as our car descended through the winding mountain roads, the Himalayas offered us one final gift.</p>
-            <p>The sun had only just begun to rise. It wasn't fully visible yet, but the sky had already transformed into brilliant shades of orange and gold. The mountains stood like dark silhouettes against the glowing horizon while the valleys slowly woke beneath the morning light.</p>
-            <p>I sat quietly by the window with soft music playing through my earphones.</p>
-            <p>For the first time in what felt like years, my mind wasn't racing.</p>
-            <p>The pressure to achieve more, the endless deadlines, the constant feeling of needing to be somewhere else—all of it seemed to fade with the morning mist.</p>
-            <p>The mountains hadn't solved my problems.</p>
-            <p>They had simply reminded me that life isn't meant to be lived at full speed every single day.</p>
-            <p>Sometimes, the most meaningful thing you can do is pause. Watch a sunrise. Breathe in cold mountain air. Sit in silence. Remember that the world existed long before us and will continue long after us.</p>
-            <p>As the first rays of sunlight touched the hills, one thought stayed with me.</p>
-            <p>If moments like these aren't what we're living for, then what exactly is the point of all the rush?</p>
-            <p>Maybe that's why people keep returning to the mountains.</p>
-            <p>Not because they're escaping life—but because, every once in a while, the mountains quietly remind them how to live it.</p>
+            <p>The following day, we headed to Landour and Lal Tibba, among the highest points around Mussoorie. A light drizzle welcomed us throughout the climb, making the roads glisten and filling the air with the earthy scent of rain. On our way to the famous Landour Bakehouse, we passed Ruskin Bond's home. One of my friends smiled and said, "Now it makes complete sense why he chose to spend his life here." He was absolutely right. There was something different about Landour. Nobody seemed to be in a hurry. People weren't rushing from one attraction to another — they simply sat on benches, walked through quiet lanes, admired the valleys and enjoyed the silence. It almost felt like the town encouraged creativity: <strong>when the noise around you disappears, your own thoughts finally become audible.</strong> We spent hours wandering those peaceful roads before beginning our journey back home early the next morning.</p>
+            <p>Somewhere around five-thirty, as our car descended through the winding mountain roads, the Himalayas offered us one final gift. The sun had only just begun to rise. It wasn't fully visible yet, but the sky had already transformed into brilliant shades of orange and gold, and the mountains stood like dark silhouettes against the glowing horizon while the valleys slowly woke beneath the morning light. I sat quietly by the window with soft music playing through my earphones. <strong>For the first time in what felt like years, my mind wasn't racing.</strong> The pressure to achieve more, the endless deadlines, the constant feeling of needing to be somewhere else—all of it seemed to fade with the morning mist. The mountains hadn't solved my problems. They had simply reminded me that life isn't meant to be lived at full speed every single day. Sometimes, the most meaningful thing you can do is pause — watch a sunrise, breathe in cold mountain air, sit in silence, and remember that the world existed long before us and will continue long after us.</p>
+            <p>As the first rays of sunlight touched the hills, one thought stayed with me: if moments like these aren't what we're living for, then what exactly is the point of all the rush? Maybe that's why people keep returning to the mountains — <strong>not because they're escaping life, but because, every once in a while, the mountains quietly remind them how to live it.</strong></p>
         </div>
     </main>
 

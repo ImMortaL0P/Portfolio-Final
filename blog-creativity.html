@@ -80,29 +80,16 @@
         
         /* Narrow Text Block */
         .text-block {
-            max-width: 680px;
+            max-width: 700px;
             margin: 0 auto 60px;
         }
         .text-block p {
-            margin-bottom: 24px;
+            margin-bottom: 26px;
             color: var(--cream);
             font-size: 1.1rem;
         }
-        
-        /* Q&A Interview Style */
-        .qa-block {
-            margin-bottom: 40px;
-        }
-        .qa-question {
-            font-family: 'Bricolage Grotesque', sans-serif;
-            font-weight: 800;
-            font-size: 1.3rem;
-            margin-bottom: 12px;
+        .text-block p strong {
             color: var(--lime);
-        }
-        .qa-answer {
-            color: var(--cream-dim);
-            margin-bottom: 24px;
         }
 
         /* Image Layouts */
@@ -136,6 +123,10 @@
         @media (pointer: coarse) { *, *::before, *::after { cursor: auto !important; } .cursor-dot, .cursor-ring { display: none; } }
         @media (max-width: 768px) {
             .img-grid-2, .img-grid-3 { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 640px) {
+            .editorial-header { padding: 130px 24px 60px; }
+            .editorial-body { padding: 0 24px; }
         }
     </style>
 </head>
@@ -191,15 +182,9 @@
         </div>
 
         <div class="text-block">
-            <div class="qa-block">
-                <div class="qa-question">What do you mean when you say creativity is a process?</div>
-                <div class="qa-answer">[PLACEHOLDER TEXT] "People see the finished poster, the final photograph, the polished reel—and they assume it appeared. But behind every piece is a trail of discarded drafts, 3 AM revisions, and moments where I genuinely questioned whether the idea was worth pursuing at all. The process is iteration. It's sitting with discomfort. It's trusting that the ugly first draft is a necessary step, not a failure."</div>
-            </div>
+            <p><strong>What do you mean when you say creativity is a process?</strong> [PLACEHOLDER TEXT] People see the finished poster, the final photograph, the polished reel, and they assume it appeared. But behind every piece is a trail of discarded drafts, 3 AM revisions, and moments where I genuinely questioned whether the idea was worth pursuing at all. The process is iteration. It's sitting with discomfort. It's trusting that the ugly first draft is a necessary step, not a failure.</p>
 
-            <div class="qa-block">
-                <div class="qa-question">What is the 'hidden toll' you refer to?</div>
-                <div class="qa-answer">[PLACEHOLDER TEXT] "The toll is what you pay when the work demands your full emotional presence. When you pour yourself into a design and someone dismisses it in two seconds. When you spend hours perfecting a frame and the light shifts. When you ship something personal and the silence that follows feels deafening. The toll is also physical—skipped meals, strained eyes, the weight of self-imposed deadlines. Nobody warns you that caring deeply about your craft can feel like carrying a stone uphill."</div>
-            </div>
+            <p><strong>What is the "hidden toll" you refer to?</strong> [PLACEHOLDER TEXT] The toll is what you pay when the work demands your full emotional presence — when you pour yourself into a design and someone dismisses it in two seconds, when you spend hours perfecting a frame and the light shifts, when you ship something personal and the silence that follows feels deafening. The toll is also physical: skipped meals, strained eyes, the weight of self-imposed deadlines. Nobody warns you that caring deeply about your craft can feel like carrying a stone uphill.</p>
         </div>
 
         <!-- 2 Column Grid -->
@@ -209,10 +194,7 @@
         </div>
 
         <div class="text-block">
-            <div class="qa-block">
-                <div class="qa-question">How do you keep going when the process feels overwhelming?</div>
-                <div class="qa-answer">[PLACEHOLDER TEXT] "I've learned to separate my identity from my output. A bad design day doesn't make me a bad designer. A rejected pitch doesn't erase everything I've built. I keep going because the process—however draining—is also where I feel most alive. There's a strange paradox in creative work: the thing that exhausts you is also the thing that gives you meaning."</div>
-            </div>
+            <p><strong>How do you keep going when the process feels overwhelming?</strong> [PLACEHOLDER TEXT] I've learned to separate my identity from my output. A bad design day doesn't make me a bad designer. A rejected pitch doesn't erase everything I've built. I keep going because the process — however draining — is also where I feel most alive. There's a strange paradox in creative work: the thing that exhausts you is also the thing that gives you meaning.</p>
         </div>
 
         <!-- 3 Column Grid -->
