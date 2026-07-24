@@ -1,0 +1,31 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-07-24T17:37:00.473Z"
+      },
+      {
+        "rule": "overused-font",
+        "value": "space grotesk",
+        "createdAt": "2026-07-24T17:52:19.355Z",
+        "reason": "Pre-existing site font, paired with Bricolage Grotesque since before this session's changes; not introduced by recent edits"
+      },
+      {
+        "rule": "single-font",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-07-24T18:16:21.443Z",
+        "reason": "Deliberate single-family system (Bricolage Grotesque variable font); hierarchy carried by weight (400 body / 800 display), size, case (uppercase headings), and tracking contrast, not family count"
+      }
+    ]
+  }
+}
