@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script>(function(){try{var t=localStorage.getItem('mg-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume - Mangalam</title>
     <meta name="description" content="Kumar Mangalam — resume, career timeline and experience across engineering, design and leadership.">
-    <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="#fff7f0">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,6 +18,30 @@
            1. CORE VARIABLES & RESET
            ========================================= */
         :root {
+            --bg: #fff7f0;
+            --surface: #f7ead9;
+            --surface-2: #eef3fb;
+            --cream: #0e1a16;
+            --cream-dim: #5f746b;
+            --ink: #0b1311;
+            --lime: #bad6ff;
+            --pink: #f5d9c0;
+            --violet: #d9c9f0;
+            --teal: #c7ead9;
+            --terracotta: #f0c9c9;
+            --lime-deep: #4a7fc4;
+            --pink-deep: #c4794a;
+            --violet-deep: #7a5fb0;
+            --teal-deep: #3f9173;
+            --terracotta-deep: #b8615f;
+            --paper: #fffdfa;
+            --cream-rgb: 14,26,22; --bg-rgb: 255,247,240;
+            --border-w: 1.5px;
+            --container: 1200px;
+            --easing: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        :root[data-theme="dark"] {
             --bg: #120a10;
             --surface: #1e1218;
             --surface-2: #291721;
@@ -28,10 +53,12 @@
             --violet: #d94fd4;
             --teal: #2ec4b6;
             --terracotta: #e76f51;
-            --paper: #fefefe;
-            --border-w: 3px;
-            --container: 1200px;
-            --easing: cubic-bezier(0.16, 1, 0.3, 1);
+            --lime-deep: var(--lime);
+            --pink-deep: var(--pink);
+            --violet-deep: var(--violet);
+            --teal-deep: var(--teal);
+            --terracotta-deep: var(--terracotta);
+            --cream-rgb: 247,237,225; --bg-rgb: 18,10,16;
         }
 
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
@@ -87,12 +114,12 @@
            correctly over both the white hero and the
            dark body below)
            ========================================= */
-        nav { position: fixed; top: 0; width: 100%; padding: 26px 0; z-index: 100; mix-blend-mode: difference; }
-        .nav-left { display: flex; align-items: center; gap: 30px; }
+        nav { position: fixed; top: 0; width: 100%; padding: 26px 0; z-index: 100; }
+        .nav-left { display: flex; align-items: center; gap: 16px; background: rgba(var(--bg-rgb),0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 8px 20px 8px 12px; border-radius: 999px; }
         .back-btn { font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--cream-dim); transition: 0.3s var(--easing); display: flex; align-items: center; gap: 6px; }
-        .back-btn:hover { color: var(--lime); transform: translateX(-4px); }
+        .back-btn:hover { color: var(--lime-deep); transform: translateX(-4px); }
         .logo { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em; text-transform: uppercase; color: var(--cream); }
-        .logo span { color: var(--lime); }
+        .logo span { color: var(--lime-deep); }
         .menu-btn {
             display: flex; align-items: center; gap: 12px; background: transparent; border: 2px solid var(--cream);
             color: var(--cream); padding: 12px 22px; font-family: 'Space Grotesk', sans-serif; font-weight: 700;
@@ -118,7 +145,7 @@
             font-size: clamp(2.15rem, 7.2vw, 5rem); line-height: 0.92; letter-spacing: -0.02em; transition: transform 0.35s var(--easing), color 0.35s;
             display: inline-block;
         }
-        .menu-links a:hover { transform: translateX(20px); color: var(--cream); }
+        .menu-links a:hover { transform: translateX(20px); color: var(--paper); }
         .menu-footer { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; }
         .menu-footer a { font-weight: 700; text-transform: uppercase; font-size: 0.85rem; border-bottom: 2px solid var(--ink); padding-bottom: 2px; }
         .menu-socials { display: flex; gap: 24px; }
@@ -153,29 +180,29 @@
         }
         .hero-role {
             font-family: 'Space Grotesk', sans-serif; text-transform: none; font-weight: 700;
-            font-size: clamp(1.1rem, 2vw, 1.4rem); color: #4a3f38; margin-bottom: 26px; letter-spacing: -0.01em;
+            font-size: clamp(1.1rem, 2vw, 1.4rem); color: #33413c; margin-bottom: 26px; letter-spacing: -0.01em;
             opacity: 0; animation: fadeUp 1s var(--easing) forwards 0.55s;
         }
         .hero-desc {
-            max-width: 520px; font-size: 1.05rem; color: #55483f; margin-bottom: 40px;
+            max-width: 520px; font-size: 1.05rem; color: #44534c; margin-bottom: 40px;
             opacity: 0; animation: fadeUp 1s var(--easing) forwards 0.7s;
         }
         .hero-cta-row { display: flex; gap: 18px; flex-wrap: wrap; opacity: 0; animation: fadeUp 1s var(--easing) forwards 0.9s; }
         .btn-solid {
             display: inline-flex; align-items: center; gap: 10px; padding: 17px 32px;
-            background: var(--ink); color: var(--cream); border: var(--border-w) solid var(--ink);
+            background: var(--ink); color: var(--paper); border: var(--border-w) solid var(--ink);
             font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; text-transform: uppercase;
-            letter-spacing: 0.5px; font-size: 0.9rem; box-shadow: 6px 6px 0 var(--lime);
+            letter-spacing: 0.5px; font-size: 0.9rem; border-radius: 999px; box-shadow: 0 10px 26px -12px rgba(var(--cream-rgb),0.5);
             transition: transform 0.3s var(--easing), box-shadow 0.3s var(--easing);
         }
-        .btn-solid:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0 var(--lime); }
+        .btn-solid:hover { transform: translateY(-3px); box-shadow: 0 16px 30px -12px rgba(var(--cream-rgb),0.55); }
         .btn-outline {
             display: inline-flex; align-items: center; gap: 10px; padding: 15px 30px;
             background: transparent; color: var(--ink); border: 2px solid var(--ink);
             font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; text-transform: uppercase;
-            letter-spacing: 0.5px; font-size: 0.9rem; transition: 0.3s var(--easing);
+            letter-spacing: 0.5px; font-size: 0.9rem; border-radius: 999px; transition: 0.3s var(--easing);
         }
-        .btn-outline:hover { background: var(--ink); color: var(--cream); }
+        .btn-outline:hover { background: var(--ink); color: var(--paper); }
 
         .hero-photo-wrap {
             position: relative; z-index: 1;
@@ -217,7 +244,7 @@
         .profile-lede span { color: var(--cream-dim); }
         .skills-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 40px; }
         .skill-chip {
-            display: inline-flex; align-items: center; padding: 10px 18px; border: 2px solid rgba(247,237,225,0.25);
+            display: inline-flex; align-items: center; padding: 10px 18px; border: 2px solid rgba(var(--cream-rgb),0.25);
             border-radius: 999px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;
             color: var(--cream-dim); transition: 0.3s var(--easing);
         }
@@ -234,7 +261,7 @@
         .timeline { position: relative; }
         .timeline::before {
             content: ''; position: absolute; left: 158px; top: 0; bottom: 0; width: 2px;
-            background: linear-gradient(to bottom, transparent, rgba(247,237,225,0.22) 4%, rgba(247,237,225,0.22) 96%, transparent);
+            background: linear-gradient(to bottom, transparent, rgba(var(--cream-rgb),0.22) 4%, rgba(var(--cream-rgb),0.22) 96%, transparent);
         }
         .timeline-progress {
             position: absolute; left: 158px; top: 0; width: 2px; height: 0%;
@@ -264,29 +291,29 @@
 
         .tl-dot {
             position: absolute; left: 158px; top: 10px; width: 16px; height: 16px; border-radius: 50%;
-            background: var(--bg); border: 2px solid rgba(247,237,225,0.35); transform: translateX(-50%) scale(0.7);
+            background: var(--bg); border: 2px solid rgba(var(--cream-rgb),0.35); transform: translateX(-50%) scale(0.7);
             transition: 0.5s var(--easing);
         }
         .tl-item.active .tl-dot { border-color: var(--accent); box-shadow: 0 0 0 5px rgba(255,255,255,0.04), 0 0 16px -2px var(--accent); transform: translateX(-50%) scale(1); background: var(--accent); }
 
         .tl-card {
-            background: var(--surface); border: 2px solid rgba(247,237,225,0.1); border-radius: 4px;
+            background: var(--surface); border: 2px solid rgba(var(--cream-rgb),0.1); border-radius: 4px;
             padding: 28px 30px; position: relative; overflow: hidden;
             transition: border-color 0.4s var(--easing), transform 0.4s var(--easing);
         }
         .tl-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--accent); }
-        .tl-item.active .tl-card { border-color: rgba(247,237,225,0.18); }
+        .tl-item.active .tl-card { border-color: rgba(var(--cream-rgb),0.18); }
         .tl-card:hover { transform: translateX(4px); }
 
         .tl-tag {
             display: inline-block; font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.4px;
-            color: var(--accent); margin-bottom: 10px;
+            color: var(--accent-deep); margin-bottom: 10px;
         }
         .tl-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.35rem; text-transform: none; letter-spacing: -0.01em; margin-bottom: 4px; }
         .tl-org { color: var(--cream-dim); font-size: 0.9rem; font-weight: 700; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; }
         .tl-points { list-style: none; display: flex; flex-direction: column; gap: 9px; }
         .tl-points li { position: relative; padding-left: 20px; color: var(--cream-dim); font-size: 0.95rem; line-height: 1.55; }
-        .tl-points li::before { content: '→'; position: absolute; left: 0; top: 0; color: var(--accent); font-weight: 700; }
+        .tl-points li::before { content: '→'; position: absolute; left: 0; top: 0; color: var(--accent-deep); font-weight: 700; }
         .tl-points li strong { color: var(--cream); font-weight: 700; }
 
         @media (max-width: 700px) {
@@ -304,14 +331,14 @@
         .rec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
 
         .rec-card {
-            background: var(--surface); border: 2px solid rgba(247,237,225,0.1); border-radius: 4px;
+            background: var(--surface); border: 2px solid rgba(var(--cream-rgb),0.1); border-radius: 4px;
             padding: 26px 28px; position: relative; overflow: hidden;
             opacity: 0; transform: translateY(36px) scale(0.98);
             transition: opacity 0.7s var(--easing), transform 0.7s var(--easing), border-color 0.4s var(--easing), box-shadow 0.4s var(--easing);
         }
         .rec-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--accent); }
         .rec-card.active { opacity: 1; transform: translateY(0) scale(1); }
-        .rec-card:hover { transform: translateY(-4px); border-color: rgba(247,237,225,0.2); box-shadow: 8px 8px 0 var(--accent); }
+        .rec-card:hover { transform: translateY(-4px); border-color: rgba(var(--cream-rgb),0.2); box-shadow: 8px 8px 0 var(--accent); }
 
         .rec-card:nth-child(1) { transition-delay: 0s; }
         .rec-card:nth-child(2) { transition-delay: 0.06s; }
@@ -326,7 +353,7 @@
 
         .rec-tag {
             display: inline-block; font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.4px;
-            color: var(--accent); margin-bottom: 10px;
+            color: var(--accent-deep); margin-bottom: 10px;
         }
         .rec-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.15rem; text-transform: none; letter-spacing: -0.01em; margin-bottom: 4px; }
         .rec-org {
@@ -347,16 +374,16 @@
         .cta-title { font-size: clamp(2.2rem, 7vw, 4.5rem); margin-bottom: 30px; }
         .cta-title .out { color: transparent; -webkit-text-stroke: 1.5px var(--cream); }
         .cta-row { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; margin-top: 10px; }
-        footer { padding: 70px 0 50px; border-top: 2px solid rgba(245,241,230,0.15); }
+        footer { padding: 70px 0 50px; border-top: 2px solid rgba(var(--cream-rgb),0.12); }
         .footer-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
         .footer-row .socials { display: flex; gap: 24px; }
         .footer-row .socials a { color: var(--cream-dim); font-weight: 700; text-transform: uppercase; font-size: 0.85rem; transition: color 0.3s; }
-        .footer-row .socials a:hover { color: var(--lime); }
+        .footer-row .socials a:hover { color: var(--lime-deep); }
         .back-top {
             width: 46px; height: 46px; border: 2px solid var(--cream); border-radius: 50%;
             display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: 0.3s var(--easing);
         }
-        .back-top:hover { background: var(--cream); color: var(--ink); transform: translateY(-4px); }
+        .back-top:hover { background: var(--ink); color: var(--paper); transform: translateY(-4px); }
         .copyright { color: var(--cream-dim); font-size: 0.8rem; margin-top: 40px; text-align: center; }
 
         @media (prefers-reduced-motion: reduce) {
@@ -368,7 +395,18 @@
             *, *::before, *::after { cursor: auto !important; }
             .cursor-dot, .cursor-ring { display: none; }
         }
-    </style>
+    
+        .nav-right { display: flex; align-items: center; gap: 12px; }
+        .theme-toggle {
+            display: flex; align-items: center; justify-content: center;
+            width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--cream);
+            background: transparent; color: var(--cream); font-size: 1rem; transition: 0.3s var(--easing);
+        }
+        .theme-toggle:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+        .theme-toggle .icon-sun { display: none; }
+        :root[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+        :root[data-theme="dark"] .theme-toggle .icon-sun { display: inline; }
+</style>
 </head>
 <body>
 
@@ -382,10 +420,13 @@
                 <a href="index.html" class="back-btn hover-trigger">← Back</a>
                 <a href="index.html" class="logo hover-trigger">MANGALAM<span>.</span></a>
             </div>
+            <div class="nav-right">
+                <button class="theme-toggle hover-trigger" onclick="toggleTheme()" aria-label="Toggle dark mode"><span class="icon-moon">☾</span><span class="icon-sun">☀</span></button>
             <button class="menu-btn hover-trigger" onclick="toggleMenu(true)">
-                <span class="bars"><span></span><span></span><span></span></span>
-                Menu
-            </button>
+                    <span class="bars"><span></span><span></span><span></span></span>
+                    Menu
+                </button>
+            </div>
         </div>
     </nav>
 
@@ -461,7 +502,7 @@
         <div class="timeline" id="timeline">
             <div class="timeline-progress" id="timelineProgress"></div>
 
-            <div class="tl-item" style="--accent: var(--teal);">
+            <div class="tl-item" style="--accent: var(--teal); --accent-deep: var(--teal-deep);">
                 <div class="tl-year">2027–2029</div>
                 <div class="tl-dot"></div>
                 <div class="tl-card">
@@ -474,7 +515,7 @@
                 </div>
             </div>
 
-            <div class="tl-item" style="--accent: var(--lime);">
+            <div class="tl-item" style="--accent: var(--lime); --accent-deep: var(--lime-deep);">
                 <div class="tl-year">Jul '25–Jan '26</div>
                 <div class="tl-dot"></div>
                 <div class="tl-card">
@@ -488,7 +529,7 @@
                 </div>
             </div>
 
-            <div class="tl-item" style="--accent: var(--lime);">
+            <div class="tl-item" style="--accent: var(--lime); --accent-deep: var(--lime-deep);">
                 <div class="tl-year">Jul '23–Dec '24</div>
                 <div class="tl-dot"></div>
                 <div class="tl-card">
@@ -504,7 +545,7 @@
                 </div>
             </div>
 
-            <div class="tl-item" style="--accent: var(--teal);">
+            <div class="tl-item" style="--accent: var(--teal); --accent-deep: var(--teal-deep);">
                 <div class="tl-year">2023</div>
                 <div class="tl-dot"></div>
                 <div class="tl-card">
@@ -517,7 +558,7 @@
                 </div>
             </div>
 
-            <div class="tl-item" style="--accent: var(--lime);">
+            <div class="tl-item" style="--accent: var(--lime); --accent-deep: var(--lime-deep);">
                 <div class="tl-year">May–Jul '22</div>
                 <div class="tl-dot"></div>
                 <div class="tl-card">
@@ -531,7 +572,7 @@
                 </div>
             </div>
 
-            <div class="tl-item" style="--accent: var(--teal);">
+            <div class="tl-item" style="--accent: var(--teal); --accent-deep: var(--teal-deep);">
                 <div class="tl-year">2019</div>
                 <div class="tl-dot"></div>
                 <div class="tl-card">
@@ -544,7 +585,7 @@
                 </div>
             </div>
 
-            <div class="tl-item" style="--accent: var(--teal);">
+            <div class="tl-item" style="--accent: var(--teal); --accent-deep: var(--teal-deep);">
                 <div class="tl-year">2017</div>
                 <div class="tl-dot"></div>
                 <div class="tl-card">
@@ -567,70 +608,70 @@
         </div>
 
         <div class="rec-grid" id="recGrid">
-            <div class="rec-card" style="--accent: var(--terracotta);">
+            <div class="rec-card" style="--accent: var(--terracotta); --accent-deep: var(--terracotta-deep);">
                 <span class="rec-tag">Activity</span>
                 <h3 class="rec-title">Community Educator / NSS</h3>
                 <div class="rec-org">Social Warriors NGO, Patna · 2025</div>
                 <p class="rec-desc"><strong>240+ hours</strong> educating underprivileged children; active in Covid Relief, Bihar Flood Relief and Pre-RD Camp campaigns.</p>
             </div>
 
-            <div class="rec-card" style="--accent: var(--pink);">
+            <div class="rec-card" style="--accent: var(--pink); --accent-deep: var(--pink-deep);">
                 <span class="rec-tag">Award</span>
                 <h3 class="rec-title">Employee of the Month</h3>
                 <div class="rec-org">JSPL — Jindal Steel &amp; Power Ltd. · 2024</div>
                 <p class="rec-desc"><strong>1 / 200+ employees</strong> honoured for commissioning the new twin strand caster; also won the Shabbash award for record-time re-startup.</p>
             </div>
 
-            <div class="rec-card" style="--accent: var(--violet);">
+            <div class="rec-card" style="--accent: var(--violet); --accent-deep: var(--violet-deep);">
                 <span class="rec-tag">Leadership</span>
                 <h3 class="rec-title">Publicity and Design Head</h3>
                 <div class="rec-org">Birla Institute of Technology, Mesra · 2023</div>
                 <p class="rec-desc">Led a team of <strong>50+ individuals</strong> for the Annual Sports Fest's Design &amp; Merchandising; <strong>20,000+ footfall</strong> and <strong>8+ sponsors</strong> in 3 days.</p>
             </div>
 
-            <div class="rec-card" style="--accent: var(--terracotta);">
+            <div class="rec-card" style="--accent: var(--terracotta); --accent-deep: var(--terracotta-deep);">
                 <span class="rec-tag">Activity</span>
                 <h3 class="rec-title">Core-Member, Event Management</h3>
                 <div class="rec-org">Birla Institute of Technology, Mesra · 2021–2023</div>
                 <p class="rec-desc">Spearheaded Sponsorship, Content &amp; Design teams across <strong>4+ Major and 9+ Minor</strong> techno-cultural festivals.</p>
             </div>
 
-            <div class="rec-card" style="--accent: var(--terracotta);">
+            <div class="rec-card" style="--accent: var(--terracotta); --accent-deep: var(--terracotta-deep);">
                 <span class="rec-tag">Activity</span>
                 <h3 class="rec-title">Table-Tennis Team</h3>
                 <div class="rec-org">Birla Institute of Technology, Mesra · 2021–2023</div>
                 <p class="rec-desc"><strong>4th / 200+ students</strong>; college team member across 6+ tournaments, 1/5 teams at Elegante, IIM Bodh Gaya.</p>
             </div>
 
-            <div class="rec-card" style="--accent: var(--violet);">
+            <div class="rec-card" style="--accent: var(--violet); --accent-deep: var(--violet-deep);">
                 <span class="rec-tag">Leadership</span>
                 <h3 class="rec-title">Vice President &amp; Co-Manager</h3>
                 <div class="rec-org">Birla Institute of Technology, Mesra · 2021–2022</div>
                 <p class="rec-desc">Led <strong>30+ individuals</strong> across <strong>10+ technical events</strong>; founded and co-managed BITP Esports with <strong>40+ athletes</strong>.</p>
             </div>
 
-            <div class="rec-card" style="--accent: var(--terracotta);">
+            <div class="rec-card" style="--accent: var(--terracotta); --accent-deep: var(--terracotta-deep);">
                 <span class="rec-tag">Activity</span>
                 <h3 class="rec-title">Internal Hackathons — SIH</h3>
                 <div class="rec-org">Smart India Hackathon · 2019–2022</div>
                 <p class="rec-desc"><strong>Runner-up</strong> in SIH 2020 (RFID smart parking); <strong>4th position</strong> in 2022 (Random Encryption Generation).</p>
             </div>
 
-            <div class="rec-card" style="--accent: var(--pink);">
+            <div class="rec-card" style="--accent: var(--pink); --accent-deep: var(--pink-deep);">
                 <span class="rec-tag">Award</span>
                 <h3 class="rec-title">Most Creative Student</h3>
                 <div class="rec-org">St. Michael's High School · 2018</div>
                 <p class="rec-desc">Founded <strong>Pixy Lens &amp; Pixel Artists</strong>, producing 300+ creatives; designed the school's Jubilee Logo &amp; Flag.</p>
             </div>
 
-            <div class="rec-card" style="--accent: var(--pink);">
+            <div class="rec-card" style="--accent: var(--pink); --accent-deep: var(--pink-deep);">
                 <span class="rec-tag">Award</span>
                 <h3 class="rec-title">Zonal Gold Medal — SOF</h3>
                 <div class="rec-org">National Cyber Olympiad · 2018</div>
                 <p class="rec-desc">Ranked <strong>11 / 4000+</strong> at Zonal Level (IIT KGP Khitiz).</p>
             </div>
 
-            <div class="rec-card" style="--accent: var(--violet);">
+            <div class="rec-card" style="--accent: var(--violet); --accent-deep: var(--violet-deep);">
                 <span class="rec-tag">Leadership</span>
                 <h3 class="rec-title">Founder &amp; Mentor</h3>
                 <div class="rec-org">St. Michael's High School · 2017–2019</div>
@@ -739,6 +780,16 @@
         window.addEventListener('scroll', updateTimelineProgress, { passive: true });
         window.addEventListener('resize', updateTimelineProgress);
         updateTimelineProgress();
-    </script>
+    
+        function toggleTheme() {
+            var root = document.documentElement;
+            var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            if (next === 'dark') root.setAttribute('data-theme', 'dark');
+            else root.removeAttribute('data-theme');
+            try { localStorage.setItem('mg-theme', next); } catch(e) {}
+            var meta = document.querySelector('meta[name="theme-color"]');
+            if (meta) meta.setAttribute('content', next === 'dark' ? '#120a10' : '#fff7f0');
+        }
+</script>
 </body>
 </html>

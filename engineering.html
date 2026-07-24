@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script>(function(){try{var t=localStorage.getItem('mg-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Engineering - Mangalam</title>
     <meta name="description" content="Engineering projects and research by Mangalam.">
@@ -16,6 +17,29 @@
            1. CORE VARIABLES & RESET
            ========================================= */
         :root {
+            --bg: #fff7f0;
+            --surface: #f7ead9;
+            --surface-2: #eef3fb;
+            --cream: #0e1a16;
+            --cream-dim: #5f746b;
+            --ink: #0b1311;
+
+            --lime: #bad6ff;
+            --pink: #f5d9c0;
+            --violet: #d9c9f0;
+            --lime-deep: #4a7fc4;
+            --pink-deep: #c4794a;
+            --violet-deep: #7a5fb0;
+            --paper: #fdf8f2;
+            --cream-rgb: 14,26,22; --bg-rgb: 255,247,240;
+            --lime-rgb: 186,214,255;
+
+            --border-w: 1.5px;
+            --container: 1400px;
+            --easing: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        :root[data-theme="dark"] {
             --bg: #120a10;
             --surface: #1e1218;
             --surface-2: #291721;
@@ -25,9 +49,11 @@
             --lime: #ff6b4a;
             --pink: #ffb703;
             --violet: #d94fd4;
-            --border-w: 3px;
-            --container: 1400px;
-            --easing: cubic-bezier(0.16, 1, 0.3, 1);
+            --lime-deep: var(--lime);
+            --pink-deep: var(--pink);
+            --violet-deep: var(--violet);
+            --cream-rgb: 247,237,225; --bg-rgb: 18,10,16;
+            --lime-rgb: 255,107,74;
         }
 
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
@@ -84,12 +110,12 @@
         /* =========================================
            4. NAVIGATION
            ========================================= */
-        nav { position: fixed; top: 0; width: 100%; padding: 26px 0; z-index: 100; mix-blend-mode: difference;}
-        .nav-left { display: flex; align-items: center; gap: 30px; }
+        nav { position: fixed; top: 0; width: 100%; padding: 26px 0; z-index: 100;}
+        .nav-left { display: flex; align-items: center; gap: 16px; background: rgba(var(--bg-rgb),0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 8px 20px 8px 12px; border-radius: 999px; }
         .back-btn { font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--cream-dim); transition: 0.3s var(--easing); display: flex; align-items: center; gap: 6px; }
-        .back-btn:hover { color: var(--lime); transform: translateX(-4px); }
+        .back-btn:hover { color: var(--lime-deep); transform: translateX(-4px); }
         .logo { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em; text-transform: uppercase; color: var(--cream); }
-        .logo span { color: var(--lime); }
+        .logo span { color: var(--lime-deep); }
         .menu-btn {
             display: flex; align-items: center; gap: 12px; background: transparent; border: 2px solid var(--cream);
             color: var(--cream); padding: 12px 22px; font-family: 'Space Grotesk', sans-serif; font-weight: 700;
@@ -116,7 +142,7 @@
             font-size: clamp(2.15rem, 7.2vw, 5rem); line-height: 0.92; letter-spacing: -0.02em; transition: transform 0.35s var(--easing), color 0.35s;
             display: inline-block;
         }
-        .menu-links a:hover { transform: translateX(20px); color: var(--cream); }
+        .menu-links a:hover { transform: translateX(20px); color: var(--paper); }
         .menu-footer { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; }
         .menu-footer a { font-weight: 700; text-transform: uppercase; font-size: 0.85rem; border-bottom: 2px solid var(--ink); padding-bottom: 2px; }
         .menu-socials { display: flex; gap: 24px; }
@@ -199,7 +225,7 @@
         .post-meta {
             display: flex;
             justify-content: space-between;
-            border-bottom: 1px solid rgba(245,241,230,0.15);
+            border-bottom: 1px solid rgba(var(--cream-rgb),0.12);
             padding-bottom: 12px;
             font-family: 'Space Grotesk', sans-serif;
             font-size: 0.8rem;
@@ -216,7 +242,7 @@
         }
 
         .journal-post:hover .post-title {
-            color: var(--lime);
+            color: var(--lime-deep);
         }
 
         .post-excerpt {
@@ -232,7 +258,7 @@
         /* =========================================
            7. FOOTER
            ========================================= */
-        footer { padding: 70px 0 50px; border-top: 2px solid rgba(245,241,230,0.15); text-align: center; }
+        footer { padding: 70px 0 50px; border-top: 2px solid rgba(var(--cream-rgb),0.12); text-align: center; }
         .copyright { color: var(--cream-dim); font-size: 0.8rem; }
 
         @media (max-width: 1024px) {
@@ -244,7 +270,18 @@
             *, *::before, *::after { cursor: auto !important; }
             .cursor-dot, .cursor-ring { display: none; }
         }
-    </style>
+    
+        .nav-right { display: flex; align-items: center; gap: 12px; }
+        .theme-toggle {
+            display: flex; align-items: center; justify-content: center;
+            width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--cream);
+            background: transparent; color: var(--cream); font-size: 1rem; transition: 0.3s var(--easing);
+        }
+        .theme-toggle:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+        .theme-toggle .icon-sun { display: none; }
+        :root[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+        :root[data-theme="dark"] .theme-toggle .icon-sun { display: inline; }
+</style>
 </head>
 <body>
 
@@ -258,10 +295,13 @@
                 <a href="index.html" class="back-btn hover-trigger">← Back</a>
                 <a href="index.html" class="logo hover-trigger">MANGALAM<span>.</span></a>
             </div>
+            <div class="nav-right">
+                <button class="theme-toggle hover-trigger" onclick="toggleTheme()" aria-label="Toggle dark mode"><span class="icon-moon">☾</span><span class="icon-sun">☀</span></button>
             <button class="menu-btn hover-trigger" onclick="toggleMenu(true)">
-                <span class="bars"><span></span><span></span><span></span></span>
-                Menu
-            </button>
+                    <span class="bars"><span></span><span></span><span></span></span>
+                    Menu
+                </button>
+            </div>
         </div>
     </nav>
 
@@ -425,6 +465,16 @@
                 overlay.classList.remove('open');
             }
         }
-    </script>
+    
+        function toggleTheme() {
+            var root = document.documentElement;
+            var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            if (next === 'dark') root.setAttribute('data-theme', 'dark');
+            else root.removeAttribute('data-theme');
+            try { localStorage.setItem('mg-theme', next); } catch(e) {}
+            var meta = document.querySelector('meta[name="theme-color"]');
+            if (meta) meta.setAttribute('content', next === 'dark' ? '#120a10' : '#fff7f0');
+        }
+</script>
 </body>
 </html>
