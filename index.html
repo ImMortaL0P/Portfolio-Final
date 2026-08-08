@@ -16,6 +16,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="assets/css/chrome.css">
     <style>
         /* =========================================
            1. CORE VARIABLES & RESET
@@ -99,10 +100,11 @@
             pointer-events: none;
         }
         #blob-bg { position: fixed; inset: 0; z-index: -2; overflow: hidden; pointer-events: none; }
-        .blob { position: absolute; border-radius: 50%; filter: blur(70px); opacity: 0.55; }
-        .blob.b-lime   { width: 55vw; height: 55vw; background: var(--lime);   top: -15%; left: -15%; animation: float1 22s ease-in-out infinite; }
-        .blob.b-pink   { width: 45vw; height: 45vw; background: var(--pink);  bottom: -15%; right: -10%; animation: float2 26s ease-in-out infinite; }
-        .blob.b-violet { width: 40vw; height: 40vw; background: var(--violet); top: 35%; right: 15%; animation: float3 20s ease-in-out infinite; }
+        .blob { position: absolute; border-radius: 50%; filter: blur(48px); opacity: 0.55; will-change: transform; }
+        .blob.b-lime   { width: 46vw; height: 46vw; background: var(--lime);   top: -15%; left: -15%; animation: float1 22s ease-in-out infinite; }
+        .blob.b-pink   { width: 38vw; height: 38vw; background: var(--pink);  bottom: -15%; right: -10%; animation: float2 26s ease-in-out infinite; }
+        .blob.b-violet { width: 34vw; height: 34vw; background: var(--violet); top: 35%; right: 15%; animation: float3 20s ease-in-out infinite; }
+        body.tab-hidden .blob { animation-play-state: paused; }
 
         @keyframes float1 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(8%,10%) scale(1.15); } }
         @keyframes float2 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-6%,-8%) scale(1.1); } }
@@ -116,27 +118,6 @@
         /* =========================================
            3. CUSTOM CURSOR
            ========================================= */
-        .cursor-dot {
-            width: 9px; height: 9px; background: #fff; mix-blend-mode: difference;
-            position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
-            border-radius: 50%; pointer-events: none; z-index: 99999;
-        }
-        .cursor-ring {
-            width: 42px; height: 42px; border: 2px solid #fff; mix-blend-mode: difference;
-            position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
-            border-radius: 50%; pointer-events: none; z-index: 99999;
-            transition: width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s, opacity 0.3s;
-        }
-        body.hovering .cursor-ring { width: 76px; height: 76px; background: #fff; border-color: #fff; opacity: 0.6; }
-        .cursor-label {
-            position: fixed; top: 0; left: 0; transform: translate(-50%, -50%) scale(0.4);
-            pointer-events: none; z-index: 99999; mix-blend-mode: difference; color: #fff;
-            font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 0.8rem;
-            text-transform: uppercase; letter-spacing: 1.5px; white-space: nowrap; opacity: 0;
-            transition: opacity 0.25s var(--easing), transform 0.25s var(--easing);
-        }
-        body.hovering-card .cursor-ring { opacity: 0; }
-        body.hovering-card .cursor-label { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 
         /* =========================================
            4. PRELOADER
@@ -211,49 +192,8 @@
         /* =========================================
            6. NAVIGATION
            ========================================= */
-        nav {
-            position: fixed; top: 0; width: 100%; padding: 26px 0; z-index: 100;
-            background: transparent; backdrop-filter: none; border-bottom: 1px solid transparent;
-            transition: background 0.4s var(--easing), backdrop-filter 0.4s var(--easing), border-color 0.4s var(--easing);
-        }
-        nav.scrolled {
-            background: rgba(var(--bg-rgb), 0.75);
-            backdrop-filter: blur(16px) saturate(1.6); -webkit-backdrop-filter: blur(16px) saturate(1.6);
-            border-bottom: 1px solid rgba(var(--cream-rgb), 0.08);
-        }
-        .logo { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em; text-transform: uppercase; }
-        .logo span { color: var(--lime-deep); }
-        .menu-btn {
-            display: flex; align-items: center; gap: 12px; background: transparent; border: 2px solid var(--cream);
-            color: var(--cream); padding: 12px 22px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700;
-            text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; border-radius: 999px;
-            transition: transform 0.15s var(--easing);
-        }
-        .menu-btn:active { transform: scale(0.95); }
-        .menu-btn .bars { display: flex; flex-direction: column; gap: 3px; }
-        .menu-btn .bars span { width: 16px; height: 2px; background: var(--cream); display: block; }
 
         /* Fullscreen overlay menu */
-        .menu-overlay {
-            opacity: 0; pointer-events: none;
-            position: fixed; inset: 0; background: var(--lime); color: var(--ink); z-index: 20000;
-            transform: translateY(-100%); transition: transform 0.6s var(--easing), opacity 0.6s var(--easing);
-            display: flex; flex-direction: column; justify-content: space-between; padding: 40px 0 60px; overflow-y: auto;
-        }
-        .menu-overlay.open { transform: translateY(0); opacity: 1; pointer-events: all; }
-        .menu-close {
-            position: absolute; top: 26px; right: 40px; background: none; border: none; color: var(--ink);
-            font-size: 2.4rem; line-height: 1; z-index: 2;
-        }
-        .menu-links { display: flex; flex-direction: column; gap: clamp(16px, 4.2vh, 42px); }
-        .menu-links a {
-            font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; text-transform: uppercase;
-            font-size: clamp(2.15rem, 7.2vw, 5rem); line-height: 0.92; letter-spacing: -0.02em; transition: transform 0.35s var(--easing), color 0.35s;
-            display: inline-block;
-        }
-        .menu-links a:hover { transform: translateX(20px); color: var(--paper); }
-        .menu-footer { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; }
-        .menu-footer a { font-weight: 700; text-transform: uppercase; font-size: 0.85rem; border-bottom: 2px solid var(--ink); padding-bottom: 2px; }
         .menu-socials { display: flex; gap: 24px; }
 
         /* =========================================
@@ -749,30 +689,15 @@
             .ticker-wrap { margin: 40px -5% 70px; }
         }
 
-        @media (pointer: coarse) {
-            *, *::before, *::after { cursor: auto !important; }
-            .cursor-dot, .cursor-ring, .cursor-label { display: none; }
-        }
 
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto; }
             .reveal-on-scroll { transition: none; opacity: 1; transform: none; }
-            .blob { animation: none; }
+            .blob { animation: none !important; }
             .polaroid { animation: none !important; }
             .hero-title .line, .badge, .hero-desc, .hero-cta-row { animation: none !important; opacity: 1; transform: none; }
         }
     
-        .nav-right { display: flex; align-items: center; gap: 12px; }
-        .theme-toggle {
-            display: flex; align-items: center; justify-content: center;
-            width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--cream);
-            background: transparent; color: var(--cream); font-size: 1rem; transition: 0.3s var(--easing), transform 0.15s var(--easing);
-        }
-        .theme-toggle:active { transform: scale(0.92); }
-        .theme-toggle:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-        .theme-toggle .icon-sun { display: none; }
-        :root[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
-        :root[data-theme="dark"] .theme-toggle .icon-sun { display: inline; }
 </style>
 </head>
 <body>
@@ -852,9 +777,9 @@
         <div class="polaroid-parallax" style="--speed: -0.1"><div class="polaroid-enter" style="animation-delay: 3.2s"><div class="polaroid p2 hover-trigger" aria-hidden="true"><img src="assets/dsc-5855.webp" loading="lazy" alt=""></div></div></div>
         <div class="polaroid-parallax" style="--speed: 0.08"><div class="polaroid-enter" style="animation-delay: 3.4s"><div class="polaroid p3 hover-trigger" aria-hidden="true"><img src="assets/alleviate.webp" loading="lazy" alt=""></div></div></div>
         <div class="polaroid-parallax" style="--speed: -0.15"><div class="polaroid-enter" style="animation-delay: 3.6s"><div class="polaroid p4 hover-trigger" aria-hidden="true"><img src="assets/gloom-thumb.webp" loading="lazy" alt=""></div></div></div>
-        <div class="polaroid-parallax" style="--speed: 0.12"><div class="polaroid-enter" style="animation-delay: 3.8s"><div class="polaroid p5 hover-trigger" aria-hidden="true"><img src="assets/Retro Sticker.png" loading="lazy" alt=""></div></div></div>
+        <div class="polaroid-parallax" style="--speed: 0.12"><div class="polaroid-enter" style="animation-delay: 3.8s"><div class="polaroid p5 hover-trigger" aria-hidden="true"><img src="assets/Retro Sticker.webp" loading="lazy" alt=""></div></div></div>
         <div class="polaroid-parallax" style="--speed: -0.08"><div class="polaroid-enter" style="animation-delay: 4.0s"><div class="polaroid p6 hover-trigger" aria-hidden="true"><img src="assets/leo-caprio.webp" loading="lazy" alt=""></div></div></div>
-        <div class="polaroid-parallax" style="--speed: 0.2"><div class="polaroid-enter" style="animation-delay: 4.2s"><div class="polaroid p7 hover-trigger" aria-hidden="true"><img src="assets/mockup-hero.jpg" loading="lazy" alt=""></div></div></div>
+        <div class="polaroid-parallax" style="--speed: 0.2"><div class="polaroid-enter" style="animation-delay: 4.2s"><div class="polaroid p7 hover-trigger" aria-hidden="true"><img src="assets/mockup-hero.webp" loading="lazy" alt=""></div></div></div>
         <div class="polaroid-parallax" style="--speed: -0.12"><div class="polaroid-enter" style="animation-delay: 4.4s"><div class="polaroid p8 hover-trigger" aria-hidden="true"><img src="assets/solitude.webp" loading="lazy" alt=""></div></div></div>
 
         <div class="container">
@@ -973,11 +898,11 @@
             </div>
             <div class="bento-grid">
                 <div class="art-card standard hover-trigger" onclick="openModal('static_travel')">
-                    <div class="card-img-wrap"><img src="assets/travel/evcc00hhl2baraepbpg8.webp" class="card-img" loading="lazy" decoding="async" alt="Travel"></div>
+                    <div class="card-img-wrap"><img src="assets/Travel/evcc00hhl2baraepbpg8.webp" class="card-img" loading="lazy" decoding="async" alt="Travel"></div>
                     <div class="card-info"><h3 class="card-title">Travel</h3><span class="card-meta">Static Creative</span></div>
                 </div>
                 <div class="art-card standard hover-trigger" onclick="openModal('static_floral')">
-                    <div class="card-img-wrap"><img src="assets/floral/cn2o6jieto9dforlwwix.webp" class="card-img" loading="lazy" decoding="async" alt="Floral"></div>
+                    <div class="card-img-wrap"><img src="assets/Floral/cn2o6jieto9dforlwwix.webp" class="card-img" loading="lazy" decoding="async" alt="Floral"></div>
                     <div class="card-info"><h3 class="card-title">Floral</h3><span class="card-meta">Static Creative</span></div>
                 </div>
                 <div class="art-card standard hover-trigger" onclick="openModal('static_popart')">
@@ -985,15 +910,15 @@
                     <div class="card-info"><h3 class="card-title">Pop Art</h3><span class="card-meta">Static Creative</span></div>
                 </div>
                 <div class="art-card standard hover-trigger" onclick="openModal('static_motivation')">
-                    <div class="card-img-wrap"><img src="assets/typo-kinetic.jpg" class="card-img" loading="lazy" decoding="async" alt="Motivation"></div>
+                    <div class="card-img-wrap"><img src="assets/Motivation/aucr6wybedndhm4b85pa.webp" class="card-img" loading="lazy" decoding="async" alt="Motivation"></div>
                     <div class="card-info"><h3 class="card-title">Motivation</h3><span class="card-meta">Static Creative</span></div>
                 </div>
                 <div class="art-card standard hover-trigger" onclick="openModal('static_automotive')">
-                    <div class="card-img-wrap"><img src="assets/typo-swiss.jpg" class="card-img" loading="lazy" decoding="async" alt="Automotive"></div>
+                    <div class="card-img-wrap"><img src="assets/Automotive/afoeg90rlfvjwawmenna.webp" class="card-img" loading="lazy" decoding="async" alt="Automotive"></div>
                     <div class="card-info"><h3 class="card-title">Automotive</h3><span class="card-meta">Static Creative</span></div>
                 </div>
                 <div class="art-card standard hover-trigger" onclick="openModal('static_personality')">
-                    <div class="card-img-wrap"><img src="assets/typo-vintage.jpg" class="card-img" loading="lazy" decoding="async" alt="Personality"></div>
+                    <div class="card-img-wrap"><img src="assets/Personality/cwmldaonxtobvfefotyj.webp" class="card-img" loading="lazy" decoding="async" alt="Personality"></div>
                     <div class="card-info"><h3 class="card-title">Personality</h3><span class="card-meta">Static Creative</span></div>
                 </div>
             </div>
@@ -1021,7 +946,7 @@
                             <div class="client-logo">SP<br>SERVICES</div>
                         </div>
                         <div class="client-half hover-trigger" onclick="openModal('brush')">
-                            <img src="assets/brush-landing.jpg" class="card-img" loading="lazy" decoding="async" style="filter: brightness(0.5);" alt="Brush Production work">
+                            <img src="assets/brush-landing.webp" class="card-img" loading="lazy" decoding="async" style="filter: brightness(0.5);" alt="Brush Production work">
                             <div class="client-logo">Brush<br>Production</div>
                         </div>
                     </div>
@@ -1040,15 +965,15 @@
             </div>
             <div class="bento-grid">
                 <div class="art-card big hover-trigger" onclick="openModal('typo1')">
-                    <div class="card-img-wrap"><img src="assets/Retro Sticker.png" class="card-img" loading="lazy" decoding="async" alt="Retro Typography"></div>
+                    <div class="card-img-wrap"><img src="assets/Retro Sticker.webp" class="card-img" loading="lazy" decoding="async" alt="Retro Typography"></div>
                     <div class="card-info"><h3 class="card-title">Retro Typography</h3><span class="card-meta">Retro / Vintage</span></div>
                 </div>
                 <div class="art-card standard hover-trigger" onclick="openModal('typo2')">
-                    <div class="card-img-wrap"><img src="assets/Gold.png" class="card-img" loading="lazy" decoding="async" alt="Textured Metallics"></div>
+                    <div class="card-img-wrap"><img src="assets/Gold.webp" class="card-img" loading="lazy" decoding="async" alt="Textured Metallics"></div>
                     <div class="card-info"><h3 class="card-title">Textured Metallics</h3><span class="card-meta">3D / Texture</span></div>
                 </div>
                 <div class="art-card standard hover-trigger" onclick="openModal('typo3')">
-                    <div class="card-img-wrap"><img src="assets/Comic.png" class="card-img" loading="lazy" decoding="async" alt="Illustrative Lettering"></div>
+                    <div class="card-img-wrap"><img src="assets/Comic.webp" class="card-img" loading="lazy" decoding="async" alt="Illustrative Lettering"></div>
                     <div class="card-info"><h3 class="card-title">Illustrative Lettering</h3><span class="card-meta">Illustration / Type</span></div>
                 </div>
                 <div class="art-card standard hover-trigger" onclick="openModal('typo4')">
@@ -1056,7 +981,7 @@
                     <div class="card-info"><h3 class="card-title">Paper Craft Type</h3><span class="card-meta">Cut-Out / Collage</span></div>
                 </div>
                 <div class="art-card standard hover-trigger" onclick="openModal('typo5')">
-                    <div class="card-img-wrap"><img src="assets/Spring .png" class="card-img" loading="lazy" decoding="async" alt="Botanical & Floral Type"></div>
+                    <div class="card-img-wrap"><img src="assets/Spring .webp" class="card-img" loading="lazy" decoding="async" alt="Botanical & Floral Type"></div>
                     <div class="card-info"><h3 class="card-title">Botanical &amp; Floral Type</h3><span class="card-meta">Nature / Organic</span></div>
                 </div>
             </div>
@@ -1072,15 +997,15 @@
             </div>
             <div class="bento-grid">
                 <div class="art-card big hover-trigger" onclick="openModal('mockup1')">
-                    <div class="card-img-wrap"><img src="assets/mockup-hero.jpg" class="card-img" loading="lazy" decoding="async" alt="Premium Packaging Suite"></div>
+                    <div class="card-img-wrap"><img src="assets/mockup-hero.webp" class="card-img" loading="lazy" decoding="async" alt="Premium Packaging Suite"></div>
                     <div class="card-info"><h3 class="card-title">Premium Packaging Suite</h3><span class="card-meta">Product Mockup</span></div>
                 </div>
                 <div class="art-card standard hover-trigger" onclick="openModal('mockup2')">
-                    <div class="card-img-wrap"><img src="assets/mockup-magazine.jpg" class="card-img" loading="lazy" decoding="async" alt="Editorial Spread"></div>
+                    <div class="card-img-wrap"><img src="assets/mockup-magazine.webp" class="card-img" loading="lazy" decoding="async" alt="Editorial Spread"></div>
                     <div class="card-info"><h3 class="card-title">Editorial Spread</h3><span class="card-meta">Magazine Mockup</span></div>
                 </div>
                 <div class="art-card standard hover-trigger" onclick="openModal('mockup3')">
-                    <div class="card-img-wrap"><img src="assets/mockup-device.jpg" class="card-img" loading="lazy" decoding="async" alt="Device Showcase"></div>
+                    <div class="card-img-wrap"><img src="assets/mockup-device.webp" class="card-img" loading="lazy" decoding="async" alt="Device Showcase"></div>
                     <div class="card-info"><h3 class="card-title">Device Showcase</h3><span class="card-meta">UI Mockup</span></div>
                 </div>
             </div>
@@ -1192,6 +1117,7 @@
         </div>
     </footer>
 
+    <script src="assets/js/chrome.js"></script>
     <script>
         // --- 1. PRELOADER ---
         (function() {
@@ -1262,7 +1188,7 @@
                     pctWrap.style.setProperty('--clip', (100 - displayVal) + '%');
                 }
 
-                if (displayVal >= 100 && document.readyState === 'complete') {
+                if (displayVal >= 100) {
                     setTimeout(hidePreloader, 400);
                 } else {
                     requestAnimationFrame(updateProgress);
@@ -1280,6 +1206,24 @@
             });
             
             requestAnimationFrame(updateProgress);
+        })();
+
+        // --- 1b. AMBIENT BACKGROUND: pause offscreen/hidden work ---
+        (function initAmbientBackground() {
+            const bgVideo = document.getElementById('cinematic-bg');
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            if (bgVideo && reduceMotion) {
+                bgVideo.pause();
+            }
+
+            document.addEventListener('visibilitychange', () => {
+                const hidden = document.hidden;
+                document.body.classList.toggle('tab-hidden', hidden);
+                if (!bgVideo || reduceMotion) return;
+                if (hidden) bgVideo.pause();
+                else bgVideo.play().catch(() => {});
+            });
         })();
 
         // --- 2. DATA STORE ---
@@ -1338,20 +1282,20 @@
             'static_travel': {
                 title: "Travel",
                 desc: "AI Made/Manipulated creatives inspired from pop style, focused on travel aesthetics.",
-                hero: "assets/travel/evcc00hhl2baraepbpg8.webp",
-                g1: "assets/travel/plyyr8lcujoa31jzs8ej.webp",
-                g2: "assets/travel/tlwh4nmhdzw1giwnubos.webp",
-                g3: "assets/travel/tppjp0ralrbx45eer1w3.webp",
-                g4: "assets/travel/zq87gadcfiezoynyslup.webp"
+                hero: "assets/Travel/evcc00hhl2baraepbpg8.webp",
+                g1: "assets/Travel/plyyr8lcujoa31jzs8ej.webp",
+                g2: "assets/Travel/tlwh4nmhdzw1giwnubos.webp",
+                g3: "assets/Travel/tppjp0ralrbx45eer1w3.webp",
+                g4: "assets/Travel/zq87gadcfiezoynyslup.webp"
             },
             'static_floral': {
                 title: "Floral",
                 desc: "AI Made/Manipulated creatives inspired from pop style, focused on floral designs.",
-                hero: "assets/floral/cn2o6jieto9dforlwwix.webp",
-                g1: "assets/floral/favjlwvonkrm05tks65v.webp",
-                g2: "assets/floral/pcfer5zhd7hohoncgugu.webp",
-                g3: "assets/floral/tkwd2k711pzzjq9szojz.webp",
-                g4: "assets/floral/vlowtylc7mk0id05c8so.webp"
+                hero: "assets/Floral/cn2o6jieto9dforlwwix.webp",
+                g1: "assets/Floral/favjlwvonkrm05tks65v.webp",
+                g2: "assets/Floral/pcfer5zhd7hohoncgugu.webp",
+                g3: "assets/Floral/tkwd2k711pzzjq9szojz.webp",
+                g4: "assets/Floral/vlowtylc7mk0id05c8so.webp"
             },
             'static_popart': {
                 title: "Pop Art",
@@ -1365,29 +1309,29 @@
             'static_motivation': {
                 title: "Motivation",
                 desc: "AI Made/Manipulated creatives inspired from pop style, combining text and striking visuals.",
-                hero: "assets/typo-kinetic.jpg",
-                g1: "assets/typo-hero.jpg",
-                g2: "assets/typo-3d.jpg",
-                g3: "assets/typo-decon.jpg",
-                g4: "assets/typo-swiss.jpg"
+                hero: "assets/Motivation/aucr6wybedndhm4b85pa.webp",
+                g1: "assets/Motivation/egthx97z3py7tjyf3iib.webp",
+                g2: "assets/Motivation/o0avtqlbnkjwdyo773b0.webp",
+                g3: "assets/Motivation/rx1lmh3m1xzr7sauwhrn.webp",
+                g4: "assets/Motivation/sbnol3v3trqsshgwavz3.webp"
             },
             'static_automotive': {
                 title: "Automotive",
                 desc: "AI Made/Manipulated creatives inspired from pop style, centered around automotive themes.",
-                hero: "assets/typo-swiss.jpg",
-                g1: "assets/typo-hero.jpg",
-                g2: "assets/typo-kinetic.jpg",
-                g3: "assets/typo-decon.jpg",
-                g4: "assets/typo-vintage.jpg"
+                hero: "assets/Automotive/afoeg90rlfvjwawmenna.webp",
+                g1: "assets/Automotive/moig7cz9cyh7wakd0dh4.webp",
+                g2: "assets/Automotive/na5wn9ejxjxxgdky6uiz.webp",
+                g3: "assets/Automotive/vqjmyrtvc0wkum9hexd6.webp",
+                g4: "assets/Automotive/wxrmf3jgy1qhsuk1gfyk.webp"
             },
             'static_personality': {
                 title: "Personality",
                 desc: "AI Made/Manipulated creatives inspired from pop style, highlighting distinct personalities.",
-                hero: "assets/typo-vintage.jpg",
-                g1: "assets/typo-hero.jpg",
-                g2: "assets/typo-3d.jpg",
-                g3: "assets/typo-kinetic.jpg",
-                g4: "assets/typo-swiss.jpg"
+                hero: "assets/Personality/cwmldaonxtobvfefotyj.webp",
+                g1: "assets/Personality/fhmflypufyrshkqytt9d.webp",
+                g2: "assets/Personality/g13mwjgnbden63lexphu.webp",
+                g3: "assets/Personality/ruqyboi7zmrenrmbjf2l.webp",
+                g4: "assets/Personality/wkl7w2yjn4yxipn6whrm.webp"
             },
             'video1': {
                 title: "Kinetic Reel 2025",
@@ -1409,120 +1353,78 @@
             'brush': {
                 title: "Brush Production",
                 desc: "Brush Production is your one-step solution for print media! We deliver a broad range of high-quality posters and prints catering to vibrant tastes, from Anime and Movies to modern and vintage arts.",
-                hero: "assets/brush-landing.jpg",
-                g1: "assets/brush-2.jpg",
-                g2: "assets/brush-3.jpg",
-                g3: "assets/brush-4.jpg"
+                hero: "assets/brush-landing.webp",
+                g1: "assets/brush-2.webp",
+                g2: "assets/brush-3.webp",
+                g3: "assets/brush-4.webp"
             },
             'typo1': {
                 title: "Retro Typography",
                 desc: "A vibrant collection of retro and vintage-inspired type designs — from groovy psychedelic lettering to weathered old-school signage and bold sticker aesthetics.",
-                hero: "assets/Retro Sticker.png",
-                g1: "assets/Retro Groovy .png",
-                g2: "assets/Retro Hazelnut.png",
-                g3: "assets/old school.png"
+                hero: "assets/Retro Sticker.webp",
+                g1: "assets/Retro Groovy .webp",
+                g2: "assets/Retro Hazelnut.webp",
+                g3: "assets/old school.webp"
             },
             'typo2': {
                 title: "Textured Metallics",
                 desc: "Typography brought to life through rich metallic textures — gold leaf, rusty brass, and dynamic rush effects. Each piece explores the interplay of type and tactile surface.",
-                hero: "assets/Gold.png",
-                g1: "assets/Rusty Brass.png",
-                g2: "assets/Rush.png",
-                g3: "assets/Paper Patched.png"
+                hero: "assets/Gold.webp",
+                g1: "assets/Rusty Brass.webp",
+                g2: "assets/Rush.webp",
+                g3: "assets/Paper Patched.webp"
             },
             'typo3': {
                 title: "Illustrative Lettering",
                 desc: "Playful, hand-drawn letterforms that blur the line between illustration and typography — from comic-book energy to doodle-style charm and expressive character.",
-                hero: "assets/Comic.png",
-                g1: "assets/Doodled.png",
-                g2: "assets/Vegan.png",
-                g3: "assets/Weep.png"
+                hero: "assets/Comic.webp",
+                g1: "assets/Doodled.webp",
+                g2: "assets/Vegan.webp",
+                g3: "assets/Weep.webp"
             },
             'typo4': {
                 title: "Paper Craft Type",
                 desc: "Typography constructed from physical media — paper cut-outs, patched textures and collaged letterforms that celebrate the raw, tactile beauty of analog craft.",
                 hero: "assets/Paper Cut Out",
-                g1: "assets/Paper Patched.png",
-                g2: "assets/Spring .png",
-                g3: "assets/Retro Hazelnut.png"
+                g1: "assets/Paper Patched.webp",
+                g2: "assets/Spring .webp",
+                g3: "assets/Retro Hazelnut.webp"
             },
             'typo5': {
                 title: "Botanical & Floral Type",
                 desc: "Organic, nature-inspired typography where letterforms intertwine with floral elements, botanical illustrations and natural textures — delicate yet bold.",
-                hero: "assets/Spring .png",
-                g1: "assets/Gold.png",
-                g2: "assets/Doodled.png",
-                g3: "assets/Retro Sticker.png"
+                hero: "assets/Spring .webp",
+                g1: "assets/Gold.webp",
+                g2: "assets/Doodled.webp",
+                g3: "assets/Retro Sticker.webp"
             },
             'mockup1': {
                 title: "Premium Packaging Suite",
                 desc: "High-end product packaging mockups featuring minimalist white boxes and business cards on dark marble. Designed to showcase brand identity in a premium, photorealistic context.",
-                hero: "assets/mockup-hero.jpg",
-                g1: "assets/mockup-stationery.jpg",
-                g2: "assets/mockup-packaging.jpg",
-                g3: "assets/mockup-frames.jpg"
+                hero: "assets/mockup-hero.webp",
+                g1: "assets/mockup-stationery.webp",
+                g2: "assets/mockup-packaging.webp",
+                g3: "assets/mockup-frames.webp"
             },
             'mockup2': {
                 title: "Editorial Spread",
                 desc: "Luxury magazine spread mockup on concrete, dramatic natural shadows. Perfect for presenting editorial layouts, brand stories and print design in a tangible, real-world setting.",
-                hero: "assets/mockup-magazine.jpg",
-                g1: "assets/mockup-hero.jpg",
-                g2: "assets/mockup-stationery.jpg",
-                g3: "assets/mockup-packaging.jpg"
+                hero: "assets/mockup-magazine.webp",
+                g1: "assets/mockup-hero.webp",
+                g2: "assets/mockup-stationery.webp",
+                g3: "assets/mockup-packaging.webp"
             },
             'mockup3': {
                 title: "Device Showcase",
                 desc: "Multi-device presentation mockup featuring laptop and smartphone on a clean desk environment. Designed for showcasing UI/UX design, web apps and digital products.",
-                hero: "assets/mockup-device.jpg",
-                g1: "assets/mockup-frames.jpg",
-                g2: "assets/mockup-magazine.jpg",
-                g3: "assets/mockup-hero.jpg"
+                hero: "assets/mockup-device.webp",
+                g1: "assets/mockup-frames.webp",
+                g2: "assets/mockup-magazine.webp",
+                g3: "assets/mockup-hero.webp"
             }
         };
 
-        // --- 3. CUSTOM CURSOR, HOVER & PARALLAX ---
-        const navEl = document.querySelector('nav');
-        window.addEventListener('scroll', () => {
-            document.body.style.setProperty('--scroll', window.scrollY);
-            if (navEl) navEl.classList.toggle('scrolled', window.scrollY > 40);
-        });
-
-        const cursorDot = document.querySelector('.cursor-dot');
-        const cursorRing = document.querySelector('.cursor-ring');
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-        let targetX = 0, targetY = 0, ringX = 0, ringY = 0, ringInit = false;
-        window.addEventListener('mousemove', (e) => {
-            targetX = e.clientX; targetY = e.clientY;
-            cursorDot.style.left = `${targetX}px`;
-            cursorDot.style.top = `${targetY}px`;
-            if (!ringInit) { ringX = targetX; ringY = targetY; ringInit = true; }
-        });
-        const cursorLabel = document.querySelector('.cursor-label');
-        if (prefersReducedMotion) {
-            window.addEventListener('mousemove', (e) => {
-                cursorRing.style.left = `${e.clientX}px`;
-                cursorRing.style.top = `${e.clientY}px`;
-                cursorLabel.style.left = `${e.clientX}px`;
-                cursorLabel.style.top = `${e.clientY}px`;
-            });
-        } else {
-            (function trackRing() {
-                ringX += (targetX - ringX) * 0.2;
-                ringY += (targetY - ringY) * 0.2;
-                cursorRing.style.left = `${ringX}px`;
-                cursorRing.style.top = `${ringY}px`;
-                cursorLabel.style.left = `${ringX}px`;
-                cursorLabel.style.top = `${ringY}px`;
-                requestAnimationFrame(trackRing);
-            })();
-        }
-
-        document.querySelectorAll('.hover-trigger').forEach(el => {
-            el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
-            el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
-        });
-
+        // --- 3. PAGE-SPECIFIC HOVER (shared cursor/menu/theme/nav-scroll now in assets/js/chrome.js) ---
         document.querySelectorAll('.art-card').forEach(card => {
             card.addEventListener('mouseenter', () => document.body.classList.add('hovering-card'));
             card.addEventListener('mouseleave', () => document.body.classList.remove('hovering-card'));
@@ -1536,13 +1438,6 @@
                     card.style.setProperty('--my', `${((e.clientY - rect.top) / rect.height) * 100}%`);
                 });
             });
-        }
-
-        // --- 4. MENU OVERLAY ---
-        const menuOverlay = document.getElementById('menuOverlay');
-        function toggleMenu(open) {
-            menuOverlay.classList.toggle('open', open);
-            document.body.style.overflow = open ? 'hidden' : 'auto';
         }
 
         // --- 5. LAZY VIDEO LOADING ---
@@ -1566,21 +1461,32 @@
         scrollPath.style.strokeDasharray = pathLength + ' ' + pathLength;
         scrollPath.style.strokeDashoffset = pathLength;
 
-        window.addEventListener('scroll', () => {
-            let scrollPercentage = (document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
-            let drawLength = pathLength * scrollPercentage;
+        let scrollTicking = false;
+        function onScrollFrame() {
+            document.body.style.setProperty('--scroll', window.scrollY);
+            const scrollPercentage = (document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
+            const drawLength = pathLength * scrollPercentage;
             scrollPath.style.strokeDashoffset = pathLength - drawLength;
+            scrollTicking = false;
+        }
+        window.addEventListener('scroll', () => {
+            if (!scrollTicking) {
+                requestAnimationFrame(onScrollFrame);
+                scrollTicking = true;
+            }
+        }, { passive: true });
+        onScrollFrame();
 
-            document.querySelectorAll('.reveal-on-scroll').forEach(el => {
-                const top = el.getBoundingClientRect().top;
-                if (top < window.innerHeight - 100) {
-                    if (!el.classList.contains('active')) {
-                        el.classList.add('active');
-                        setTimeout(() => el.classList.add('revealed'), 1000);
-                    }
+        const revealIo = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    setTimeout(() => entry.target.classList.add('revealed'), 1000);
+                    revealIo.unobserve(entry.target);
                 }
             });
-        });
+        }, { threshold: 0, rootMargin: '0px 0px -100px 0px' });
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => revealIo.observe(el));
 
         // --- 6b. ABOUT SECTION — TYPEWRITER QUOTE + STAT COUNTERS ---
         (function initAboutSection() {
@@ -1648,40 +1554,41 @@
             }
 
             // Stat counter
-            let counted = false;
             const aboutSection = document.getElementById('about');
             function countUp() {
-                if (counted) return;
-                const rect = aboutSection.getBoundingClientRect();
-                if (rect.top < window.innerHeight - 80) {
-                    counted = true;
-                    typeOut();
-                    document.querySelectorAll('.stat-num[data-target]').forEach((el, idx) => {
-                        const target = parseInt(el.dataset.target);
-                        const suffix = el.dataset.suffix || '';
-                        const duration = 1800;
-                        const startDelay = idx * 150;
-                        setTimeout(() => {
-                            const start = performance.now();
-                            function tick(now) {
-                                const elapsed = now - start;
-                                const progress = Math.min(elapsed / duration, 1);
-                                const eased = 1 - Math.pow(1 - progress, 4);
-                                el.textContent = Math.floor(eased * target) + suffix;
-                                if (progress < 1) requestAnimationFrame(tick);
-                                else el.textContent = target + suffix;
-                            }
-                            requestAnimationFrame(tick);
-                        }, startDelay);
-                    });
-                    // Stagger stat-box entrance
-                    aboutSection.querySelectorAll('.stat-box').forEach((box, i) => {
-                        box.style.transitionDelay = `${400 + i * 120}ms`;
-                    });
-                }
+                typeOut();
+                document.querySelectorAll('.stat-num[data-target]').forEach((el, idx) => {
+                    const target = parseInt(el.dataset.target);
+                    const suffix = el.dataset.suffix || '';
+                    const duration = 1800;
+                    const startDelay = idx * 150;
+                    setTimeout(() => {
+                        const start = performance.now();
+                        function tick(now) {
+                            const elapsed = now - start;
+                            const progress = Math.min(elapsed / duration, 1);
+                            const eased = 1 - Math.pow(1 - progress, 4);
+                            el.textContent = Math.floor(eased * target) + suffix;
+                            if (progress < 1) requestAnimationFrame(tick);
+                            else el.textContent = target + suffix;
+                        }
+                        requestAnimationFrame(tick);
+                    }, startDelay);
+                });
+                // Stagger stat-box entrance
+                aboutSection.querySelectorAll('.stat-box').forEach((box, i) => {
+                    box.style.transitionDelay = `${400 + i * 120}ms`;
+                });
             }
-            window.addEventListener('scroll', countUp);
-            countUp(); // check on load
+            const countUpIo = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        countUp();
+                        countUpIo.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0, rootMargin: '0px 0px -80px 0px' });
+            countUpIo.observe(aboutSection);
         })();
 
         // --- 7. MODAL LOGIC ---
@@ -1756,16 +1663,6 @@
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
-    
-        function toggleTheme() {
-            var root = document.documentElement;
-            var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            if (next === 'dark') root.setAttribute('data-theme', 'dark');
-            else root.removeAttribute('data-theme');
-            try { localStorage.setItem('mg-theme', next); } catch(e) {}
-            var meta = document.querySelector('meta[name="theme-color"]');
-            if (meta) meta.setAttribute('content', next === 'dark' ? '#120a10' : '#fff7f0');
-        }
 </script>
 </body>
 </html>

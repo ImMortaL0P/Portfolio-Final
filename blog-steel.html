@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/chrome.css">
     <style>
         :root {
             --bg: #fff7f0; --surface: #f7ead9; --cream: #0e1a16; --cream-dim: #5f746b;
@@ -31,35 +32,7 @@
         .flex { display: flex; justify-content: space-between; align-items: center; }
         ::selection { background: var(--lime); color: var(--ink); }
 
-        .cursor-dot { width: 9px; height: 9px; background: #fff; mix-blend-mode: difference; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; pointer-events: none; z-index: 99999; }
-        .cursor-ring { width: 42px; height: 42px; border: 2px solid #fff; mix-blend-mode: difference; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; pointer-events: none; z-index: 99999; transition: width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s; }
-        body.hovering .cursor-ring { width: 76px; height: 76px; background: #fff; border-color: #fff; opacity: 0.6; }
         
-        nav {
-            position: fixed; top: 0; width: 100%; padding: 26px 0; z-index: 100;
-            background: transparent; border-bottom: 1px solid transparent;
-            transition: background 0.4s var(--easing), backdrop-filter 0.4s var(--easing), border-color 0.4s var(--easing);
-        }
-        nav.scrolled {
-            background: rgba(var(--bg-rgb), 0.75);
-            backdrop-filter: blur(16px) saturate(1.6); -webkit-backdrop-filter: blur(16px) saturate(1.6);
-            border-bottom: 1px solid rgba(var(--cream-rgb), 0.08);
-        }
-        .nav-left { display: flex; align-items: center; gap: 16px; background: rgba(var(--bg-rgb),0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 8px 20px 8px 12px; border-radius: 999px; }
-        .back-btn { font-family: 'Bricolage Grotesque', sans-serif; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--cream-dim); transition: 0.3s var(--easing); display: flex; align-items: center; gap: 6px; }
-        .back-btn:hover { color: var(--lime-deep); transform: translateX(-4px); }
-        .logo { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em; text-transform: uppercase; color: var(--cream); }
-        .logo span { color: var(--lime-deep); }
-        .menu-btn { display: flex; align-items: center; gap: 12px; background: transparent; border: 2px solid var(--cream); color: var(--cream); padding: 12px 22px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; border-radius: 999px; transition: transform 0.15s var(--easing); }
-        .menu-btn:active { transform: scale(0.95); }
-        .menu-btn .bars { display: flex; flex-direction: column; gap: 3px; }
-        .menu-btn .bars span { width: 16px; height: 2px; background: var(--cream); display: block; }
-        .menu-overlay { opacity: 0; pointer-events: none; position: fixed; inset: 0; background: var(--lime); color: var(--ink); z-index: 20000; transform: translateY(-100%); transition: transform 0.6s var(--easing); display: flex; flex-direction: column; justify-content: space-between; padding: 40px 0 60px; overflow-y: auto; }
-        .menu-overlay.open { opacity: 1; pointer-events: all; transform: translateY(0); }
-        .menu-close { position: absolute; top: 26px; right: 40px; background: none; border: none; color: var(--ink); font-size: 2.4rem; line-height: 1; z-index: 2; }
-        .menu-links { display: flex; flex-direction: column; gap: clamp(16px, 4.2vh, 42px); }
-        .menu-links a { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; text-transform: uppercase; font-size: clamp(2.15rem, 7.2vw, 5rem); line-height: 0.92; letter-spacing: -0.02em; transition: transform 0.35s var(--easing), color 0.35s; display: inline-block; }
-        .menu-links a:hover { transform: translateX(20px); color: var(--paper); }
         
         .article-hero { position: relative; width: 100%; height: 80vh; display: flex; align-items: center; justify-content: center; background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover; border-bottom: 1px solid rgba(var(--cream-rgb),0.08); }
         .article-hero::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.4); z-index: 1; }
@@ -87,17 +60,6 @@
             .article-image { height: 320px; margin: 50px 0; }
         }
     
-        .nav-right { display: flex; align-items: center; gap: 12px; }
-        .theme-toggle {
-            display: flex; align-items: center; justify-content: center;
-            width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--cream);
-            background: transparent; color: var(--cream); font-size: 1rem; transition: 0.3s var(--easing), transform 0.15s var(--easing);
-        }
-        .theme-toggle:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-        .theme-toggle:active { transform: scale(0.92); }
-        .theme-toggle .icon-sun { display: none; }
-        :root[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
-        :root[data-theme="dark"] .theme-toggle .icon-sun { display: inline; }
 </style>
 </head>
 <body>
@@ -132,7 +94,7 @@
         </div>
     </div>
 
-    <header class="article-hero" style="background-image: url('assets/kepinator-metallurgy-2932947.jpg');">
+    <header class="article-hero" style="background-image: url('assets/kepinator-metallurgy-2932947.webp');">
         <div class="article-hero-content">
             <h1 class="article-title">The Art of Transforming<br>Iron to Steel</h1>
             <div class="article-meta">Aug 24, 2021 • Engineering</div>
@@ -141,15 +103,15 @@
 
     <main class="article-body">
         <p>When I ask people what the world's most recycled material is, the answers are almost always the same—plastic, paper, maybe even rubber. Very few guess the correct answer: <strong>steel</strong>. It is one of the most fascinating engineering stories ever written, yet most of us never get to witness it. We see steel in bridges, skyscrapers, cars, railway tracks, ships, and even our kitchen appliances, but rarely do we stop to wonder how ordinary rocks buried deep beneath the Earth become the backbone of modern civilization. So, let me take you on that journey.</p>
-        <figure class="article-image hover-trigger" style="background-image: url('assets/wide-angle-shot-excavation-machines.jpg');" aria-label="Excavation Machines at Work"></figure>
+        <figure class="article-image hover-trigger" style="background-image: url('assets/wide-angle-shot-excavation-machines.webp');" aria-label="Excavation Machines at Work"></figure>
         <p>Every piece of steel begins its life hundreds of meters below the Earth's surface. Massive excavators and mining equipment dig out four essential ingredients: iron ore, coal, limestone, and dolomite. Once extracted, these raw materials begin another journey—this time aboard trucks and railway wagons headed toward an integrated steel plant. As the trains arrive at the plant, the raw materials are carefully unloaded and separated. Coal is stored in one stockyard, iron ore in another, while limestone and dolomite make their way to the flux house. It may look like organized storage, but in reality this is the first step of an enormous manufacturing process where every material has a carefully planned role to play.</p>
         <p>The first challenge appears almost immediately. Unlike countries blessed with abundant high-grade iron ore, much of India's iron ore is available as fine powder rather than large lumps, and a blast furnace cannot simply consume this dust. Engineers solve this problem in ingenious ways: some of the iron ore fines are converted into sinter, where the ore is mixed with coke breeze and fluxes before being heated into a porous, stone-like material. Another portion becomes pellets—inside giant rotating discs, water and binders help the fine particles roll into small spherical balls that are later hardened by heat. The remaining larger lumps of iron ore require little processing and can be used directly. By this stage, <strong>the iron ore is finally ready</strong>.</p>
         <p>Next comes coal, another material that refuses to cooperate so easily. Much of the coal available in India isn't suitable for steelmaking in its natural form, so it must undergo a remarkable transformation called coking. Inside huge coke ovens, the coal is heated to extremely high temperatures in the complete absence of oxygen. Because there is no air, it doesn't burn—instead, moisture and volatile compounds are driven off, leaving behind a hard, porous, carbon-rich material known simply as coke. Even here, nothing is wasted: the gases released during coking possess a high calorific value and are collected to fuel other furnaces across the steel plant, making the entire process more energy-efficient.</p>
         <p>Now, with iron ore prepared and coke ready, we arrive at the heart of ironmaking—the <strong>blast furnace</strong>. Standing several stories tall, the blast furnace is where chemistry and engineering come together in spectacular fashion. Layers of iron ore, coke, limestone, and dolomite are charged from the top, while a powerful blast of preheated air enters through the bottom. Inside, temperatures soar beyond 2,000°C. The coke burns, producing both the heat and the carbon monoxide needed for the next crucial step. Iron ore is not pure iron—it is iron chemically bonded with oxygen, and simply melting it would achieve nothing. That oxygen has to be removed.</p>
-        <figure class="article-image hover-trigger" style="background-image: url('assets/interior-view-steel-factory.jpg');" aria-label="Interior of a Steel Factory"></figure>
+        <figure class="article-image hover-trigger" style="background-image: url('assets/interior-view-steel-factory.webp');" aria-label="Interior of a Steel Factory"></figure>
         <p>As the burden slowly descends through the furnace over the next two to three days, carbon monoxide strips oxygen away from the iron ore in a series of reduction reactions. The newly liberated iron melts and gradually trickles toward the bottom of the furnace. It is difficult not to admire the scale of this process: the raw materials charged into the furnace today will not emerge until several days later as a glowing river of molten iron. This liquid is known by several names—hot metal, molten iron, or simply liquid iron—but regardless of the name, it represents the successful completion of the first half of steelmaking. The molten iron is tapped into enormous insulated vessels called torpedo ladles, which transport it to the next stage: the Steel Melting Shop. Sometimes, however, the blast furnace produces more hot metal than the steel plant can immediately consume. Since shutting down a blast furnace is neither practical nor economical, the excess iron is rapidly cooled by atomizing it into water, forming small metallic pellets known as granshots—chemically nothing more than pelletized pig iron, ready to be stored or sold until needed.</p>
         <p>Inside the Steel Melting Shop stands another engineering marvel—the Basic Oxygen Furnace, or BOF. Despite its intimidating name, its purpose is surprisingly straightforward: <strong>transform molten iron into steel</strong>. The iron arriving from the blast furnace still contains far too much carbon; in fact, it resembles cast iron more than steel. To remove this excess carbon, pure oxygen is blown into the molten bath at extremely high speed.</p>
-        <figure class="article-image hover-trigger" style="background-image: url('assets/12019-steel-1968194.jpg');" aria-label="Molten Steel"></figure>
+        <figure class="article-image hover-trigger" style="background-image: url('assets/12019-steel-1968194.webp');" aria-label="Molten Steel"></figure>
         <p>Almost instantly, oxygen reacts with carbon to form carbon monoxide and carbon dioxide, which escape from the molten metal. At the same time, argon gas is bubbled through the bath to stir the liquid steel and help remove dissolved gases and impurities. Within barely fifteen minutes, the chemistry changes dramatically: what entered the furnace as carbon-rich hot metal now becomes steel, with its carbon content adjusted to suit the desired grade. But <strong>precision matters</strong>—every customer demands steel with a different chemical composition. Some grades require chromium for corrosion resistance, vanadium for strength, titanium for grain refinement, or several other alloying elements depending on the final application. This is why the steel is transferred to the Ladle Refining Furnace, where powerful graphite electrodes maintain the temperature through electric arcing while metallurgists carefully add alloying elements until the steel reaches its exact specification. Only then is it ready for its final transformation.</p>
         <p>The liquid steel flows into a Continuous Casting Machine, where it enters water-cooled copper moulds and begins to solidify. As the strand continuously moves downward, it cools further and is cut into slabs, blooms, or billets of the desired length. These are known as semi-finished products. Some customers purchase them directly, while many continue their journey through rolling mills, where gigantic rollers compress and shape the steel into thick plates, thin coils, strips, rails, structural sections, and countless other products that eventually find their way into industries across the world. Finally, the finished steel is loaded onto railway wagons and trucks, leaving the steel plant to begin an entirely new journey—one that ends as the buildings we work in, the vehicles we drive, the bridges we cross, and the machines that power our lives.</p>
         <p>And perhaps that's the most remarkable part of the story: what began as fine iron ore buried deep beneath the Earth has, through heat, chemistry, and decades of engineering innovation, become one of humanity's most important materials. <strong>The next time you see a skyscraper, a railway track, or even a simple steel utensil</strong>, remember that it has already completed an extraordinary journey—from the heart of the Earth to the heart of modern civilization.</p>
@@ -160,42 +122,8 @@
         <div class="container">&copy; 2026 Mangalam. All rights reserved.</div>
     </footer>
 
+    <script src="assets/js/chrome.js"></script>
     <script>
-        const navEl = document.querySelector('nav');
-        window.addEventListener('scroll', () => {
-            navEl.classList.toggle('scrolled', window.scrollY > 40);
-        }, { passive: true });
-        const cursorDot = document.querySelector('.cursor-dot');
-        const cursorRing = document.querySelector('.cursor-ring');
-        if (window.matchMedia("(pointer: fine)").matches) {
-                        window.addEventListener('mousemove', (e) => {
-                cursorDot.style.left = `${e.clientX}px`;
-                cursorDot.style.top = `${e.clientY}px`;
-                setTimeout(() => {
-                    cursorRing.style.left = `${e.clientX}px`;
-                    cursorRing.style.top = `${e.clientY}px`;
-                }, 50);
-            });
-            document.querySelectorAll('.hover-trigger').forEach(el => {
-                el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
-                el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
-            });
-        }
-        function toggleMenu(show) {
-            const overlay = document.getElementById('menuOverlay');
-            if (show) overlay.classList.add('open');
-            else overlay.classList.remove('open');
-        }
-    
-        function toggleTheme() {
-            var root = document.documentElement;
-            var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            if (next === 'dark') root.setAttribute('data-theme', 'dark');
-            else root.removeAttribute('data-theme');
-            try { localStorage.setItem('mg-theme', next); } catch(e) {}
-            var meta = document.querySelector('meta[name="theme-color"]');
-            if (meta) meta.setAttribute('content', next === 'dark' ? '#120a10' : '#fff7f0');
-        }
 </script>
 </body>
 </html>

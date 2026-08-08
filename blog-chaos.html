@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/chrome.css">
     <style>
         :root {
             --bg: #fff7f0; --surface: #f7ead9; --cream: #0e1a16; --cream-dim: #5f746b;
@@ -32,35 +33,7 @@
         ::selection { background: var(--lime); color: var(--ink); }
 
         /* Cursor & Nav (Copied from writings.html) */
-        .cursor-dot { width: 9px; height: 9px; background: #fff; mix-blend-mode: difference; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; pointer-events: none; z-index: 99999; }
-        .cursor-ring { width: 42px; height: 42px; border: 2px solid #fff; mix-blend-mode: difference; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; pointer-events: none; z-index: 99999; transition: width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s; }
-        body.hovering .cursor-ring { width: 76px; height: 76px; background: #fff; border-color: #fff; opacity: 0.6; }
         
-        nav {
-            position: fixed; top: 0; width: 100%; padding: 26px 0; z-index: 100;
-            background: transparent; border-bottom: 1px solid transparent;
-            transition: background 0.4s var(--easing), backdrop-filter 0.4s var(--easing), border-color 0.4s var(--easing);
-        }
-        nav.scrolled {
-            background: rgba(var(--bg-rgb), 0.75);
-            backdrop-filter: blur(16px) saturate(1.6); -webkit-backdrop-filter: blur(16px) saturate(1.6);
-            border-bottom: 1px solid rgba(var(--cream-rgb), 0.08);
-        }
-        .nav-left { display: flex; align-items: center; gap: 16px; background: rgba(var(--bg-rgb),0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 8px 20px 8px 12px; border-radius: 999px; }
-        .back-btn { font-family: 'Bricolage Grotesque', sans-serif; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--cream-dim); transition: 0.3s var(--easing); display: flex; align-items: center; gap: 6px; }
-        .back-btn:hover { color: var(--lime-deep); transform: translateX(-4px); }
-        .logo { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em; text-transform: uppercase; color: var(--cream); }
-        .logo span { color: var(--lime-deep); }
-        .menu-btn { display: flex; align-items: center; gap: 12px; background: transparent; border: 2px solid var(--cream); color: var(--cream); padding: 12px 22px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; border-radius: 999px; transition: transform 0.15s var(--easing); }
-        .menu-btn:active { transform: scale(0.95); }
-        .menu-btn .bars { display: flex; flex-direction: column; gap: 3px; }
-        .menu-btn .bars span { width: 16px; height: 2px; background: var(--cream); display: block; }
-        .menu-overlay { opacity: 0; pointer-events: none; position: fixed; inset: 0; background: var(--lime); color: var(--ink); z-index: 20000; transform: translateY(-100%); transition: transform 0.6s var(--easing); display: flex; flex-direction: column; justify-content: space-between; padding: 40px 0 60px; overflow-y: auto; }
-        .menu-overlay.open { opacity: 1; pointer-events: all; transform: translateY(0); }
-        .menu-close { position: absolute; top: 26px; right: 40px; background: none; border: none; color: var(--ink); font-size: 2.4rem; line-height: 1; z-index: 2; }
-        .menu-links { display: flex; flex-direction: column; gap: clamp(16px, 4.2vh, 42px); }
-        .menu-links a { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; text-transform: uppercase; font-size: clamp(2.15rem, 7.2vw, 5rem); line-height: 0.92; letter-spacing: -0.02em; transition: transform 0.35s var(--easing), color 0.35s; display: inline-block; }
-        .menu-links a:hover { transform: translateX(20px); color: var(--paper); }
         
         /* Article Layout */
         .article-hero { position: relative; width: 100%; height: 80vh; display: flex; align-items: center; justify-content: center; background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover; border-bottom: 1px solid rgba(var(--cream-rgb),0.08); }
@@ -92,17 +65,6 @@
             .article-image { height: 320px; margin: 50px 0; }
         }
     
-        .nav-right { display: flex; align-items: center; gap: 12px; }
-        .theme-toggle {
-            display: flex; align-items: center; justify-content: center;
-            width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--cream);
-            background: transparent; color: var(--cream); font-size: 1rem; transition: 0.3s var(--easing), transform 0.15s var(--easing);
-        }
-        .theme-toggle:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-        .theme-toggle:active { transform: scale(0.92); }
-        .theme-toggle .icon-sun { display: none; }
-        :root[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
-        :root[data-theme="dark"] .theme-toggle .icon-sun { display: inline; }
 </style>
 </head>
 <body>
@@ -137,7 +99,7 @@
         </div>
     </div>
 
-    <header class="article-hero" style="background-image: url('assets/forest-on-head.jpg');">
+    <header class="article-hero" style="background-image: url('assets/forest-on-head.webp');">
         <div class="article-hero-content">
             <h1 class="article-title">A sound of Thunder:<br>The Science of Chaos</h1>
             <div class="article-meta">Jun 28, 2055 • Science</div>
@@ -149,13 +111,13 @@
 
         <p>Chaos theory says that within the apparent randomness of chaotic, complex systems, there are underlying patterns — interconnectedness, constant feedback loops, repetition, self-similarity, fractals, and self-organization. <strong>The butterfly effect</strong>, an underlying principle of chaos, describes how a small change in one state of a deterministic nonlinear system can result in large differences in a later state. There is, in other words, a sensitive dependence on initial conditions. Get the starting point wrong by even a hair, and the system you're trying to predict can end up somewhere completely unrecognizable.</p>
 
-        <figure class="article-image hover-trigger" style="background-image: url('assets/nathan.jpg');" aria-label="Chaos abstract"></figure>
+        <figure class="article-image hover-trigger" style="background-image: url('assets/nathan.webp');" aria-label="Chaos abstract"></figure>
 
         <p>“A Sound of Thunder" is a science fiction short story by American writer Ray Bradbury, first published in Collier's magazine on June 28, 1952. This story is often credited with the origin of the term Butterfly Effect. The plot goes as follows: in the year 2055, time travel has become a practical reality, and the company Time Safari Inc. offers wealthy adventurers the chance to travel back in time to hunt extinct species such as dinosaurs. A hunter named Eckels pays $10,000 to join a hunting party that will travel back 66 million years to a guided safari to kill a Tyrannosaurus rex.</p>
 
         <p>When the party arrives in the past, Travis (the hunting guide) and Lesperance (Travis's assistant) warn Eckels and the two other hunters, Billings and Kramer, about the necessity of minimizing the events they change before they go back, since even the smallest alterations to the distant past could snowball into catastrophic changes in history. Travis explains that the hunters are obliged to stay on a levitating path to avoid disrupting the environment, and that any deviation will be punished with hefty fines. Prior to the hunt, Time Safari scouts had been sent back to select and tag their prey — an animal that would have died within minutes anyway, and whose death had been calculated to have minimal effect on the future.</p>
 
-        <figure class="article-image hover-trigger" style="background-image: url('assets/daniele.jpg');" aria-label="Portfolio Image"></figure>
+        <figure class="article-image hover-trigger" style="background-image: url('assets/daniele.webp');" aria-label="Portfolio Image"></figure>
 
         <p>Although Eckels is initially excited about the hunt, when the monstrous beast approaches, he loses his nerve. He panics and runs back to the time machine through the forest. The hunting party then kills the T-Rex and returns to the future. Travis asks the people at the company if everything was ok, and they nod in affirmation — but <strong>things don't feel the same to anyone</strong>. The words of English were spelled differently. The president was someone else.</p>
 
@@ -170,7 +132,7 @@
 
         <p>Laplace's idea, written more than a century before Lorenz ever touched a computer, is called Laplace's Demon — the notion that a sufficiently powerful intellect, given the exact position and momentum of every particle in the universe, could calculate the entire future and the entire past with certainty. It's a beautiful thought experiment, and chaos theory is precisely what breaks it. The butterfly effect showed that <strong>the predictability of any chaotic system can only be accurate if the number of variables at play is very small</strong>, and the initial condition for each variable is accurate to every single decimal place — accuracy to an infinite number of decimal places, which is practically impossible. This is the reason why it is easier to predict the motion of celestial bodies than it is to predict the weather on the planet a week out. Planets move under the influence of a handful of forces we understand precisely. Weather has pressure, moisture, wind speed, particulate presence, ocean temperature, and dozens of other variables all tangled together, each one nudging the others in ways that are impossible to fully separate.</p>
 
-        <figure class="article-image hover-trigger" style="background-image: url('assets/emrah.jpg');" aria-label="Unpredictability"></figure>
+        <figure class="article-image hover-trigger" style="background-image: url('assets/emrah.webp');" aria-label="Unpredictability"></figure>
 
         <p>You don't need a supercomputer to see this for yourself. Set up a double pendulum — a rod swinging from a rod — and release it twice from what looks like exactly the same starting angle. Within a few seconds, the two pendulums are swinging in completely different patterns, even though nothing about the setup changed except an angle too small for the human eye to notice. Financial markets behave the same way, which is why economists can build models that explain yesterday's crash perfectly and still fail to predict tomorrow's. So does the human heart, whose rhythm looks chaotic on a monitor right up until the irregularity becomes dangerous. Once you start looking for this pattern, you notice it everywhere: in traffic that jams for no visible reason, in epidemics that stall in one town and explode in the next, in a dripping tap whose rhythm never quite repeats.</p>
 
@@ -184,42 +146,8 @@
         <div class="container">&copy; 2026 Mangalam. All rights reserved.</div>
     </footer>
 
+    <script src="assets/js/chrome.js"></script>
     <script>
-        const navEl = document.querySelector('nav');
-        window.addEventListener('scroll', () => {
-            navEl.classList.toggle('scrolled', window.scrollY > 40);
-        }, { passive: true });
-        const cursorDot = document.querySelector('.cursor-dot');
-        const cursorRing = document.querySelector('.cursor-ring');
-        if (window.matchMedia("(pointer: fine)").matches) {
-                        window.addEventListener('mousemove', (e) => {
-                cursorDot.style.left = `${e.clientX}px`;
-                cursorDot.style.top = `${e.clientY}px`;
-                setTimeout(() => {
-                    cursorRing.style.left = `${e.clientX}px`;
-                    cursorRing.style.top = `${e.clientY}px`;
-                }, 50);
-            });
-            document.querySelectorAll('.hover-trigger').forEach(el => {
-                el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
-                el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
-            });
-        }
-        function toggleMenu(show) {
-            const overlay = document.getElementById('menuOverlay');
-            if (show) overlay.classList.add('open');
-            else overlay.classList.remove('open');
-        }
-    
-        function toggleTheme() {
-            var root = document.documentElement;
-            var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            if (next === 'dark') root.setAttribute('data-theme', 'dark');
-            else root.removeAttribute('data-theme');
-            try { localStorage.setItem('mg-theme', next); } catch(e) {}
-            var meta = document.querySelector('meta[name="theme-color"]');
-            if (meta) meta.setAttribute('content', next === 'dark' ? '#120a10' : '#fff7f0');
-        }
 </script>
 </body>
 </html>
