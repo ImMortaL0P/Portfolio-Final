@@ -764,10 +764,10 @@
             </div>
         </div>
         <div class="container menu-footer">
-            <span>kumarmangalam.patna@gmail.com</span>
+            <span>&#107;&#117;&#109;&#97;&#114;&#109;&#97;&#110;&#103;&#97;&#108;&#97;&#109;&#46;&#112;&#97;&#116;&#110;&#97;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</span>
             <div class="menu-socials">
-                <a href="https://www.linkedin.com/in/kumar-mangalam-362a77176/" class="hover-trigger">LinkedIn</a>
-                <a href="https://www.behance.net/kumarmangalam3" class="hover-trigger">Behance</a>
+                <a href="https://www.linkedin.com/in/kumar-mangalam-362a77176/" target="_blank" rel="noopener noreferrer" class="hover-trigger">LinkedIn</a>
+                <a href="https://www.behance.net/kumarmangalam3" target="_blank" rel="noopener noreferrer" class="hover-trigger">Behance</a>
                 <a href="#" class="hover-trigger">Instagram</a>
             </div>
         </div>
@@ -1041,7 +1041,7 @@
         <h2 class="cta-title"><span class="fill">Let's Make</span><br><span class="outline">Something Bold</span></h2>
         <a href="#" class="btn-solid hover-trigger" onclick="openContactModal()">Start a Project ↗</a>
         <br>
-        <span class="cta-email">kumarmangalam.patna@gmail.com</span>
+        <span class="cta-email">&#107;&#117;&#109;&#97;&#114;&#109;&#97;&#110;&#103;&#97;&#108;&#97;&#109;&#46;&#112;&#97;&#116;&#110;&#97;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</span>
     </section>
 
     <div class="modal-wrap" id="projectModal">
@@ -1073,9 +1073,10 @@
                 <p style="color: rgba(14,26,22,0.7);">Tell us about your vision. We'll handle the rest.</p>
             </div>
 
-            <form action="https://formsubmit.co/kumarmangalam.patna@gmail.com" method="POST" class="contact-form">
-                <input type="hidden" name="_next" value="">
-                <input type="hidden" name="_captcha" value="false">
+            <form action="https://formsubmit.co/kumarmangalam.patna%40gmail.com" method="POST" class="contact-form">
+                <input type="hidden" name="_next" value="https://mangalam.cc">
+                <input type="hidden" name="_captcha" value="true">
+                <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
 
                 <div class="form-group">
                     <label class="form-label">Name</label>
@@ -1110,8 +1111,8 @@
                 <span class="logo">MANGALAM<span>.</span></span>
                 <div class="socials">
                     <a href="#" class="hover-trigger">Instagram</a>
-                    <a href="https://www.linkedin.com/in/kumar-mangalam-362a77176/" class="hover-trigger">LinkedIn</a>
-                    <a href="https://www.behance.net/kumarmangalam3" class="hover-trigger">Behance</a>
+                    <a href="https://www.linkedin.com/in/kumar-mangalam-362a77176/" target="_blank" rel="noopener noreferrer" class="hover-trigger">LinkedIn</a>
+                    <a href="https://www.behance.net/kumarmangalam3" target="_blank" rel="noopener noreferrer" class="hover-trigger">Behance</a>
                 </div>
                 <a href="#" class="back-top hover-trigger" aria-label="Back to top">↑</a>
             </div>
@@ -1202,9 +1203,6 @@
             window.addEventListener('load', () => { 
                 targetVal = 100; 
                 clearTimeout(maxWait);
-                
-                const nextInput = document.querySelector('input[name="_next"]');
-                if (nextInput) nextInput.value = window.location.href;
             });
             
             requestAnimationFrame(updateProgress);
