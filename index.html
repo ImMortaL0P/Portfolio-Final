@@ -415,6 +415,9 @@
         .cat-block:nth-of-type(5) .art-card.big { height: auto; aspect-ratio: 3 / 2; }
         .cat-block:nth-of-type(5) .art-card.standard { height: auto; aspect-ratio: 3 / 2; }
         .cat-block:nth-of-type(6) { --accent: #f0c9c9; }
+        .cat-block:nth-of-type(7) { --accent: #a8d8ea; }
+        .cat-block:nth-of-type(7) .art-card.big { height: auto; aspect-ratio: 16 / 9; }
+        .cat-block:nth-of-type(7) .art-card.standard { height: auto; aspect-ratio: 16 / 9; }
 
         .cat-head {
             display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px;
@@ -684,6 +687,8 @@
             .big, .standard { grid-column: span 1; grid-row: span 1; height: 380px; }
             .cat-block:nth-of-type(5) .big,
             .cat-block:nth-of-type(5) .standard { height: auto; aspect-ratio: 3 / 2; }
+            .cat-block:nth-of-type(7) .big,
+            .cat-block:nth-of-type(7) .standard { height: auto; aspect-ratio: 16 / 9; }
             .polaroid { display: none; }
             .modal-panel { grid-template-columns: 1fr; max-height: 100vh; height: 100vh; overflow-y: auto; }
             .project-panel { grid-template-columns: 1fr; height: auto; }
@@ -825,6 +830,7 @@
                 <div class="ticker-item">Motion Graphics ✦</div>
                 <div class="ticker-item">Typography ✦</div>
                 <div class="ticker-item">Mockups ✦</div>
+                <div class="ticker-item">Illustrations ✦</div>
                 <div class="ticker-item">Photography ✦</div>
                 <div class="ticker-item">Creative Design ✦</div>
                 <div class="ticker-item">Brand Strategy ✦</div>
@@ -832,6 +838,7 @@
                 <div class="ticker-item">Motion Graphics ✦</div>
                 <div class="ticker-item">Typography ✦</div>
                 <div class="ticker-item">Mockups ✦</div>
+                <div class="ticker-item">Illustrations ✦</div>
                 <div class="ticker-item">Photography ✦</div>
             </div>
         </div>
@@ -842,7 +849,7 @@
             <span class="idx outline-text">01</span>
             <div>
                 <h2>Selected Work</h2>
-                <p class="section-sub">A curated collection of graphic design, photography, motion, typography and mockup projects — spanning brand identity, editorial, film and product.</p>
+                <p class="section-sub">A curated collection of graphic design, photography, motion, typography, mockup and illustration projects — spanning brand identity, editorial, film and product.</p>
             </div>
         </div>
 
@@ -967,17 +974,14 @@
                     <h3 class="cat-title">Typography</h3>
                     <span class="tag cat-tag">Type / Lettering</span>
                 </div>
-                <span class="cat-count">15 — 19</span>
+                <span class="cat-count">15 — 18</span>
             </div>
             <div class="bento-grid">
                 <div class="art-card big hover-trigger" onclick="openModal('typo1')">
                     <div class="card-img-wrap"><img src="assets/Retro Sticker.webp" class="card-img" loading="lazy" decoding="async" alt="Retro Typography"></div>
                     <div class="card-info"><h3 class="card-title">Retro Typography</h3><span class="card-meta">Retro / Vintage</span></div>
                 </div>
-                <div class="art-card standard hover-trigger" onclick="openModal('typo2')">
-                    <div class="card-img-wrap"><img src="assets/Gold.webp" class="card-img" loading="lazy" decoding="async" alt="Textured Metallics"></div>
-                    <div class="card-info"><h3 class="card-title">Textured Metallics</h3><span class="card-meta">3D / Texture</span></div>
-                </div>
+
                 <div class="art-card standard hover-trigger" onclick="openModal('typo3')">
                     <div class="card-img-wrap"><img src="assets/Comic.webp" class="card-img" loading="lazy" decoding="async" alt="Illustrative Lettering"></div>
                     <div class="card-info"><h3 class="card-title">Illustrative Lettering</h3><span class="card-meta">Illustration / Type</span></div>
@@ -1013,6 +1017,31 @@
                 <div class="art-card standard hover-trigger" onclick="openModal('mockup3')">
                     <div class="card-img-wrap"><img src="assets/mockup-device.webp" class="card-img" loading="lazy" decoding="async" alt="Device Showcase"></div>
                     <div class="card-info"><h3 class="card-title">Device Showcase</h3><span class="card-meta">UI Mockup</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cat-block reveal-on-scroll">
+            <div class="cat-head">
+                <div class="cat-title-row">
+                    <h3 class="cat-title">Illustrations</h3>
+                    <span class="tag cat-tag">Vector / Digital Art</span>
+                </div>
+                <span class="cat-count">23 — 25</span>
+            </div>
+            <div class="bento-grid">
+                <div class="art-card big hover-trigger" onclick="openModal('illus1')">
+                    <div class="card-img-wrap"><img src="assets/Jaipur Blues/Jaipur Blues Title.webp" class="card-img" loading="lazy" decoding="async" alt="Jaipur Blues"></div>
+                    <div class="card-info"><h3 class="card-title">Jaipur Blues</h3><span class="card-meta">Illustration Series</span></div>
+                </div>
+                <div class="art-card standard hover-trigger" onclick="openModal('illus2')">
+                    <div class="card-img-wrap"><img src="assets/Icon Packs/24 Y2K RETRO FUTURISTIC SHAPES.webp" class="card-img" loading="lazy" decoding="async" alt="Icon Packs"></div>
+                    <div class="card-info"><h3 class="card-title">Icon Packs</h3><span class="card-meta">Vector Icons</span></div>
+                </div>
+                <div class="art-card standard" style="cursor: default; display: flex; align-items: center; justify-content: center;">
+                    <div class="card-img-wrap" style="display: flex; align-items: center; justify-content: center; background: var(--surface-2);">
+                        <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.2rem; font-weight: 800; color: var(--cream-dim); text-transform: uppercase; letter-spacing: 2px;">Coming Soon</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1427,6 +1456,23 @@
                 g1: "assets/mockup-frames.webp",
                 g2: "assets/mockup-magazine.webp",
                 g3: "assets/mockup-hero.webp"
+            },
+            'illus1': {
+                title: "Jaipur Blues",
+                desc: "An illustration series inspired by the vibrant streets, architecture and culture of Jaipur — rendered in rich blue tones that capture the city's regal heritage and artistic soul.",
+                hero: "assets/Jaipur Blues/Jaipur Blues Title.webp",
+                g1: "assets/Jaipur Blues/Jaipur Blues.webp",
+                g2: "assets/Jaipur Blues/Jaipur Blues 2.webp",
+                g3: "assets/Jaipur Blues/Jaipur Blues 3.webp"
+            },
+            'illus2': {
+                title: "Icon Packs",
+                desc: "Curated vector icon collections spanning diverse themes — from boho abstract shapes and Y2K retro-futuristic forms to coffee shop elements, travel icons and floral monograms. Designed for versatile use across branding, social media and digital products.",
+                hero: "assets/Icon Packs/24 Y2K RETRO FUTURISTIC SHAPES.webp",
+                g1: "assets/Icon Packs/20 Abstract Boho Sun, Moon & Arch Shapes.webp",
+                g2: "assets/Icon Packs/20 coffee Shops Element.webp",
+                g3: "assets/Icon Packs/24 Travel & vacation Icons.webp",
+                g4: "assets/Icon Packs/20 Wedding & Floral Monogram Elements.webp"
             }
         };
 
