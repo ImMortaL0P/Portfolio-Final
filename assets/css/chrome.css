@@ -2,26 +2,62 @@
    SHARED SITE CHROME: cursor, nav, menu overlay, theme toggle, footer basics
    ========================================= */
 
+/* — Pen-nib dot — */
 .cursor-dot {
-    width: 9px; height: 9px; background: #fff; mix-blend-mode: difference;
-    position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
-    border-radius: 50%; pointer-events: none; z-index: 99999;
+    width: 10px; height: 10px; background: var(--lime-deep);
+    position: fixed; top: 0; left: 0;
+    transform: translate(-50%, -50%) rotate(45deg);
+    border-radius: 2px 2px 0 2px;
+    pointer-events: none; z-index: 99999;
+    transition: opacity 0.2s, transform 0.2s, width 0.25s, height 0.25s;
 }
+body.hovering .cursor-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) rotate(0deg);
+    opacity: 0.6;
+}
+body.hovering-card .cursor-dot { opacity: 0; }
+
+/* — Marching-ants ring — */
 .cursor-ring {
-    width: 42px; height: 42px; border: 2px solid #fff; mix-blend-mode: difference;
-    position: fixed; top: 0; left: 0; transform: translate(-50%, -50%) scale(1);
-    border-radius: 50%; pointer-events: none; z-index: 99999;
-    transition: transform 0.3s, background-color 0.3s, border-color 0.3s, opacity 0.3s;
+    width: 40px; height: 40px;
+    border: 1.5px dashed rgba(255,255,255,0.45);
+    position: fixed; top: 0; left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%; pointer-events: none; z-index: 99998;
+    transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                height 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.3s, background-color 0.3s, opacity 0.3s;
+    animation: marchingAnts 4s linear infinite;
 }
-body.hovering .cursor-ring { transform: translate(-50%, -50%) scale(1.8095); background: #fff; border-color: #fff; opacity: 0.6; }
+@keyframes marchingAnts {
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+body.hovering .cursor-ring {
+    width: 60px; height: 60px;
+    border-color: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.04);
+}
+body.hovering-card .cursor-ring {
+    width: 88px; height: 88px;
+    border-style: solid;
+    border-color: var(--lime-deep);
+    border-width: 2px;
+    background: rgba(var(--lime-deep-rgb, 183,228,99), 0.08);
+    animation: none;
+}
+
+/* — View label — */
 .cursor-label {
-    position: fixed; top: 0; left: 0; transform: translate(-50%, -50%) scale(0.4);
-    pointer-events: none; z-index: 99999; mix-blend-mode: difference; color: #fff;
-    font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 0.8rem;
-    text-transform: uppercase; letter-spacing: 1.5px; white-space: nowrap; opacity: 0;
+    position: fixed; top: 0; left: 0;
+    transform: translate(-50%, -50%) scale(0.4);
+    pointer-events: none; z-index: 99999; color: #fff;
+    font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 0.65rem;
+    text-transform: uppercase; letter-spacing: 2px; white-space: nowrap; opacity: 0;
     transition: opacity 0.25s var(--easing), transform 0.25s var(--easing);
 }
-body.hovering-card .cursor-ring { opacity: 0; }
 body.hovering-card .cursor-label { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 
 @media (pointer: coarse) {

@@ -408,19 +408,16 @@
         .section-sub { color: var(--cream-dim); max-width: 480px; margin-top: 18px; }
 
         .cat-block { margin-bottom: 130px; --accent: var(--lime); }
-        .cat-block:nth-of-type(2) { --accent: var(--pink); }
-        .cat-block:nth-of-type(3) { --accent: #ffd166; }
-        .cat-block:nth-of-type(4) { --accent: var(--violet); }
-        .cat-block:nth-of-type(5) { --accent: #c7ead9; }
-        .cat-block:nth-of-type(5) .art-card.big { height: auto; aspect-ratio: 3 / 2; }
-        .cat-block:nth-of-type(5) .art-card.standard { height: auto; aspect-ratio: 3 / 2; }
-        .cat-block:nth-of-type(6) .art-card.big { height: auto; aspect-ratio: 4 / 3; }
-        .cat-block:nth-of-type(6) .art-card.standard { height: auto; aspect-ratio: 4 / 3; }
-        .cat-block:nth-of-type(7) { --accent: #f0c9c9; }
-        .cat-block:nth-of-type(8) { --accent: #a8d8ea; }
-        .cat-block:nth-of-type(8) .art-card.big { height: auto; aspect-ratio: 16 / 9; }
-        .cat-block:nth-of-type(8) .art-card.standard { height: auto; aspect-ratio: 16 / 9; }
-        .cat-block:nth-of-type(8) .card-img { object-fit: contain; }
+        .cat-block:nth-of-type(2) { --accent: #f0c9c9; }
+        .cat-block:nth-of-type(3) { --accent: var(--pink); }
+        .cat-block:nth-of-type(4) { --accent: #ffd166; }
+        .cat-block:nth-of-type(5) { --accent: var(--violet); }
+        .cat-block:nth-of-type(5) .art-card.big { height: auto; aspect-ratio: 4 / 3; }
+        .cat-block:nth-of-type(5) .art-card.standard { height: auto; aspect-ratio: 4 / 3; }
+        .cat-block:nth-of-type(6) { --accent: #c7ead9; }
+        .cat-block:nth-of-type(7) { --accent: #a8d8ea; }
+        .cat-block:nth-of-type(7) .art-card.big { height: auto; aspect-ratio: 3 / 2; }
+        .cat-block:nth-of-type(7) .art-card.standard { height: auto; aspect-ratio: 3 / 2; }
 
         .cat-head {
             display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px;
@@ -692,11 +689,9 @@
             .bento-grid { grid-template-columns: 1fr; gap: 20px; }
             .big, .standard { grid-column: span 1; grid-row: span 1; height: 380px; }
             .cat-block:nth-of-type(5) .big,
-            .cat-block:nth-of-type(5) .standard { height: auto; aspect-ratio: 3 / 2; }
-            .cat-block:nth-of-type(6) .big,
-            .cat-block:nth-of-type(6) .standard { height: auto; aspect-ratio: 4 / 3; }
-            .cat-block:nth-of-type(8) .big,
-            .cat-block:nth-of-type(8) .standard { height: auto; aspect-ratio: 16 / 9; }
+            .cat-block:nth-of-type(5) .standard { height: auto; aspect-ratio: 4 / 3; }
+            .cat-block:nth-of-type(7) .big,
+            .cat-block:nth-of-type(7) .standard { height: auto; aspect-ratio: 3 / 2; }
             .polaroid { display: none; }
             .modal-panel { grid-template-columns: 1fr; max-height: 100vh; height: 100vh; overflow-y: auto; }
             .project-panel { grid-template-columns: 1fr; height: auto; }
@@ -892,10 +887,35 @@
         <div class="cat-block reveal-on-scroll">
             <div class="cat-head">
                 <div class="cat-title-row">
+                    <h3 class="cat-title">Illustrations</h3>
+                    <span class="tag cat-tag">Vector / Digital Art</span>
+                </div>
+                <span class="cat-count">05 — 07</span>
+            </div>
+            <div class="bento-grid">
+                <div class="art-card big hover-trigger" onclick="openModal('illus1')">
+                    <div class="card-img-wrap"><img src="assets/Jaipur Blues/Jaipur Blues Title.webp" class="card-img" loading="lazy" decoding="async" alt="Jaipur Blues"></div>
+                    <div class="card-info"><h3 class="card-title">Jaipur Blues</h3><span class="card-meta">Illustration Series</span></div>
+                </div>
+                <div class="art-card standard hover-trigger" onclick="openModal('illus2')">
+                    <div class="card-img-wrap"><img src="assets/Icon Packs/24 Y2K RETRO FUTURISTIC SHAPES.webp" class="card-img" loading="lazy" decoding="async" alt="Icon Packs"></div>
+                    <div class="card-info"><h3 class="card-title">Icon Packs</h3><span class="card-meta">Vector Icons</span></div>
+                </div>
+                <div class="art-card standard" style="cursor: default; display: flex; align-items: center; justify-content: center;">
+                    <div class="card-img-wrap" style="display: flex; align-items: center; justify-content: center; background: var(--surface-2);">
+                        <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.2rem; font-weight: 800; color: var(--cream-dim); text-transform: uppercase; letter-spacing: 2px;">Coming Soon</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cat-block reveal-on-scroll">
+            <div class="cat-head">
+                <div class="cat-title-row">
                     <h3 class="cat-title">Photography</h3>
                     <span class="tag cat-tag">Street / B&amp;W</span>
                 </div>
-                <span class="cat-count">05 — 06</span>
+                <span class="cat-count">08 — 09</span>
             </div>
             <div class="bento-grid">
                 <div class="art-card big hover-trigger" onclick="openModal('photo1')">
@@ -915,7 +935,7 @@
                     <h3 class="cat-title">Static Creatives</h3>
                     <span class="tag cat-tag">AI Made/Manipulated creatives inspired from pop style</span>
                 </div>
-                <span class="cat-count">07 — 12</span>
+                <span class="cat-count">10 — 15</span>
             </div>
             <div class="bento-grid">
                 <div class="art-card standard hover-trigger" onclick="openModal('static_travel')">
@@ -948,10 +968,34 @@
         <div class="cat-block reveal-on-scroll">
             <div class="cat-head">
                 <div class="cat-title-row">
+                    <h3 class="cat-title">Mockups</h3>
+                    <span class="tag cat-tag">Product / Brand</span>
+                </div>
+                <span class="cat-count">16 — 18</span>
+            </div>
+            <div class="bento-grid">
+                <div class="art-card big hover-trigger" onclick="openModal('mockup1')">
+                    <div class="card-img-wrap"><img src="assets/lunea-serum.webp" class="card-img" loading="lazy" decoding="async" alt="Lunéa Skincare Packaging"></div>
+                    <div class="card-info"><h3 class="card-title">Lunéa Skincare</h3><span class="card-meta">Packaging Mockup</span></div>
+                </div>
+                <div class="art-card standard hover-trigger" onclick="openModal('mockup2')">
+                    <div class="card-img-wrap"><img src="assets/Packaging Mockups/Lunea Gift Pack.webp" class="card-img" loading="lazy" decoding="async" alt="Packaging Spread"></div>
+                    <div class="card-info"><h3 class="card-title">Packaging Spread</h3><span class="card-meta">Packaging Mockup</span></div>
+                </div>
+                <div class="art-card standard hover-trigger" onclick="openModal('mockup3')">
+                    <div class="card-img-wrap"><img src="assets/mockup-device.webp" class="card-img" loading="lazy" decoding="async" alt="Device Showcase"></div>
+                    <div class="card-info"><h3 class="card-title">Device Showcase</h3><span class="card-meta">UI Mockup</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cat-block reveal-on-scroll">
+            <div class="cat-head">
+                <div class="cat-title-row">
                     <h3 class="cat-title">Motion &amp; Clients</h3>
                     <span class="tag cat-tag">Film / Brand</span>
                 </div>
-                <span class="cat-count">13 — 14</span>
+                <span class="cat-count">19 — 20</span>
             </div>
             <div class="bento-grid">
                 <div class="art-card big hover-trigger" onclick="openModal('video1')">
@@ -982,7 +1026,7 @@
                     <h3 class="cat-title">Typography</h3>
                     <span class="tag cat-tag">Type / Lettering</span>
                 </div>
-                <span class="cat-count">15 — 18</span>
+                <span class="cat-count">21 — 24</span>
             </div>
             <div class="bento-grid">
                 <div class="art-card big hover-trigger" onclick="openModal('typo1')">
@@ -1001,55 +1045,6 @@
                 <div class="art-card standard hover-trigger" onclick="openModal('typo5')">
                     <div class="card-img-wrap"><img src="assets/Spring .webp" class="card-img" loading="lazy" decoding="async" alt="Botanical & Floral Type"></div>
                     <div class="card-info"><h3 class="card-title">Botanical &amp; Floral Type</h3><span class="card-meta">Nature / Organic</span></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="cat-block reveal-on-scroll">
-            <div class="cat-head">
-                <div class="cat-title-row">
-                    <h3 class="cat-title">Mockups</h3>
-                    <span class="tag cat-tag">Product / Brand</span>
-                </div>
-                <span class="cat-count">20 — 22</span>
-            </div>
-            <div class="bento-grid">
-                <div class="art-card big hover-trigger" onclick="openModal('mockup1')">
-                    <div class="card-img-wrap"><img src="assets/lunea-serum.webp" class="card-img" loading="lazy" decoding="async" alt="Lunéa Skincare Packaging"></div>
-                    <div class="card-info"><h3 class="card-title">Lunéa Skincare</h3><span class="card-meta">Packaging Mockup</span></div>
-                </div>
-                <div class="art-card standard hover-trigger" onclick="openModal('mockup2')">
-                    <div class="card-img-wrap"><img src="assets/Packaging Mockups/Lunea Gift Pack.webp" class="card-img" loading="lazy" decoding="async" alt="Packaging Spread"></div>
-                    <div class="card-info"><h3 class="card-title">Packaging Spread</h3><span class="card-meta">Packaging Mockup</span></div>
-                </div>
-                <div class="art-card standard hover-trigger" onclick="openModal('mockup3')">
-                    <div class="card-img-wrap"><img src="assets/mockup-device.webp" class="card-img" loading="lazy" decoding="async" alt="Device Showcase"></div>
-                    <div class="card-info"><h3 class="card-title">Device Showcase</h3><span class="card-meta">UI Mockup</span></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="cat-block reveal-on-scroll">
-            <div class="cat-head">
-                <div class="cat-title-row">
-                    <h3 class="cat-title">Illustrations</h3>
-                    <span class="tag cat-tag">Vector / Digital Art</span>
-                </div>
-                <span class="cat-count">23 — 25</span>
-            </div>
-            <div class="bento-grid">
-                <div class="art-card big hover-trigger" onclick="openModal('illus1')">
-                    <div class="card-img-wrap"><img src="assets/Jaipur Blues/Jaipur Blues Title.webp" class="card-img" loading="lazy" decoding="async" alt="Jaipur Blues"></div>
-                    <div class="card-info"><h3 class="card-title">Jaipur Blues</h3><span class="card-meta">Illustration Series</span></div>
-                </div>
-                <div class="art-card standard hover-trigger" onclick="openModal('illus2')">
-                    <div class="card-img-wrap"><img src="assets/Icon Packs/24 Y2K RETRO FUTURISTIC SHAPES.webp" class="card-img" loading="lazy" decoding="async" alt="Icon Packs"></div>
-                    <div class="card-info"><h3 class="card-title">Icon Packs</h3><span class="card-meta">Vector Icons</span></div>
-                </div>
-                <div class="art-card standard" style="cursor: default; display: flex; align-items: center; justify-content: center;">
-                    <div class="card-img-wrap" style="display: flex; align-items: center; justify-content: center; background: var(--surface-2);">
-                        <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.2rem; font-weight: 800; color: var(--cream-dim); text-transform: uppercase; letter-spacing: 2px;">Coming Soon</span>
-                    </div>
                 </div>
             </div>
         </div>
