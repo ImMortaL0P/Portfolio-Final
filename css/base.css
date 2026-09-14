@@ -190,3 +190,12 @@ img, video { max-width: 100%; height: auto; display: block; }
 
 /* Value list flex layout for non-grid values */
 .value-list .row { grid-template-columns: 180px auto; gap: var(--s-3); }
+
+.display-h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  line-height: var(--anton-lh);
+  text-transform: uppercase;
+  color: var(--on-light-1);
+}
+.section--dark .display-h3 { color: var(--on-dark-1); }

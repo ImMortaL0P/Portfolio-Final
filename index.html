@@ -35,17 +35,30 @@
     
     <!-- 1. Hero (Light) -->
     <section id="hero" class="hero-section">
-      <div class="wrap">
-        <h1 class="hero-heading">
-          <span class="mask"><span class="hero-line hero-line-text">ENGINEER,</span></span>
-          <span class="mask"><span class="hero-line hero-line-text">DESIGNER,</span></span>
-          <span class="mask"><span class="hero-line hero-line-text">DEVELOPER</span></span>
-        </h1>
-        <p class="hero-sub display-m">Solving complex problems with elegant systems.</p>
-        <div class="hero-actions">
-          <a href="#work" class="button-chip meta">View Work</a>
-          <a href="#contact" class="button-chip meta primary">Contact</a>
+      <div class="wrap hero-grid">
+
+        <div class="hero-main">
+          <h1 class="hero-heading">
+            <span class="mask"><span class="hero-line hero-line-text">ENGINEER,</span></span>
+            <span class="mask"><span class="hero-line hero-line-text">DESIGNER,</span></span>
+            <span class="mask"><span class="hero-line hero-line-text">DEVELOPER</span></span>
+          </h1>
+          <p class="hero-sub">I design and build the whole thing &mdash; identity, interface and the code underneath. Based in Patna, working everywhere.</p>
+          <div class="hero-actions">
+            <a href="#work" class="button-chip meta" data-cursor="SCROLL">View Work</a>
+            <a href="#contact" class="button-chip meta primary" data-cursor="SAY HI">Contact</a>
+          </div>
+          <div class="hero-rule" aria-hidden="true"></div>
+          <dl class="hero-facts">
+            <div><dt>Categories</dt><dd>08</dd></div>
+            <div><dt>Series</dt><dd>27</dd></div>
+            <div><dt>Client sites</dt><dd>02</dd></div>
+            <div><dt>Working since</dt><dd>2025</dd></div>
+          </dl>
         </div>
+
+        <aside class="hero-genre" aria-label="Disciplines"><!-- populated by JS --></aside>
+
       </div>
     </section>
 
@@ -65,8 +78,7 @@
           </button>
           <div class="service__panel" id="panel-design">
             <div class="panel-content body-text">
-              Creative Design, Brand Strategy, Editorial Design. 
-              We build brands that last, focusing on core identities and enduring visual languages.
+              Identity systems, brand strategy, editorial and print. I work from the core idea outward, so the visual language still holds up three years later.
             </div>
           </div>
         </div>
@@ -79,8 +91,7 @@
           </button>
           <div class="service__panel" id="panel-motion">
             <div class="panel-content body-text">
-              Motion Graphics, Visual Storytelling. 
-              Bringing interfaces and stories to life through considered, purposeful animation.
+              Kinetic typography, title sequences and interface motion. Animation that carries meaning rather than decorating a static frame.
             </div>
           </div>
         </div>
@@ -94,7 +105,7 @@
           <div class="service__panel" id="panel-build">
             <div class="panel-content body-text">
               Web Design &amp; Development.
-              From marketing sites to complex internal products, built for performance and durability.
+              From a bilingual school site to a twelve-module hotel CRM &mdash; designed and built by the same pair of hands, so nothing gets lost in handoff.
             </div>
           </div>
         </div>
@@ -119,10 +130,10 @@
     <section id="about" class="section--dark about-section">
       <div class="about__card">
         <div class="about__content">
-          <img src="assets/emrah.webp" alt="Portrait of K. Mangalam" class="about__portrait" loading="lazy" width="160" height="160">
+          <img src="assets/resume-hero.webp" alt="Portrait of K. Mangalam" class="about__portrait" loading="lazy" width="160" height="160">
           <div class="about__bio">
             <h2 class="display-l">An Engineer, Designer &amp; Developer.</h2>
-            <p class="body-text">Bridging the gap between creative vision and technical reality.</p>
+            <p class="body-text">I started in engineering and moved toward design without leaving the code behind. That means a project doesn&rsquo;t stop at a handoff file &mdash; the thing that ships is the thing that was designed.</p>
           </div>
         </div>
       </div>
@@ -182,7 +193,7 @@
           </button>
           <div class="faq__panel" id="faq-panel-1">
             <div class="panel-content body-text">
-              Most projects take 4-8 weeks from start to finish. Internal tools and robust CRMs may require 10-12 weeks depending on scale.
+              A marketing site runs 4&ndash;8 weeks. Internal tools and CRMs run 10&ndash;12, depending on how many modules are in scope.
             </div>
           </div>
         </div>
@@ -195,7 +206,7 @@
           </button>
           <div class="faq__panel" id="faq-panel-2">
             <div class="panel-content body-text">
-              I can assist with structuting messages and UX writing, but primary brand copy is best provided by you or a copywriter.
+              I&rsquo;ll handle structure and UX writing &mdash; labels, empty states, error messages. Long-form brand copy is better from you or a copywriter who knows the business.
             </div>
           </div>
         </div>
@@ -224,7 +235,7 @@
         <div class="footer-col">
           <span class="label">Social</span>
           <ul class="footer-links meta">
-            <li><a href="#">Instagram</a></li>
+            <li><a href="https://instagram.com/" rel="me">Instagram</a></li>
             <li><a href="#">Twitter</a></li>
             <li><a href="#">LinkedIn</a></li>
           </ul>

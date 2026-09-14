@@ -24,9 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
         start: 0, end: 'max',
         onUpdate: (self) => {
             const down = self.direction === 1 && self.scroll() > 120;
-            gsap.to(nav.logo,  { x: down ? -80 : 0,  duration: 0.5, ease: 'power3.out' });
-            gsap.to(nav.links, { y: down ? -84 : 0,  duration: 0.5, ease: 'power3.out' });
-            gsap.to(nav.cta,   { x: down ? 208 : 0,  duration: 0.5, ease: 'power3.out' });
+            gsap.to(nav.logo,  { xPercent: down ? -130 : 0, autoAlpha: down ? 0 : 1, duration: 0.55, ease: 'power3.out' });
+            gsap.to(nav.links, { y: down ? -96 : 0, autoAlpha: down ? 0 : 1, duration: 0.55, ease: 'power3.out' });
+            gsap.to(nav.cta,   { xPercent: down ? 130 : 0, autoAlpha: down ? 0 : 1, duration: 0.55, ease: 'power3.out' });
         }
     });
 
@@ -114,23 +114,24 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-/* --- 7.6 Work rows hover logic attached dynamically --- */
-window.initWorkRowHover = () => {
-    document.querySelectorAll('.work-row').forEach((row) => {
-        const thumb = row.querySelector('.work-row__thumb');
-        
-        // Build timeline
-        const tl = gsap.timeline({ paused: true })
-            .to(row,   { height: 172, backgroundColor: 'rgba(17,17,17,0.06)', duration: 0.4, ease: 'power3.out' })
-            .to(thumb, { width: 160, opacity: 1, marginRight: 24, duration: 0.4, ease: 'power3.out' }, 0);
-      
-        row.addEventListener('mouseenter', () => tl.play());
-        row.addEventListener('mouseleave', () => tl.reverse());
-        row.addEventListener('focusin',    () => tl.play());
-        row.addEventListener('focusout',   () => tl.reverse());
+/* --- 7.6 Work rows ---------------------------------------------------
+   Hover (monochrome -> colour, strip grows) is pure CSS in sections.css:
+   GPU-composited, no JS per frame, and it still works without JS.
+   This only handles the at-rest reveal as each row scrolls in.        */
+window.initWorkReveal = () => {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.querySelectorAll('.work-category').forEach((cat) => {
+    gsap.from(cat.querySelectorAll('.work-row'), {
+      opacity: 0, y: 18, duration: 0.55, stagger: 0.06, ease: 'power2.out',
+      scrollTrigger: { trigger: cat, start: 'top 82%', once: true }
     });
-    
-    // Also re-attach cursor events for dynamic rows
-    if (window.attachCursorEvents) window.attachCursorEvents();
+    gsap.from(cat.querySelector('.cat-header'), {
+      opacity: 0, y: 14, duration: 0.5, ease: 'power2.out',
+      scrollTrigger: { trigger: cat, start: 'top 88%', once: true }
+    });
+  });
+  if (window.attachCursorEvents) window.attachCursorEvents();
 };
 
+/* Back-compat: older markup called this. */
+window.initWorkRowHover = () => window.initWorkReveal && window.initWorkReveal();
