@@ -15,8 +15,8 @@
   --on-dark-dim:   #7A7A7A;  /* resting state of lit rows — see note */
 
   /* ---- Accent ---- */
-  --accent:        #FF4C24;  /* 5.68:1 on --ink. NEVER for text on --ground (2.74:1) */
-  --accent-ink:    #111111;
+  --accent:        #D13B13;  /* 4.83:1 on #FFFFFF. */
+  --accent-ink:    #FFFFFF;
 
   /* ---- Type scale ---- */
   --text-huge:     clamp(5rem, 15vw, 12rem);

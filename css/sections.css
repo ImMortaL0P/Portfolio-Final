@@ -49,14 +49,29 @@
   background: var(--ink);
   color: var(--ground);
 }
-.button-chip.primary {
+.section--dark .button-chip {
+  border-color: var(--on-dark-1);
+  color: var(--on-dark-1);
+}
+.section--dark .button-chip:hover {
+  background: var(--on-dark-1);
+  color: var(--ink);
+}
+.button-chip.primary,
+.section--dark .button-chip.primary {
   background: var(--accent);
   color: var(--accent-ink);
   border-color: var(--accent);
 }
 .button-chip.primary:hover {
   background: var(--ink);
+  color: var(--on-dark-1);
   border-color: var(--ink);
+}
+.section--dark .button-chip.primary:hover {
+  background: var(--on-dark-1);
+  color: var(--ink);
+  border-color: var(--on-dark-1);
 }
 
 /* --- Hero --- */
@@ -82,9 +97,22 @@
   width: 100%;
   text-align: left;
   border-bottom: 1px solid var(--rule-dark);
+  transition: background 0.3s ease;
+}
+.service__trigger > :not(:last-child), .faq__trigger > :not(:last-child) {
+  transition: transform 0.3s ease;
+}
+.service__trigger:hover, .faq__trigger:hover {
+  background: rgba(122, 122, 122, 0.05);
+}
+.service__trigger:hover > :not(:last-child), .faq__trigger:hover > :not(:last-child) {
+  transform: translateX(var(--s-2));
 }
 .faq__trigger {
   border-bottom-color: var(--rule-light);
+}
+.faq__trigger:hover {
+  background: rgba(17, 17, 17, 0.03);
 }
 /* Base `.row` styles applied already */
 
@@ -107,6 +135,32 @@
 .work-section {
   padding-block: var(--s-8);
 }
+.work-category {
+  margin-bottom: var(--s-8);
+}
+.work-category:last-child {
+  margin-bottom: 0;
+}
+.cat-header {
+  border-bottom: 1px solid var(--rule-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: var(--s-1);
+  margin-bottom: var(--s-2);
+}
+@media (max-width: 600px) {
+  .cat-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--s-1);
+  }
+}
+.cat-items {
+  display: flex;
+  flex-direction: column;
+}
+
 .work-row {
   display: grid;
   grid-template-columns: 180px auto 1fr auto;
