@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+    <script>(function(){try{var t=localStorage.getItem('mg-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Call of the Mountains — Mangalam</title>
+    <meta name="theme-color" content="#fff7f0">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/chrome.css">
+    <style>
+        :root {
+            --bg: #fff7f0; --surface: #f7ead9; --cream: #0e1a16; --cream-dim: #5f746b;
+            --ink: #0b1311; --lime: #bad6ff; --lime-deep: #4a7fc4; --paper: #fdf8f2;
+            --cream-rgb: 14,26,22; --bg-rgb: 255,247,240; --easing: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        :root[data-theme="dark"] {
+            --bg: #120a10; --surface: #1e1218; --cream: #f7ede1; --cream-dim: #b3a196;
+            --ink: #120a10; --lime: #ff6b4a; --lime-deep: var(--lime); --cream-rgb: 247,237,225; --bg-rgb: 18,10,16;
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; cursor: none; font-optical-sizing: auto; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--cream); font-family: 'Bricolage Grotesque', sans-serif; overflow-x: hidden; line-height: 1.8; font-size: 1.15rem; }
+        h1, h2, h3, h4 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
+        a { color: inherit; text-decoration: none; }
+        img { max-width: 100%; display: block; border-radius: 4px; object-fit: cover; }
+        
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 40px; position: relative; }
+        .flex { display: flex; justify-content: space-between; align-items: center; }
+        ::selection { background: var(--lime); color: var(--ink); }
+
+        
+        
+        /* Editorial Layout Styles */
+        .editorial-header {
+            padding: 160px 40px 80px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .editorial-title {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+        .editorial-meta {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--cream-dim);
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .editorial-meta span {
+            display: inline-block;
+        }
+        
+        .editorial-body {
+            max-width: 1200px;
+            margin: 0 auto 120px;
+            padding: 0 clamp(20px, 6vw, 100px);
+        }
+
+        /* Text Block — fills the available editorial width */
+        .text-block {
+            max-width: 100%;
+            margin: 0 auto 60px;
+        }
+        .text-block p {
+            margin-bottom: 30px;
+            color: var(--cream);
+            font-size: 1.1rem;
+        }
+        .text-block p strong, .text-block p b {
+            color: var(--lime-deep);
+            font-weight: 700;
+        }
+        
+        /* Q&A Interview Style */
+        .qa-block {
+            margin-bottom: 40px;
+        }
+        .qa-question {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-weight: 800;
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: var(--lime-deep);
+        }
+        .qa-answer {
+            color: var(--cream-dim);
+            margin-bottom: 24px;
+        }
+
+        /* Image Layouts */
+        .img-full {
+            width: 100%;
+            height: auto;
+            margin: 60px 0;
+        }
+        .img-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 60px 0;
+        }
+        .img-grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin: 60px 0;
+        }
+        .img-grid-2 img, .img-grid-3 img {
+            width: 100%;
+            height: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            object-position: center;
+        }
+        .img-caption {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--cream-dim);
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        footer { padding: 60px 0; border-top: 1px solid rgba(var(--cream-rgb),0.12); text-align: center; color: var(--cream-dim); font-size: 0.9rem; }
+        
+        @media (pointer: coarse) { *, *::before, *::after { cursor: auto !important; } .cursor-dot, .cursor-ring { display: none; } }
+        @media (max-width: 768px) {
+            .img-grid-2, .img-grid-3 { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 640px) {
+            .editorial-header { padding: 130px 24px 60px; }
+        }
+    
+</style>
+</head>
+<body>
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+    <nav>
+        <div class="container flex">
+            <div class="nav-left">
+                <a href="writings.html" class="back-btn hover-trigger">← Back</a>
+                <a href="index.html" class="logo hover-trigger">MANGALAM<span>.</span></a>
+            </div>
+            <div class="nav-right">
+                <button class="theme-toggle hover-trigger" onclick="toggleTheme()" aria-label="Toggle dark mode"><span class="icon-moon">☾</span><span class="icon-sun">☀</span></button>
+            <button class="menu-btn hover-trigger" onclick="toggleMenu(true)">
+                    <span class="bars"><span></span><span></span><span></span></span>
+                    Menu
+                </button>
+            </div>
+        </div>
+    </nav>
+    <div class="menu-overlay" id="menuOverlay">
+        <button class="menu-close hover-trigger" onclick="toggleMenu(false)">×</button>
+        <div class="container">
+            <div class="menu-links">
+                <a href="index.html#work" class="hover-trigger" onclick="toggleMenu(false)">Work</a>
+                <a href="index.html#about" class="hover-trigger" onclick="toggleMenu(false)">About</a>
+                <a href="engineering.html" class="hover-trigger" onclick="toggleMenu(false)">ENGINEERING</a>
+                <a href="writings.html" class="hover-trigger" onclick="toggleMenu(false)">WRITINGS</a>
+                <a href="resume.html" class="hover-trigger" onclick="toggleMenu(false)">RESUME</a>
+                <a href="index.html#contact" class="hover-trigger" onclick="toggleMenu(false)">Contact</a>
+            </div>
+        </div>
+    </div>
+
+    <header class="editorial-header">
+        <h1 class="editorial-title">The Call of the Mountains</h1>
+        <div class="editorial-meta">
+            <span>Photo Essay</span>
+            <span>Jul 18, 2026</span>
+            <span>Written By K. Mangalam</span>
+        </div>
+    </header>
+
+    <main class="editorial-body">
+        <div class="text-block">
+            <p>For as long as I can remember, the debate between mountains and beaches has never really had a winner. Everyone seems to have a side. Personally, I've never been able to choose — both have their own kind of magic. But there is something about the mountains that is difficult to explain. <strong>They have a strange way of changing you.</strong> You arrive carrying the noise of everyday life, and somehow, without realizing it, you leave carrying a little more silence within yourself. Over the years, I've found myself returning to the hills time and again — Shimla, Manali, Kullu, Kodaikanal, Rishikesh, Mussoorie — every place has left behind memories that refuse to fade. Yet the mountains never feel repetitive. Every visit feels like meeting an old friend who somehow has a new story to tell.</p>
+        </div>
+
+        <!-- Full width Image -->
+        <div>
+            <video class="img-full hover-trigger" src="assets/IMG_7183.mp4" autoplay loop muted playsinline aria-label="The Call of the Mountains"></video>
+            <div class="img-caption">Where the air thins and the world below disappears.</div>
+        </div>
+
+        <div class="text-block">
+            <p>So when my friends suggested another trip to Mussoorie and Landour in June 2025, the answer was obvious — <strong>some invitations are simply too good to refuse.</strong> Before heading to Dehradun, two of us made a small detour to Haridwar. We walked to the ghats and took a holy dip in the Ganga. The first touch of the water was enough to send a shiver through my body; it was unbelievably cold. What amazed me even more was the thought that the river had already travelled hundreds of kilometres from its Himalayan source, yet it still carried that icy freshness. Standing in the current, surrounded by pilgrims from every corner of the country, I realized that Haridwar is much more than a destination. It is an emotion carried forward by generations. Whether one is deeply religious or not, it is impossible to ignore the faith that fills the air. From there, our journey truly began in Dehradun—the quiet gateway to the Himalayas.</p>
+            <p>Our first stop was Kuchu Pani, a natural stream cave where freezing water flowed through narrow rocky passages. We spent a couple of hours walking through the stream, clicking photographs and escaping the June heat. Curiously, those two hours felt unusually long, as though time itself had slowed down. Later that day, we visited the Forest Research Institute (FRI), one of Dehradun's most iconic landmarks. Like many people, I associated it with Student of the Year, parts of which were filmed there, and I expected a glamorous campus buzzing with activity. <strong>Reality was far more beautiful.</strong> Instead of a busy college, we found ourselves wandering through a peaceful estate lined with towering trees from species we had never seen before. The air carried the faint fragrance of camphor from the many camphor trees scattered across the campus, while birdsong replaced the usual city noise. The institute houses several museums, but one, in particular, stayed with us—the Museum of the Life of Trees. At its centre stood the cross-section of an ancient tree trunk. Hundreds of growth rings spread out from its core, each one representing another year the tree had lived. Labels marked different periods of its life. By the time it had fallen, the tree had witnessed nearly nine centuries of history. Standing before it was strangely humbling.</p>
+        </div>
+
+        <!-- 2 Column Grid -->
+        <div class="img-grid-2">
+            <img class="hover-trigger" src="assets/4D4A9268-D89D-4B09-B78F-DF51096F0645_1_105_c.webp" alt="Mountain Peak">
+            <img class="hover-trigger" src="assets/AAF700C5-98AA-4666-B354-46FD0FFAA627_1_102_o.webp" alt="Starry Mountain Night">
+        </div>
+
+        <div class="text-block">
+            <p>We looked at those hundreds of rings and then thought about our own lives—barely twenty-five years long. Compared to the silent life of that tree, our existence felt incredibly small. It reminded us that while we often measure life through deadlines, promotions and achievements, nature measures it differently—through seasons, patience and time. Perhaps that is why five hours disappeared inside FRI without any of us noticing. We wandered through its museums, shaded walkways and gardens, completely losing track of time. Ironically, the two hours at Kuchu Pani had felt longer than the entire afternoon at FRI.</p>
+            <p>The next morning, we finally drove up towards Mussoorie. We stayed near Mall Road, the busiest part of the town, and during the afternoon it felt like any other popular hill station—shops filled with tourists, cafés serving steaming cups of coffee, and streets buzzing with people. For a moment, I wondered if this visit would be any different from the others. <strong>Then evening arrived.</strong> Clouds slowly rolled over the hills, swallowing roads, buildings and entire valleys within minutes. Visibility dropped to barely a hundred metres. The distant lights disappeared into the mist, and suddenly, the town became quiet. There were no blaring horns, no overwhelming traffic, no constant rush — it felt as though we had stepped into another world, hidden behind a curtain of clouds. Perhaps that is what mountains do best: <strong>they don't just offer breathtaking views—they gently silence everything that doesn't deserve your attention.</strong></p>
+        </div>
+
+        <!-- 3 Column Grid -->
+        <div class="img-grid-3">
+            <img class="hover-trigger" src="assets/F1CCF357-C729-45C9-A8E4-DA4E026AECA9_1_105_c.webp" alt="Mountain Trail">
+            <img class="hover-trigger" src="assets/F8632A8A-5A33-41AF-8735-D1AC31C6D3C8_1_102_o.webp" alt="Himalayan Range">
+            <img class="hover-trigger" src="assets/DE275104-0FF1-44E4-A0F7-4150EBB7B0F9_1_102_o.webp" alt="Misty Valley">
+        </div>
+
+        <div class="text-block">
+            <p>The following day, we headed to Landour and Lal Tibba, among the highest points around Mussoorie. A light drizzle welcomed us throughout the climb, making the roads glisten and filling the air with the earthy scent of rain. On our way to the famous Landour Bakehouse, we passed Ruskin Bond's home. One of my friends smiled and said, "Now it makes complete sense why he chose to spend his life here." He was absolutely right. There was something different about Landour. Nobody seemed to be in a hurry. People weren't rushing from one attraction to another — they simply sat on benches, walked through quiet lanes, admired the valleys and enjoyed the silence. It almost felt like the town encouraged creativity: <strong>when the noise around you disappears, your own thoughts finally become audible.</strong> We spent hours wandering those peaceful roads before beginning our journey back home early the next morning.</p>
+            <p>Somewhere around five-thirty, as our car descended through the winding mountain roads, the Himalayas offered us one final gift. The sun had only just begun to rise. It wasn't fully visible yet, but the sky had already transformed into brilliant shades of orange and gold, and the mountains stood like dark silhouettes against the glowing horizon while the valleys slowly woke beneath the morning light. I sat quietly by the window with soft music playing through my earphones. <strong>For the first time in what felt like years, my mind wasn't racing.</strong> The pressure to achieve more, the endless deadlines, the constant feeling of needing to be somewhere else—all of it seemed to fade with the morning mist. The mountains hadn't solved my problems. They had simply reminded me that life isn't meant to be lived at full speed every single day. Sometimes, the most meaningful thing you can do is pause — watch a sunrise, breathe in cold mountain air, sit in silence, and remember that the world existed long before us and will continue long after us.</p>
+            <p>As the first rays of sunlight touched the hills, one thought stayed with me: if moments like these aren't what we're living for, then what exactly is the point of all the rush? Maybe that's why people keep returning to the mountains — <strong>not because they're escaping life, but because, every once in a while, the mountains quietly remind them how to live it.</strong></p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">&copy; 2026 Mangalam. All rights reserved.</div>
+    </footer>
+
+    <script src="assets/js/chrome.js"></script>
+    <script>
+</script>
+</body>
+</html>

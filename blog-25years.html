@@ -1,377 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
-    <script>(function(){try{var t=localStorage.getItem('mg-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>25 Years on This Planet: Lessons Taught by Time — Mangalam</title>
-    <meta name="theme-color" content="#fff7f0">
-    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/chrome.css">
-    <style>
-        :root {
-            --bg: #fff7f0; --surface: #f7ead9; --cream: #0e1a16; --cream-dim: #5f746b;
-            --ink: #0b1311; --lime: #bad6ff; --lime-deep: #4a7fc4; --paper: #fdf8f2;
-            --cream-rgb: 14,26,22; --bg-rgb: 255,247,240; --easing: cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        :root[data-theme="dark"] {
-            --bg: #120a10; --surface: #1e1218; --cream: #f7ede1; --cream-dim: #b3a196;
-            --ink: #120a10; --lime: #ff6b4a; --lime-deep: var(--lime); --cream-rgb: 247,237,225; --bg-rgb: 18,10,16;
-        }
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; cursor: none; font-optical-sizing: auto; }
-        html { scroll-behavior: smooth; }
-        body { background: var(--bg); color: var(--cream); font-family: 'Bricolage Grotesque', sans-serif; overflow-x: hidden; line-height: 1.8; font-size: 1.15rem; }
-        h1, h2, h3, h4 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
-        a { color: inherit; text-decoration: none; }
-        img { max-width: 100%; display: block; border-radius: 4px; object-fit: cover; }
-        
-        .container { max-width: 1400px; margin: 0 auto; padding: 0 40px; position: relative; }
-        .flex { display: flex; justify-content: space-between; align-items: center; }
-        ::selection { background: var(--lime); color: var(--ink); }
+  <script>(function(){try{var t=localStorage.getItem('mg-theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="I will be turning twenty-five this year, and twenty-five is not old. But it is old enough to have been wrong about important things, to have lost peop">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>K</text></svg>">
+  <title>25 Years on This Planet: Lessons Taught by Time &mdash; K. Mangalam</title>
 
-        
-        
-        /* Photo Journal Layout */
-        .journal-header {
-            padding: 160px 40px 60px;
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .journal-title {
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
-            line-height: 1.1;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-        }
-        .journal-meta {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--cream-dim);
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        .journal-meta span { display: inline-block; }
-        
-        .journal-body {
-            max-width: 1200px;
-            margin: 0 auto 120px;
-            padding: 0 40px;
-        }
-
-        /* Photo Journal Entry */
-        .journal-entry {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-            margin-bottom: 100px;
-        }
-        .journal-entry.reverse { direction: rtl; }
-        .journal-entry.reverse > * { direction: ltr; }
-
-        .journal-entry-img {
-            width: 100%;
-            height: 480px;
-            object-fit: cover;
-            border-radius: 6px;
-        }
-
-        .journal-entry-text { }
-        .journal-entry-number {
-            font-family: 'Bricolage Grotesque', sans-serif;
-            font-size: 5rem;
-            font-weight: 800;
-            color: var(--lime-deep);
-            opacity: 0.25;
-            line-height: 1;
-            margin-bottom: 10px;
-        }
-        .journal-entry-heading {
-            font-size: 1.6rem;
-            margin-bottom: 18px;
-            color: var(--cream);
-            text-transform: uppercase;
-        }
-        .journal-entry-body {
-            color: var(--cream-dim);
-            font-size: 1.05rem;
-            line-height: 1.8;
-        }
-
-        /* Full-bleed image break */
-        .journal-fullbleed {
-            width: 100vw;
-            margin-left: calc(-50vw + 50%);
-            height: 500px;
-            object-fit: cover;
-            border-radius: 0;
-            margin-bottom: 100px;
-        }
-
-        /* Intro & Outro text */
-        .journal-intro {
-            max-width: 680px;
-            margin: 0 auto 80px;
-            text-align: center;
-        }
-        .journal-intro p {
-            color: var(--cream);
-            font-size: 1.15rem;
-            margin-bottom: 24px;
-        }
-
-        .journal-closing {
-            max-width: 680px;
-            margin: 40px auto 0;
-            text-align: center;
-            font-style: italic;
-            color: var(--cream-dim);
-            font-size: 1.2rem;
-            line-height: 1.8;
-            border-top: 1px solid rgba(var(--cream-rgb),0.12);
-            padding-top: 60px;
-        }
-
-        /* Mosaic grid — 3x3, two large photos (top-left, bottom-right) + 5 small */
-        .journal-mosaic {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(3, 220px);
-            gap: 16px;
-            margin-bottom: 100px;
-        }
-        .journal-mosaic img {
-            width: 100%; height: 100%; object-fit: cover; border-radius: 6px;
-        }
-        .journal-mosaic .mosaic-placeholder {
-            width: 100%; height: 100%; min-height: 200px; border-radius: 6px;
-            display: flex; align-items: center; justify-content: center;
-            background: var(--surface); border: 2px dashed rgba(var(--cream-rgb),0.2);
-            color: var(--cream-dim); font-size: 0.75rem; text-transform: uppercase;
-            letter-spacing: 1.5px; text-align: center; padding: 12px;
-        }
-        .journal-mosaic > :nth-child(1) { grid-column: 1; grid-row: 1 / 3; }
-        .journal-mosaic > :nth-child(2) { grid-column: 2; grid-row: 1; }
-        .journal-mosaic > :nth-child(3) { grid-column: 3; grid-row: 1; }
-        .journal-mosaic > :nth-child(4) { grid-column: 2; grid-row: 2; }
-        .journal-mosaic > :nth-child(5) { grid-column: 1; grid-row: 3; }
-        .journal-mosaic > :nth-child(6) { grid-column: 2; grid-row: 3; }
-        .journal-mosaic > :nth-child(7) { grid-column: 3; grid-row: 2 / 4; }
-
-        footer { padding: 60px 0; border-top: 1px solid rgba(var(--cream-rgb),0.12); text-align: center; color: var(--cream-dim); font-size: 0.9rem; }
-        
-        @media (pointer: coarse) { *, *::before, *::after { cursor: auto !important; } .cursor-dot, .cursor-ring { display: none; } }
-        @media (max-width: 768px) {
-            .journal-entry { grid-template-columns: 1fr; }
-            .journal-entry.reverse { direction: ltr; }
-            .journal-mosaic { grid-template-columns: 1fr; grid-template-rows: auto; }
-            .journal-mosaic > :nth-child(1),
-            .journal-mosaic > :nth-child(2),
-            .journal-mosaic > :nth-child(3),
-            .journal-mosaic > :nth-child(4),
-            .journal-mosaic > :nth-child(5),
-            .journal-mosaic > :nth-child(6),
-            .journal-mosaic > :nth-child(7) { grid-column: auto; grid-row: auto; }
-            .journal-mosaic img { height: 280px; }
-        }
-        /* Music Player Widget */
-        .music-player-widget {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: rgba(11, 19, 17, 0.04);
-            padding: 10px 20px 10px 10px;
-            border-radius: 999px;
-            border: 1px solid rgba(11, 19, 17, 0.08);
-            transition: transform 0.3s var(--easing), border-color 0.3s;
-            margin-top: 40px;
-        }
-        .music-player-widget:hover {
-            border-color: var(--lime-deep);
-            transform: translateY(-2px);
-        }
-        .vinyl-record {
-            width: 40px;
-            height: 40px;
-            background: #111;
-            border-radius: 50%;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: inset 0 0 0 2px #333, inset 0 0 0 4px #111, inset 0 0 0 6px #333, inset 0 0 0 8px #111;
-            animation: spin 3s linear infinite;
-            animation-play-state: paused;
-        }
-        .vinyl-record.playing {
-            animation-play-state: running;
-        }
-        .vinyl-center {
-            width: 14px;
-            height: 14px;
-            background: var(--lime);
-            border-radius: 50%;
-            position: relative;
-        }
-        .vinyl-center::after {
-            content: '';
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 4px;
-            height: 4px;
-            background: #111;
-            border-radius: 50%;
-        }
-        .music-info {
-            display: flex;
-            flex-direction: column;
-        }
-        .music-title {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--cream);
-            line-height: 1.2;
-        }
-        .music-artist {
-            font-size: 0.7rem;
-            color: var(--cream-dim);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
-        }
-    
-</style>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/motion.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/contact.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/post.css">
+  <link rel="stylesheet" href="css/responsive.css">
 </head>
-<body>
-    <div class="cursor-dot"></div>
-    <div class="cursor-ring"></div>
-    <nav>
-        <div class="container flex">
-            <div class="nav-left">
-                <a href="writings.html" class="back-btn hover-trigger">← Back</a>
-                <a href="index.html" class="logo hover-trigger">MANGALAM<span>.</span></a>
-            </div>
-            <div class="nav-right">
-                <button class="theme-toggle hover-trigger" onclick="toggleTheme()" aria-label="Toggle dark mode"><span class="icon-moon">☾</span><span class="icon-sun">☀</span></button>
-            <button class="menu-btn hover-trigger" onclick="toggleMenu(true)">
-                    <span class="bars"><span></span><span></span><span></span></span>
-                    Menu
-                </button>
-            </div>
-        </div>
-    </nav>
-    <div class="menu-overlay" id="menuOverlay">
-        <button class="menu-close hover-trigger" onclick="toggleMenu(false)">×</button>
-        <div class="container">
-            <div class="menu-links">
-                <a href="index.html#work" class="hover-trigger" onclick="toggleMenu(false)">Work</a>
-                <a href="index.html#about" class="hover-trigger" onclick="toggleMenu(false)">About</a>
-                <a href="engineering.html" class="hover-trigger" onclick="toggleMenu(false)">ENGINEERING</a>
-                <a href="writings.html" class="hover-trigger" onclick="toggleMenu(false)">WRITINGS</a>
-                <a href="resume.html" class="hover-trigger" onclick="toggleMenu(false)">RESUME</a>
-                <a href="index.html#contact" class="hover-trigger" onclick="toggleMenu(false)">Contact</a>
-            </div>
-        </div>
+<body class="post-page" data-post="25years">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <div class="nav-scrim" aria-hidden="true"></div>
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <a href="index.html" class="nav-logo display-m">K. Mangalam</a>
+      <ul class="nav-links">
+        <li><a href="writings.html" class="label">Blogs</a></li>
+        <li><a href="index.html#work" class="label">Work</a></li>
+      </ul>
+      <a href="index.html#contact" class="nav-cta button-chip meta">Get in Touch</a>
     </div>
+  </nav>
 
-    <header class="journal-header">
-        <h1 class="journal-title">25 Years on This Planet: Lessons Taught by Time</h1>
-        <div class="journal-meta">
-            <span>Photo Journal</span>
-            <span>Jul 18, 2026</span>
-            <span>By K. Mangalam</span>
-        </div>
-
-        <div class="music-player-widget hover-trigger" onclick="toggleAudio()" title="Play / Pause Audio">
-            Play Me!
-            <div class="vinyl-record" id="vinylIcon">
-                <div class="vinyl-center"></div>
-            </div>
-            <div class="music-info" style="text-align: left;">
-                <span class="music-title">Viva La Vida x Pompeii</span>
-                <span class="music-artist">Paused</span>
-            </div>
-            <audio id="localAudio" src="assets/vivalavida_clean.m4a" loop></audio>
-        </div>
+  <main id="main">
+    <header class="post-hero">
+      <div class="wrap">
+        <a class="post-back meta" href="writings.html" data-cursor="BACK">&#8592; All writing</a>
+        <p class="post-hero__meta meta">
+          <span class="post-hero__kind">Photo Journal</span>
+          <span class="post-hero__date">Jul 18, 2026</span>
+          <span class="post-hero__read">4 min read</span>
+        </p>
+        <h1 class="post-hero__title">25 Years on This Planet: Lessons Taught by Time</h1>
+      </div>
     </header>
 
-    <main class="journal-body">
-
-        <div class="journal-intro">
+    <article class="post-body wrap">
+<div class="post-lead">
             <p><strong></strong> I will be turning twenty-five this year, and twenty-five is not old. But it is old enough to have been wrong about important things, to have lost people you 
                 thought would stay, and to have built something from the wreckage of plans that didn't survive contact with reality. This is the journal of my failures as a 25-year-old and the lessons that are still shaping my future.</p>
         </div>
 
         <!-- Entry 01 -->
-        <div class="journal-entry">
-            <img class="journal-entry-img hover-trigger" src="assets/C3BFE7AA-A9C0-4104-81F6-EE241B48056D_1_105_c.webp" alt="Solitude and growth">
-            <div class="journal-entry-text">
-                <div class="journal-entry-number">01</div>
-                <h3 class="journal-entry-heading">IT'S OK TO DOUBT YOURSELF</h3>
-                <p class="journal-entry-body">A lot will go wrong before even one thing goes right, and it's okay. Doubting your decisions is not a sign of impending doom but a strong indicator that you care about the outcome. 
+        <div class="post-entry">
+            <img loading="lazy" decoding="async" class="post-entry__img" src="assets/C3BFE7AA-A9C0-4104-81F6-EE241B48056D_1_105_c.webp" alt="Solitude and growth">
+            <div class="post-entry__text">
+                <div class="post-entry__n meta">01</div>
+                <h3 class="post-entry__h">IT'S OK TO DOUBT YOURSELF</h3>
+                <p class="post-entry__p">A lot will go wrong before even one thing goes right, and it's okay. Doubting your decisions is not a sign of impending doom but a strong indicator that you care about the outcome. 
                     And even if the outcome is not what you wanted, what did you really lose? There is far greater learning in failures than there is in successes. Over the past few years, I have made decisions that have made me second-guess myself and my potential; resigning from my job and preparing for an unfamiliar CAT exam are prime examples of this.
                 I was scared to the point of giving up, skipping exams, or even rejoining my work, but looking back, it all did work out in the end.</p>
             </div>
         </div>
 
         <!-- Entry 02 -->
-        <div class="journal-entry reverse">
-            <img class="journal-entry-img hover-trigger" src="assets/1C1CAC5E-2731-43D1-AFF2-AA396CDC87C6_4_5005_c.jpeg" alt="Writing and reflection">
-            <div class="journal-entry-text">
-                <div class="journal-entry-number">02</div>
-                <h3 class="journal-entry-heading">Your taste will always outrun your skill</h3>
-                <p class="journal-entry-body">You can see the gap. Between what you make and what you know is possible. Between the design in your head and the one on the screen. This gap is not a flaw—it is proof that your standards are higher than your current ability, and that is exactly the tension that drives growth. The danger is not in having the gap; it is in letting it convince you to stop.
+        <div class="post-entry post-entry--reverse">
+            <img loading="lazy" decoding="async" class="post-entry__img" src="assets/1C1CAC5E-2731-43D1-AFF2-AA396CDC87C6_4_5005_c.jpeg" alt="Writing and reflection">
+            <div class="post-entry__text">
+                <div class="post-entry__n meta">02</div>
+                <h3 class="post-entry__h">Your taste will always outrun your skill</h3>
+                <p class="post-entry__p">You can see the gap. Between what you make and what you know is possible. Between the design in your head and the one on the screen. This gap is not a flaw—it is proof that your standards are higher than your current ability, and that is exactly the tension that drives growth. The danger is not in having the gap; it is in letting it convince you to stop.
                     Whenever I sit down to design a new piece, I ingest so much content to draw inspiration from, but I always end up with a design that is not even close to what I imagined. But the design I end up with is still better than what I could have made a year ago. 
                     Treat this as a compass pointing you toward the next level, and not a failure of living up to your potential.</p>
             </div>
         </div>
 
         <!-- Full-bleed image break -->
-        <img class="journal-fullbleed hover-trigger" src="assets/DSC_2295.webp" alt="Looking out into the distance">
+        <img loading="lazy" decoding="async" class="post-media post-media--full" src="assets/DSC_2295.webp" alt="Looking out into the distance">
 
         <!-- Entry 03 -->
-        <div class="journal-entry">
-            <img class="journal-entry-img hover-trigger" src="assets/FF0EF459-8ADA-4369-8BC4-4C4B74F9167C_1_105_c.webp" alt="Quiet moments">
-            <div class="journal-entry-text">
-                <div class="journal-entry-number">03</div>
-                <h3 class="journal-entry-heading">The family you choose for yourself.</h3>
-                <p class="journal-entry-body">Your friends, or homies, whatever you call them. They are essentially the family you choose for yourself. They will be there during your highs demanding treats, and in your lows, laughing at you first, but consoling you nonetheless.
+        <div class="post-entry">
+            <img loading="lazy" decoding="async" class="post-entry__img" src="assets/FF0EF459-8ADA-4369-8BC4-4C4B74F9167C_1_105_c.webp" alt="Quiet moments">
+            <div class="post-entry__text">
+                <div class="post-entry__n meta">03</div>
+                <h3 class="post-entry__h">The family you choose for yourself.</h3>
+                <p class="post-entry__p">Your friends, or homies, whatever you call them. They are essentially the family you choose for yourself. They will be there during your highs demanding treats, and in your lows, laughing at you first, but consoling you nonetheless.
                     I made the mistake of pushing them away a few years back at my lowest, and damn, if only I knew then what I know now. No matter what you are going through, these people will have either one of two things for you: a solution or a place to sit and talk. They might not be in touch on a daily basis,
                 but they will be there the moment you need them. Love them, cherish them, laugh with them, and don't forget to laugh at them!</p>
             </div>
         </div>
 
         <!-- Mosaic Grid -->
-        <div class="journal-mosaic">
-            <img class="hover-trigger" src="assets/IMG_0002 (quillbot.com).jpg" alt="Nature and time">
-            <img class="hover-trigger" src="assets/70D6F2AE-C157-41BB-B988-1DC1F159645F_1_105_c.webp" alt="Morning light">
-            <img class="hover-trigger" src="assets/E36BCEDD-3CAE-43B9-9C2A-66CBA241F2CC_1_105_c.webp" alt="Forest path">
-            <img class="hover-trigger" src="assets/B74740EA-AAAD-4F9D-8405-0B3EFC896D89_1_105_c.webp" alt="Photo memory">
-            <img class="hover-trigger" src="assets/0EB89CA2-B003-44AD-9242-A6D8F3B6BC2F_1_105_c.webp" alt="Photo memory">
-            <img class="hover-trigger" src="assets/B2A8D517-F420-4BA8-A950-D66EFC35B58A_1_105_c.webp" alt="Photo memory">
-            <img class="hover-trigger" src="assets/EAD48EBB-F41D-4A29-BE3D-3FB409A5DBAA_1_105_c.webp" alt="Sunset ridge">
+        <div class="post-grid post-grid--3">
+            <img loading="lazy" decoding="async"  src="assets/IMG_0002 (quillbot.com).jpg" alt="Nature and time">
+            <img loading="lazy" decoding="async"  src="assets/70D6F2AE-C157-41BB-B988-1DC1F159645F_1_105_c.webp" alt="Morning light">
+            <img loading="lazy" decoding="async"  src="assets/E36BCEDD-3CAE-43B9-9C2A-66CBA241F2CC_1_105_c.webp" alt="Forest path">
+            <img loading="lazy" decoding="async"  src="assets/B74740EA-AAAD-4F9D-8405-0B3EFC896D89_1_105_c.webp" alt="Photo memory">
+            <img loading="lazy" decoding="async"  src="assets/0EB89CA2-B003-44AD-9242-A6D8F3B6BC2F_1_105_c.webp" alt="Photo memory">
+            <img loading="lazy" decoding="async"  src="assets/B2A8D517-F420-4BA8-A950-D66EFC35B58A_1_105_c.webp" alt="Photo memory">
+            <img loading="lazy" decoding="async"  src="assets/EAD48EBB-F41D-4A29-BE3D-3FB409A5DBAA_1_105_c.webp" alt="Sunset ridge">
         </div>
 
         <!-- Entry 04 -->
-        <div class="journal-entry reverse">
-            <img class="journal-entry-img hover-trigger" src="assets/01D22E3D-07B0-4541-ADC4-8F89166D1A13_1_105_c.webp" alt="Books and learning">
-            <div class="journal-entry-text">
-                <div class="journal-entry-number">04</div>
-                <h3 class="journal-entry-heading">Your Biggest Strength.</h3>
-                <p class="journal-entry-body">The family you are born into. Your mom may not always hold you like she used to when you were little, your dad may not always praise you like he used to, and your siblings may not say 'I love you' so often now, but they will be the ones you find standing behind you at every step.
+        <div class="post-entry post-entry--reverse">
+            <img loading="lazy" decoding="async" class="post-entry__img" src="assets/01D22E3D-07B0-4541-ADC4-8F89166D1A13_1_105_c.webp" alt="Books and learning">
+            <div class="post-entry__text">
+                <div class="post-entry__n meta">04</div>
+                <h3 class="post-entry__h">Your Biggest Strength.</h3>
+                <p class="post-entry__p">The family you are born into. Your mom may not always hold you like she used to when you were little, your dad may not always praise you like he used to, and your siblings may not say 'I love you' so often now, but they will be the ones you find standing behind you at every step.
                     There will be times when you will feel like they don't understand you, they don't see the world like you do, but remember they are also experiencing life for the first time just like you, and unlike you, they often don't have the luxury to fall back on their parents for decisions that they find difficult to make on their own.
                     Love them as they love you, support them as they support you. I can't be grateful enough to my family for making me who I am, and I am sure you feel the same about yours.
                 </p>
@@ -379,12 +119,12 @@
         </div>
 
         <!-- Entry 05 -->
-        <div class="journal-entry">
-            <video class="journal-entry-img hover-trigger" src="assets/heartbreak-gif.mp4" autoplay loop muted playsinline aria-label="Two silhouettes on a beach at dusk"></video>
-            <div class="journal-entry-text">
-                <div class="journal-entry-number">05</div>
-                <h3 class="journal-entry-heading">Heartbreak Syndrome</h3>
-                <p class="journal-entry-body">Falling in love is easier than staying in love; sometimes your partners outgrow you. The strong ones will move on easily, but the attached ones will keep searching for answers as to what they could have done differently to keep them in their lives.
+        <div class="post-entry">
+            <video class="post-entry__img" src="assets/heartbreak-gif.mp4" autoplay loop muted playsinline aria-label="Two silhouettes on a beach at dusk"></video>
+            <div class="post-entry__text">
+                <div class="post-entry__n meta">05</div>
+                <h3 class="post-entry__h">Heartbreak Syndrome</h3>
+                <p class="post-entry__p">Falling in love is easier than staying in love; sometimes your partners outgrow you. The strong ones will move on easily, but the attached ones will keep searching for answers as to what they could have done differently to keep them in their lives.
                     But the truth is, those answers don't exist, and I know it's difficult to accept this and move on. Especially when you've planned your whole life around them—their absence just feels like a void. But you need to allow new people to come into your life, experience life again,
                     and remember that chapter as an essential part of your journey that taught you to grow and to see the world in a different light without them. One heartbreak won't define how you feel about life, but it will define how strong you can be.
                 </p>
@@ -392,53 +132,46 @@
         </div>
 
         <!-- Full-bleed image break -->
-        <img class="journal-fullbleed hover-trigger" src="assets/DSC_1817.webp" alt="Sunset silhouette">
+        <img loading="lazy" decoding="async" class="post-media post-media--full" src="assets/DSC_1817.webp" alt="Sunset silhouette">
 
         <!-- Entry 06 -->
-        <div class="journal-entry reverse">
-            <img class="journal-entry-img hover-trigger" src="assets/BCDD545C-D841-4470-B773-F4A77C675EF1.jpeg" alt="Connections and solitude">
-            <div class="journal-entry-text">
-                <div class="journal-entry-number">06</div>
-                <h3 class="journal-entry-heading">Academics are important; skills are more important.</h3>
-                <p class="journal-entry-body">As soon as I completed my B.Tech in Mechanical Engineering, I joined JSPL. Assuming I would be working in my own domain, I was ecstatic, but soon I received the call that I would be posted in Steel Casters.
+        <div class="post-entry post-entry--reverse">
+            <img loading="lazy" decoding="async" class="post-entry__img" src="assets/BCDD545C-D841-4470-B773-F4A77C675EF1.jpeg" alt="Connections and solitude">
+            <div class="post-entry__text">
+                <div class="post-entry__n meta">06</div>
+                <h3 class="post-entry__h">Academics are important; skills are more important.</h3>
+                <p class="post-entry__p">As soon as I completed my B.Tech in Mechanical Engineering, I joined JSPL. Assuming I would be working in my own domain, I was ecstatic, but soon I received the call that I would be posted in Steel Casters.
                     Entering a metallurgy-heavy space, I thought I would struggle to adapt, but that's exactly when my skills came in handy. Being a quick learner, I quickly picked up the basics and started taking up small responsibilities, eventually taking on the big ones.
                     My skills earned me a place in that competitive environment, as well as two prestigious awards and a strong reputation across the entire department. Skills will take you places where your degree can just get you through the door.
                 </p>
             </div>
         </div>
 
-        <div class="journal-closing">
+        <div class="post-closing">
             <p>"Twenty-five years is not a milestone. It is a checkpoint. A place to pause, look at the map, and acknowledge that you've been walking in roughly the right direction—even when it didn't feel like it. The lessons here are not finished. They are still being written, one frame at a time."</p>
         </div>
+    </article>
 
-    </main>
+    <nav class="post-pager wrap" aria-label="Other writing">
+      <a class="post-pager__prev" href="#"><span class="meta">Previous</span><span class="post-pager__name"></span></a>
+      <a class="post-pager__next" href="#"><span class="meta">Next</span><span class="post-pager__name"></span></a>
+    </nav>
+  </main>
 
-    <footer>
-        <div class="container">&copy; 2026 Mangalam. All rights reserved.</div>
-    </footer>
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-legal row">
+        <span class="meta">&copy; 2026 K. Mangalam</span>
+        <span class="meta">All Rights Reserved</span>
+      </div>
+    </div>
+  </footer>
 
-    <script>
-    </script>
-    <script src="assets/js/chrome.js"></script>
-    <script>
-        const audio = document.getElementById('localAudio');
-        const vinyl = document.getElementById('vinylIcon');
-        const artistText = document.querySelector('.music-artist');
-        let isPlaying = false;
+  <div class="cursor-pill meta" aria-hidden="true" style="opacity: 0; transform: scale(0.4);">VIEW</div>
 
-        function toggleAudio() {
-            if (isPlaying) {
-                audio.pause();
-                isPlaying = false;
-                vinyl.classList.remove('playing');
-                artistText.innerText = 'Paused';
-            } else {
-                audio.play();
-                isPlaying = true;
-                vinyl.classList.add('playing');
-                artistText.innerText = 'Now Playing';
-            }
-        }
-</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script type="module" src="js/post.js"></script>
 </body>
 </html>

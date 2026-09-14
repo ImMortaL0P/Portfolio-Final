@@ -33,6 +33,8 @@
   --s-4: 32px;
   --s-5: 48px;
   --s-6: 64px;
+  --s-7: 80px;   /* the scale skipped this step; anything using it silently
+                    collapsed to an invalid clamp(), i.e. zero padding */
   --s-8: 96px;
   
   --r-panel: 8px;
@@ -105,7 +107,7 @@ img, video { max-width: 100%; height: auto; display: block; }
   margin: 0 auto;
 }
 .section--dark {
-  background: var(--ink);
+  background: var(--panel);
   color: var(--on-dark-3);
 }
 

@@ -43,16 +43,37 @@
 }
 
 
-/* --- Noise overlay --- */
+/* --- Paper texture -------------------------------------------------
+   Fine tooth only. A low-frequency turbulence layer is what reads as
+   slate or as stains, so there isn't one: paper grain is high frequency
+   and barely there. Alpha is baked into the SVG so each ground can carry
+   its own weight.                                                      */
 .noise-overlay {
   position: fixed;
   inset: 0;
   z-index: 3;
   pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='0.55'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+  opacity: 0.07;
+  mix-blend-mode: multiply;
 }
 
+/* multiply all but disappears on the dark grounds, so those get their own
+   screened grain at a lower weight. */
+.section--dark { position: relative; }
+.section--dark::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='pd'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23pd)' opacity='0.5'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+  opacity: 0.05;
+  mix-blend-mode: screen;
+}
+.section--dark > * { position: relative; z-index: 2; }
 
 /* --- Reduces Motion --- */
 @media (prefers-reduced-motion: reduce) {
@@ -72,4 +93,32 @@
     width: 100% !important;
     height: auto !important;
   }
+}
+
+/* ================= Scroll layers ================= */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  background: var(--accent);
+  z-index: 30;
+  pointer-events: none;
+}
+
+/* word-by-word heading reveal: each word rides up out of its own mask */
+.rv { display: inline-block; overflow: hidden; vertical-align: bottom; }
+.rv__i { display: inline-block; will-change: transform; }
+
+/* process rows dim until they reach the middle of the screen */
+.process-row .value-row__label,
+.process-row .process-row__body {
+  transition: color .45s var(--ease-out), opacity .45s var(--ease-out);
+}
+@media (prefers-reduced-motion: reduce) {
+  .process-row .value-row__label { color: var(--on-dark-1) !important; }
+  .process-row .process-row__body { opacity: 1 !important; }
+  .scroll-progress { display: none; }
 }

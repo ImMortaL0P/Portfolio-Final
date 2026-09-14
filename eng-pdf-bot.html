@@ -1,132 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
-    <script>(function(){try{var t=localStorage.getItem('mg-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A sound of Thunder: The Automation Script of Chaos — Mangalam</title>
-    <meta name="theme-color" content="#fff7f0">
-    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/chrome.css">
-    <style>
-        :root {
-            --bg: #fff7f0; --surface: #f7ead9; --cream: #0e1a16; --cream-dim: #5f746b;
-            --ink: #0b1311; --lime: #bad6ff; --lime-deep: #4a7fc4; --paper: #fdf8f2;
-            --cream-rgb: 14,26,22; --bg-rgb: 255,247,240; --easing: cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        :root[data-theme="dark"] {
-            --bg: #120a10; --surface: #1e1218; --cream: #f7ede1; --cream-dim: #b3a196;
-            --ink: #120a10; --lime: #ff6b4a; --lime-deep: var(--lime); --cream-rgb: 247,237,225; --bg-rgb: 18,10,16;
-        }
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; cursor: none; font-optical-sizing: auto; }
-        html { scroll-behavior: smooth; }
-        body { background: var(--bg); color: var(--cream); font-family: 'Bricolage Grotesque', sans-serif; overflow-x: hidden; line-height: 1.8; font-size: 1.15rem; }
-        h1, h2, h3, h4 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
-        a { color: inherit; text-decoration: none; }
-        img { max-width: 100%; display: block; border-radius: 4px; }
-        
-        .container { max-width: 1400px; margin: 0 auto; padding: 0 40px; position: relative; }
-        .flex { display: flex; justify-content: space-between; align-items: center; }
-        ::selection { background: var(--lime); color: var(--ink); }
+  <script>(function(){try{var t=localStorage.getItem('mg-theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="An asynchronous bridge that archives Telegram PDFs to Google Drive.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>K</text></svg>">
+  <title>Telegram to Drive Sync &mdash; K. Mangalam</title>
 
-        /* Cursor & Nav (Copied from writings.html) */
-        
-        
-        /* Article Layout */
-        .article-hero { position: relative; width: 100%; height: 80vh; display: flex; align-items: center; justify-content: center; background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover; border-bottom: 1px solid rgba(var(--cream-rgb),0.08); }
-        .article-hero::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.4); z-index: 1; }
-        .article-hero-content { text-align: center; padding: 0 40px; position: relative; z-index: 2; }
-        .article-title { font-size: clamp(3rem, 7vw, 6rem); color: #fff; text-shadow: 0 4px 20px rgba(0,0,0,0.5); text-transform: uppercase; margin-bottom: 20px; }
-        .article-meta { font-size: 1rem; color: var(--cream); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
-        
-        .article-body { max-width: 800px; margin: 80px auto 120px; padding: 0 40px; color: var(--cream); }
-        .article-body p { margin-bottom: 30px; }
-        .article-body h2, .article-body h3 { margin: 60px 0 30px; color: var(--lime-deep); font-size: 2.5rem; }
-        .article-body h4 { font-size: 1.8rem; color: var(--cream); font-style: italic; margin-bottom: 20px; font-weight: 400; }
-        .article-quote { font-family: 'Bricolage Grotesque', sans-serif; font-size: 2rem; font-style: italic; color: var(--lime-deep); border-left: 4px solid var(--lime); padding-left: 30px; margin: 60px 0; line-height: 1.3; }
-        
-        .article-image { position: relative; width: 100vw; height: 500px; margin: 80px 0 80px calc(-50vw + 50%); background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover; box-shadow: inset 0 0 100px rgba(0,0,0,0.2); }
-        .article-image::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.1); pointer-events: none; }
-        .article-image figcaption { font-size: 0.85rem; color: var(--cream-dim); text-align: center; margin-top: 15px; font-family: 'Bricolage Grotesque', sans-serif; position: absolute; bottom: -30px; width: 100%; }
-
-        .article-author { margin-top: 60px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--cream-dim); text-align: right; }
-        
-        /* Footer */
-        footer { padding: 60px 0; border-top: 1px solid rgba(var(--cream-rgb),0.12); text-align: center; color: var(--cream-dim); font-size: 0.9rem; }
-        
-        @media (pointer: coarse) { *, *::before, *::after { cursor: auto !important; } .cursor-dot, .cursor-ring { display: none; } }
-    
-</style>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/motion.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/contact.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/category.css">
+  <link rel="stylesheet" href="css/project.css">
+  <link rel="stylesheet" href="css/responsive.css">
 </head>
-<body>
-    <div class="cursor-dot"></div>
-    <div class="cursor-ring"></div>
-    <nav>
-        <div class="container flex">
-            <div class="nav-left">
-                <a href="engineering.html" class="back-btn hover-trigger">← Back</a>
-                <a href="index.html" class="logo hover-trigger">MANGALAM<span>.</span></a>
-            </div>
-            <div class="nav-right">
-                <button class="theme-toggle hover-trigger" onclick="toggleTheme()" aria-label="Toggle dark mode"><span class="icon-moon">☾</span><span class="icon-sun">☀</span></button>
-            <button class="menu-btn hover-trigger" onclick="toggleMenu(true)">
-                    <span class="bars"><span></span><span></span><span></span></span>
-                    Menu
-                </button>
-            </div>
-        </div>
-    </nav>
-    <div class="menu-overlay" id="menuOverlay">
-        <button class="menu-close hover-trigger" onclick="toggleMenu(false)">×</button>
-        <div class="container">
-            <div class="menu-links">
-                <a href="index.html#work" class="hover-trigger" onclick="toggleMenu(false)">Work</a>
-                <a href="index.html#about" class="hover-trigger" onclick="toggleMenu(false)">About</a>
-                <a href="engineering.html" class="hover-trigger" onclick="toggleMenu(false)">ENGINEERING</a>
-                <a href="writings.html" class="hover-trigger" onclick="toggleMenu(false)">WRITINGS</a>
-                <a href="resume.html" class="hover-trigger" onclick="toggleMenu(false)">RESUME</a>
-                <a href="index.html#contact" class="hover-trigger" onclick="toggleMenu(false)">Contact</a>
-            </div>
-        </div>
-    </div>
+<body class="proj-page" data-project="pdf-bot">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="noise-overlay" aria-hidden="true"></div>
 
-    <header class="article-hero" style="background-image: url('https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?auto=format&fit=crop&w=1200&q=80');">
-        <div class="article-hero-content">
-            <h1 class="article-title">Telegram to Drive Sync</h1>
-            <div class="article-meta">2024 • Python & API</div>
-        </div>
+  <div class="nav-scrim" aria-hidden="true"></div>
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <a href="index.html" class="nav-logo display-m">K. Mangalam</a>
+      <ul class="nav-links">
+        <li><a href="index.html#work" class="label">All work</a></li>
+        <li><a href="index.html#engineering" class="label">Engineering</a></li>
+        <li><a href="writings.html" class="label">Blogs</a></li>
+      </ul>
+      <a href="index.html#contact" class="nav-cta button-chip meta">Get in Touch</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <header class="proj-hero">
+      <div class="wrap">
+        <a class="proj-back meta" href="index.html#engineering" data-cursor="BACK">&#8592; Engineering</a>
+        <p class="proj-hero__meta meta">
+          <span class="proj-hero__n"></span>
+          <span class="proj-hero__disc"></span>
+          <span class="proj-hero__years"></span>
+        </p>
+        <h1 class="proj-hero__title"></h1>
+        <p class="proj-hero__kicker"></p>
+        <div class="proj-live"></div>
+      </div>
     </header>
 
-    <main class="article-body">
+    <div class="wrap">
+      <div class="proj-intro">
+        <p class="proj-lede"></p>
+        <div class="proj-stack-col">
+          <span class="proj-stack-label meta">Stack</span>
+          <ul class="proj-stack"></ul>
+        </div>
+      </div>
 
-        <h3>Telegram to Google Drive Sync</h3>
-        <p>An asynchronous Python automation script engineered to act as a bridge between secure messaging and permanent cloud storage. It silently extracts PDF documents from a specific Telegram channel and securely backs them up to a Google Drive folder without manual intervention.</p>
-        
-        <figure class="article-image hover-trigger" style="background-image: url('https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?auto=format&fit=crop&w=1200&q=80');" aria-label="Cloud Sync"></figure>
+      <div class="proj-stats"></div>
 
-        <h3>Asynchronous Operations & Smart Filtering</h3>
-        <p>Built with <code>Telethon</code> and <code>asyncio</code>, the bot achieves high-throughput Telegram message parsing and concurrent media downloading. It employs Smart Filtering to automatically scan channel history and strictly target <code>application/pdf</code> MIME types, ensuring bandwidth isn't wasted on irrelevant media.</p>
+      <div class="proj-shots"></div>
 
-        <h3>Robust Cloud Streaming</h3>
-        <p>Files are uploaded to Google Drive using 2MB chunked resumable streams via the Google API, making it highly stable for large technical documents. The CLI features custom visual progress bars tracking both the Telegram download phase and the Google Drive upload phase in real-time.</p>
+      <div class="proj-body"></div>
 
-        <h3>Zero Storage Footprint</h3>
-        <p>Designed to be lightweight and run on resource-constrained environments (like a Raspberry Pi or a low-tier VPS), the script automatically deletes the local copy of the PDF immediately after a successful upload to Drive is verified by the API.</p>
-        
-    </main>
+      <nav class="proj-pager" aria-label="Other engineering work">
+        <a class="proj-pager__prev" href="#"><span class="meta">Previous</span><span class="proj-pager__name"></span></a>
+        <a class="proj-pager__next" href="#"><span class="meta">Next</span><span class="proj-pager__name"></span></a>
+      </nav>
+    </div>
+  </main>
 
-    <footer>
-        <div class="container">&copy; 2026 Mangalam. All rights reserved.</div>
-    </footer>
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-legal row">
+        <span class="meta">&copy; 2026 K. Mangalam</span>
+        <span class="meta">All Rights Reserved</span>
+      </div>
+    </div>
+  </footer>
 
-    <script src="assets/js/chrome.js"></script>
-    <script>
-</script>
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lightbox__close meta" type="button" aria-label="Close">Close &times;</button>
+    <button class="lightbox__nav lightbox__nav--prev" type="button" aria-label="Previous">&#8592;</button>
+    <img class="lightbox__img" alt="">
+    <button class="lightbox__nav lightbox__nav--next" type="button" aria-label="Next">&#8594;</button>
+    <p class="lightbox__cap meta"></p>
+  </div>
+
+  <div class="cursor-pill meta" aria-hidden="true" style="opacity: 0; transform: scale(0.4);">VIEW</div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script type="module" src="js/project.js"></script>
 </body>
 </html>

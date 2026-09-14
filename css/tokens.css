@@ -35,3 +35,54 @@
 }
 
 @media (max-width: 900px) { :root { --section-pad: 72px; } }
+
+/* ================= Theme =================
+   Two tokens do the flipping and nothing else does:
+     --ground  the page surface
+     --ink     everything drawn on it (text, rules, chips)
+   The dark furniture is deliberately NOT part of the flip. --panel is
+   the black of the dark sections, the nav pill and the resume card, and
+   --surface-invert is the light chip that sits on top of them; both hold
+   their value in either theme, so those blocks look identical in dark
+   mode. The accent never moves. */
+:root {
+  --panel:          #111111;   /* dark sections — constant */
+  --surface-invert: #EBE9E4;   /* light chip on a dark ground — constant */
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* the page ground goes deeper than --panel, so the dark sections still
+     read as raised blocks instead of dissolving into the background */
+  --ground:      #0A0A09;
+  --ink:         #EFEDE8;
+
+  --on-light-1:  #F2F0EB;   /* headlines */
+  --on-light-2:  #D6D3CC;   /* eyebrows  */
+  --on-light-3:  #A3A099;   /* body copy */
+
+  --rule-light:  rgba(235, 233, 228, 0.13);
+  --tint-light:  rgba(235, 233, 228, 0.05);
+}
+
+/* the paper grain multiplies on a light ground and vanishes on a dark
+   one, so in dark mode it has to screen instead */
+:root[data-theme="dark"] .noise-overlay {
+  mix-blend-mode: screen;
+  opacity: 0.045;
+}
+
+/* figures and screenshots are authored on white — a hairline keeps them
+   from floating on the dark ground */
+:root[data-theme="dark"] .paper__fig-btn,
+:root[data-theme="dark"] .proj-shot__btn {
+  border-color: rgba(235, 233, 228, 0.18);
+}
+
+/* code inline in prose */
+:root[data-theme="dark"] .post-body code,
+:root[data-theme="dark"] .proj-block__body code {
+  background: rgba(235, 233, 228, 0.09);
+}

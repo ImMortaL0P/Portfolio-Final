@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>(function(){try{var t=localStorage.getItem('mg-theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
   <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Personal portfolio of K. Mangalam, an Engineer, Designer, and Developer. View selected works in design, motion, and web development.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>K</text></svg>">
@@ -11,6 +14,10 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/sections.css">
   <link rel="stylesheet" href="css/motion.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/contact.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -19,6 +26,7 @@
   <div class="noise-overlay" aria-hidden="true"></div>
   
   <!-- Dispersing Nav -->
+  <div class="nav-scrim" aria-hidden="true"></div>
   <nav class="nav">
     <div class="wrap nav-inner">
       <a href="/" class="nav-logo display-m">K. MANGALAM</a>
@@ -26,6 +34,8 @@
         <li><a href="#services" class="label">Services</a></li>
         <li><a href="#work" class="label">Work</a></li>
         <li><a href="#about" class="label">About</a></li>
+        <li><a href="#engineering" class="label">Engineering</a></li>
+        <li><a href="writings.html" class="label">Blogs</a></li>
       </ul>
       <a href="#contact" class="nav-cta button-chip meta">Get in Touch</a>
     </div>
@@ -35,29 +45,85 @@
     
     <!-- 1. Hero (Light) -->
     <section id="hero" class="hero-section">
-      <div class="wrap hero-grid">
+      <div class="wrap">
 
-        <div class="hero-main">
-          <h1 class="hero-heading">
-            <span class="mask"><span class="hero-line hero-line-text">ENGINEER,</span></span>
-            <span class="mask"><span class="hero-line hero-line-text">DESIGNER,</span></span>
-            <span class="mask"><span class="hero-line hero-line-text">DEVELOPER</span></span>
-          </h1>
-          <p class="hero-sub">I design and build the whole thing &mdash; identity, interface and the code underneath. Based in Patna, working everywhere.</p>
-          <div class="hero-actions">
-            <a href="#work" class="button-chip meta" data-cursor="SCROLL">View Work</a>
-            <a href="#contact" class="button-chip meta primary" data-cursor="SAY HI">Contact</a>
+        <p class="hero-eyebrow meta">
+          <span>K. Mangalam</span>
+          <span aria-hidden="true">&mdash;</span>
+          <span>Engineer, Designer</span>
+          <span aria-hidden="true">&mdash;</span>
+          <span>India</span>
+        </p>
+
+        <div class="hero-grid">
+          <div class="hero-main">
+            <h1 class="hero-heading">
+              <span class="mask"><span class="hero-line hero-line-text">Halftone,</span></span>
+              <span class="mask"><span class="hero-line hero-line-text">Monochrome,</span></span>
+              <span class="mask"><span class="hero-line hero-line-text">Vernacular.</span></span>
+            </h1>
+            <p class="hero-sub">Hi, I&rsquo;m Mangalam. A designer with expertise in Illustration, Hyperrealism and Brutalist Typography. On the side I also do Photography, web development and motion animation.</p>
+            <div class="hero-actions">
+              <a href="#work" class="button-chip meta" data-cursor="SCROLL">View Work</a>
+              <a href="#contact" class="button-chip meta primary" data-cursor="SAY HI">Contact</a>
+            </div>
           </div>
-          <div class="hero-rule" aria-hidden="true"></div>
-          <dl class="hero-facts">
-            <div><dt>Categories</dt><dd>08</dd></div>
-            <div><dt>Series</dt><dd>27</dd></div>
-            <div><dt>Client sites</dt><dd>02</dd></div>
-            <div><dt>Working since</dt><dd>2025</dd></div>
-          </dl>
+
+          <aside class="hero-genre" aria-label="Disciplines"><!-- populated by JS --></aside>
         </div>
 
-        <aside class="hero-genre" aria-label="Disciplines"><!-- populated by JS --></aside>
+        <dl class="hero-facts">
+          <div><dt>Disciplines</dt><dd>08</dd></div>
+          <div><dt>Series</dt><dd>26</dd></div>
+          <div><dt>Client sites</dt><dd>02</dd></div>
+          <div><dt>Creating since</dt><dd>2017</dd></div>
+        </dl>
+
+      </div>
+    </section>
+
+    <!-- 1b. Start here (Light) -->
+    <section id="start" class="start-section">
+      <div class="wrap">
+
+        <div class="start__head">
+          <h2 class="start__label meta">Start here</h2>
+          <p class="start__lede">Three things I get hired for. Pick the one that sounds like your problem.</p>
+        </div>
+
+        <div class="start__grid">
+
+          <a class="start__card" href="#cat-brand-design" data-cursor="SEE WORK">
+            <span class="start__n meta">01</span>
+            <h3 class="start__title" data-reveal-words>Identity &amp; Brand</h3>
+            <p class="start__note">A mark is where it starts, not where it ends. You leave with the system behind it &mdash; type, colour, layout rules &mdash; so everything printed after this still looks like you.</p>
+            <span class="start__go meta">See brand work &#8594;</span>
+          </a>
+
+          <a class="start__card" href="#cat-websites" data-cursor="SEE WORK">
+            <span class="start__n meta">02</span>
+            <h3 class="start__title" data-reveal-words>Websites &amp; Products</h3>
+            <p class="start__note">Designed and built by the same person, so nothing is lost in handoff &mdash; and shipped with an admin panel, so you are not paying a developer to change a notice.</p>
+            <span class="start__go meta">See live sites &#8594;</span>
+          </a>
+
+          <a class="start__card" href="#cat-poster-designs" data-cursor="SEE WORK">
+            <span class="start__n meta">03</span>
+            <h3 class="start__title" data-reveal-words>Editorial &amp; Print</h3>
+            <p class="start__note">Posters, covers and layouts set for a real press &mdash; bleed, trim and ink accounted for &mdash; in English and Devanagari both.</p>
+            <span class="start__go meta">See print work &#8594;</span>
+          </a>
+
+        </div>
+
+        <div class="start__clients">
+          <p class="start__clients-label meta">Recent clients</p>
+          <ul class="client-row">
+            <li><img src="assets/clients/umv-adla.webp" alt="U.M.V. Adla" width="309" height="320" loading="lazy" decoding="async"></li>
+            <li><img src="assets/clients/sharda-palace.webp" alt="Sharda Palace" width="640" height="477" loading="lazy" decoding="async"></li>
+            <li><img src="assets/clients/sp-services.webp" alt="SP Services" width="320" height="320" loading="lazy" decoding="async"></li>
+          </ul>
+        </div>
 
       </div>
     </section>
@@ -71,11 +137,11 @@
         </div>
         
         <div class="service" id="service-design">
-          <button class="row service__trigger" aria-expanded="false" aria-controls="panel-design" data-cursor="OPEN">
+          <a class="row service__trigger" href="#cat-graphic-design" data-cursor="SEE WORK">
             <span class="row__meta meta">01</span>
             <span class="display-l">DESIGN</span>
-            <span class="row__icon" aria-hidden="true">+</span>
-          </button>
+            <span class="row__icon" aria-hidden="true">&#8594;</span>
+          </a>
           <div class="service__panel" id="panel-design">
             <div class="panel-content body-text">
               Identity systems, brand strategy, editorial and print. I work from the core idea outward, so the visual language still holds up three years later.
@@ -84,11 +150,11 @@
         </div>
         
         <div class="service" id="service-motion">
-          <button class="row service__trigger" aria-expanded="false" aria-controls="panel-motion" data-cursor="OPEN">
+          <a class="row service__trigger" href="#cat-kinetic-showreel" data-cursor="SEE WORK">
             <span class="row__meta meta">02</span>
             <span class="display-l">MOTION</span>
-            <span class="row__icon" aria-hidden="true">+</span>
-          </button>
+            <span class="row__icon" aria-hidden="true">&#8594;</span>
+          </a>
           <div class="service__panel" id="panel-motion">
             <div class="panel-content body-text">
               Kinetic typography, title sequences and interface motion. Animation that carries meaning rather than decorating a static frame.
@@ -97,11 +163,11 @@
         </div>
         
         <div class="service" id="service-build">
-          <button class="row service__trigger" aria-expanded="false" aria-controls="panel-build" data-cursor="OPEN">
+          <a class="row service__trigger" href="#cat-websites" data-cursor="SEE WORK">
             <span class="row__meta meta">03</span>
             <span class="display-l">BUILD</span>
-            <span class="row__icon" aria-hidden="true">+</span>
-          </button>
+            <span class="row__icon" aria-hidden="true">&#8594;</span>
+          </a>
           <div class="service__panel" id="panel-build">
             <div class="panel-content body-text">
               Web Design &amp; Development.
@@ -126,16 +192,171 @@
       </div>
     </section>
 
-    <!-- 4. About (Dark) -->
-    <section id="about" class="section--dark about-section">
-      <div class="about__card">
-        <div class="about__content">
-          <img src="assets/resume-hero.webp" alt="Portrait of K. Mangalam" class="about__portrait" loading="lazy" width="160" height="160">
-          <div class="about__bio">
-            <h2 class="display-l">An Engineer, Designer &amp; Developer.</h2>
-            <p class="body-text">I started in engineering and moved toward design without leaving the code behind. That means a project doesn&rsquo;t stop at a handoff file &mdash; the thing that ships is the thing that was designed.</p>
+    <!-- 4. About / Resume -->
+    <section id="about" class="about-section">
+      <div class="about__pin">
+        <div class="about__card section--dark">
+          <div class="wrap about__inner">
+
+            <p class="about__eyebrow meta">
+              <span>03 &mdash; Resume</span>
+              <span>Patna, India</span>
+            </p>
+
+            <div class="about__content">
+
+              <div class="about__now">
+                <p class="about__now-label meta">Currently working in</p>
+                <h3 class="about__now-word" data-scramble>Photography</h3>
+                <p class="about__now-meta meta">
+                  <span class="about__now-index">01 / 08</span>
+                  <span class="about__now-tags">Street / Portrait / B&amp;W</span>
+                </p>
+                <ol class="about__rail" aria-hidden="true"></ol>
+              </div>
+
+              <div class="about__bio">
+                <h2 class="about__title">From engineering<br>to design, without<br>leaving the code.</h2>
+                <p class="body-text">A project doesn&rsquo;t stop at a handoff file. I draw the idea, set the type, build the pages and ship them &mdash; so the thing that goes live is the thing that was designed, not an approximation of it.</p>
+              </div>
+
+              <div class="about__exp">
+                <p class="about__exp-label meta">Experience</p>
+                <ol class="about__exp-list">
+                  <li>
+                    <a class="about__exp-item" href="eng-jspl.html" data-cursor="READ">
+                      <span class="about__exp-years meta">2023 &mdash; 2024</span>
+                      <span class="about__exp-role">Assistant Manager</span>
+                      <span class="about__exp-org meta">Jindal Steel &amp; Power</span>
+                      <span class="about__exp-note">Control room, Steel Melting Shop. Commissioned JSPL&rsquo;s first twin-strand slab caster; led 20+ engineers across shift operations.</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="about__exp-item" href="eng-sail.html" data-cursor="READ">
+                      <span class="about__exp-years meta">2022</span>
+                      <span class="about__exp-role">Summer Intern</span>
+                      <span class="about__exp-org meta">SAIL &amp; EIL</span>
+                      <span class="about__exp-note">Locomotive maintenance at Rourkela Steel Plant, then pump process data sheets in EIL&rsquo;s Rotating Equipment Division.</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="about__exp-item" href="#work" data-cursor="VIEW">
+                      <span class="about__exp-years meta">2017 &mdash; Now</span>
+                      <span class="about__exp-role">Independent Practice</span>
+                      <span class="about__exp-org meta">Design &amp; Build</span>
+                      <span class="about__exp-note">Identity, editorial and poster work, photography and shipped websites for clients across India.</span>
+                    </a>
+                  </li>
+                </ol>
+              </div>
+
+            </div>
+
+            <div class="about__caps">
+              <div class="about__cap">
+                <span class="meta">Design</span>
+                <ul><li>Photoshop</li><li>Illustrator</li><li>InDesign</li><li>Lightroom</li><li>Figma</li></ul>
+              </div>
+              <div class="about__cap">
+                <span class="meta">Motion</span>
+                <ul><li>After Effects</li><li>Premiere Pro</li><li>Blender</li></ul>
+              </div>
+              <div class="about__cap">
+                <span class="meta">Build</span>
+                <ul><li>HTML &amp; CSS</li><li>JavaScript</li><li>React</li><li>GSAP</li><li>Python</li><li>Git</li></ul>
+              </div>
+              <div class="about__cap">
+                <span class="meta">AI &amp; Tooling</span>
+                <ul><li>Gemini API</li><li>FastAPI</li><li>Claude Code</li><li>VS Code</li></ul>
+              </div>
+              <div class="about__cap">
+                <span class="meta">Practice</span>
+                <ul><li>Brand identity</li><li>Editorial &amp; poster</li><li>Photography</li><li>Web design &amp; build</li></ul>
+              </div>
+            </div>
+
+            <div class="about__foot">
+              <p class="meta about__status">
+                <span class="status-dot" aria-hidden="true"></span>
+                Available for work &mdash; 2026
+              </p>
+              <a class="button-chip meta" href="assets/kumar-mangalam-resume.pdf" target="_blank" rel="noopener" data-cursor="OPEN CV">Download CV &#8599;</a>
+            </div>
+
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- 5. Engineering -->
+    <section id="engineering" class="eng-section">
+      <div class="wrap">
+
+        <div class="cat-header eng-header">
+          <span class="cat-header__meta">
+            <span class="cat-header__n meta">04</span>
+            <span class="meta">Software / Automation / AI</span>
+          </span>
+          <span class="cat-header__count meta">5 projects</span>
+          <h2 class="cat-header__title display-l" data-reveal-words>Engineering</h2>
+        </div>
+
+        <p class="eng-lede body-text">Before the design work there was a control room. I still build the technical side &mdash; extraction pipelines, dashboards, automation and AI tooling &mdash; and it&rsquo;s the reason the web work doesn&rsquo;t stop at a mockup.</p>
+
+                <div class="eng-list">
+          <a class="eng-row" href="eng-fintabula.html" data-cursor="READ">
+            <span class="eng-row__meta meta">2024&ndash;Now &middot; AI Engineering</span>
+            <span class="eng-row__body">
+              <h4 class="eng-row__title">FinTabula</h4>
+              <span class="eng-row__note">Financial-statement table extractor. Rebuilds multi-page balance sheets, P&amp;Ls and cash-flow tables from PDFs into styled Excel workbooks, using pdfplumber locally or Gemini 1.5 Flash when the layout defeats it.</span>
+              <span class="eng-row__stack meta">FastAPI &middot; pdfplumber &middot; Gemini</span>
+            </span>
+            <span class="eng-row__icon" aria-hidden="true">&#8594;</span>
+          </a>
+
+          <a class="eng-row" href="eng-whatsapp.html" data-cursor="READ">
+            <span class="eng-row__meta meta">2024&ndash;Now &middot; Generative AI</span>
+            <span class="eng-row__body">
+              <h4 class="eng-row__title">WhatsApp Command Center</h4>
+              <span class="eng-row__note">An AI chief of staff sitting on top of WhatsApp. Reads a live message database and turns unstructured group chatter into summaries, priority matrices and deadlines.</span>
+              <span class="eng-row__stack meta">Baileys &middot; SQLite &middot; Gemini</span>
+            </span>
+            <span class="eng-row__icon" aria-hidden="true">&#8594;</span>
+          </a>
+
+          <a class="eng-row" href="eng-scm.html" data-cursor="READ">
+            <span class="eng-row__meta meta">2024&ndash;Now &middot; Logistics</span>
+            <span class="eng-row__body">
+              <h4 class="eng-row__title">SCM Mission Control</h4>
+              <span class="eng-row__note">Real-time supply-chain dashboard: end-to-end route visibility, live traffic speed against free-flow, predictive delay forecasting and multi-API weather along the corridor.</span>
+              <span class="eng-row__stack meta">TomTom Traffic API &middot; Weather APIs</span>
+            </span>
+            <span class="eng-row__icon" aria-hidden="true">&#8594;</span>
+          </a>
+
+          <a class="eng-row" href="eng-tools101.html" data-cursor="READ">
+            <span class="eng-row__meta meta">2024&ndash;Now &middot; Workflow Tools</span>
+            <span class="eng-row__body">
+              <h4 class="eng-row__title">Tools 101 Suite</h4>
+              <span class="eng-row__note">A monorepo of automation built to kill repetitive work &mdash; bulk WhatsApp community management, a desktop automation widget, and file-sync utilities.</span>
+              <span class="eng-row__stack meta">Python &middot; Node &middot; Shell</span>
+            </span>
+            <span class="eng-row__icon" aria-hidden="true">&#8594;</span>
+          </a>
+
+          <a class="eng-row" href="eng-pdf-bot.html" data-cursor="READ">
+            <span class="eng-row__meta meta">2024 &middot; Python &amp; API</span>
+            <span class="eng-row__body">
+              <h4 class="eng-row__title">Telegram &rarr; Drive Sync</h4>
+              <span class="eng-row__note">An asynchronous bridge between a Telegram channel and Google Drive. Concurrent downloads with smart filtering, so PDFs archive themselves without anyone touching it.</span>
+              <span class="eng-row__stack meta">Telethon &middot; asyncio &middot; Drive API</span>
+            </span>
+            <span class="eng-row__icon" aria-hidden="true">&#8594;</span>
+          </a>
+        </div>
+
+        <a class="button-chip meta eng-all" href="engineering.html" data-cursor="OPEN">All engineering work &#8594;</a>
+
       </div>
     </section>
 
@@ -143,36 +364,50 @@
     <section id="values" class="section--dark values-section">
       <div class="wrap">
         <div class="row">
-          <h2 class="row__meta meta">03. Philosophy</h2>
+          <h2 class="row__meta meta">05. Process</h2>
           <div class="display-l" aria-hidden="true">&nbsp;</div>
         </div>
-        
-        <div class="value-list">
-          <!-- Value rows -->
-          <div class="row value-row">
+
+        <p class="process__lede body-text">Four steps, one person, a date agreed at the start and held to. A brand identity runs three to four weeks; a full site, six to ten.</p>
+
+        <div class="value-list process-list">
+
+          <div class="row value-row process-row">
             <span class="row__meta meta">01</span>
-            <span class="display-l value-row__label">Fixed scope</span>
+            <span class="display-l value-row__label">Brief</span>
+            <span class="process-row__body">
+              <span class="process-row__principle meta">Fixed scope</span>
+              <span class="process-row__note">We write down what is in and what is out before anything starts. The number I quote is the number you pay.</span>
+            </span>
           </div>
-          <div class="row value-row">
+
+          <div class="row value-row process-row">
             <span class="row__meta meta">02</span>
-            <span class="display-l value-row__label">Honest timelines</span>
+            <span class="display-l value-row__label">Design</span>
+            <span class="process-row__body">
+              <span class="process-row__principle meta">Designed, then built</span>
+              <span class="process-row__note">Directions, then one chosen route taken all the way. You see real layouts with your own content, not filler.</span>
+            </span>
           </div>
-          <div class="row value-row">
+
+          <div class="row value-row process-row">
             <span class="row__meta meta">03</span>
-            <span class="display-l value-row__label">One point of contact</span>
+            <span class="display-l value-row__label">Build</span>
+            <span class="process-row__body">
+              <span class="process-row__principle meta">One point of contact</span>
+              <span class="process-row__note">The person who drew it is the person who builds it. No handoff, no translation loss, no third party to chase.</span>
+            </span>
           </div>
-          <div class="row value-row">
+
+          <div class="row value-row process-row">
             <span class="row__meta meta">04</span>
-            <span class="display-l value-row__label">Built to hand over</span>
+            <span class="display-l value-row__label">Handover</span>
+            <span class="process-row__body">
+              <span class="process-row__principle meta">Yours to run</span>
+              <span class="process-row__note">Source files, fonts and an admin panel where the content actually changes &mdash; so routine updates never come back to me.</span>
+            </span>
           </div>
-          <div class="row value-row">
-            <span class="row__meta meta">05</span>
-            <span class="display-l value-row__label">Designed, then built</span>
-          </div>
-          <div class="row value-row">
-            <span class="row__meta meta">06</span>
-            <span class="display-l value-row__label">Still here after launch</span>
-          </div>
+
         </div>
       </div>
     </section>
@@ -181,32 +416,58 @@
     <section id="faq" class="faq-section">
       <div class="wrap">
         <div class="row">
-          <h2 class="row__meta meta">04. FAQ</h2>
+          <h2 class="row__meta meta">06. FAQ</h2>
           <div class="display-l" aria-hidden="true">&nbsp;</div>
         </div>
         
         <div class="faq" id="faq-1">
           <button class="row faq__trigger" aria-expanded="false" aria-controls="faq-panel-1" data-cursor="OPEN">
             <span class="row__meta meta">01</span>
-            <span class="display-m">What's your typical timeline?</span>
+            <span class="display-m">What does a project usually cost?</span>
             <span class="row__icon" aria-hidden="true">+</span>
           </button>
           <div class="faq__panel" id="faq-panel-1">
             <div class="panel-content body-text">
-              A marketing site runs 4&ndash;8 weeks. Internal tools and CRMs run 10&ndash;12, depending on how many modules are in scope.
+              Most work is quoted as a fixed price against a defined scope, so you know the number before anything starts. A marketing site and a twelve-module internal tool are different orders of magnitude &mdash; tell me what you need and I&rsquo;ll come back with a figure, not a range.
             </div>
           </div>
         </div>
-        
+
         <div class="faq" id="faq-2">
           <button class="row faq__trigger" aria-expanded="false" aria-controls="faq-panel-2" data-cursor="OPEN">
             <span class="row__meta meta">02</span>
-            <span class="display-m">Do you write the copy?</span>
+            <span class="display-m">How long does it take?</span>
             <span class="row__icon" aria-hidden="true">+</span>
           </button>
           <div class="faq__panel" id="faq-panel-2">
             <div class="panel-content body-text">
-              I&rsquo;ll handle structure and UX writing &mdash; labels, empty states, error messages. Long-form brand copy is better from you or a copywriter who knows the business.
+              A marketing site runs 4&ndash;8 weeks. Internal tools and CRMs run 10&ndash;12, depending on how many modules are in scope. Brand identity and print work are usually 2&ndash;4.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq" id="faq-3">
+          <button class="row faq__trigger" aria-expanded="false" aria-controls="faq-panel-3" data-cursor="OPEN">
+            <span class="row__meta meta">03</span>
+            <span class="display-m">Do you design and build, or just one?</span>
+            <span class="row__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq__panel" id="faq-panel-3">
+            <div class="panel-content body-text">
+              Both, and that&rsquo;s the point. There&rsquo;s no handoff file and no second party interpreting it &mdash; the thing that goes live is the thing that was designed.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq" id="faq-4">
+          <button class="row faq__trigger" aria-expanded="false" aria-controls="faq-panel-4" data-cursor="OPEN">
+            <span class="row__meta meta">04</span>
+            <span class="display-m">Can I update the site myself afterwards?</span>
+            <span class="row__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq__panel" id="faq-panel-4">
+            <div class="panel-content body-text">
+              Yes. U.M.V. Adla ships with an admin panel for notices, images and page content, so day-to-day changes never touch the code. I build that in wherever the content actually changes.
             </div>
           </div>
         </div>
@@ -217,39 +478,74 @@
     <section id="contact" class="section--dark cta-section">
       <div class="wrap">
         <div class="cta-panel">
-          <h2 class="display-huge">Let's Create.</h2>
-          <a href="mailto:kumarmangalam.patna@gmail.com" class="button-chip meta primary">Get in Touch</a>
+          <canvas class="cta__bg" aria-hidden="true"></canvas>
+          <div class="cta-panel__body">
+            <p class="cta-panel__eyebrow meta">Open for commissions &mdash; identity, editorial, web</p>
+            <h2 class="display-huge">Let's Create.</h2>
+            <a href="mailto:kumarmangalam.patna@gmail.com" class="button-chip meta primary" data-contact data-cursor="SAY HI">Get in Touch</a>
+          </div>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- 8. Footer (Light) -->
+  <!-- 8. Footer -->
   <footer class="site-footer">
     <div class="wrap">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <a href="/" class="display-m">K. MANGALAM</a>
+
+      <div class="footer-top">
+        <div class="footer-col footer-col--brand">
+          <a href="/" class="footer-mark display-m">K. MANGALAM</a>
+          <p class="footer-blurb">Illustration, brutalist typography and the websites they end up on. Designed and built by one pair of hands, in Patna.</p>
+          <p class="meta footer-status">
+            <span class="status-dot" aria-hidden="true"></span>
+            Available for work &mdash; 2026
+          </p>
         </div>
+
         <div class="footer-col">
-          <span class="label">Social</span>
+          <span class="label footer-col__head">Explore</span>
           <ul class="footer-links meta">
-            <li><a href="https://instagram.com/" rel="me">Instagram</a></li>
-            <li><a href="#">Twitter</a></li>
-            <li><a href="#">LinkedIn</a></li>
+            <li><a href="#start">Start here</a></li>
+            <li><a href="#work">Selected work</a></li>
+            <li><a href="#about">Resume</a></li>
+            <li><a href="engineering.html">Engineering</a></li>
+            <li><a href="writings.html">Blogs</a></li>
           </ul>
         </div>
+
         <div class="footer-col">
-          <span class="label">Location</span>
-          <p class="meta">Patna, India</p>
+          <span class="label footer-col__head">Elsewhere</span>
+          <ul class="footer-links meta">
+            <li><a href="https://www.behance.net/kumarmangalam3" target="_blank" rel="me noopener">Behance &#8599;</a></li>
+            <li><a href="https://instagram.com/" target="_blank" rel="me noopener">Instagram &#8599;</a></li>
+            <li><a href="#">LinkedIn &#8599;</a></li>
+            <li><a href="mailto:kumarmangalam.patna@gmail.com">Email</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <span class="label footer-col__head">Studio</span>
+          <ul class="footer-links meta">
+            <li>Patna, India</li>
+            <li><span class="footer-clock" data-clock>&mdash;&mdash;</span> local</li>
+            <li>Creating since 2017</li>
+          </ul>
+          <a class="button-chip meta primary footer-cta" href="#contact" data-contact data-cursor="SAY HI">Start a project &#8599;</a>
         </div>
       </div>
+
       <div class="footer-legal row">
         <span class="meta">&copy; 2026 K. Mangalam</span>
-        <span class="meta">All Rights Reserved</span>
+        <span class="meta footer-colophon">Anton &amp; Archivo &middot; built by hand</span>
+        <button class="meta footer-top-link" type="button" data-top data-cursor="TOP">Back to top &#8593;</button>
       </div>
+
     </div>
+
+    <!-- the wordmark runs off the page, clipped, as a sign-off -->
+    <div class="footer-wordmark" aria-hidden="true"><span>MANGALAM</span></div>
   </footer>
 
   <!-- Cursor Pill -->

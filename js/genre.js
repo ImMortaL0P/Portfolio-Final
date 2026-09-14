@@ -1,3 +1,4 @@
+import { scrambleTo, swapTo } from './scramble.js';
 /* ------------------------------------------------------------------
    HERO GENRE ENGINE
    A canvas that cycles through the eight disciplines, drawing a small
@@ -6,11 +7,35 @@
 ------------------------------------------------------------------ */
 
 /* Drawn straight onto the page ground: ink on paper, no panel behind it. */
-const INK = '#111111';
-const GROUND = '#111111';   /* "bright" marks are now ink */
+/* The scenes are drawn in the page's own ink, so they have to follow the
+   theme. These are reassigned from the live tokens at init and whenever
+   the theme changes — the accent never moves. */
+let INK_RGB = '17,17,17';
+let INK_GAIN = 1;
+
+/* Every mark in every scene goes through this, so one assignment in
+   syncPalette() re-inks the whole set. Light ink on a near-black ground
+   reads weaker than dark ink on paper at the same alpha, so dark mode
+   carries a gain — the hierarchy between marks is preserved, the whole
+   drawing just holds its presence. */
+function ink(a) { return 'rgba(' + INK_RGB + ',' + Math.min(1, a * INK_GAIN) + ')'; }
+
+let INK = '#111111';
+let GROUND = '#111111';     /* "bright" marks are drawn in ink */
+let DIM = ink(0.24);
+let MID = ink(0.62);
 const ACCENT = '#FF4C24';
-const DIM = 'rgba(17,17,17,0.24)';
-const MID = 'rgba(17,17,17,0.62)';
+
+function syncPalette() {
+  const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+  INK_RGB = dark ? '239,237,232' : '17,17,17';
+  INK_GAIN = dark ? 1.6 : 1;
+  INK = GROUND = dark ? '#EFEDE8' : '#111111';
+  DIM = ink(dark ? 0.26 : 0.24);
+  MID = ink(dark ? 0.64 : 0.62);
+}
+syncPalette();
+addEventListener('themechange', syncPalette);
 
 const easeInOut = (t) => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
 const easeOut = (t) => 1 - Math.pow(1 - t, 3);
@@ -39,9 +64,9 @@ function photography(c, w, h, t) {
     c.lineTo(cx + Math.cos(a2) * R * open, cy + Math.sin(a2) * R * open);
     c.lineTo(cx + Math.cos(a2) * R * 1.7, cy + Math.sin(a2) * R * 1.7);
     c.closePath();
-    c.fillStyle = i % 2 ? 'rgba(17,17,17,0.13)' : 'rgba(17,17,17,0.07)';
+    c.fillStyle = i % 2 ? ink(0.13) : ink(0.07);
     c.fill();
-    c.strokeStyle = 'rgba(17,17,17,0.42)'; c.stroke();
+    c.strokeStyle = ink(0.42); c.stroke();
   }
 
   c.beginPath(); c.arc(cx, cy, R * open, 0, Math.PI * 2);
@@ -52,39 +77,110 @@ function photography(c, w, h, t) {
   c.fillText('1/250  ISO 200', 16, h - 24);
 }
 
-/* ---------- 02 Illustrations: a line that draws itself ---------- */
+/* ---------- 02 Illustrations: a profile drawn the way you'd draw one ----------
+   Construction marks first, then the contour, then hatching, then the one
+   piece of colour. That sequence is the actual craft, so it's the diagram. */
+function catmullRom(pts, samples) {
+  const out = [];
+  const n = pts.length;
+  for (let i = 0; i < n; i++) {
+    const p0 = pts[(i - 1 + n) % n], p1 = pts[i], p2 = pts[(i + 1) % n], p3 = pts[(i + 2) % n];
+    for (let j = 0; j < samples; j++) {
+      const t = j / samples, t2 = t * t, t3 = t2 * t;
+      out.push([
+        0.5 * ((2 * p1[0]) + (-p0[0] + p2[0]) * t + (2 * p0[0] - 5 * p1[0] + 4 * p2[0] - p3[0]) * t2 + (-p0[0] + 3 * p1[0] - 3 * p2[0] + p3[0]) * t3),
+        0.5 * ((2 * p1[1]) + (-p0[1] + p2[1]) * t + (2 * p0[1] - 5 * p1[1] + 4 * p2[1] - p3[1]) * t2 + (-p0[1] + 3 * p1[1] - 3 * p2[1] + p3[1]) * t3)
+      ]);
+    }
+  }
+  return out;
+}
+
+/* left-facing profile, normalised to a 0..1 box */
+const HEAD = [
+  [0.62, 0.04], [0.44, 0.07], [0.31, 0.16], [0.26, 0.28],
+  [0.27, 0.36], [0.21, 0.45], [0.30, 0.50], [0.27, 0.56],
+  [0.32, 0.62], [0.29, 0.70], [0.41, 0.80], [0.58, 0.85],
+  [0.73, 0.78], [0.79, 0.60], [0.80, 0.34], [0.74, 0.13]
+];
+
 function illustrations(c, w, h, t) {
-  const p = easeInOut(clamp01(t * 1.25));
-  const cx = w / 2, cy = h * 0.46, R = Math.min(w, h) * 0.3;
-  const N = 320, upto = Math.floor(N * p);
+  const S = Math.min(w, h * 0.92);
+  const ox = (w - S) / 2, oy = (h - S) / 2 - h * 0.02;
+  const P = (p) => [ox + p[0] * S, oy + p[1] * S];
+  const pts = catmullRom(HEAD, 14).map(P);
 
-  c.strokeStyle = 'rgba(17,17,17,0.88)'; c.lineWidth = 2; c.beginPath();
-  for (let i = 0; i <= upto; i++) {
-    const a = (i / N) * Math.PI * 2;
-    const r = R * (1 + 0.30 * Math.sin(a * 3 + t * 2) + 0.14 * Math.sin(a * 7 - t * 3));
-    const x = cx + Math.cos(a) * r, y = cy + Math.sin(a) * r * 0.92;
-    i ? c.lineTo(x, y) : c.moveTo(x, y);
-  }
-  c.stroke();
-
-  if (upto > 2 && p < 1) {
-    const a = (upto / N) * Math.PI * 2;
-    const r = R * (1 + 0.30 * Math.sin(a * 3 + t * 2) + 0.14 * Math.sin(a * 7 - t * 3));
+  /* 1. construction — the marks you make before you commit */
+  const con = clamp01(t / 0.18);
+  if (con > 0) {
+    c.save();
+    c.globalAlpha = con * (1 - clamp01((t - 0.62) / 0.22) * 0.55);
+    c.strokeStyle = DIM; c.lineWidth = 1; c.setLineDash([4, 5]);
+    const cx = ox + S * 0.52, cy = oy + S * 0.42, R = S * 0.29;
+    c.beginPath(); c.arc(cx, cy, R * con, 0, Math.PI * 2); c.stroke();
     c.beginPath();
-    c.arc(cx + Math.cos(a) * r, cy + Math.sin(a) * r * 0.92, 3.5, 0, Math.PI * 2);
-    c.fillStyle = ACCENT; c.fill();
+    c.moveTo(ox + S * 0.18, cy); c.lineTo(ox + S * 0.86, cy);      /* eye line   */
+    c.moveTo(ox + S * 0.20, oy + S * 0.56); c.lineTo(ox + S * 0.86, oy + S * 0.56); /* nose base */
+    c.moveTo(ox + S * 0.24, oy + S * 0.68); c.lineTo(ox + S * 0.86, oy + S * 0.68); /* mouth line */
+    c.stroke();
+    c.setLineDash([]);
+    c.restore();
   }
 
-  /* fill shapes drop in behind once the contour closes */
-  const f = clamp01((p - 0.62) / 0.38);
-  if (f > 0) {
-    c.globalAlpha = f * 0.5;
-    c.fillStyle = ACCENT;
-    c.beginPath(); c.arc(cx - R * 0.34, cy - R * 0.16, R * 0.15 * f, 0, Math.PI * 2); c.fill();
-    c.fillStyle = 'rgba(17,17,17,0.45)';
-    c.beginPath(); c.arc(cx + R * 0.32, cy - R * 0.16, R * 0.15 * f, 0, Math.PI * 2); c.fill();
-    c.globalAlpha = 1;
+  /* 2. contour — one continuous line, drawn */
+  const draw = easeInOut(clamp01((t - 0.10) / 0.48));
+  const upto = Math.floor(pts.length * draw);
+  if (upto > 1) {
+    c.beginPath();
+    for (let i = 0; i < upto; i++) i ? c.lineTo(pts[i][0], pts[i][1]) : c.moveTo(pts[0][0], pts[0][1]);
+    c.strokeStyle = ink(0.92);
+    c.lineWidth = 2.4; c.lineJoin = 'round'; c.lineCap = 'round';
+    c.stroke();
+    if (draw < 1) {
+      const tip = pts[upto - 1];
+      c.beginPath(); c.arc(tip[0], tip[1], 3.5, 0, Math.PI * 2);
+      c.fillStyle = ACCENT; c.fill();
+    }
   }
+
+  /* 3. hatching — shading, clipped inside the head */
+  const hatch = clamp01((t - 0.52) / 0.30);
+  if (hatch > 0 && draw >= 1) {
+    const clip = new Path2D();
+    pts.forEach((p, i) => i ? clip.lineTo(p[0], p[1]) : clip.moveTo(p[0], p[1]));
+    clip.closePath();
+    c.save(); c.clip(clip);
+    c.strokeStyle = ink(0.30); c.lineWidth = 1.4;
+    const gap = 9, span = S * 1.15;
+    const lines = Math.floor(span / gap);
+    for (let i = 0; i < lines * hatch; i++) {
+      const d = ox + S * 0.46 + i * gap;
+      c.beginPath(); c.moveTo(d, oy - S * 0.1); c.lineTo(d - S * 0.55, oy + S * 1.05); c.stroke();
+    }
+    c.restore();
+  }
+
+  /* 4. the one piece of colour */
+  const col = clamp01((t - 0.74) / 0.22);
+  if (col > 0) {
+    const ex = ox + S * 0.375, ey = oy + S * 0.415;
+    c.save();
+    c.globalAlpha = col;
+    c.beginPath();
+    c.ellipse(ex, ey, S * 0.058, S * 0.030, -0.12, 0, Math.PI * 2);
+    c.fillStyle = ACCENT; c.fill();
+    c.beginPath(); c.arc(ex + S * 0.004, ey, S * 0.013, 0, Math.PI * 2);
+    c.fillStyle = GROUND; c.fill();
+    /* brow */
+    c.beginPath();
+    c.moveTo(ex - S * 0.075, ey - S * 0.065); c.quadraticCurveTo(ex, ey - S * 0.092, ex + S * 0.072, ey - S * 0.060);
+    c.strokeStyle = ink(0.88); c.lineWidth = 3; c.lineCap = 'round'; c.stroke();
+    c.restore();
+  }
+
+  c.fillStyle = MID; c.font = '11px "Spline Sans Mono", monospace';
+  const stage = t < 0.18 ? 'CONSTRUCTION' : t < 0.58 ? 'CONTOUR' : t < 0.80 ? 'SHADING' : 'COLOUR';
+  c.fillText(stage, 0, h - 8);
 }
 
 /* ---------- 03 Design: a modular grid assembling ---------- */
@@ -111,7 +207,7 @@ function design(c, w, h, t) {
     const x = pad + b[0] * gw, y = oy + b[1] * gh;
     const bw = b[2] * gw, bh = b[3] * gh;
     c.globalAlpha = s;
-    c.fillStyle = i === 3 ? ACCENT : 'rgba(17,17,17,' + (0.17 + (i % 3) * 0.11) + ')';
+    c.fillStyle = i === 3 ? ACCENT : ink(0.17 + (i % 3) * 0.11);
     c.fillRect(x + 3, y + 3 - (1 - s) * 14, bw - 6, bh - 6);
     c.globalAlpha = 1;
   });
@@ -121,7 +217,7 @@ function design(c, w, h, t) {
 function posters(c, w, h, t) {
   const pw = w * 0.54, ph = pw * Math.SQRT2, px = (w - pw) / 2, py = h * 0.5 - ph / 2;
 
-  c.fillStyle = 'rgba(17,17,17,0.08)'; c.fillRect(px, py, pw, ph);
+  c.fillStyle = ink(0.08); c.fillRect(px, py, pw, ph);
   c.strokeStyle = DIM; c.lineWidth = 1; c.strokeRect(px, py, pw, ph);
 
   /* halftone disc swelling */
@@ -134,7 +230,7 @@ function posters(c, w, h, t) {
       if (d > R) continue;
       const r = (1 - d / R) * 3.1;
       c.beginPath(); c.arc(cx + x, cy + y, r, 0, Math.PI * 2);
-      c.fillStyle = d / R < 0.34 ? ACCENT : 'rgba(17,17,17,0.78)';
+      c.fillStyle = d / R < 0.34 ? ACCENT : ink(0.78);
       c.fill();
     }
   }
@@ -153,9 +249,9 @@ function websites(c, w, h, t) {
   const bw = w * (0.74 - 0.36 * narrow), bh = h * 0.62;
   const bx = (w - bw) / 2, by = h * 0.2;
 
-  c.strokeStyle = 'rgba(17,17,17,0.80)'; c.lineWidth = 1.6;
+  c.strokeStyle = ink(0.80); c.lineWidth = 1.6;
   c.strokeRect(bx, by, bw, bh);
-  c.fillStyle = 'rgba(17,17,17,0.13)'; c.fillRect(bx, by, bw, 22);
+  c.fillStyle = ink(0.13); c.fillRect(bx, by, bw, 22);
   [0, 1, 2].forEach((i) => {
     c.beginPath(); c.arc(bx + 13 + i * 13, by + 11, 3.2, 0, Math.PI * 2);
     c.fillStyle = i === 0 ? ACCENT : DIM; c.fill();
@@ -176,7 +272,7 @@ function websites(c, w, h, t) {
     const y = wide.y + (tall.y - wide.y) * ni;
     const cw = wide.w + (tall.w - wide.w) * ni;
     const ch = wide.h + (tall.h - wide.h) * ni;
-    c.fillStyle = i === 1 ? 'rgba(255,76,36,0.38)' : 'rgba(17,17,17,0.13)';
+    c.fillStyle = i === 1 ? 'rgba(255,76,36,0.38)' : ink(0.13);
     c.fillRect(x, y, cw, ch);
     c.strokeStyle = i === 1 ? ACCENT : DIM; c.lineWidth = 1; c.strokeRect(x, y, cw, ch);
   }
@@ -187,34 +283,112 @@ function websites(c, w, h, t) {
 
 /* ---------- 06 Brand Design: a mark resolving ---------- */
 function brand(c, w, h, t) {
-  const cx = w / 2, cy = h * 0.44, R = Math.min(w, h) * 0.24;
-  const p = easeInOut(clamp01(t * 1.5));
-  const spin = (1 - p) * Math.PI;
+  const cx = w / 2, cy = h * 0.40;
+  const R = Math.min(w, h) * 0.215;
 
-  c.save(); c.translate(cx, cy);
-  for (let i = 0; i < 3; i++) {
-    c.save(); c.rotate(spin * (i + 1) * 0.8 + (i * Math.PI * 2) / 3);
-    c.beginPath();
-    c.arc(0, 0, R * (1 - i * 0.17), -Math.PI * 0.42, Math.PI * 0.42);
-    c.strokeStyle = i === 0 ? ACCENT : 'rgba(17,17,17,' + (0.80 - i * 0.24) + ')';
-    c.lineWidth = 3; c.stroke();
-    c.restore();
+  /* three acts: guides draw, mark assembles, system proves itself */
+  const a1 = easeInOut(clamp01(t / 0.34));            /* construction */
+  const a2 = easeInOut(clamp01((t - 0.26) / 0.40));   /* lockup */
+  const a3 = easeInOut(clamp01((t - 0.66) / 0.34));   /* scale proof */
+  const guides = 1 - a3;                              /* guides retire last */
+
+  /* ---- construction geometry ---- */
+  c.save();
+  c.translate(cx, cy);
+  c.lineWidth = 1;
+  c.strokeStyle = ink(0.20 * guides);
+
+  c.beginPath(); c.arc(0, 0, R, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * a1); c.stroke();
+
+  if (guides > 0.02) {
+    c.setLineDash([3, 5]);
+    c.beginPath(); c.arc(0, 0, R * 1.34, 0, Math.PI * 2 * a1); c.stroke();
+    const g = R * 1.34 * a1;
+    c.beginPath(); c.moveTo(-g, 0); c.lineTo(g, 0); c.moveTo(0, -g); c.lineTo(0, g); c.stroke();
+    /* the 45s a monogram actually gets built on */
+    const d = g * 0.72;
+    c.beginPath(); c.moveTo(-d, -d); c.lineTo(d, d); c.moveTo(-d, d); c.lineTo(d, -d); c.stroke();
+    c.setLineDash([]);
   }
-  c.beginPath(); c.arc(0, 0, R * 0.14 * p, 0, Math.PI * 2);
-  c.fillStyle = GROUND; c.fill();
   c.restore();
 
-  /* wordmark letter-spacing settles as the mark locks */
+  /* ---- the mark: an M cut from three strokes, swinging into lockup ---- */
+  const drawMark = (s, alpha, accent) => {
+    const r = R * s;
+    c.save();
+    c.scale(s, s);
+    c.lineWidth = Math.max(1.2, 3 / Math.max(s, 0.35)) * s;
+    c.lineCap = 'butt';
+    c.lineJoin = 'miter';
+
+    const legs = [[-1, 1], [0, -1], [1, 1]];
+    for (let i = 0; i < 3; i++) {
+      const settle = easeInOut(clamp01((a2 - i * 0.12) / 0.7));
+      const swing = (1 - settle) * (i === 1 ? 0.9 : -0.6);
+      c.save();
+      c.rotate(swing);
+      c.globalAlpha = alpha * settle;
+      c.strokeStyle = (accent && i === 1) ? ACCENT : INK;
+      c.lineWidth = R * 0.145;
+      const x = legs[i][0] * R * 0.42;
+      const top = -R * 0.46, bot = R * 0.46;
+      c.beginPath();
+      if (i === 1) { c.moveTo(-R * 0.42, top); c.lineTo(0, bot * 0.55); c.lineTo(R * 0.42, top); }
+      else { c.moveTo(x, top); c.lineTo(x, bot); }
+      c.stroke();
+      c.restore();
+    }
+    c.restore();
+    return r;
+  };
+
+  c.save(); c.translate(cx, cy); drawMark(1, 1, true); c.restore();
+
+  /* ---- act three: the same mark at three sizes, on a baseline ---- */
+  if (a3 > 0.01) {
+    const sizes = [0.42, 0.26, 0.15];
+    const gap = R * 0.9;
+    let x = cx - gap;
+    const y = cy + R * 2.05;
+    c.save();
+    c.globalAlpha = a3;
+    sizes.forEach((s, i) => {
+      const appear = clamp01((a3 - i * 0.18) / 0.5);
+      if (appear <= 0) return;
+      c.save();
+      c.translate(x, y);
+      c.globalAlpha = a3 * appear;
+      drawMark(s, 1, false);
+      c.restore();
+      c.font = '10px "Spline Sans Mono", monospace';
+      c.textAlign = 'center';
+      c.fillStyle = DIM;
+      c.fillText(['64', '32', '16'][i] + 'px', x, y + R * 0.62);
+      x += gap;
+    });
+    c.restore();
+  }
+
+  /* ---- wordmark: tracking settles as the mark locks ---- */
   const word = 'IDENTITY';
   c.font = '13px "Spline Sans Mono", monospace';
-  const track = 22 - 14 * p;
+  c.textAlign = 'left';
+  const track = 22 - 14 * a2;
   const total = word.length * track;
+  const wy = cy + R * 1.5;
   c.fillStyle = MID;
+  c.globalAlpha = a2;
   for (let i = 0; i < word.length; i++) {
-    c.fillText(word[i], cx - total / 2 + i * track, cy + R + 46);
+    c.fillText(word[i], cx - total / 2 + i * track, wy);
   }
-  c.strokeStyle = DIM; c.lineWidth = 1;
-  c.beginPath(); c.moveTo(cx - total / 2, cy + R + 58); c.lineTo(cx + total / 2, cy + R + 58); c.stroke();
+  c.globalAlpha = 1;
+
+  c.strokeStyle = DIM;
+  c.lineWidth = 1;
+  c.beginPath();
+  c.moveTo(cx - total / 2, wy + 12);
+  c.lineTo(cx - total / 2 + total * a2, wy + 12);
+  c.stroke();
 }
 
 /* ---------- 07 Kinetic Showreel: type on a timeline ---------- */
@@ -266,7 +440,7 @@ function typography(c, w, h, t) {
 
   for (let i = layers; i >= 1; i--) {
     const k = i / layers;
-    c.fillStyle = 'rgba(17,17,17,' + (0.06 + k * 0.11) + ')';
+    c.fillStyle = ink(0.06 + k * 0.11);
     c.fillText('Aa', cx + osc * 16 * k, cy + osc * 10 * k);
   }
   c.fillStyle = GROUND;
@@ -288,7 +462,7 @@ function typography(c, w, h, t) {
 export const SCENES = [
   { n: '01', name: 'Photography',      note: 'Light, framing, the decisive moment', draw: photography },
   { n: '02', name: 'Illustrations',    note: 'One line, then everything after it',  draw: illustrations },
-  { n: '03', name: 'Design',           note: 'A grid, and the judgement to break it', draw: design },
+  { n: '03', name: 'Graphic Design',   note: 'A grid, and the judgement to break it', draw: design },
   { n: '04', name: 'Poster Designs',   note: 'One idea, read from across the room',  draw: posters },
   { n: '05', name: 'Websites',         note: 'Designed and built by the same hands', draw: websites },
   { n: '06', name: 'Brand Design',     note: 'A mark that still works at 16px',      draw: brand },
@@ -342,8 +516,8 @@ export function initGenreEngine() {
   function label(k) {
     const s = SCENES[k];
     elN.textContent = s.n;
-    elName.textContent = s.name;
-    elNote.textContent = s.note;
+    scrambleTo(elName, s.name);
+    swapTo(elNote, s.note);
     bars.forEach((b, j) => b.setAttribute('aria-selected', String(j === k)));
   }
 

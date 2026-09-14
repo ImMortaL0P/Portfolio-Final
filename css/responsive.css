@@ -1,0 +1,248 @@
+/* ==================================================================
+   Mobile & responsive pass
+   Everything below 860px. The desktop layout is untouched above it.
+   ================================================================== */
+
+/* the custom cursor is a pointing-device idea; on touch it is dead
+   weight and it was also poking a pixel past the viewport edge */
+@media (hover: none), (pointer: coarse) {
+  .cursor-pill { display: none !important; }
+}
+
+/* ================= Mobile nav ================= */
+.mnav { display: none; }
+
+@media (max-width: 859.98px) {
+  /* the three dispersing pieces have nowhere to go at this width */
+  .nav-links, .nav-cta { display: none !important; }
+
+  .mnav {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 42;
+    padding: 14px var(--gutter);
+  }
+  .mnav__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    min-height: 44px;              /* a real touch target */
+    padding: 0 2px;
+    color: var(--ink);
+  }
+  body.nav-on-dark .mnav__btn { color: var(--on-dark-1); }
+  body.mnav-open .mnav__btn { color: var(--on-dark-1); }
+
+  .mnav__bars {
+    display: block;
+    width: 22px;
+    height: 12px;
+    position: relative;
+  }
+  .mnav__bars i {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background: currentColor;
+    transition: transform .35s var(--ease-out), opacity .25s var(--ease-out);
+  }
+  .mnav__bars i:first-child { top: 1px; }
+  .mnav__bars i:last-child  { bottom: 1px; }
+  .mnav.is-open .mnav__bars i:first-child { transform: translateY(4.5px) rotate(45deg); }
+  .mnav.is-open .mnav__bars i:last-child  { transform: translateY(-4.5px) rotate(-45deg); }
+
+  /* the logo keeps the left corner; the toggle moves beside the button */
+  .nav-logo { font-size: 1rem; top: 20px; }
+  .theme-toggle {
+    top: 20px;
+    right: calc(var(--gutter) + 92px);
+    gap: 7px;
+  }
+  .theme-toggle__label { display: none; }
+  body.mnav-open .theme-toggle { color: var(--on-dark-1); z-index: 43; }
+
+  /* ---- the sheet ---- */
+  .mnav__sheet {
+    position: fixed;
+    inset: 0;
+    z-index: 41;
+    background: var(--panel);
+    display: flex;
+    align-items: flex-end;
+    padding: 84px var(--gutter) calc(env(safe-area-inset-bottom, 0px) + 28px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .mnav__sheet[hidden] { display: none; }
+  .mnav__sheet-inner { width: 100%; }
+
+  .mnav__list { display: block; margin-bottom: var(--s-5); }
+  .mnav__link {
+    display: flex;
+    align-items: baseline;
+    gap: var(--s-2);
+    padding: 13px 0;
+    border-bottom: 1px solid var(--rule-dark);
+    font-family: var(--font-display);
+    font-size: clamp(1.7rem, 9vw, 2.6rem);
+    line-height: 1;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+    color: var(--on-dark-1);
+  }
+  .mnav__n { color: var(--accent); font-size: var(--text-mono); }
+  .mnav__foot { display: flex; flex-direction: column; gap: var(--s-3); align-items: flex-start; }
+  .mnav__meta { display: flex; gap: var(--s-3); color: var(--on-dark-3); }
+  .mnav__meta a { color: var(--on-dark-1); }
+
+  /* the scrim belongs to the desktop nav only */
+  .nav-scrim { display: none; }
+}
+
+/* ================= Layout below 860 ================= */
+@media (max-width: 859.98px) {
+  :root { --section-pad: 64px; }
+
+  /* the 180px label column is half the screen at this width */
+  .row { grid-template-columns: 1fr auto; gap: var(--s-2); padding-block: var(--s-3); }
+  .row__meta { grid-column: 1 / -1; margin-bottom: 2px; }
+  .value-list .row { grid-template-columns: 1fr; }
+
+  /* ---- hero ---- */
+  .hero-section { padding-top: 104px; }
+  .hero-grid { grid-template-columns: 1fr; gap: var(--s-4); }
+  .hero-heading { font-size: clamp(2.6rem, 13vw, 4.4rem); }
+  .hero-sub { font-size: 15px; max-width: none; }
+  .hero-actions { gap: 10px; }
+  .hero-actions .button-chip { flex: 1 1 auto; text-align: center; min-height: 46px; line-height: 26px; }
+  .hero-genre { min-height: 320px; }
+  /* minmax(0,…) so a long label can't push the column past the screen */
+  .hero-facts { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: var(--s-2) var(--s-3); }
+  .hero-facts dt, .hero-facts dd { overflow-wrap: anywhere; }
+
+  /* ---- start band ---- */
+  .start__head { flex-direction: column; gap: var(--s-1); }
+  .start__card { padding-block: var(--s-4); }
+  .start__card:first-child { padding-top: var(--s-3); }
+  .start__note { max-width: none; }
+  .client-row { gap: var(--s-4); justify-content: flex-start; }
+  .start__clients { text-align: left; }
+  .client-row li { height: 58px; }
+
+  /* ---- work rows ---- */
+  .work-row__strip { display: none; }   /* four thumbs do not survive 390px */
+  .cat-header { gap: var(--s-1); }
+
+  /* ---- process ---- */
+  .process-list .row { grid-template-columns: 1fr; }
+  .process-row__body { grid-column: 1; }
+  .process-row__note { max-width: none; }
+
+  /* ---- engineering / papers / projects ---- */
+  .eng-row { grid-template-columns: 1fr auto; gap: var(--s-2); }
+  .eng-row__meta { grid-column: 1 / -1; }
+  .paper-row { grid-template-columns: 1fr auto; }
+  .paper-row__n { grid-column: 1 / -1; }
+  .proj-block, .paper .paper__body { grid-template-columns: 1fr; }
+  .proj-intro, .paper-intro { grid-template-columns: 1fr; }
+  .proj-shots, .paper-figs { grid-template-columns: 1fr; }
+  .proj-pager a, .post-pager a, .paper-pager a { max-width: 47%; }
+
+  /* ---- writing ---- */
+  .writ-row { grid-template-columns: 1fr; }
+  .writ-row__thumb { max-width: 220px; }
+  .writ-filters { gap: 7px; }
+  .writ-filter { min-height: 40px; }
+
+  /* ---- footer ---- */
+  .footer-top { gap: var(--s-4); }
+  .footer-legal { grid-template-columns: 1fr; gap: 6px; }
+  .footer-top-link { justify-self: start; min-height: 40px; }
+}
+
+/* ================= The pinned resume ================= */
+/* A 100vh pinned card holding three columns cannot work on a phone.
+   At 900px and below it stops being pinned and simply flows — the same
+   boundary the ScrollTrigger matchMedia uses, so the two never overlap. */
+@media (max-width: 900px) {
+  .about-section { height: auto; }
+  .about__pin { height: auto; display: block; }
+  .about__card {
+    width: 100% !important;
+    height: auto !important;
+    border-radius: 0 !important;
+    padding-block: var(--s-6) var(--s-5);
+    /* ScrollTrigger writes inset/margin inline when it pins — neutralise
+       it in case a resize crosses the breakpoint mid-session */
+    position: static !important;
+    inset: auto !important;
+    margin: 0 !important;
+  }
+  .about__inner { max-height: none; }
+  .about__content { grid-template-columns: 1fr; gap: var(--s-4); }
+  .about__title { font-size: clamp(2rem, 10vw, 3rem); }
+  .about__now-word { font-size: clamp(1.9rem, 9vw, 2.8rem); }
+  .about__bio .body-text { font-size: 15px; max-width: none; }
+  .about__exp-note { display: block !important; }
+  .about__caps { grid-template-columns: 1fr; }
+  .about__cap { align-items: flex-start; }
+  .about__cap > .meta { flex-basis: 100%; margin-bottom: 4px; }
+  .about__foot { gap: var(--s-2); }
+}
+
+/* ================= Contact modal ================= */
+@media (max-width: 680px) {
+  .cf { padding: 0; align-items: flex-end; }
+  .cf__panel {
+    width: 100%;
+    max-height: 92dvh;
+    border-radius: var(--r-panel) var(--r-panel) 0 0;
+    padding: var(--s-4) var(--s-3) calc(env(safe-area-inset-bottom, 0px) + var(--s-3));
+  }
+  .cf__sub { display: block; font-size: 13.5px; }
+  .cf__close { top: var(--s-2); right: var(--s-2); min-height: 44px; display: flex; align-items: center; }
+  .cf__input { font-size: 16px; }   /* 16px stops iOS zooming the field on focus */
+  .cf__foot { flex-direction: column; align-items: stretch; }
+  .cf__send { text-align: center; min-height: 48px; line-height: 28px; }
+  .cf__note { text-align: center; }
+  .cf__chip span { padding: 9px 13px; }
+}
+
+/* ================= Small phones ================= */
+@media (max-width: 420px) {
+  :root { --gutter: 18px; }
+  .hero-facts { gap: var(--s-2); }
+  .hero-eyebrow { gap: 4px 8px; }
+  .start__title { font-size: clamp(1.6rem, 9vw, 2.2rem); }
+  .writ-hero__title, .proj-hero__title, .paper-hero__title { font-size: clamp(2.2rem, 13vw, 3.2rem); }
+  .cta-panel { padding: var(--s-5) var(--s-3); }
+  .display-huge { font-size: clamp(2.6rem, 15vw, 4rem); }
+  .footer-wordmark span { font-size: 22vw; }
+}
+
+/* very narrow phones: the facts go to one column rather than squeeze */
+@media (max-width: 340px) {
+  .hero-facts { grid-template-columns: minmax(0, 1fr) !important; }
+  .theme-toggle { right: calc(var(--gutter) + 78px); }
+  .nav-logo { font-size: 0.9rem; }
+}
+
+/* ================= Landscape phones ================= */
+@media (max-height: 460px) and (orientation: landscape) {
+  .hero-section { padding-top: 84px; }
+  .hero-genre { min-height: 240px; }
+  .mnav__sheet { align-items: flex-start; padding-top: 72px; }
+  .mnav__link { font-size: 1.4rem; padding: 9px 0; }
+}
+
+/* ================= Touch targets ================= */
+@media (pointer: coarse) {
+  .footer-links a,
+  .nav-links li a,
+  .writ-filter,
+  .theme-toggle { min-height: 40px; display: inline-flex; align-items: center; }
+  .button-chip { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+}

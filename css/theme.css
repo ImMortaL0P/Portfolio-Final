@@ -1,0 +1,61 @@
+/* ================= Theme toggle ================= */
+.theme-toggle {
+  position: fixed;
+  z-index: 11;
+  top: var(--s-4);
+  right: calc(var(--gutter) + 158px);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+  background: none;
+  border: 0;
+  transition: color .3s var(--ease-out), opacity .45s var(--ease-out), transform .45s var(--ease-out);
+}
+@media (max-width: 900px) {
+  /* the CTA keeps the corner on small screens; the toggle tucks under it */
+  .theme-toggle { right: var(--gutter); top: calc(var(--s-4) + 46px); }
+}
+
+.theme-toggle__track {
+  position: relative;
+  display: block;
+  width: 38px;
+  height: 20px;
+  border-radius: 99px;
+  border: 1px solid currentColor;
+  opacity: 0.55;
+  transition: opacity .3s var(--ease-out), background .3s var(--ease-out);
+}
+.theme-toggle:hover .theme-toggle__track { opacity: 1; }
+
+.theme-toggle__knob {
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  width: 12px;
+  height: 12px;
+  margin-top: -6px;
+  border-radius: 50%;
+  background: currentColor;
+  transition: transform .4s var(--ease-out), background .3s var(--ease-out);
+}
+/* in dark mode the knob travels and turns accent — the one lit thing */
+:root[data-theme="dark"] .theme-toggle__knob {
+  transform: translateX(18px);
+  background: var(--accent);
+}
+.theme-toggle__label {
+  min-width: 34px;
+  text-align: left;
+  opacity: 0.7;
+}
+.theme-toggle:hover .theme-toggle__label { opacity: 1; }
+
+/* it disperses with the rest of the nav on scroll-down */
+body.nav-hidden .theme-toggle { opacity: 0; transform: translateY(-8px); pointer-events: none; }
+body.nav-on-dark .theme-toggle { color: var(--on-dark-1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle, .theme-toggle__knob, .theme-toggle__track { transition: none; }
+}

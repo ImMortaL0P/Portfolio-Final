@@ -1,120 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
-    <script>(function(){try{var t=localStorage.getItem('mg-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>So tell me, how does a RBMK reactor core explode? — Mangalam</title>
-    <meta name="theme-color" content="#fff7f0">
-    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/chrome.css">
-    <style>
-        :root {
-            --bg: #fff7f0; --surface: #f7ead9; --cream: #0e1a16; --cream-dim: #5f746b;
-            --ink: #0b1311; --lime: #bad6ff; --lime-deep: #4a7fc4; --paper: #fdf8f2;
-            --cream-rgb: 14,26,22; --bg-rgb: 255,247,240; --easing: cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        :root[data-theme="dark"] {
-            --bg: #120a10; --surface: #1e1218; --cream: #f7ede1; --cream-dim: #b3a196;
-            --ink: #120a10; --lime: #ff6b4a; --lime-deep: var(--lime); --cream-rgb: 247,237,225; --bg-rgb: 18,10,16;
-        }
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; cursor: none; font-optical-sizing: auto; }
-        html { scroll-behavior: smooth; }
-        body { background: var(--bg); color: var(--cream); font-family: 'Bricolage Grotesque', sans-serif; overflow-x: hidden; line-height: 1.8; font-size: 1.15rem; }
-        h1, h2, h3, h4 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
-        a { color: inherit; text-decoration: none; }
-        img { max-width: 100%; display: block; border-radius: 4px; }
-        
-        .container { max-width: 1400px; margin: 0 auto; padding: 0 40px; position: relative; }
-        .flex { display: flex; justify-content: space-between; align-items: center; }
-        ::selection { background: var(--lime); color: var(--ink); }
+  <script>(function(){try{var t=localStorage.getItem('mg-theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The Chernobyl disaster is, to date, the most severe nuclear disaster in the recorded history of mankind. Many people still believe that reactor number">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>K</text></svg>">
+  <title>So tell me, how does a RBMK reactor explode? &mdash; K. Mangalam</title>
 
-        
-        
-        .article-hero { position: relative; width: 100%; height: 80vh; display: flex; align-items: center; justify-content: center; background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover; border-bottom: 1px solid rgba(var(--cream-rgb),0.08); }
-        .article-hero::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.4); z-index: 1; }
-        .article-hero-content { text-align: center; padding: 0 40px; position: relative; z-index: 2; }
-        .article-title { font-size: clamp(3rem, 7vw, 6rem); color: #fff; text-shadow: 0 4px 20px rgba(0,0,0,0.5); text-transform: uppercase; margin-bottom: 20px; }
-        .article-meta { font-size: 1rem; color: var(--cream); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
-        
-        .article-body { max-width: 1200px; margin: 90px auto 120px; padding: 0 clamp(20px, 6vw, 100px); color: var(--cream); }
-        .article-body p { margin-bottom: 32px; }
-        .article-body p strong, .article-body p b { color: var(--lime-deep); font-weight: 700; }
-        .article-body h2, .article-body h3 { margin: 60px 0 30px; color: var(--lime-deep); font-size: 2.5rem; }
-        .article-body h4 { font-size: 1.8rem; color: var(--cream); font-style: italic; margin-bottom: 20px; font-weight: 400; }
-        .article-quote { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.7rem; font-style: italic; color: var(--lime-deep); border-left: 4px solid var(--lime); padding-left: 30px; margin: 60px 0; line-height: 1.4; }
-
-        .article-image { position: relative; width: 100vw; height: 460px; margin: 70px 0 70px calc(-50vw + 50%); background-position: center; background-repeat: no-repeat; background-size: cover; box-shadow: inset 0 0 100px rgba(0,0,0,0.2); }
-        .article-image::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.1); pointer-events: none; }
-
-        .article-author { margin-top: 60px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--cream-dim); text-align: right; }
-        footer { padding: 60px 0; border-top: 1px solid rgba(var(--cream-rgb),0.12); text-align: center; color: var(--cream-dim); font-size: 0.9rem; }
-
-        @media (pointer: coarse) { *, *::before, *::after { cursor: auto !important; } .cursor-dot, .cursor-ring { display: none; } }
-        @media (max-width: 640px) {
-            .article-body { margin-top: 60px; }
-            .article-hero-content { padding: 0 24px; }
-            .article-image { height: 320px; margin: 50px 0; }
-        }
-    
-</style>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/motion.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/contact.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/post.css">
+  <link rel="stylesheet" href="css/responsive.css">
 </head>
-<body>
-    <div class="cursor-dot"></div>
-    <div class="cursor-ring"></div>
-    <nav>
-        <div class="container flex">
-            <div class="nav-left">
-                <a href="writings.html" class="back-btn hover-trigger">← Back</a>
-                <a href="index.html" class="logo hover-trigger">MANGALAM<span>.</span></a>
-            </div>
-            <div class="nav-right">
-                <button class="theme-toggle hover-trigger" onclick="toggleTheme()" aria-label="Toggle dark mode"><span class="icon-moon">☾</span><span class="icon-sun">☀</span></button>
-            <button class="menu-btn hover-trigger" onclick="toggleMenu(true)">
-                    <span class="bars"><span></span><span></span><span></span></span>
-                    Menu
-                </button>
-            </div>
-        </div>
-    </nav>
-    <div class="menu-overlay" id="menuOverlay">
-        <button class="menu-close hover-trigger" onclick="toggleMenu(false)">×</button>
-        <div class="container">
-            <div class="menu-links">
-                <a href="index.html#work" class="hover-trigger" onclick="toggleMenu(false)">Work</a>
-                <a href="index.html#about" class="hover-trigger" onclick="toggleMenu(false)">About</a>
-                <a href="engineering.html" class="hover-trigger" onclick="toggleMenu(false)">ENGINEERING</a>
-                <a href="writings.html" class="hover-trigger" onclick="toggleMenu(false)">WRITINGS</a>
-                <a href="resume.html" class="hover-trigger" onclick="toggleMenu(false)">RESUME</a>
-                <a href="index.html#contact" class="hover-trigger" onclick="toggleMenu(false)">Contact</a>
-            </div>
-        </div>
+<body class="post-page" data-post="chernobyl">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <div class="nav-scrim" aria-hidden="true"></div>
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <a href="index.html" class="nav-logo display-m">K. Mangalam</a>
+      <ul class="nav-links">
+        <li><a href="writings.html" class="label">Blogs</a></li>
+        <li><a href="index.html#work" class="label">Work</a></li>
+      </ul>
+      <a href="index.html#contact" class="nav-cta button-chip meta">Get in Touch</a>
     </div>
+  </nav>
 
-    <header class="article-hero" style="background-image: url('assets/reactorChernobly.webp');">
-        <div class="article-hero-content">
-            <h1 class="article-title">So tell me, how does a<br>RBMK reactor explode?</h1>
-            <div class="article-meta">Aug 20, 2021 • History</div>
-        </div>
+  <main id="main">
+    <header class="post-hero">
+      <div class="wrap">
+        <a class="post-back meta" href="writings.html" data-cursor="BACK">&#8592; All writing</a>
+        <p class="post-hero__meta meta">
+          <span class="post-hero__kind">History</span>
+          <span class="post-hero__date">Aug 20, 2021</span>
+          <span class="post-hero__read">7 min read</span>
+        </p>
+        <h1 class="post-hero__title">So tell me, how does a<br>RBMK reactor explode?</h1>
+      </div>
     </header>
+    <figure class="post-lead-media">
+      <img src="assets/reactorChernobly.webp" alt="" loading="eager" decoding="async">
+    </figure>
 
-    <main class="article-body">
-        <h2>Chernobyl Disaster</h2>
+    <article class="post-body wrap">
+<h2>Chernobyl Disaster</h2>
         <p><em>The Chernobyl disaster is, to date, the most severe nuclear disaster in the recorded history of mankind. Many people still believe that reactor number 4 at the Vladimir I. Lenin Nuclear Power Station exploded because it became a nuke and a nuclear explosion took place. This is not exactly true. Though the nuclear reaction spiraled out of control, it did not cause the explosion or the catastrophe. This is the science behind the Chernobyl disaster.</em></p>
 
         <p>I've watched every documentary and dramatization of this night that I could find, and the thing that stays with me isn't the fire or the radiation — it's how ordinary the whole thing sounds right up until it doesn't. A routine safety test, postponed by a few hours, run by a night shift that hadn't planned for it. No sirens. No warning. Just a sequence of small, defensible decisions that happened to line up in exactly the wrong order. Understanding how, mechanically, that happened is what turned this from a story I found unsettling into one I couldn't stop reading about.</p>
 
-        <figure class="article-image hover-trigger" style="background-image: url('assets/maskChernobly.webp');" aria-label="Chernobyl Mask"></figure>
+        <figure class="post-fig post-fig--full"><img src="assets/maskChernobly.webp" alt="Chernobyl Mask" loading="lazy" decoding="async"></figure>
 
         <p>The central component which can be rightfully credited as the main culprit in the disaster is graphite. The reactor type used at Chernobyl was the RBMK-1000 (Reaktor Bolshoy Moshchnosti Kanalniy), a Soviet design built for a very specific reason: unlike most Western reactors, it could be refueled while running, and its plumbing could — if the political will was there — be adapted to breed weapons-grade plutonium alongside civilian electricity. That dual-purpose ancestry shaped almost every compromise baked into its design. Its designers claimed it to be the “safest” reactor, since it supposedly could not cause any explosion. Later research revealed that <strong>it had several key flaws that could pile up to become catastrophic</strong>: the active removal of decay heat, the graphite displacer ends of the control rods, a positive void coefficient, and the fact that this reactor type was very unstable at lower power levels.</p>
 
-        <figure class="article-image hover-trigger" style="background-image: url('assets/deadcatChernobly.webp');" aria-label="Radiation Concept"></figure>
+        <figure class="post-fig post-fig--full"><img src="assets/deadcatChernobly.webp" alt="Radiation Concept" loading="lazy" decoding="async"></figure>
 
         <p>RBMK is a generation-II graphite-moderated, light-water-cooled reactor. So what is a moderator in a nuclear reactor? When an atom splits, it releases neutrons at near the speed of light. At this speed it becomes highly unlikely that the neutrons will strike the next atom. A neutron flux moderator — the name comes from the fact that it moderates neutron speed — is introduced into the reaction, in this case graphite. The neutrons slow down as they bounce around inside the moderator until they travel slowly enough to split more atoms. Each graphite block has a hole down the center that contains the pipes for the fuel channels and control rods. Water, the coolant, flows inside these channels at very high pressure.</p>
 
@@ -122,7 +70,7 @@
 
         <p>Due to this design flaw, the control rods caused a momentary power surge precisely when they were meant to kill the reaction. To make matters worse, the graphite tips were not made long enough to reach the base of the reactor, so some void was still left in the base when they were inserted. None of this was very critical while the reactor was functioning normally, but then a safety test came into the picture, and that is what pushed everything into catastrophe. The test was meant to simulate a blackout condition, in which the pumps circulating fresh coolant water would die and, before the backup generators came online, it would be too late. The goal was to see whether the energy from the reactor's own dying turbine could keep the pumps running in that gap. For this, the reactor had to be kept in low power mode — 700MJ instead of the ideal 3200MJ — to simulate a blackout condition.</p>
 
-        <figure class="article-image hover-trigger" style="background-image: url('assets/towerChernobly.webp');" aria-label="Roentegn"></figure>
+        <figure class="post-fig post-fig--full"><img src="assets/towerChernobly.webp" alt="Roentegn" loading="lazy" decoding="async"></figure>
 
         <p>One more factor came into play because of the RBMK's instability at low power levels: xenon. Xenon is a very strong neutron poison, and at full power the reactor burns this xenon away. The test was postponed on the day it was meant to take place, and this caused severe xenon poisoning in the core — poisoning that went beyond recovery. The only safe solution at that point was to shut the reactor down and restart it after 24 hours, a basic reactor rule: <strong>never start a reactor that has been poisoned</strong>. But the staff decided to proceed with the test anyway. To bring the power up to the desired test levels, the controllers pulled out all the control rods from the reactor, but the poisoning was so strong that the best they could achieve was 500MJ. They proceeded with the test regardless. The pumps were shut down, and now the reactor's reactivity was unchecked — fresh coolant, no control rods — so it swung instantly back to a highly reactive state and power began to rise.</p>
 
@@ -132,22 +80,35 @@
 
         <p>Who is to blame for this? Operators? Definitely. Design engineers? For sure. The government, for the cover-up? Yes. But at the end of it, the claim that an RBMK core can't explode on its own, unless pushed to the edge, was technically true — the Chernobyl explosion was caused by gases and water vapor, not a nuclear blast. There were so many lies involved that Professor Valery Legasov — the scientist appointed by the Central Committee of the Soviet Union to handle the crisis — said this in his voice notes, before committing suicide:</p>
 
-        <div class="article-quote">
+        <blockquote class="post-quote">
             “When the truth offends, we lie and lie, until we can no longer remember it is even there. But it is still there. Every lie we tell incurs a debt to the truth. Sooner or later, that debt is paid. I ask now, what is the cost of Lies?”
-        </div>
+        </blockquote>
 
         <p>What stays with me about Legasov's question is that it isn't really about nuclear engineering at all. Every one of the design flaws that caused Chernobyl was known, on paper, well before that night — to someone, in some report, filed away because admitting it would have meant admitting the reactor design that powered a large part of a superpower's grid wasn't as safe as claimed. The graphite tips, the positive void coefficient, the instability at low power: none of it was a mystery in April 1986. It was a debt, quietly accruing interest, waiting for the one night the safety margins ran out at the same time the truth did.</p>
 
         <h4>So now you know, how does a RBMK reactor core explodes.</h4>
+    </article>
 
-    </main>
+    <nav class="post-pager wrap" aria-label="Other writing">
+      <a class="post-pager__prev" href="#"><span class="meta">Previous</span><span class="post-pager__name"></span></a>
+      <a class="post-pager__next" href="#"><span class="meta">Next</span><span class="post-pager__name"></span></a>
+    </nav>
+  </main>
 
-    <footer>
-        <div class="container">&copy; 2026 Mangalam. All rights reserved.</div>
-    </footer>
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-legal row">
+        <span class="meta">&copy; 2026 K. Mangalam</span>
+        <span class="meta">All Rights Reserved</span>
+      </div>
+    </div>
+  </footer>
 
-    <script src="assets/js/chrome.js"></script>
-    <script>
-</script>
+  <div class="cursor-pill meta" aria-hidden="true" style="opacity: 0; transform: scale(0.4);">VIEW</div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script type="module" src="js/post.js"></script>
 </body>
 </html>

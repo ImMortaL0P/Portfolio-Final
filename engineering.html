@@ -1,396 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
-    <script>(function(){try{var t=localStorage.getItem('mg-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Engineering - Mangalam</title>
-    <meta name="description" content="Engineering projects and research by Mangalam.">
-    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <script>(function(){try{var t=localStorage.getItem('mg-theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Software, automation and process engineering work by K. Mangalam.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>K</text></svg>">
+  <title>Engineering &mdash; K. Mangalam</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="assets/css/chrome.css">
-    <style>
-        /* =========================================
-           1. CORE VARIABLES & RESET
-           ========================================= */
-        :root {
-            --bg: #fff7f0;
-            --surface: #f7ead9;
-            --surface-2: #eef3fb;
-            --cream: #0e1a16;
-            --cream-dim: #5f746b;
-            --ink: #0b1311;
-
-            --lime: #bad6ff;
-            --pink: #f5d9c0;
-            --violet: #d9c9f0;
-            --lime-deep: #4a7fc4;
-            --pink-deep: #c4794a;
-            --violet-deep: #7a5fb0;
-            --paper: #fdf8f2;
-            --cream-rgb: 14,26,22; --bg-rgb: 255,247,240;
-            --lime-rgb: 186,214,255;
-
-            --border-w: 1.5px;
-            --container: 1400px;
-            --easing: cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        :root[data-theme="dark"] {
-            --bg: #120a10;
-            --surface: #1e1218;
-            --surface-2: #291721;
-            --cream: #f7ede1;
-            --cream-dim: #b3a196;
-            --ink: #120a10;
-            --lime: #ff6b4a;
-            --pink: #ffb703;
-            --violet: #d94fd4;
-            --lime-deep: var(--lime);
-            --pink-deep: var(--pink);
-            --violet-deep: var(--violet);
-            --cream-rgb: 247,237,225; --bg-rgb: 18,10,16;
-            --lime-rgb: 255,107,74;
-        }
-
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; cursor: none; font-optical-sizing: auto; }
-        html { scroll-behavior: smooth; }
-
-        body {
-            background: var(--bg);
-            color: var(--cream);
-            font-family: 'Bricolage Grotesque', sans-serif;
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        h1, h2, h3 {
-            font-family: 'Bricolage Grotesque', sans-serif;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            line-height: 0.95;
-            text-transform: uppercase;
-        }
-
-        img { max-width: 100%; display: block; }
-        a { color: inherit; text-decoration: none; }
-
-        .container { max-width: var(--container); margin: 0 auto; padding: 0 40px; position: relative; }
-        .flex { display: flex; justify-content: space-between; align-items: center; }
-
-        ::selection { background: var(--lime); color: var(--ink); }
-
-        /* =========================================
-           2. AMBIENT BACKGROUND
-           ========================================= */
-        .noise-overlay {
-            position: fixed; inset: 0; pointer-events: none; z-index: 9990; opacity: 0.05; mix-blend-mode: overlay;
-            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-        }
-
-        /* =========================================
-           3. CUSTOM CURSOR
-           ========================================= */
-
-        /* =========================================
-           4. NAVIGATION
-           ========================================= */
-
-        /* Fullscreen overlay menu */
-        .menu-socials { display: flex; gap: 24px; }
-
-        /* =========================================
-           5. JOURNAL HEADER
-           ========================================= */
-        .journal-header {
-            padding: 200px 0 100px;
-            text-align: center;
-        }
-        
-        .journal-title {
-            font-size: clamp(3rem, 10vw, 8rem);
-            margin-bottom: 30px;
-        }
-
-        .journal-subtitle {
-            font-size: 1.2rem;
-            color: var(--cream-dim);
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.5;
-        }
-
-        /* =========================================
-           6. MINIMALIST GRID (MASONRY-LIKE)
-           ========================================= */
-        .journal-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 120px 80px;
-            padding-bottom: 150px;
-        }
-
-        .journal-post {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        /* Offset for masonry effect */
-        .journal-post:nth-child(even) {
-            margin-top: 100px;
-        }
-
-        .post-image-wrapper {
-            width: 100%;
-            position: relative;
-            overflow: hidden;
-            background: var(--surface);
-        }
-
-        .post-image-wrapper.portrait {
-            padding-top: 125%; /* 4:5 aspect ratio */
-        }
-        
-        .post-image-wrapper.landscape {
-            padding-top: 75%; /* 4:3 aspect ratio */
-        }
-        
-        .post-image-wrapper.square {
-            padding-top: 100%; /* 1:1 aspect ratio */
-        }
-
-        .post-img {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            object-fit: cover;
-            transition: transform 1.2s var(--easing);
-            filter: grayscale(20%);
-        }
-
-        .journal-post:hover .post-img {
-            transform: scale(1.05);
-            filter: grayscale(0%);
-        }
-
-        .post-meta {
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid rgba(var(--cream-rgb),0.12);
-            padding-bottom: 12px;
-            font-family: 'Bricolage Grotesque', sans-serif;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--cream-dim);
-            font-weight: 700;
-        }
-
-        .post-title {
-            font-size: 2.2rem;
-            line-height: 1.1;
-            transition: color 0.3s;
-        }
-
-        .journal-post:hover .post-title {
-            color: var(--lime-deep);
-        }
-
-        .post-excerpt {
-            color: var(--cream-dim);
-            font-size: 1.05rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            opacity: 0.8;
-        }
-
-        /* =========================================
-           7. FOOTER
-           ========================================= */
-        footer { padding: 70px 0 50px; border-top: 2px solid rgba(var(--cream-rgb),0.12); text-align: center; }
-        .copyright { color: var(--cream-dim); font-size: 0.8rem; }
-
-        @media (max-width: 1024px) {
-            .journal-grid { grid-template-columns: 1fr; gap: 80px; }
-            .journal-post:nth-child(even) { margin-top: 0; }
-        }
-
-        @media (pointer: coarse) {
-            *, *::before, *::after { cursor: auto !important; }
-            .cursor-dot, .cursor-ring { display: none; }
-        }
-    
-</style>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/motion.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/contact.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/category.css">
+  <link rel="stylesheet" href="css/project.css">
+  <link rel="stylesheet" href="css/responsive.css">
 </head>
-<body>
+<body class="proj-page">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="noise-overlay" aria-hidden="true"></div>
 
-    <div class="noise-overlay"></div>
-    <div class="cursor-dot"></div>
-    <div class="cursor-ring"></div>
-
-    <nav>
-        <div class="container flex">
-            <div class="nav-left">
-                <a href="index.html" class="back-btn hover-trigger">← Back</a>
-                <a href="index.html" class="logo hover-trigger">MANGALAM<span>.</span></a>
-            </div>
-            <div class="nav-right">
-                <button class="theme-toggle hover-trigger" onclick="toggleTheme()" aria-label="Toggle dark mode"><span class="icon-moon">☾</span><span class="icon-sun">☀</span></button>
-            <button class="menu-btn hover-trigger" onclick="toggleMenu(true)">
-                    <span class="bars"><span></span><span></span><span></span></span>
-                    Menu
-                </button>
-            </div>
-        </div>
-    </nav>
-
-    <div class="menu-overlay" id="menuOverlay">
-        <button class="menu-close hover-trigger" onclick="toggleMenu(false)">×</button>
-        <div class="container">
-            <div class="menu-links">
-                <a href="index.html#work" class="hover-trigger" onclick="toggleMenu(false)">Work</a>
-                <a href="index.html#about" class="hover-trigger" onclick="toggleMenu(false)">About</a>
-                <a href="engineering.html" class="hover-trigger" onclick="toggleMenu(false)">ENGINEERING</a>
-                <a href="writings.html" class="hover-trigger" onclick="toggleMenu(false)">WRITINGS</a>
-                <a href="resume.html" class="hover-trigger" onclick="toggleMenu(false)">RESUME</a>
-                <a href="index.html#contact" class="hover-trigger" onclick="toggleMenu(false)">Contact</a>
-            </div>
-        </div>
-        <div class="container menu-footer">
-            <span>kumarmangalam.patna@gmail.com</span>
-            <div class="menu-socials">
-                <a href="https://www.linkedin.com/in/kumar-mangalam-362a77176/" target="_blank" rel="noopener noreferrer" class="hover-trigger">LinkedIn</a>
-                <a href="https://www.behance.net/kumarmangalam3" target="_blank" rel="noopener noreferrer" class="hover-trigger">Behance</a>
-                <a href="#" class="hover-trigger">Instagram</a>
-            </div>
-        </div>
+  <div class="nav-scrim" aria-hidden="true"></div>
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <a href="index.html" class="nav-logo display-m">K. Mangalam</a>
+      <ul class="nav-links">
+        <li><a href="index.html#work" class="label">All work</a></li>
+        <li><a href="index.html#about" class="label">About</a></li>
+        <li><a href="writings.html" class="label">Blogs</a></li>
+      </ul>
+      <a href="index.html#contact" class="nav-cta button-chip meta">Get in Touch</a>
     </div>
+  </nav>
 
-    <header class="journal-header container">
-        <h1 class="journal-title">Engineering</h1>
-        <p class="journal-subtitle">A showcase of technical problem-solving, automation, and research from manufacturing to software development.</p>
+  <main id="main">
+    <header class="proj-hero">
+      <div class="wrap">
+        <a class="proj-back meta" href="index.html#engineering" data-cursor="BACK">&#8592; Back to portfolio</a>
+        <p class="proj-hero__meta meta">
+          <span class="proj-hero__n">04</span>
+          <span class="proj-hero__disc">Software / Automation / Process</span>
+          <span class="eng-count"></span>
+        </p>
+        <h1 class="proj-hero__title">Engineering</h1>
+        <p class="proj-hero__kicker">Extraction pipelines, dashboards, automation and AI tooling &mdash; and, from the control room that came before them, published work on continuous casting.</p>
+      </div>
     </header>
 
-    <main class="container">
-        
-        <h2 class="section-title" style="color: var(--cream); margin-top: 40px; margin-bottom: 20px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 2rem;">Work Experience & Internships</h2>
-        <div class="journal-grid" style="padding-bottom: 80px;">
-            <a href="eng-jspl.html" class="journal-post hover-trigger">
-                <div class="post-image-wrapper landscape" style="position: relative; overflow: hidden; background: #000;">
-                    <iframe src="https://www.youtube.com/embed/UvGwIFVUK7M?autoplay=1&mute=1&controls=0&loop=1&playlist=UvGwIFVUK7M&rel=0&showinfo=0" 
-                            style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 150%; height: 150%; pointer-events: none; border: 0;" 
-                            allow="autoplay; encrypted-media" allowfullscreen loading="lazy"
-                            sandbox="allow-scripts allow-same-origin allow-presentation"></iframe>
-                </div>
-                <div class="post-meta">
-                    <span>July 2023 - Dec 2024</span>
-                    <span>Assistant Manager</span>
-                </div>
-                <h2 class="post-title">JSPL (Jindal Steel & Power Ltd)</h2>
-                <p class="post-excerpt">Commissioned JSPL's first high-speed Twin Strand Slab Caster as Control Room Engineer. Overseen Process Control, data analytics for KPI improvement, and led a team of 20+ operators.</p>
-            </a>
+    <div class="wrap">
+      <h2 class="eng-group-head meta">Software &amp; Automation</h2>
+      <div class="eng-list"></div>
 
-            <a href="eng-sail.html" class="journal-post hover-trigger">
-                <div class="post-image-wrapper landscape" style="position: relative; overflow: hidden; background: #000;">
-                    <iframe src="https://www.youtube.com/embed/d-OoVwyyZXU?autoplay=1&mute=1&controls=0&loop=1&playlist=d-OoVwyyZXU&rel=0&showinfo=0&end=39" 
-                            style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 150%; height: 150%; pointer-events: none; border: 0;" 
-                            allow="autoplay; encrypted-media" allowfullscreen loading="lazy"
-                            sandbox="allow-scripts allow-same-origin allow-presentation"></iframe>
-                </div>
-                <div class="post-meta">
-                    <span>May 2022 - July 2022</span>
-                    <span>Summer Intern</span>
-                </div>
-                <h2 class="post-title">SAIL & EIL Internships</h2>
-                <p class="post-excerpt">Assisted in 3 Diesel-Electric Locomotive Maintenance (RITES) in TRM Dept. of Rourkela Steel Plant (SAIL). Worked in Rotating Equipment Division of EIL, Delhi, drafting Process Data Sheets for Pumps.</p>
-            </a>
-        </div>
+      <h2 class="eng-group-head meta" id="research">Research</h2>
+      <p class="eng-group-lede body-text">Peer-reviewed and working papers. Summaries here; the figures, charts and detail are on each paper&rsquo;s own page.</p>
+      <div class="paper-list"></div>
+    </div>
+  </main>
 
-        <h2 class="section-title" style="color: var(--cream); margin-bottom: 20px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 2rem;">Software & Automation Projects</h2>
-        <div class="journal-grid">
-            <a href="eng-fintabula.html" class="journal-post hover-trigger">
-                <div class="post-image-wrapper square">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="FinTabula" class="post-img" loading="lazy">
-                </div>
-                <div class="post-meta">
-                    <span>2024 - Present</span>
-                    <span>AI Engineering</span>
-                </div>
-                <h2 class="post-title">FinTabula: Table Extractor</h2>
-                <p class="post-excerpt">A modern web app using pdfplumber and Gemini 1.5 Flash to intelligently scan and rebuild complex, multi-page financial statement tables into beautifully styled Excel workbooks.</p>
-            </a>
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-legal row">
+        <span class="meta">&copy; 2026 K. Mangalam</span>
+        <span class="meta">All Rights Reserved</span>
+      </div>
+    </div>
+  </footer>
 
-            <a href="eng-whatsapp.html" class="journal-post hover-trigger">
-                <div class="post-image-wrapper landscape">
-                    <img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?auto=format&fit=crop&w=1200&q=80" alt="WhatsApp Agent" class="post-img" loading="lazy">
-                </div>
-                <div class="post-meta">
-                    <span>2024 - Present</span>
-                    <span>Generative AI</span>
-                </div>
-                <h2 class="post-title">WhatsApp Command Center</h2>
-                <p class="post-excerpt">An AI Chief of Staff application that sits on top of WhatsApp (via Baileys) translating messy B-School groups into actionable summaries, priority matrices, and interactive terminal briefings using Gemini AI.</p>
-            </a>
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lightbox__close meta" type="button" aria-label="Close">Close &times;</button>
+    <button class="lightbox__nav lightbox__nav--prev" type="button" aria-label="Previous">&#8592;</button>
+    <img class="lightbox__img" alt="">
+    <button class="lightbox__nav lightbox__nav--next" type="button" aria-label="Next">&#8594;</button>
+    <p class="lightbox__cap meta"></p>
+  </div>
 
-            <a href="eng-scm.html" class="journal-post hover-trigger">
-                <div class="post-image-wrapper portrait">
-                    <img src="assets/scm-mission-control-cover.webp" alt="SCM Mission Control" class="post-img" loading="lazy">
-                </div>
-                <div class="post-meta">
-                    <span>2024 - Present</span>
-                    <span>Logistics Dashboards</span>
-                </div>
-                <h2 class="post-title">SCM Mission Control</h2>
-                <p class="post-excerpt">High-fidelity, real-time Supply Chain Mission Control Dashboard providing end-to-end route visibility, live route traffic from TomTom, and multi-API weather forecasting.</p>
-            </a>
+  <div class="cursor-pill meta" aria-hidden="true" style="opacity: 0; transform: scale(0.4);">VIEW</div>
 
-            <a href="eng-tools101.html" class="journal-post hover-trigger">
-                <div class="post-image-wrapper landscape">
-                    <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=1200&q=80" alt="Tools 101" class="post-img" loading="lazy">
-                </div>
-                <div class="post-meta">
-                    <span>2024 - Present</span>
-                    <span>Workflow Tools</span>
-                </div>
-                <h2 class="post-title">Tools 101 Suite</h2>
-                <p class="post-excerpt">Custom automation tools including a Telegram–Google Drive File Synchronization Tool, Bulk WhatsApp Community Manager, and a Desktop Automation Widget.</p>
-            </a>
-
-            <a href="eng-pdf-bot.html" class="journal-post hover-trigger">
-                <div class="post-image-wrapper square">
-                    <img src="https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?auto=format&fit=crop&w=1200&q=80" alt="PDF Bot" class="post-img" loading="lazy">
-                </div>
-                <div class="post-meta">
-                    <span>2024</span>
-                    <span>Python & API</span>
-                </div>
-                <h2 class="post-title">Telegram to Google Drive Sync</h2>
-                <p class="post-excerpt">An asynchronous Python script built with Telethon that safely extracts PDF documents from targeted Telegram channels and streams them directly into Google Drive via API.</p>
-            </a>
-        </div>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p class="copyright">&copy; 2026 Mangalam. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script src="assets/js/chrome.js"></script>
-    <script>
-        // Custom Cursor
-
-        // Mobile Menu Toggle
-</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script type="module" src="js/englist.js"></script>
 </body>
 </html>

@@ -1,0 +1,107 @@
+/* ================= Footer ================= */
+.site-footer {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(var(--s-6), 8vw, var(--s-8)) 0;
+  border-top: 1px solid var(--rule-light);
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(140px, 0.72fr));
+  gap: clamp(var(--s-4), 4vw, var(--s-6));
+  padding-bottom: clamp(var(--s-5), 6vw, var(--s-7));
+}
+@media (max-width: 1000px) {
+  .footer-top { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .footer-col--brand { grid-column: 1 / -1; }
+}
+@media (max-width: 560px) { .footer-top { grid-template-columns: 1fr; gap: var(--s-4); } }
+
+.footer-mark {
+  display: block;
+  font-size: clamp(1.4rem, 2.6vw, 2.1rem);
+  color: var(--on-light-1);
+  transition: color .3s var(--ease-out);
+}
+.footer-mark:hover { color: var(--accent); }
+.footer-blurb {
+  margin-top: var(--s-2);
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--on-light-3);
+  max-width: 40ch;
+}
+.footer-status {
+  display: flex;
+  align-items: center;
+  gap: var(--s-1);
+  margin-top: var(--s-3);
+  color: var(--on-light-2);
+}
+
+.footer-col__head {
+  display: block;
+  color: var(--accent);
+  padding-bottom: var(--s-2);
+  margin-bottom: var(--s-2);
+  border-bottom: 1px solid var(--rule-light);
+}
+.footer-links { display: flex; flex-direction: column; gap: 9px; }
+.footer-links li { color: var(--on-light-3); }
+.footer-links a {
+  color: var(--on-light-3);
+  display: inline-block;
+  transition: color .25s var(--ease-out), transform .25s var(--ease-out);
+}
+.footer-links a:hover { color: var(--accent); transform: translateX(3px); }
+
+.footer-clock { color: var(--on-light-1); font-variant-numeric: tabular-nums; }
+.footer-cta { margin-top: var(--s-3); }
+
+/* ---- legal strip ---- */
+.footer-legal {
+  grid-template-columns: 1fr auto auto;
+  gap: var(--s-3);
+  align-items: center;
+  border-bottom: 0;
+  border-top: 1px solid var(--rule-light);
+  padding-block: var(--s-3);
+}
+@media (max-width: 700px) {
+  .footer-legal { grid-template-columns: 1fr; gap: var(--s-1); }
+  .footer-colophon { display: none; }
+}
+.footer-legal .meta { color: var(--on-light-3); }
+.footer-top-link {
+  color: var(--on-light-3);
+  justify-self: end;
+  transition: color .25s var(--ease-out);
+}
+.footer-top-link:hover { color: var(--accent); }
+
+/* ---- oversized sign-off, clipped by the page edge ---- */
+.footer-wordmark {
+  pointer-events: none;
+  user-select: none;
+  line-height: 0.74;
+  margin-top: var(--s-3);
+  overflow: hidden;
+}
+.footer-wordmark span {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 19vw, 17rem);
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-align: center;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--rule-light);
+  /* the lower third sits below the fold of the page, so it reads as a
+     watermark rather than a headline */
+  transform: translateY(16%);
+}
+@supports not ((-webkit-text-stroke: 1px red)) {
+  .footer-wordmark span { color: var(--rule-light); }
+}
