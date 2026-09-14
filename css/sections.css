@@ -1,0 +1,219 @@
+/* --- Navigation --- */
+.nav {
+  position: relative;
+  z-index: 10;
+  height: 0; /* Elements are fixed out of this Flow */
+}
+.nav-logo, .nav-links, .nav-cta {
+  position: fixed;
+  z-index: 10;
+  top: var(--s-4);
+}
+.nav-logo {
+  left: var(--gutter);
+}
+.nav-cta {
+  right: var(--gutter);
+}
+.nav-links {
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: var(--s-3);
+  background: var(--ink);
+  color: var(--on-dark-1);
+  padding: var(--s-2) var(--s-4);
+  border-radius: 99px; /* Pill */
+}
+/* Ensure links pill contrasts over dark sections occasionally */
+.nav-links li a {
+  color: var(--ground);
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+.nav-links li a:hover {
+  opacity: 1;
+}
+
+/* Button primitive */
+.button-chip {
+  display: inline-block;
+  padding: var(--s-2) var(--s-3);
+  border-radius: var(--r-chip);
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  background: transparent;
+  transition: all 0.2s ease;
+}
+.button-chip:hover {
+  background: var(--ink);
+  color: var(--ground);
+}
+.button-chip.primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-color: var(--accent);
+}
+.button-chip.primary:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+/* --- Hero --- */
+.hero-section {
+  padding-top: 25vh;
+  padding-bottom: 15vh;
+  min-height: auto;
+}
+.hero-heading {
+  margin-bottom: var(--s-3);
+}
+.hero-actions {
+  display: flex;
+  gap: var(--s-2);
+  margin-top: var(--s-4);
+}
+
+/* --- Accordions (Services, FAQ) --- */
+.accordion-section, .faq-section {
+  padding-block: var(--s-8);
+}
+.service__trigger, .faq__trigger {
+  width: 100%;
+  text-align: left;
+  border-bottom: 1px solid var(--rule-dark);
+}
+.faq__trigger {
+  border-bottom-color: var(--rule-light);
+}
+/* Base `.row` styles applied already */
+
+.service__panel, .faq__panel {
+  height: 0;
+  opacity: 0;
+  display: block; /* Managed by GSAP */
+  overflow: hidden;
+}
+.panel-content {
+  padding-block: var(--s-4);
+  padding-left: calc(180px + var(--s-3));
+  max-width: 800px;
+}
+@media (max-width: 600px) {
+  .panel-content { padding-left: 0; }
+}
+
+/* --- Work Rows --- */
+.work-section {
+  padding-block: var(--s-8);
+}
+.work-row {
+  display: grid;
+  grid-template-columns: 180px auto 1fr auto;
+  gap: var(--s-3);
+  align-items: center;
+  padding-block: var(--s-4);
+  border-bottom: 1px solid var(--rule-light);
+  transition: background var(--dur-mid) var(--ease-out);
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  
+  /* Start height matches padding + text roughly */
+  height: clamp(90px, 12vw, 120px);
+}
+@media (max-width: 600px) {
+  .work-row { grid-template-columns: 1fr auto; height: auto; padding-block: var(--s-3); }
+  .work-row__meta { grid-column: 1 / -1; }
+  .work-row__thumb { display: none; } /* keep it simple on mobile */
+}
+
+/* Base styles for JS tween */
+.work-row__thumb {
+  width: 0;
+  opacity: 0;
+  border-radius: var(--r-panel);
+  overflow: hidden;
+}
+.work-row__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- About --- */
+.about-section {
+  /* Provide runway for pinning */
+  height: 200vh;
+  position: relative;
+}
+.about__card {
+  background: var(--ink);
+  color: var(--on-dark-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: absolute;
+  top: 0; /* Or let GSAP pin manage it */
+}
+.about__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--s-4);
+  max-width: 600px;
+  padding: var(-- gutter);
+}
+.about__portrait {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: grayscale(1);
+}
+
+/* --- Values --- */
+.values-section {
+  padding-block: var(--s-8);
+}
+.value-row__label {
+  color: var(--on-dark-dim); /* Start dark */
+}
+
+/* --- CTA --- */
+.cta-section {
+  padding-block: var(--s-8);
+}
+.cta-panel {
+  background: var(--surface-2, #1e1116);
+  border-radius: var(--r-panel);
+  padding: clamp(var(--s-4), 10vw, var(--s-8));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--s-4);
+}
+
+/* --- Footer --- */
+.site-footer {
+  padding-block: var(--s-8) var(--s-4);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: var(--s-4);
+  margin-bottom: var(--s-8);
+}
+@media (max-width: 600px) {
+  .footer-grid { grid-template-columns: 1fr; }
+}
+.footer-links li {
+  margin-bottom: var(--s-1);
+}
+.footer-legal {
+  border-top: 1px solid var(--rule-light);
+  border-bottom: none; /* Override row base */
+}

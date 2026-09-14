@@ -1,0 +1,27 @@
+:root {
+  /* ---- Ground & ink (the whole palette is two colours) ---- */
+  --ground:        #EBE9E4;  /* warm off-white sections */
+  --ink:           #111111;  /* near-black sections + type on light */
+
+  /* ---- Type on light ground ---- */
+  --on-light-1:    #111111;  /* headlines            15.56:1  AAA */
+  --on-light-2:    #333333;  /* eyebrows             10.41:1  AAA */
+  --on-light-3:    #555555;  /* body copy             6.14:1  AA  */
+
+  /* ---- Type on dark ground ---- */
+  --on-dark-1:     #EBE9E4;  /* headlines            15.56:1  AAA */
+  --on-dark-2:     #DBDBDB;  /* eyebrows             13.64:1  AAA */
+  --on-dark-3:     #AAAAAA;  /* body copy             8.13:1  AA  */
+  --on-dark-dim:   #7A7A7A;  /* resting state of lit rows — see note */
+
+  /* ---- Accent ---- */
+  --accent:        #FF4C24;  /* 5.68:1 on --ink. NEVER for text on --ground (2.74:1) */
+  --accent-ink:    #111111;
+
+  /* ---- Type scale ---- */
+  --text-huge:     clamp(5rem, 15vw, 12rem);
+  --text-h1:       clamp(3rem, 8vw, 6rem);
+  --text-h2:       clamp(2rem, 5vw, 4rem);
+  --text-p:        clamp(1rem, 2vw, 1.25rem);
+  --text-mono:     0.875rem;
+}

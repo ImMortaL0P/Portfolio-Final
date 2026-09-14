@@ -1,0 +1,187 @@
+@font-face {
+  font-family: 'Anton';
+  src: url('../assets/fonts/anton-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Archivo';
+  src: url('../assets/fonts/archivo-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Spline Sans Mono';
+  src: url('../assets/fonts/spline-sans-mono-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-display: 'Anton', impact, sans-serif;
+  --font-body: 'Archivo', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Spline Sans Mono', ui-monospace, 'SF Mono', monospace;
+  
+  --s-1: 8px;
+  --s-2: 16px;
+  --s-3: 24px;
+  --s-4: 32px;
+  --s-5: 48px;
+  --s-6: 64px;
+  --s-8: 96px;
+  
+  --r-panel: 8px;
+  --r-chip: 4px;
+  
+  --gutter: 32px;
+  --rule-light: rgba(17, 17, 17, 0.1);
+  --rule-dark: rgba(235, 233, 228, 0.1);
+  
+  --dur-mid: 0.3s;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  
+  /* Override line-height based on Section 4.3 */
+  --anton-lh: 0.84;
+}
+
+@media (max-width: 600px) {
+  :root {
+    --gutter: 20px;
+  }
+}
+
+/* Reset / Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--on-light-3);
+  background: var(--ground);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.skip {
+  position: absolute;
+  top: -100px;
+  left: 20px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: var(--s-2);
+  z-index: 100;
+  border-radius: var(--r-chip);
+}
+.skip:focus {
+  top: 20px;
+}
+
+:focus-visible { 
+  outline: 2px solid var(--accent); 
+  outline-offset: 3px; 
+}
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; cursor: pointer; border: none; background: transparent; padding: 0; }
+ul, ol { list-style: none; padding: 0; margin: 0; }
+h1, h2, h3, h4, h5, h6, p { margin: 0; font-weight: normal; }
+
+img, video { max-width: 100%; height: auto; display: block; }
+
+/* Utilities */
+.wrap {
+  padding-inline: var(--gutter);
+  max-width: 1440px;
+  margin: 0 auto;
+}
+.section--dark {
+  background: var(--ink);
+  color: var(--on-dark-3);
+}
+
+/* Typography Classes */
+.display-huge {
+  font-family: var(--font-display);
+  font-size: var(--text-huge);
+  line-height: var(--anton-lh);
+  text-transform: uppercase;
+  color: var(--on-light-1);
+}
+.section--dark .display-huge { color: var(--on-dark-1); }
+
+.hero-line-text {
+  font-family: var(--font-display);
+  font-size: min(8.16vw, 132px);
+  line-height: 0.92; /* Specific constraint for hero per spec */
+  text-transform: uppercase;
+  color: var(--on-light-1);
+}
+
+.display-l {
+  font-family: var(--font-display);
+  font-size: var(--text-h1);
+  line-height: var(--anton-lh);
+  text-transform: uppercase;
+  color: var(--on-light-1);
+}
+.section--dark .display-l { color: var(--on-dark-1); }
+
+.display-m {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  line-height: var(--anton-lh);
+  text-transform: uppercase;
+  color: var(--on-light-1);
+}
+.section--dark .display-m { color: var(--on-dark-1); }
+
+.body-text {
+  font-family: var(--font-body);
+  font-size: var(--text-p);
+  line-height: 1.5;
+  color: var(--on-light-3);
+}
+.section--dark .body-text { color: var(--on-dark-3); }
+
+.meta, .label {
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: var(--on-light-2);
+}
+.section--dark .meta, .section--dark .label { color: var(--on-dark-2); }
+
+
+/* Layout Primitives: .row */
+.row {
+  display: grid;
+  grid-template-columns: 180px 1fr auto;
+  gap: var(--s-3);
+  align-items: center;
+  padding-block: var(--s-4);
+  border-bottom: 1px solid var(--rule-light);
+  transition: background var(--dur-mid) var(--ease-out);
+  position: relative;
+}
+.section--dark .row { border-bottom-color: var(--rule-dark); }
+
+@media (max-width: 600px) {
+  .row { grid-template-columns: 1fr auto; }
+  .row__meta { grid-column: 1 / -1; margin-bottom: var(--s-1); }
+  .row { padding-block: var(--s-3); }
+}
+
+
+/* Specific overrides for sections to space them correctly */
+.work-row__title { margin: 0; }
+.work-row__icon { margin-left: auto; margin-right: 0; }
+.work-row__thumb { flex-shrink: 0; margin-right: var(--s-3); }
+
+/* Value list flex layout for non-grid values */
+.value-list .row { grid-template-columns: 180px auto; gap: var(--s-3); }
