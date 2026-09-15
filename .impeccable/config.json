@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "layout-transition",
+        "value": "*",
+        "files": [
+          "css/sections.css"
+        ],
+        "createdAt": "2026-09-15T05:55:00.026Z",
+        "reason": "Intentional layout expansion interaction"
+      }
+    ]
+  }
+}
