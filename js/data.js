@@ -64,9 +64,9 @@ export const workCategories = [
       { year: '2026', kind: 'Hotel CRM', title: 'SHARDA PALACE', href: 'https://hotel-booking-crm-community.vercel.app/', live: true,
         note: 'Twelve-module property management system — bookings, billing, OTA channel reconciliation and guest comms in one dashboard.',
         shots: ['assets/thumbs/sharda-crm-19ba1f.webp'], full: ['assets/work/sharda-crm.webp'], mid: ['assets/mid/sharda-crm-19ba1f.webp'] },
-      { year: '2026', kind: 'Creative Studio', title: 'BRUSH', href: 'https://immortal0p.github.io/Brush-Production/', live: true,
-        note: 'Interactive showcase website crafted for Brush Production to feature their creative ecosystem.',
-        shots: ['assets/thumbs/brush/brush-1.png', 'assets/thumbs/brush/brush-2.png', 'assets/thumbs/brush/brush-3.png', 'assets/thumbs/brush/brush-4.png'], full: ['assets/work/brush/brush-1.png', 'assets/work/brush/brush-2.png', 'assets/work/brush/brush-3.png', 'assets/work/brush/brush-4.png'], mid: ['assets/mid/brush/brush-1.png', 'assets/mid/brush/brush-2.png', 'assets/mid/brush/brush-3.png', 'assets/mid/brush/brush-4.png'] }
+      { year: '2026', kind: 'B2B & B2C Outlet', title: 'BRUSH', href: 'https://immortal0p.github.io/Brush-Production/', live: true,
+        note: 'A comprehensive b2b and b2c outlet for design and creative physical media needs, serving retail customers alongside institutions and corporate clients.',
+        shots: ['assets/thumbs/brush/hero.webp', 'assets/thumbs/brush/product1.webp', 'assets/thumbs/brush/admin1.webp', 'assets/thumbs/brush/admin2.webp'], full: ['assets/showcase/brush-hero.webp', 'assets/showcase/brush-product1.webp', 'assets/showcase/brush-admin1.webp', 'assets/showcase/brush-admin2.webp'], mid: ['assets/mid/brush/hero.webp', 'assets/mid/brush/product1.webp', 'assets/mid/brush/admin1.webp', 'assets/mid/brush/admin2.webp'] }
     ]
   },
   {
