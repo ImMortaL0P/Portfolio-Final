@@ -1,11 +1,9 @@
 /* ------------------------------------------------------------------
    Contact modal.
 
-   There is no backend behind this site, so the form does not pretend to
-   post anywhere. It validates, then hands a fully composed message to
-   the visitor's own mail client — which also means the enquiry arrives
-   from their real address, already structured. Swap `deliver()` for a
-   fetch to a form endpoint if that ever changes.
+   Uses FormSubmit (formsubmit.co) to send the form directly to email via AJAX.
+   The first time this runs, FormSubmit will send a confirmation email 
+   to the target address. You MUST click 'Activate' in that email.
 ------------------------------------------------------------------- */
 
 const TO = 'kumarmangalam.patna@gmail.com';
@@ -83,21 +81,21 @@ function markup() {
         <p class="cf__error meta" role="alert" hidden></p>
         <div class="cf__foot">
           <button class="button-chip meta primary cf__send" type="submit" data-cursor="SEND">Send it &#8599;</button>
-          <span class="cf__note meta">Opens in your mail app, addressed and filled in.</span>
+          <span class="cf__note meta">Sends straight to my inbox via secure SMTP.</span>
         </div>
       </form>
 
       <div class="cf__done" hidden>
-        <p class="cf__eyebrow meta">Handed to your mail app</p>
+        <p class="cf__eyebrow meta">Delivered successfully</p>
         <h3 class="cf__title">On its way.</h3>
-        <p class="cf__sub">If nothing opened, write to <a href="mailto:${TO}">${TO}</a> directly &mdash; it reaches the same place.</p>
+        <p class="cf__sub">If you have attachments, write to <a href="mailto:${TO}">${TO}</a> directly &mdash; it reaches the same place.</p>
         <button class="button-chip meta cf__again" type="button" data-close>Close</button>
       </div>
     </div>`;
   return el;
 }
 
-function deliver(data) {
+async function deliver(data) {
   const subject = `New project — ${data.kind} — ${data.name}`;
   const body = [
     `Name:      ${data.name}`,
@@ -110,7 +108,27 @@ function deliver(data) {
     '-----------',
     data.message,
   ].join('\n');
-  location.href = `mailto:${TO}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+  try {
+    const res = await fetch(`https://formsubmit.co/ajax/${TO}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        _subject: subject,
+        email: data.email,
+        name: data.name,
+        message: body
+      })
+    });
+    if (!res.ok) throw new Error('Failed to send message');
+  } catch(e) {
+    console.error(e);
+    // Fallback to mailto if ajax fails
+    location.href = `mailto:${TO}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  }
 }
 
 export function initContact() {
@@ -165,7 +183,7 @@ export function initContact() {
     else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
   });
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const d = Object.fromEntries(new FormData(form).entries());
     const missing = [];
@@ -178,7 +196,16 @@ export function initContact() {
       return;
     }
     err.hidden = true;
-    deliver(d);
+    
+    const btn = form.querySelector('.cf__send');
+    const origText = btn.innerHTML;
+    btn.innerHTML = 'Sending...';
+    btn.disabled = true;
+    
+    await deliver(d);
+    
+    btn.innerHTML = origText;
+    btn.disabled = false;
     form.hidden = true;
     done.hidden = false;
   });
