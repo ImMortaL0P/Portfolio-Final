@@ -63,7 +63,10 @@ export const workCategories = [
         shots: ['assets/thumbs/umv-adla-38e6e6.webp'], full: ['assets/work/umv-adla.webp'], mid: ['assets/mid/umv-adla-38e6e6.webp'] },
       { year: '2026', kind: 'Hotel CRM', title: 'SHARDA PALACE', href: 'https://hotel-booking-crm-community.vercel.app/', live: true,
         note: 'Twelve-module property management system — bookings, billing, OTA channel reconciliation and guest comms in one dashboard.',
-        shots: ['assets/thumbs/sharda-crm-19ba1f.webp'], full: ['assets/work/sharda-crm.webp'], mid: ['assets/mid/sharda-crm-19ba1f.webp'] }
+        shots: ['assets/thumbs/sharda-crm-19ba1f.webp'], full: ['assets/work/sharda-crm.webp'], mid: ['assets/mid/sharda-crm-19ba1f.webp'] },
+      { year: '2026', kind: 'Creative Studio', title: 'BRUSH', href: 'https://immortal0p.github.io/Brush-Production/', live: true,
+        note: 'Interactive showcase website crafted for Brush Production to feature their creative ecosystem.',
+        shots: ['assets/thumbs/brush/brush-1.png', 'assets/thumbs/brush/brush-2.png', 'assets/thumbs/brush/brush-3.png', 'assets/thumbs/brush/brush-4.png'], full: ['assets/work/brush/brush-1.png', 'assets/work/brush/brush-2.png', 'assets/work/brush/brush-3.png', 'assets/work/brush/brush-4.png'], mid: ['assets/mid/brush/brush-1.png', 'assets/mid/brush/brush-2.png', 'assets/mid/brush/brush-3.png', 'assets/mid/brush/brush-4.png'] }
     ]
   },
   {

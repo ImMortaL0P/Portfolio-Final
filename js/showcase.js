@@ -3,6 +3,38 @@
    Everything below was read off the running applications, not assumed.
 ------------------------------------------------------------------ */
 export const showcase = {
+  'brush': {
+    title: 'Brush',
+    full: 'Brush Production — Creative Ecosystem',
+    kind: 'Creative Studio Portfolio',
+    year: '2026',
+    href: 'https://immortal0p.github.io/Brush-Production/',
+    stack: ['High-Performance UI', 'Interactive Web', 'Immersive Layouts'],
+    lede: 'An interactive portfolio crafted for Brush Production to highlight their creative ecosystem. Visually striking identity meets fluid storytelling on the web.',
+    hero: 'assets/showcase/brush-hero.png',
+    features: [
+      { n: '01', t: 'Immersive entrance',
+        d: 'A visually striking hero section that immediately introduces the creative capability of Brush, blending distinct typography with smooth interactions.',
+        shot: 'assets/showcase/brush-hero.png' },
+      { n: '02', t: 'Dynamic portfolio presentation',
+        d: 'Work is surfaced dynamically into dedicated visual blocks, optimizing the discovery process across diverse mediums.',
+        shot: 'assets/showcase/brush-feat1.png' },
+      { n: '03', t: 'Optimized media delivery',
+        d: 'Fluid asset loading and transitions that maintain a responsive feel ensuring focus remains on the studio’s output without sacrificing image quality.',
+        shot: 'assets/showcase/brush-feat2.png' },
+      { n: '04', t: 'Seamless interactive layout',
+        d: 'From hover states to structural shifts across device breakpoints, the layout is designed to flow naturally and highlight the rich visual artifacts.',
+        shot: 'assets/showcase/brush-feat3.png' }
+    ],
+    gallery: [
+      'assets/showcase/brush-hero.png',
+      'assets/showcase/brush-feat1.png',
+      'assets/showcase/brush-feat2.png',
+      'assets/showcase/brush-feat3.png',
+      'assets/showcase/brush-feat4.png'
+    ]
+  },
+
   'u-m-v-adla': {
     title: 'U.M.V. Adla',
     full: 'Uchcha Madhyamik Vidyalaya, Adla, Naubatpur, Patna',
