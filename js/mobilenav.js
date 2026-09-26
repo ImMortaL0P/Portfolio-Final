@@ -47,6 +47,7 @@ export function initMobileNav() {
         <p class="mnav__meta meta">
           <span>Patna, India</span>
           <a href="https://www.behance.net/kumarmangalam3" target="_blank" rel="me noopener">Behance &#8599;</a>
+          <a href="https://www.linkedin.com/in/kumar-mangalam-362a77176/" target="_blank" rel="me noopener">LinkedIn &#8599;</a>
         </p>
       </div>
     </div>`;

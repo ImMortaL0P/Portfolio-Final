@@ -16,7 +16,6 @@
   .footer-top { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .footer-col--brand { grid-column: 1 / -1; }
 }
-@media (max-width: 560px) { .footer-top { grid-template-columns: 1fr; gap: var(--s-4); } }
 
 .footer-mark {
   display: block;

@@ -115,7 +115,14 @@
   /* ---- hero ---- */
   .hero-section { padding-top: 104px; }
   .hero-grid { grid-template-columns: 1fr; gap: var(--s-4); }
-  .hero-heading { font-size: clamp(2.6rem, 13vw, 4.4rem); }
+  .hero-heading { font-size: clamp(3.4rem, 18vw, 6rem); }
+  /* the line spans carried their own desktop size (8vw ≈ 29px on a phone),
+     which quietly overrode the size above */
+  .hero-heading .hero-line-text { font-size: inherit; line-height: 0.9; }
+
+  /* section labels sit on a row with an empty display-size spacer that
+     only aligns columns on desktop; on a phone it is just a blank band */
+  .row > .display-l[aria-hidden="true"] { display: none; }
   .hero-sub { font-size: 15px; max-width: none; }
   .hero-actions { gap: 10px; }
   .hero-actions .button-chip { flex: 1 1 auto; text-align: center; min-height: 46px; line-height: 26px; }
@@ -134,7 +141,21 @@
   .client-row li { height: 58px; }
 
   /* ---- work rows ---- */
-  .work-row__strip { display: none; }   /* four thumbs do not survive 390px */
+  /* a portfolio row without its pictures is just a list of names: keep
+     the strip, as four equal tiles that always fit the width */
+  .work-row__strip {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+    width: 100%;
+    justify-self: stretch;
+    overflow: visible;
+  }
+  .work-row__strip .shot:nth-child(n + 5) { display: none; }
+  .shot, .work-row:hover .shot { width: auto; height: auto; aspect-ratio: 4 / 3; }
+  .work-row__strip:has(.shot:only-child) { grid-template-columns: minmax(0, 1fr); }
+  .work-row__strip:has(.shot:only-child) .shot,
+  .work-row:hover .work-row__strip:has(.shot:only-child) .shot { width: auto; height: auto; aspect-ratio: 16 / 9; }
   .cat-header { gap: var(--s-1); }
 
   /* ---- process ---- */
@@ -160,6 +181,10 @@
 
   /* ---- footer ---- */
   .footer-top { gap: var(--s-4); }
+  /* link lists side by side: a single column made the footer three screens tall */
+  .footer-top { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-4) var(--s-3); }
+  .footer-col--brand { grid-column: 1 / -1; }
+  .footer-col:last-child { grid-column: 1 / -1; }
   .footer-legal { grid-template-columns: 1fr; gap: 6px; }
   .footer-top-link { justify-self: start; min-height: 40px; }
 }
@@ -246,4 +271,25 @@
   .writ-filter,
   .theme-toggle { min-height: 40px; display: inline-flex; align-items: center; }
   .button-chip { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+
+  /* text links that stand alone need a finger-sized hit area; padding
+     paired with an equal negative margin grows it without moving a pixel */
+  .nav-logo,
+  .footer-mark,
+  .cat-back,
+  .post-back,
+  .proj-back,
+  .comic-back,
+  .paper__doi,
+  .footer-top-link,
+  .store__clear,
+  .pc__title a {
+    padding-block: 12px;
+    margin-block: -12px;
+  }
+  .cat-back, .post-back, .proj-back, .comic-back { padding-right: 12px; }
+
+  /* the discipline rail: same 3px bars, a 40px-tall target around each */
+  .genre-rail button { height: 40px; padding: 18px 0; margin-block: -9px; }
+  .genre-rail button::before { top: 18px; }
 }

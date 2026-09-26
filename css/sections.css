@@ -38,6 +38,13 @@
 }
 /* where you are: full strength and underlined. Colour stays with nav.js,
    which repaints the pill for dark grounds. */
+.work-more {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: clamp(var(--s-4), 4vw, var(--s-5));
+}
+
 .nav-links li a[aria-current="page"] {
   opacity: 1;
   text-decoration: underline;
@@ -816,7 +823,7 @@
   position: absolute;
   top: var(--s-2);
   right: 0;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.16em;
   color: var(--on-light-3);
 }
