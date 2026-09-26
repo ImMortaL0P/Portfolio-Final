@@ -100,6 +100,7 @@ cat.items.forEach((item) => {
       ${item.note ? `<p class="series__note">${item.note}</p>` : ''}
       ${item.live ? `<a class="button-chip meta series__live" href="${esc(item.href)}" target="_blank" rel="noopener" data-cursor="VISIT">Visit live site &#8599;</a>` : ''}
       ${item.video ? `<a class="button-chip meta series__live" href="${esc(item.video)}" target="_blank" rel="noopener" data-cursor="PLAY">Watch the reel &#8599;</a>` : ''}
+      ${item.page ? `<a class="button-chip meta series__live" href="${esc(item.page)}" data-cursor="READ">Read it as a comic &#8594;</a>` : ''}
     </div>
     <div class="series__grid">${figures}</div>`;
   host.appendChild(sec);

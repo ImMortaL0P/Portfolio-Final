@@ -1,0 +1,24 @@
+Pop Art	Beautiful Day	assets/Pop Art/beautiful-day.webp	assets/mid/beautiful-day-7c6c20.webp	assets/thumbs/beautiful-day-7c6c20.webp
+Pop Art	Menu F Ni Penda	assets/Pop Art/menu-f-ni-penda.webp	assets/mid/menu-f-ni-penda-059ae2.webp	assets/thumbs/menu-f-ni-penda-059ae2.webp
+Pop Art	Oh Sh Baddie	assets/Pop Art/oh-sh-baddie.webp	assets/mid/oh-sh-baddie-ad8b07.webp	assets/thumbs/oh-sh-baddie-ad8b07.webp
+Pop Art	Pop Skeleton Mohawk	assets/Pop Art/pop-skeleton-mohawk.webp	assets/mid/pop-skeleton-mohawk-bc2545.webp	assets/thumbs/pop-skeleton-mohawk-bc2545.webp
+Pop Art	Save Me	assets/Pop Art/save-me.webp	assets/mid/save-me-6186c2.webp	assets/thumbs/save-me-6186c2.webp
+Pop Art	Are You Pooping	assets/Pop Art/are-you-pooping.webp	assets/mid/are-you-pooping-5d27f8.webp	assets/thumbs/are-you-pooping-5d27f8.webp
+Pop Art	What The Actual Duck	assets/Pop Art/what-the-actual-duck.webp	assets/mid/what-the-actual-duck-2dde8b.webp	assets/thumbs/what-the-actual-duck-2dde8b.webp
+Pop Art	Shut The F Up	assets/Pop Art/shut-the-f-up.webp	assets/mid/shut-the-f-up-6b460d.webp	assets/thumbs/shut-the-f-up-6b460d.webp
+Desi Type	Dilli	assets/Desi Type/dilli.webp	assets/mid/dilli-59a84a.webp	assets/thumbs/dilli-59a84a.webp
+Desi Type	Rajasthan	assets/Desi Type/rajasthan.webp	assets/mid/rajasthan-d418e6.webp	assets/thumbs/rajasthan-d418e6.webp
+Desi Type	Naritva	assets/Desi Type/naritva.webp	assets/mid/naritva-e14671.webp	assets/thumbs/naritva-e14671.webp
+Desi Type	Love Da Lahsun	assets/Desi Type/love-da-lahsun.webp	assets/mid/love-da-lahsun-f68b2a.webp	assets/thumbs/love-da-lahsun-f68b2a.webp
+Desi Type	Dekho Magar Pyaar Se	assets/Desi Type/dekho-magar-pyaar-se.webp	assets/mid/dekho-magar-pyaar-se-412c29.webp	assets/thumbs/dekho-magar-pyaar-se-412c29.webp
+Arcana	Dimensions	assets/Arcana/dimensions.webp	assets/mid/dimensions-f4843c.webp	assets/thumbs/dimensions-f4843c.webp
+Arcana	Icarus	assets/Arcana/icarus.webp	assets/mid/icarus-c0168a.webp	assets/thumbs/icarus-c0168a.webp
+Arcana	Needing Nothing	assets/Arcana/needing-nothing.webp	assets/mid/needing-nothing-52af58.webp	assets/thumbs/needing-nothing-52af58.webp
+Arcana	Pressure Is A Privilege	assets/Arcana/pressure-is-a-privilege.webp	assets/mid/pressure-is-a-privilege-1e032e.webp	assets/thumbs/pressure-is-a-privilege-1e032e.webp
+Redraws	Gunter	assets/Redraws/gunter.webp	assets/mid/gunter-bf9c7a.webp	assets/thumbs/gunter-bf9c7a.webp
+Redraws	Jake	assets/Redraws/jake.webp	assets/mid/jake-0a6194.webp	assets/thumbs/jake-0a6194.webp
+Redraws	Jiji	assets/Redraws/jiji.webp	assets/mid/jiji-ec68c2.webp	assets/thumbs/jiji-ec68c2.webp
+Redraws	Shinchan	assets/Redraws/shinchan.webp	assets/mid/shinchan-ca2604.webp	assets/thumbs/shinchan-ca2604.webp
+Redraws	Courage	assets/Redraws/courage.webp	assets/mid/courage-f8d54b.webp	assets/thumbs/courage-f8d54b.webp
+Redraws	Oggy	assets/Redraws/oggy.webp	assets/mid/oggy-37b7aa.webp	assets/thumbs/oggy-37b7aa.webp
+Redraws	Bad Piggy	assets/Redraws/bad-piggy.webp	assets/mid/bad-piggy-55fa04.webp	assets/thumbs/bad-piggy-55fa04.webp

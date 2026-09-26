@@ -540,6 +540,12 @@
   margin: var(--s-1) 0 6px;
   min-height: 1em;
 }
+/* the ticker cycles words of very different lengths; above this width the
+   longest one ("Kinetic Showreel") still fits on one line, so pin it there
+   and no transition frame can reflow the card */
+@media (min-width: 700px) {
+  .about__now-word { white-space: nowrap; }
+}
 .about__now-meta {
   display: flex;
   flex-wrap: wrap;
