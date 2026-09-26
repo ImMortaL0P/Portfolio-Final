@@ -63,7 +63,7 @@
   letter-spacing: 0.18em;
   color: rgba(17, 17, 17, 0.45);          /* sits on the paper, never flips */
 }
-.panel:hover .panel__n { color: var(--accent); }
+.panel:hover .panel__n { color: var(--accent-text); }
 
 /* ------------------------------------------------------------------
    THE SHEET

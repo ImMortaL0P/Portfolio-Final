@@ -1,8 +1,5 @@
 import './scroll.js';
-import { initNav } from './nav.js';
-import { initTheme } from './theme.js';
-import { initContact } from './contact.js';
-import { initMobileNav } from './mobilenav.js';
+import { initSite } from './site.js';
 
 /* ------------------------------------------------------------------
    REDRAW LAB
@@ -133,22 +130,4 @@ imgs.forEach((img) => {
   }
 });
 
-/* ---------- cursor pill, same behaviour as the category pages --------- */
-const pill = document.querySelector('.cursor-pill');
-if (pill && matchMedia('(hover: hover)').matches && window.gsap) {
-  const xTo = gsap.quickTo(pill, 'x', { duration: 0.35, ease: 'power3' });
-  const yTo = gsap.quickTo(pill, 'y', { duration: 0.35, ease: 'power3' });
-  addEventListener('pointermove', (e) => { xTo(e.clientX); yTo(e.clientY); });
-  document.addEventListener('mouseover', (e) => {
-    const el = e.target.closest('[data-cursor]');
-    if (el) { pill.textContent = el.dataset.cursor; gsap.to(pill, { scale: 1, opacity: 1, duration: 0.2 }); }
-  });
-  document.addEventListener('mouseout', (e) => {
-    if (e.target.closest('[data-cursor]')) gsap.to(pill, { scale: 0.4, opacity: 0, duration: 0.2 });
-  });
-}
-
-initNav();
-initMobileNav();
-initTheme();
-initContact();
+initSite();

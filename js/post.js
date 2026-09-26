@@ -1,9 +1,6 @@
 import './scroll.js';
-import { initNav } from './nav.js';
+import { initSite } from './site.js';
 import { posts, hrefOf } from './posts.js';
-import { initTheme } from './theme.js';
-import { initContact } from './contact.js';
-import { initMobileNav } from './mobilenav.js';
 
 const slug = document.body.dataset.post;
 const i = posts.findIndex((p) => p.slug === slug);
@@ -45,11 +42,7 @@ function progress() {
 document.addEventListener('DOMContentLoaded', () => {
   pager();
   progress();
-  initNav();
-  initMobileNav();
-  initTheme();
-  initContact();
-  if (window.attachCursorEvents) window.attachCursorEvents();
+  initSite();
 
   if (window.gsap && window.ScrollTrigger) {
     document

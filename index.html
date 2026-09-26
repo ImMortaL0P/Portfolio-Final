@@ -14,22 +14,19 @@
       })();
     </script>
     <meta charset="UTF-8" />
-    <meta
-      http-equiv="Cache-Control"
-      content="no-cache, no-store, must-revalidate"
-    />
-    <meta http-equiv="Pragma" content="no-cache" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noimageindex" />
     <meta
       name="description"
       content="Personal portfolio of K. Mangalam, an Engineer, Designer, and Developer. View selected works in design, motion, and web development."
     />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>K</text></svg>"
-    />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <meta name="theme-color" content="#EBE9E4" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0A0A09" media="(prefers-color-scheme: dark)" />
     <title>K. Mangalam — Engineer, Designer, Developer</title>
 
+    <link rel="preload" href="assets/fonts/anton-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="assets/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="css/tokens.css" />
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/sections.css" />
@@ -48,12 +45,12 @@
 
     <!-- Dispersing Nav -->
     <div class="nav-scrim" aria-hidden="true"></div>
-    <nav class="nav">
+    <nav class="nav" aria-label="Primary">
       <div class="wrap nav-inner">
-        <a href="/" class="nav-logo display-m">K. MANGALAM</a>
+        <a href="index.html" class="nav-logo display-m" aria-label="K. Mangalam — home">K. Mangalam</a>
         <ul class="nav-links">
           <li><a href="#services" class="label">Services</a></li>
-          <li><a href="#work" class="label">Work</a></li>
+          <li><a href="work.html" class="label">Work</a></li>
           <li><a href="#about" class="label">About</a></li>
           <li><a href="#engineering" class="label">Engineering</a></li>
           <li><a href="writings.html" class="label">Blogs</a></li>
@@ -331,6 +328,15 @@
           <div class="work-list">
             <!-- Populated by JS -->
           </div>
+
+          <div class="work-more">
+            <a class="button-chip meta primary" href="work.html" data-cursor="OPEN"
+              >Browse &amp; filter all work &#8594;</a
+            >
+            <a class="button-chip meta" href="posters.html" data-cursor="SWIPE"
+              >Browse posters &#8594;</a
+            >
+          </div>
         </div>
       </section>
 
@@ -340,7 +346,7 @@
           <div class="about__card section--dark">
             <div class="wrap about__inner">
               <p class="about__eyebrow meta">
-                <span>03 &mdash; Resume</span>
+                <span>03. Resume</span>
                 <span>Patna, India</span>
               </p>
 
@@ -530,7 +536,7 @@
                 >2024&ndash;Now &middot; AI Engineering</span
               >
               <span class="eng-row__body">
-                <h4 class="eng-row__title">FinTabula</h4>
+                <h3 class="eng-row__title">FinTabula</h3>
                 <span class="eng-row__note"
                   >Financial-statement table extractor. Rebuilds multi-page
                   balance sheets, P&amp;Ls and cash-flow tables from PDFs into
@@ -549,7 +555,7 @@
                 >2024&ndash;Now &middot; Generative AI</span
               >
               <span class="eng-row__body">
-                <h4 class="eng-row__title">WhatsApp Command Center</h4>
+                <h3 class="eng-row__title">WhatsApp Command Center</h3>
                 <span class="eng-row__note"
                   >An AI chief of staff sitting on top of WhatsApp. Reads a live
                   message database and turns unstructured group chatter into
@@ -567,7 +573,7 @@
                 >2024&ndash;Now &middot; Logistics</span
               >
               <span class="eng-row__body">
-                <h4 class="eng-row__title">SCM Mission Control</h4>
+                <h3 class="eng-row__title">SCM Mission Control</h3>
                 <span class="eng-row__note"
                   >Real-time supply-chain dashboard: end-to-end route
                   visibility, live traffic speed against free-flow, predictive
@@ -586,7 +592,7 @@
                 >2024&ndash;Now &middot; Workflow Tools</span
               >
               <span class="eng-row__body">
-                <h4 class="eng-row__title">Tools 101 Suite</h4>
+                <h3 class="eng-row__title">Tools 101 Suite</h3>
                 <span class="eng-row__note"
                   >A monorepo of automation built to kill repetitive work
                   &mdash; bulk WhatsApp community management, a desktop
@@ -604,7 +610,7 @@
                 >2024 &middot; Python &amp; API</span
               >
               <span class="eng-row__body">
-                <h4 class="eng-row__title">Telegram &rarr; Drive Sync</h4>
+                <h3 class="eng-row__title">Telegram &rarr; Drive Sync</h3>
                 <span class="eng-row__note"
                   >An asynchronous bridge between a Telegram channel and Google
                   Drive. Concurrent downloads with smart filtering, so PDFs
@@ -821,22 +827,17 @@
       <div class="wrap">
         <div class="footer-top">
           <div class="footer-col footer-col--brand">
-            <a href="/" class="footer-mark display-m">K. MANGALAM</a>
-            <p class="footer-blurb">
-              Illustration, brutalist typography and the websites they end up
-              on. Designed and built by one pair of hands, in Patna.
-            </p>
-            <p class="meta footer-status">
-              <span class="status-dot" aria-hidden="true"></span>
-              Available for work &mdash; 2026
-            </p>
+            <a href="index.html" class="footer-mark display-m">K. Mangalam</a>
+            <p class="footer-blurb">Illustration, brutalist typography and the websites they end up on. Designed and built by one pair of hands, in Patna.</p>
+            <p class="meta footer-status"><span class="status-dot" aria-hidden="true"></span>Available for work &mdash; 2026</p>
           </div>
 
           <div class="footer-col">
-            <span class="label footer-col__head">Explore</span>
+            <h2 class="label footer-col__head">Explore</h2>
             <ul class="footer-links meta">
               <li><a href="#start">Start here</a></li>
-              <li><a href="#work">Selected work</a></li>
+              <li><a href="work.html">All work</a></li>
+              <li><a href="posters.html">Browse posters</a></li>
               <li><a href="#about">Resume</a></li>
               <li><a href="engineering.html">Engineering</a></li>
               <li><a href="writings.html">Blogs</a></li>
@@ -844,69 +845,34 @@
           </div>
 
           <div class="footer-col">
-            <span class="label footer-col__head">Elsewhere</span>
+            <h2 class="label footer-col__head">Elsewhere</h2>
             <ul class="footer-links meta">
-              <li>
-                <a
-                  href="https://www.behance.net/kumarmangalam3"
-                  target="_blank"
-                  rel="me noopener"
-                  >Behance &#8599;</a
-                >
-              </li>
-              <li>
-                <a
-                  href="https://instagram.com/"
-                  target="_blank"
-                  rel="me noopener"
-                  >Instagram &#8599;</a
-                >
-              </li>
-              <li><a href="#">LinkedIn &#8599;</a></li>
+              <li><a href="https://www.behance.net/kumarmangalam3" target="_blank" rel="me noopener">Behance &#8599;</a></li>
+              <li><a href="https://www.linkedin.com/in/kumar-mangalam-362a77176/" target="_blank" rel="me noopener">LinkedIn &#8599;</a></li>
               <li><a href="mailto:kumarmangalam.patna@gmail.com">Email</a></li>
+              <li><a href="assets/kumar-mangalam-resume.pdf" target="_blank" rel="noopener">CV (PDF) &#8599;</a></li>
             </ul>
           </div>
 
           <div class="footer-col">
-            <span class="label footer-col__head">Studio</span>
+            <h2 class="label footer-col__head">Studio</h2>
             <ul class="footer-links meta">
               <li>Patna, India</li>
-              <li>
-                <span class="footer-clock" data-clock>&mdash;&mdash;</span>
-                local
-              </li>
+              <li><span class="footer-clock" data-clock>&mdash;&mdash;</span> local</li>
               <li>Creating since 2017</li>
             </ul>
-            <a
-              class="button-chip meta primary footer-cta"
-              href="#contact"
-              data-contact
-              data-cursor="SAY HI"
-              >Start a project &#8599;</a
-            >
+            <a class="button-chip meta primary footer-cta" href="#contact" data-contact data-cursor="SAY HI">Start a project &#8599;</a>
           </div>
         </div>
 
         <div class="footer-legal row">
           <span class="meta">&copy; 2026 K. Mangalam</span>
-          <span class="meta footer-colophon"
-            >Anton &amp; Archivo &middot; built by hand</span
-          >
-          <button
-            class="meta footer-top-link"
-            type="button"
-            data-top
-            data-cursor="TOP"
-          >
-            Back to top &#8593;
-          </button>
+          <span class="meta footer-colophon">Anton &amp; Archivo &middot; built by hand</span>
+          <button class="meta footer-top-link" type="button" data-top data-cursor="TOP">Back to top &#8593;</button>
         </div>
       </div>
 
-      <!-- the wordmark runs off the page, clipped, as a sign-off -->
-      <div class="footer-wordmark" aria-hidden="true">
-        <span>MANGALAM</span>
-      </div>
+      <div class="footer-wordmark" aria-hidden="true"><span>MANGALAM</span></div>
     </footer>
 
     <!-- Cursor Pill -->

@@ -17,6 +17,9 @@
   /* ---- Accent: 5.68:1 on --ink. Never for text on --ground (2.74:1) ---- */
   --accent:        #FF4C24;
   --accent-ink:    #FFFFFF;
+  /* the accent when it is text on the light ground: same hue, deep
+     enough to read (4.64:1). Dark grounds switch it back to --accent. */
+  --accent-text:   #BF3510;
 
   /* ---- Surfaces ---- */
   --panel-dark:    #161514;
@@ -74,6 +77,7 @@
   --on-light-2:  #D6D3CC;   /* eyebrows  */
   --on-light-3:  #A3A099;   /* body copy */
 
+  --accent-text: var(--accent);
   --rule-light:  rgba(235, 233, 228, 0.13);
   --tint-light:  rgba(235, 233, 228, 0.05);
 }

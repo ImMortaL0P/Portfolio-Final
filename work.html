@@ -5,11 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noimageindex">
-  <meta name="description" content="Essays, photo journals and visual stories by K. Mangalam.">
+  <meta name="description" content="Every piece of work by K. Mangalam in one place — filter by category, series and year. Posters are available as prints.">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <meta name="theme-color" content="#EBE9E4" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0A0A09" media="(prefers-color-scheme: dark)">
-  <title>Blogs &mdash; K. Mangalam</title>
+  <title>All Work &mdash; K. Mangalam</title>
 
   <link rel="preload" href="assets/fonts/anton-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
@@ -20,11 +20,13 @@
   <link rel="stylesheet" href="css/theme.css">
   <link rel="stylesheet" href="css/contact.css">
   <link rel="stylesheet" href="css/footer.css">
-  <link rel="stylesheet" href="css/post.css">
+  <link rel="stylesheet" href="css/category.css">
+  <link rel="stylesheet" href="css/store.css">
+  <link rel="stylesheet" href="css/cart.css">
   <link rel="stylesheet" href="css/imagery.css">
   <link rel="stylesheet" href="css/responsive.css">
 </head>
-<body class="post-page">
+<body class="cat-page store-page">
   <a class="skip" href="#main">Skip to content</a>
   <div class="noise-overlay" aria-hidden="true"></div>
 
@@ -34,31 +36,86 @@
       <a href="index.html" class="nav-logo display-m" aria-label="K. Mangalam — home">K. Mangalam</a>
       <ul class="nav-links">
         <li><a href="index.html#services" class="label">Services</a></li>
-        <li><a href="work.html" class="label">Work</a></li>
+        <li><a href="work.html" class="label" aria-current="page">Work</a></li>
         <li><a href="index.html#about" class="label">About</a></li>
         <li><a href="engineering.html" class="label">Engineering</a></li>
-        <li><a href="writings.html" class="label" aria-current="page">Blogs</a></li>
+        <li><a href="writings.html" class="label">Blogs</a></li>
       </ul>
       <a href="index.html#contact" class="nav-cta button-chip meta">Get in Touch</a>
     </div>
   </nav>
 
   <main id="main">
-    <header class="writ-hero">
+    <header class="cat-hero store-hero">
       <div class="wrap">
-        <a class="post-back meta" href="index.html" data-cursor="BACK">&#8592; Home</a>
-        <p class="post-hero__meta meta">
-          <span class="post-hero__kind">Writing</span>
-          <span class="writ-count"></span>
+        <a class="cat-back meta" href="index.html" data-cursor="BACK">&#8592; Home</a>
+        <p class="cat-hero__meta meta">
+          <span class="cat-hero__n">Store</span>
+          <span>Every piece, every series</span>
+          <span class="cat-hero__count" data-total></span>
         </p>
-        <h1 class="writ-hero__title">Blogs</h1>
-        <p class="writ-hero__kicker">Essays, photo journals and visual stories &mdash; on design and photography, and on the engineering that came before them.</p>
+        <h1 class="cat-hero__title">All Work</h1>
       </div>
     </header>
 
-    <div class="wrap">
-      <div class="writ-filters" role="group" aria-label="Filter by kind"></div>
-      <div class="writ-list"></div>
+    <div class="wrap store">
+      <a class="reel-promo section--dark" href="posters.html" data-cursor="SWIPE">
+        <span class="reel-promo__stack" aria-hidden="true"></span>
+        <span class="reel-promo__text">
+          <span class="reel-promo__eyebrow meta">New &middot; Poster prints</span>
+          <span class="reel-promo__title">Browse posters</span>
+          <span class="reel-promo__note">Scroll through every poster one screen at a time, like reels. Add the ones you like to your cart.</span>
+        </span>
+        <span class="reel-promo__go meta">Start browsing &#8594;</span>
+      </a>
+
+      <div class="store__bar" role="search">
+        <label class="store__search">
+          <span class="visually-hidden">Search work</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+          <input type="search" name="q" placeholder="Search posters, series, brands&hellip;" autocomplete="off" enterkeyhint="search">
+        </label>
+        <button class="store__filter-btn meta" type="button" aria-controls="store-filters" aria-expanded="false">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M7 12h10M10 17h4"/></svg>
+          Filters <span class="store__filter-n"></span>
+        </button>
+        <label class="store__sort meta">
+          <span>Sort</span>
+          <select name="sort">
+            <option value="featured">Featured</option>
+            <option value="new">Newest first</option>
+            <option value="old">Oldest first</option>
+            <option value="az">Name A&ndash;Z</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="store__layout">
+        <aside class="store__filters" id="store-filters" aria-label="Filters" data-lenis-prevent>
+          <div class="store__filters-head">
+            <h2 class="store__filters-title meta">Filters</h2>
+            <button class="store__clear meta" type="button">Clear all</button>
+            <button class="store__filters-close meta" type="button" aria-label="Close filters">Close &times;</button>
+          </div>
+          <div class="store__groups"></div>
+          <div class="store__filters-foot">
+            <button class="button-chip meta primary store__apply" type="button">Show results</button>
+          </div>
+        </aside>
+
+        <section class="store__results" aria-labelledby="store-count">
+          <div class="store__status">
+            <p class="store__count meta" id="store-count" aria-live="polite"></p>
+            <div class="store__chips"></div>
+          </div>
+          <ul class="store__grid"></ul>
+          <div class="store__empty" hidden>
+            <p class="store__empty-title">Nothing matches that.</p>
+            <p class="store__empty-note">Try fewer filters or a different word.</p>
+            <button class="button-chip meta store__clear" type="button">Clear all filters</button>
+          </div>
+        </section>
+      </div>
     </div>
   </main>
 
@@ -114,11 +171,30 @@
     <div class="footer-wordmark" aria-hidden="true"><span>MANGALAM</span></div>
   </footer>
 
+  <div class="qv" hidden>
+    <div class="qv__scrim" data-qv-close></div>
+    <div class="qv__panel" role="dialog" aria-modal="true" aria-labelledby="qv-title" data-lenis-prevent>
+      <button class="qv__close meta" type="button" data-qv-close aria-label="Close">Close &times;</button>
+      <figure class="qv__media"><img alt=""></figure>
+      <div class="qv__body">
+        <p class="qv__cat meta"></p>
+        <h2 class="qv__title" id="qv-title"></h2>
+        <p class="qv__note"></p>
+        <div class="qv__actions"></div>
+        <div class="qv__nav">
+          <button class="qv__step meta" type="button" data-step="-1" aria-label="Previous piece">&#8592; Prev</button>
+          <span class="qv__pos meta"></span>
+          <button class="qv__step meta" type="button" data-step="1" aria-label="Next piece">Next &#8594;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="cursor-pill meta" aria-hidden="true" style="opacity: 0; transform: scale(0.4);">VIEW</div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-  <script type="module" src="js/writings.js"></script>
+  <script type="module" src="js/store.js"></script>
 </body>
 </html>

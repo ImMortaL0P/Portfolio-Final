@@ -48,6 +48,7 @@ const FIELDS = `
           <label class="cf__chip"><input type="radio" name="kind" value="Website or Product"><span>Website</span></label>
           <label class="cf__chip"><input type="radio" name="kind" value="Editorial &amp; Print"><span>Print</span></label>
           <label class="cf__chip"><input type="radio" name="kind" value="Photography"><span>Photography</span></label>
+          <label class="cf__chip"><input type="radio" name="kind" value="Poster prints"><span>Prints</span></label>
           <label class="cf__chip"><input type="radio" name="kind" value="Something else"><span>Other</span></label>
         </div>
       </fieldset>
@@ -67,7 +68,7 @@ function markup() {
   el.hidden = true;
   el.innerHTML = `
     <div class="cf__scrim" data-close></div>
-    <div class="cf__panel section--dark" role="dialog" aria-modal="true" aria-labelledby="cf-title">
+    <div class="cf__panel section--dark" data-lenis-prevent role="dialog" aria-modal="true" aria-labelledby="cf-title">
       <button class="cf__close meta" type="button" data-close aria-label="Close">Close &times;</button>
 
       <div class="cf__head">
@@ -96,7 +97,7 @@ function markup() {
 }
 
 async function deliver(data) {
-  const subject = `New project — ${data.kind} — ${data.name}`;
+  const subject = `${data.kind === 'Poster prints' ? 'Print request' : 'New project'} — ${data.kind} — ${data.name}`;
   const body = [
     `Name:      ${data.name}`,
     `Email:     ${data.email}`,
@@ -146,13 +147,25 @@ export function initContact() {
   const focusable = () =>
     [...panel.querySelectorAll('a[href], button, input, select, textarea')].filter((n) => !n.disabled && n.offsetParent !== null);
 
-  const open = (from) => {
+  const eyebrow = panel.querySelector('.cf__head .cf__eyebrow');
+  const defaultEyebrow = eyebrow.textContent;
+
+  /* `prefill` lets another feature hand over what it already knows —
+     the poster cart passes its list so nobody retypes it */
+  const open = (from, prefill) => {
     opener = from || null;
     modal.hidden = false;
     document.body.style.overflow = 'hidden';
+    if (window.lenis) window.lenis.stop();
     form.hidden = false;
     done.hidden = true;
     err.hidden = true;
+    eyebrow.textContent = prefill?.eyebrow || defaultEyebrow;
+    if (prefill?.kind) {
+      const r = form.querySelector(`input[name="kind"][value="${prefill.kind}"]`);
+      if (r) r.checked = true;
+    }
+    if (prefill?.message) form.querySelector('textarea[name="message"]').value = prefill.message;
     if (window.gsap && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
       gsap.fromTo(modal, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.3, ease: 'power2.out' });
       gsap.fromTo(panel, { y: 28, scale: 0.985 }, { y: 0, scale: 1, duration: 0.55, ease: 'power3.out' });
@@ -166,6 +179,7 @@ export function initContact() {
   const close = () => {
     modal.hidden = true;
     document.body.style.overflow = '';
+    if (window.lenis) window.lenis.start();
     opener?.focus?.();
   };
 
@@ -226,5 +240,7 @@ export function initContact() {
   };
   wire();
 
-  return { open, close, wire };
+  const api = { open, close, wire };
+  window.mgContact = api;
+  return api;
 }

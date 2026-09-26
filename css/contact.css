@@ -36,10 +36,10 @@
   color: var(--on-dark-3);
   transition: color .25s var(--ease-out);
 }
-.cf__close:hover { color: var(--accent); }
+.cf__close:hover { color: var(--accent-text); }
 
 .cf__head { margin-bottom: clamp(var(--s-3), 2.6vw, var(--s-4)); }
-.cf__eyebrow { color: var(--accent); display: block; }
+.cf__eyebrow { color: var(--accent-text); display: block; }
 .cf__title {
   font-family: var(--font-display);
   font-size: clamp(1.7rem, 4vw, 2.6rem);
@@ -56,7 +56,7 @@
   max-width: 52ch;
 }
 .cf__sub a { color: var(--on-dark-1); text-decoration: underline; text-underline-offset: 3px; }
-.cf__sub a:hover { color: var(--accent); }
+.cf__sub a:hover { color: var(--accent-text); }
 
 /* ---- fields ----
    Two columns so the whole form clears the fold: the send button is
@@ -140,7 +140,7 @@ select.cf__input option { background: var(--panel); color: var(--on-dark-1); }
 .cf__chip input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 3px; }
 
 /* ---- foot ---- */
-.cf__error { color: var(--accent); margin-bottom: var(--s-2); }
+.cf__error { color: var(--accent-text); margin-bottom: var(--s-2); }
 .cf__foot {
   display: flex;
   flex-wrap: wrap;

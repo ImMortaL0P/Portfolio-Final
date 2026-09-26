@@ -33,7 +33,7 @@ export function initMobileNav() {
   sheet.hidden = true;
 
   const items = [...(links ? links.querySelectorAll('a') : [])].map(
-    (a, i) => `<li><a href="${a.getAttribute('href')}" class="mnav__link">
+    (a, i) => `<li><a href="${a.getAttribute('href')}" class="mnav__link"${a.hasAttribute('aria-current') ? ' aria-current="page"' : ''}>
         <span class="mnav__n meta">${String(i + 1).padStart(2, '0')}</span>
         <span>${a.textContent.trim()}</span>
       </a></li>`
@@ -47,6 +47,7 @@ export function initMobileNav() {
         <p class="mnav__meta meta">
           <span>Patna, India</span>
           <a href="https://www.behance.net/kumarmangalam3" target="_blank" rel="me noopener">Behance &#8599;</a>
+          <a href="https://www.linkedin.com/in/kumar-mangalam-362a77176/" target="_blank" rel="me noopener">LinkedIn &#8599;</a>
         </p>
       </div>
     </div>`;

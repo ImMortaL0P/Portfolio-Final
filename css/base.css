@@ -8,8 +8,11 @@
 
 @font-face {
   font-family: 'Archivo';
-  src: url('../assets/fonts/archivo-500.woff2') format('woff2');
-  font-weight: 500;
+  /* variable (wght 100–900), Latin subset: one file covers the body
+     weight and the heavier weights used for emphasis */
+  src: url('../assets/fonts/archivo-var.woff2') format('woff2-variations'),
+       url('../assets/fonts/archivo-var.woff2') format('woff2');
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
@@ -97,16 +100,45 @@ a { text-decoration: none; color: inherit; }
 button { font-family: inherit; cursor: pointer; border: none; background: transparent; padding: 0; }
 ul, ol { list-style: none; padding: 0; margin: 0; }
 h1, h2, h3, h4, h5, h6, p { margin: 0; font-weight: normal; }
+/* figures keep the browser's 40px side indent otherwise, which shrank every
+   screenshot and photo on a phone by 80px */
+figure { margin: 0; }
 
 img, video { max-width: 100%; height: auto; display: block; }
 
+/* Asset protection (see js/protect.js): no drag-out, no selection
+   highlight, no iOS/Android long-press "Save image" sheet. */
+img, video, picture, canvas, svg {
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+@media print {
+  img, video, picture, canvas, .reel__bg, .pc__media, .series__open, .post-lead-media, .proj-shot, .paper__fig { visibility: hidden !important; }
+  body::before {
+    content: "Images are not included when printing. Visit the site to see the work.";
+    display: block;
+    font: 14px/1.4 system-ui, sans-serif;
+    margin-bottom: 16px;
+  }
+}
+
 /* Utilities */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
 .wrap {
   padding-inline: var(--gutter);
   max-width: 1440px;
   margin: 0 auto;
 }
 .section--dark {
+  --accent-text: var(--accent);
   background: var(--panel);
   color: var(--on-dark-3);
 }

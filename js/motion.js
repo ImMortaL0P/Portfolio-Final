@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    if (!window.gsap || !window.ScrollTrigger) return;
 
     /* --- 7.1 Hero --- */
     gsap.from('.hero-line', {
@@ -136,30 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    /* --- 7.7 Cursor Pill --- */
-    const pill = document.querySelector('.cursor-pill');
-    if (pill && window.innerWidth > 600) {
-        const xTo = gsap.quickTo(pill, 'x', { duration: 0.35, ease: 'power3' });
-        const yTo = gsap.quickTo(pill, 'y', { duration: 0.35, ease: 'power3' });
-
-        window.addEventListener('pointermove', (e) => { xTo(e.clientX); yTo(e.clientY); });
-        
-        // Attaches cursor hover states
-        window.attachCursorEvents = () => {
-            document.querySelectorAll('[data-cursor]').forEach((el) => {
-                // avoid attaching multiple times
-                if (el.dataset.cursorAttached) return;
-                el.dataset.cursorAttached = true;
-                
-                el.addEventListener('mouseenter', () => {
-                    pill.textContent = el.dataset.cursor;
-                    gsap.to(pill, { scale: 1, opacity: 1, duration: 0.2 });
-                });
-                el.addEventListener('mouseleave', () => gsap.to(pill, { scale: 0.4, opacity: 0, duration: 0.2 }));
-            });
-        };
-        window.attachCursorEvents();
-    }
+    /* Cursor pill lives in js/cursor.js now — shared with every page. */
 });
 
 
@@ -168,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
    GPU-composited, no JS per frame, and it still works without JS.
    This only handles the at-rest reveal as each row scrolls in.        */
 window.initWorkReveal = () => {
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!window.gsap || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   document.querySelectorAll('.work-category').forEach((cat) => {
     gsap.from(cat.querySelectorAll('.work-row'), {
       opacity: 0, y: 18, duration: 0.55, stagger: 0.06, ease: 'power2.out',
@@ -179,32 +157,7 @@ window.initWorkReveal = () => {
       scrollTrigger: { trigger: cat, start: 'top 88%', once: true }
     });
   });
-  if (window.attachCursorEvents) window.attachCursorEvents();
 };
 
 /* Back-compat: older markup called this. */
 window.initWorkRowHover = () => window.initWorkReveal && window.initWorkReveal();
-
-/* --- 7.6 Work rows ---------------------------------------------------
-   Hover (monochrome -> colour, strip grows) is pure CSS in sections.css:
-   GPU-composited, no JS per frame, and it still works without JS.
-   This only handles the at-rest reveal as each row scrolls in.        */
-window.initWorkReveal = () => {
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  document.querySelectorAll('.work-category').forEach((cat) => {
-    gsap.from(cat.querySelectorAll('.work-row'), {
-      opacity: 0, y: 18, duration: 0.55, stagger: 0.06, ease: 'power2.out',
-      scrollTrigger: { trigger: cat, start: 'top 82%', once: true }
-    });
-    gsap.from(cat.querySelector('.cat-header'), {
-      opacity: 0, y: 14, duration: 0.5, ease: 'power2.out',
-      scrollTrigger: { trigger: cat, start: 'top 88%', once: true }
-    });
-  });
-  if (window.attachCursorEvents) window.attachCursorEvents();
-};
-
-/* Back-compat: older markup called this. */
-window.initWorkRowHover = () => window.initWorkReveal && window.initWorkReveal();
-
-

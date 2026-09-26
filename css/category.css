@@ -11,7 +11,7 @@
   margin-bottom: var(--s-4);
   transition: color .25s var(--ease-out), transform .25s var(--ease-out);
 }
-.cat-back:hover { color: var(--accent); transform: translateX(-4px); }
+.cat-back:hover { color: var(--accent-text); transform: translateX(-4px); }
 
 .cat-hero__meta {
   display: flex;
@@ -21,7 +21,7 @@
   padding-bottom: var(--s-2);
   border-bottom: 1px solid var(--ink);
 }
-.cat-hero__n { color: var(--accent); }
+.cat-hero__n { color: var(--accent-text); }
 .cat-hero__count { margin-left: auto; }
 @media (max-width: 600px) { .cat-hero__count { margin-left: 0; } }
 
@@ -107,6 +107,62 @@
   transform: scale(1.05);
 }
 
+/* ---- posters: reel entry and per-poster cart ---- */
+.cat-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px var(--s-2);
+  margin-top: var(--s-4);
+}
+.cat-hero__hint { color: var(--on-light-3); }
+
+.series__shot.has-cart { position: relative; }
+.series__cart {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 38px;
+  padding: 0 12px;
+  border-radius: var(--r-chip);
+  background: rgba(17, 17, 17, 0.82);
+  color: #EBE9E4;
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .25s var(--ease-out), transform .25s var(--ease-out), background .2s var(--ease-out);
+}
+.series__shot:hover .series__cart,
+.series__cart:focus-visible,
+.series__cart.is-in { opacity: 1; transform: none; }
+.series__cart:hover { background: var(--accent); color: var(--accent-ink); }
+.series__cart.is-in { background: var(--accent); color: var(--accent-ink); }
+/* no hover on touch: keep the button visible */
+@media (hover: none) { .series__cart { opacity: 1; transform: none; } }
+
+/* phones: two columns, so a series reads as a set rather than a scroll of
+   full-width pictures; the cart button moves under its tile */
+@media (max-width: 600px) {
+  .series__grid { columns: 2; column-gap: 10px; }
+  .series__shot { margin-bottom: 10px; }
+  .series__cart {
+    position: static;
+    width: 100%;
+    justify-content: center;
+    margin-top: 6px;
+    opacity: 1;
+    transform: none;
+    background: transparent;
+    color: var(--on-light-1);
+    border: 1px solid var(--ink);
+    backdrop-filter: none;
+  }
+  .series__cart.is-in { background: var(--ink); color: var(--ground); border-color: var(--ink); }
+}
+
 /* ---- pager ---- */
 .cat-pager {
   display: grid;
@@ -134,8 +190,29 @@
 .cat-pager__prev:hover { transform: translateX(-6px); }
 .cat-pager__next:hover { transform: translateX(6px); }
 
+/* ---- showreel player ---- */
+.vplayer {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: clamp(var(--s-2), 5vw, var(--s-6));
+  background: rgba(10, 10, 9, 0.94);
+}
+.vplayer video { width: min(1200px, 100%); max-height: 84vh; border-radius: var(--r-chip); background: #000; }
+.vplayer__close {
+  position: absolute;
+  top: var(--s-3);
+  right: var(--gutter);
+  min-height: 44px;
+  color: var(--on-dark-1);
+}
+.vplayer__close:hover { color: var(--accent); }
+
 /* ---- lightbox ---- */
 .lightbox {
+  --accent-text: var(--accent);
   position: fixed;
   inset: 0;
   z-index: 200;
@@ -173,7 +250,7 @@
   border-radius: var(--r-chip);
   padding: var(--s-1) var(--s-2);
 }
-.lightbox__close:hover { border-color: var(--accent); color: var(--accent); }
+.lightbox__close:hover { border-color: var(--accent); color: var(--accent-text); }
 .lightbox__nav {
   grid-row: 1;
   width: 48px; height: 48px;
@@ -184,7 +261,7 @@
   font-size: 18px;
   transition: border-color .2s, color .2s;
 }
-.lightbox__nav:hover { border-color: var(--accent); color: var(--accent); }
+.lightbox__nav:hover { border-color: var(--accent); color: var(--accent-text); }
 .lightbox__nav--prev { grid-column: 1; justify-self: start; }
 .lightbox__nav--next { grid-column: 3; justify-self: end; }
 @media (max-width: 640px) {
@@ -260,7 +337,7 @@
   .feat { grid-template-columns: 1fr; }
   .feat:nth-child(even) .feat__text { order: 0; }
 }
-.feat__n { color: var(--accent); display: block; margin-bottom: var(--s-1); }
+.feat__n { color: var(--accent-text); display: block; margin-bottom: var(--s-1); }
 .feat__title {
   font-family: var(--font-display);
   font-size: clamp(1.35rem, 2.4vw, 1.9rem);

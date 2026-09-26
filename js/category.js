@@ -1,10 +1,9 @@
 import './scroll.js';
+import { initSite } from './site.js';
 import { workCategories } from './data.js';
 import { showcase } from './showcase.js';
-import { initNav } from './nav.js';
-import { initTheme } from './theme.js';
-import { initContact } from './contact.js';
-import { initMobileNav } from './mobilenav.js';
+import { posters, POSTER_CATEGORY } from './catalog.js';
+import { cart, initCartUI, toast, BAG } from './cart.js';
 
 const slug = (s) => s.toLowerCase().replace(/[^a-z]+/g, '-').replace(/^-|-$/g, '');
 const esc = (s) => String(s).replace(/"/g, '&quot;');
@@ -69,6 +68,18 @@ function buildShowcase(item) {
   return sec;
 }
 
+/* ---------- posters: the reel and the cart ---------- */
+const isPosters = cat.category === POSTER_CATEGORY;
+if (isPosters) {
+  const row = document.createElement('div');
+  row.className = 'cat-hero__actions';
+  row.innerHTML = `
+    <a class="button-chip meta primary" href="posters.html" data-cursor="SWIPE">Browse posters &#8594;</a>
+    <a class="button-chip meta" href="work.html?c=poster-designs">Shop as a grid</a>
+    <span class="cat-hero__hint meta">Every poster is available as a print</span>`;
+  document.querySelector('.cat-hero .wrap').appendChild(row);
+}
+
 /* ---------- series ---------- */
 const host = document.querySelector('#series');
 const flat = [];   /* every image on the page, for the lightbox */
@@ -86,12 +97,17 @@ cat.items.forEach((item) => {
   const figures = mids.map((src, i) => {
     const k = flat.length;
     flat.push({ full: fulls[i] || src, caption: `${item.title} — ${i + 1} / ${mids.length}` });
+    /* posters are sold as prints: each one gets its own cart button */
+    const p = isPosters && posters.find((x) => x.thumb === src);
+    const buy = p ? `
+        <button type="button" class="series__cart meta${cart.has(p.id) ? ' is-in' : ''}" data-poster="${esc(p.id)}"
+                aria-pressed="${cart.has(p.id)}" aria-label="Add ${esc(p.title)} to cart">${BAG}<span>${cart.has(p.id) ? 'In cart' : 'Add to cart'}</span></button>` : '';
     return `
-      <figure class="series__shot" style="--i:${i}">
+      <figure class="series__shot${p ? ' has-cart' : ''}" style="--i:${i}">
         <button type="button" class="series__open" data-k="${k}" data-cursor="EXPAND"
                 aria-label="Open ${esc(item.title)} image ${i + 1} full size">
           <img src="${esc(src)}" alt="${esc(item.title)} — piece ${i + 1}" loading="lazy" decoding="async">
-        </button>
+        </button>${buy}
       </figure>`;
   }).join('');
 
@@ -101,7 +117,7 @@ cat.items.forEach((item) => {
       <h2 class="series__title">${item.title}</h2>
       ${item.note ? `<p class="series__note">${item.note}</p>` : ''}
       ${item.live ? `<a class="button-chip meta series__live" href="${esc(item.href)}" target="_blank" rel="noopener" data-cursor="VISIT">Visit live site &#8599;</a>` : ''}
-      ${item.video ? `<a class="button-chip meta series__live" href="${esc(item.video)}" target="_blank" rel="noopener" data-cursor="PLAY">Watch the reel &#8599;</a>` : ''}
+      ${item.video ? `<button class="button-chip meta series__live" type="button" data-video="${esc(item.video)}" data-cursor="PLAY">Watch the reel &#9656;</button>` : ''}
       ${item.page ? `<a class="button-chip meta series__live" href="${esc(item.page)}" data-cursor="READ">Read it as a comic &#8594;</a>` : ''}
     </div>
     <div class="series__grid">${figures}</div>`;
@@ -117,6 +133,37 @@ pPrev.href = `category.html?c=${slug(prev.category)}`;
 pNext.href = `category.html?c=${slug(next.category)}`;
 pPrev.querySelector('.cat-pager__name').textContent = prev.category;
 pNext.querySelector('.cat-pager__name').textContent = next.category;
+
+/* ---------- showreel player ----------
+   Played in place rather than linking the .mp4, which opens the
+   browser's own player with a download button. */
+host.addEventListener('click', (e) => {
+  const b = e.target.closest('[data-video]');
+  if (!b) return;
+  const box = document.createElement('div');
+  box.className = 'vplayer';
+  box.setAttribute('role', 'dialog');
+  box.setAttribute('aria-modal', 'true');
+  box.setAttribute('aria-label', 'Showreel');
+  box.innerHTML = `
+    <button class="vplayer__close meta" type="button" aria-label="Close">Close &times;</button>
+    <video src="${esc(b.dataset.video)}" controls autoplay playsinline
+           controlslist="nodownload noplaybackrate noremoteplayback" disablepictureinpicture disableremoteplayback></video>`;
+  document.body.appendChild(box);
+  document.documentElement.style.overflow = 'hidden';
+  if (window.lenis) window.lenis.stop();
+  const close = () => {
+    box.remove();
+    document.documentElement.style.overflow = '';
+    if (window.lenis) window.lenis.start();
+    removeEventListener('keydown', onKey);
+    b.focus();
+  };
+  const onKey = (ev) => { if (ev.key === 'Escape') close(); };
+  addEventListener('keydown', onKey);
+  box.addEventListener('click', (ev) => { if (ev.target === box || ev.target.closest('.vplayer__close')) close(); });
+  box.querySelector('.vplayer__close').focus();
+});
 
 /* ---------- lightbox ---------- */
 const box = document.querySelector('#lightbox');
@@ -145,8 +192,23 @@ function close() {
 }
 
 host.addEventListener('click', (e) => {
+  const c = e.target.closest('[data-poster]');
+  if (c) {
+    const p = posters.find((x) => x.id === c.dataset.poster);
+    const added = cart.toggle(p);
+    toast(added ? `Added “${p.title}” to cart` : `Removed “${p.title}”`);
+    return;
+  }
   const b = e.target.closest('.series__open');
   if (b) open(+b.dataset.k);
+});
+addEventListener('cartchange', () => {
+  host.querySelectorAll('[data-poster]').forEach((b) => {
+    const inCart = cart.has(b.dataset.poster);
+    b.classList.toggle('is-in', inCart);
+    b.setAttribute('aria-pressed', String(inCart));
+    b.querySelector('span').textContent = inCart ? 'In cart' : 'Add to cart';
+  });
 });
 box.querySelector('.lightbox__close').addEventListener('click', close);
 box.querySelector('.lightbox__nav--prev').addEventListener('click', () => show(at - 1));
@@ -181,21 +243,5 @@ imgs.forEach((img) => {
   }
 });
 
-const pill = document.querySelector('.cursor-pill');
-if (pill && matchMedia('(hover: hover)').matches && window.gsap) {
-  const xTo = gsap.quickTo(pill, 'x', { duration: 0.35, ease: 'power3' });
-  const yTo = gsap.quickTo(pill, 'y', { duration: 0.35, ease: 'power3' });
-  addEventListener('pointermove', (e) => { xTo(e.clientX); yTo(e.clientY); });
-  document.addEventListener('mouseover', (e) => {
-    const el = e.target.closest('[data-cursor]');
-    if (el) { pill.textContent = el.dataset.cursor; gsap.to(pill, { scale: 1, opacity: 1, duration: 0.2 }); }
-  });
-  document.addEventListener('mouseout', (e) => {
-    if (e.target.closest('[data-cursor]')) gsap.to(pill, { scale: 0.4, opacity: 0, duration: 0.2 });
-  });
-}
-
-initNav();
-initMobileNav();
-initTheme();
-initContact();
+initSite();
+if (isPosters) initCartUI();

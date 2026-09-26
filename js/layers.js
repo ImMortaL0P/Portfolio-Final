@@ -170,5 +170,4 @@ export function initLayers() {
   initClientDrift();
   initStartCards();
   initProcessRows();
-  initFooter();
 }

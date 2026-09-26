@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>document.documentElement.setAttribute('data-theme','dark');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="robots" content="noimageindex">
+  <meta name="description" content="Browse every poster by K. Mangalam one screen at a time, like reels, and add the ones you like to your cart for prints.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="theme-color" content="#0A0A09">
+  <title>Browse Posters &mdash; K. Mangalam</title>
+
+  <link rel="preload" href="assets/fonts/anton-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/contact.css">
+  <link rel="stylesheet" href="css/cart.css">
+  <link rel="stylesheet" href="css/reel.css">
+</head>
+<body class="reel-page">
+  <a class="skip" href="#reel">Skip to posters</a>
+
+  <header class="reel-bar">
+    <a class="reel-bar__back meta" href="category.html?c=poster-designs" aria-label="Back to poster designs">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 5l-7 7 7 7"/></svg>
+      <span>Posters</span>
+    </a>
+    <a class="reel-bar__mark" href="index.html" aria-label="K. Mangalam — home">K. Mangalam</a>
+    <button class="reel-bar__cart meta" type="button" data-cart-open>
+      <svg class="bag" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+      <span class="reel-bar__cart-label">Cart</span>
+      <span class="cart-count">0</span>
+    </button>
+  </header>
+
+  <main class="reel" id="reel" tabindex="-1" aria-label="Posters, one per screen" aria-roledescription="carousel"></main>
+
+  <div class="reel-steps" aria-hidden="true">
+    <button class="reel-step" type="button" data-go="-1" tabindex="-1">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 15l6-6 6 6"/></svg>
+    </button>
+    <button class="reel-step" type="button" data-go="1" tabindex="-1">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+  </div>
+
+  <p class="reel-hint meta" aria-hidden="true"><span class="reel-hint__touch">Swipe up for the next one &middot; double-tap to add</span><span class="reel-hint__mouse">Scroll or &darr; for the next one &middot; double-click to add</span></p>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script type="module" src="js/reel.js"></script>
+</body>
+</html>

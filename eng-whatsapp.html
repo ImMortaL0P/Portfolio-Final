@@ -3,13 +3,16 @@
 <head>
   <script>(function(){try{var t=localStorage.getItem('mg-theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
   <meta charset="UTF-8">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noimageindex">
   <meta name="description" content="An AI chief of staff sitting on top of WhatsApp.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>K</text></svg>">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="theme-color" content="#EBE9E4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0A0A09" media="(prefers-color-scheme: dark)">
   <title>WhatsApp Command Center &mdash; K. Mangalam</title>
 
+  <link rel="preload" href="assets/fonts/anton-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/sections.css">
@@ -27,12 +30,14 @@
   <div class="noise-overlay" aria-hidden="true"></div>
 
   <div class="nav-scrim" aria-hidden="true"></div>
-  <nav class="nav">
+  <nav class="nav" aria-label="Primary">
     <div class="wrap nav-inner">
-      <a href="index.html" class="nav-logo display-m">K. Mangalam</a>
+      <a href="index.html" class="nav-logo display-m" aria-label="K. Mangalam — home">K. Mangalam</a>
       <ul class="nav-links">
-        <li><a href="index.html#work" class="label">All work</a></li>
-        <li><a href="index.html#engineering" class="label">Engineering</a></li>
+        <li><a href="index.html#services" class="label">Services</a></li>
+        <li><a href="work.html" class="label">Work</a></li>
+        <li><a href="index.html#about" class="label">About</a></li>
+        <li><a href="engineering.html" class="label" aria-current="page">Engineering</a></li>
         <li><a href="writings.html" class="label">Blogs</a></li>
       </ul>
       <a href="index.html#contact" class="nav-cta button-chip meta">Get in Touch</a>
@@ -42,7 +47,7 @@
   <main id="main">
     <header class="proj-hero">
       <div class="wrap">
-        <a class="proj-back meta" href="index.html#engineering" data-cursor="BACK">&#8592; Engineering</a>
+        <a class="proj-back meta" href="engineering.html" data-cursor="BACK">&#8592; All engineering</a>
         <p class="proj-hero__meta meta">
           <span class="proj-hero__n"></span>
           <span class="proj-hero__disc"></span>
@@ -78,11 +83,54 @@
 
   <footer class="site-footer">
     <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-col footer-col--brand">
+          <a href="index.html" class="footer-mark display-m">K. Mangalam</a>
+          <p class="footer-blurb">Illustration, brutalist typography and the websites they end up on. Designed and built by one pair of hands, in Patna.</p>
+          <p class="meta footer-status"><span class="status-dot" aria-hidden="true"></span>Available for work &mdash; 2026</p>
+        </div>
+
+        <div class="footer-col">
+          <h2 class="label footer-col__head">Explore</h2>
+          <ul class="footer-links meta">
+            <li><a href="index.html#start">Start here</a></li>
+            <li><a href="work.html">All work</a></li>
+            <li><a href="posters.html">Browse posters</a></li>
+            <li><a href="index.html#about">Resume</a></li>
+            <li><a href="engineering.html">Engineering</a></li>
+            <li><a href="writings.html">Blogs</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h2 class="label footer-col__head">Elsewhere</h2>
+          <ul class="footer-links meta">
+            <li><a href="https://www.behance.net/kumarmangalam3" target="_blank" rel="me noopener">Behance &#8599;</a></li>
+            <li><a href="https://www.linkedin.com/in/kumar-mangalam-362a77176/" target="_blank" rel="me noopener">LinkedIn &#8599;</a></li>
+            <li><a href="mailto:kumarmangalam.patna@gmail.com">Email</a></li>
+            <li><a href="assets/kumar-mangalam-resume.pdf" target="_blank" rel="noopener">CV (PDF) &#8599;</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h2 class="label footer-col__head">Studio</h2>
+          <ul class="footer-links meta">
+            <li>Patna, India</li>
+            <li><span class="footer-clock" data-clock>&mdash;&mdash;</span> local</li>
+            <li>Creating since 2017</li>
+          </ul>
+          <a class="button-chip meta primary footer-cta" href="index.html#contact" data-contact data-cursor="SAY HI">Start a project &#8599;</a>
+        </div>
+      </div>
+
       <div class="footer-legal row">
         <span class="meta">&copy; 2026 K. Mangalam</span>
-        <span class="meta">All Rights Reserved</span>
+        <span class="meta footer-colophon">Anton &amp; Archivo &middot; built by hand</span>
+        <button class="meta footer-top-link" type="button" data-top data-cursor="TOP">Back to top &#8593;</button>
       </div>
     </div>
+
+    <div class="footer-wordmark" aria-hidden="true"><span>MANGALAM</span></div>
   </footer>
 
   <div class="lightbox" id="lightbox" hidden>
