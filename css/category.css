@@ -116,6 +116,7 @@
   margin-top: var(--s-4);
 }
 .cat-hero__hint { color: var(--on-light-3); }
+.cat-hero__hint a { color: var(--on-light-1); text-decoration: underline; text-underline-offset: 3px; }
 
 .series__shot.has-cart { position: relative; }
 .series__cart {

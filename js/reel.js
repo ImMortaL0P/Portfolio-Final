@@ -13,6 +13,7 @@
 ------------------------------------------------------------------- */
 import { posters } from './catalog.js';
 import { cart, initCartUI, toast, BAG } from './cart.js';
+import { priceOf, money, tiersFor, LICENSES, defaultTier } from './pricing.js';
 import { initContact } from './contact.js';
 import { initProtect } from './protect.js';
 
@@ -52,11 +53,11 @@ function slideHTML(p, pos) {
     <div class="reel__info">
       <p class="reel__series meta">${esc(p.series)} &middot; ${esc(p.year)}</p>
       <h2 class="reel__title">${esc(p.title)}</h2>
-      <p class="reel__note">Poster &middot; printed to order</p>
+      <p class="reel__note">Digital file &middot; ${tiersFor(p).length > 1 ? `commercial licence ${money(priceOf(p, 'commercial'))} &middot; personal ${money(priceOf(p, 'personal'))}` : `personal licence ${money(priceOf(p, 'personal'))}`}</p>
     </div>
     <div class="reel__rail">
       <button class="reel__act reel__add${inCart ? ' is-in' : ''}" type="button" data-add aria-pressed="${inCart}" aria-label="${inCart ? 'Remove from cart' : 'Add to cart'}: ${esc(p.title)}">
-        <span class="reel__icon">${BAG}</span><span class="reel__act-label">${inCart ? 'In cart' : 'Add'}</span>
+        <span class="reel__icon">${BAG}</span><span class="reel__act-label">${inCart ? 'In cart' : money(priceOf(p, defaultTier(p)))}</span>
       </button>
       <button class="reel__act" type="button" data-share aria-label="Share ${esc(p.title)}">
         <span class="reel__icon">${SHARE}</span><span class="reel__act-label">Share</span>
@@ -149,7 +150,7 @@ function paintAdd(s) {
   b.classList.toggle('is-in', inCart);
   b.setAttribute('aria-pressed', String(inCart));
   b.setAttribute('aria-label', `${inCart ? 'Remove from cart' : 'Add to cart'}: ${s._p.title}`);
-  b.querySelector('.reel__act-label').textContent = inCart ? 'In cart' : 'Add';
+  b.querySelector('.reel__act-label').textContent = inCart ? 'In cart' : money(priceOf(s._p, defaultTier(s._p)));
 }
 
 function burst(s) {
@@ -166,7 +167,7 @@ function add(s, { onlyAdd = false } = {}) {
   if (onlyAdd && cart.has(p.id)) { burst(s); return; }
   const added = cart.toggle(p);
   if (added) burst(s);
-  toast(added ? `Added “${p.title}” · ${cart.count()} in cart` : `Removed “${p.title}”`);
+  toast(added ? `Added “${p.title}” · ${LICENSES[cart.tier(p.id)].label} · ${cart.count()} in cart` : `Removed “${p.title}”`);
 }
 
 async function share(p) {

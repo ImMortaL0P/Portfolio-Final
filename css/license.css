@@ -1,0 +1,38 @@
+/* ================= Licensing page ================= */
+.license-page .post-body > * { max-width: 68ch; margin-inline: auto; }
+.license-page .post-body > * + * { margin-top: var(--s-3); }
+.lic-h {
+  max-width: 68ch !important;
+  margin-top: clamp(var(--s-5), 6vw, var(--s-6)) !important;
+  margin-bottom: 0 !important;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  line-height: .95;
+  text-transform: uppercase;
+  color: var(--on-light-1);
+}
+.lic-compare { border-top: 1px solid var(--ink); }
+.lic-compare__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 110px 110px;
+  gap: var(--s-2);
+  align-items: baseline;
+  padding-block: 14px;
+  border-bottom: 1px solid var(--rule-light);
+  color: var(--on-light-2);
+}
+.lic-compare__row > :not(:first-child) { text-align: center; font-variant-numeric: tabular-nums; }
+.lic-compare__head { font-family: var(--font-mono); font-size: var(--text-mono); text-transform: uppercase; color: var(--on-light-1); }
+.lic-compare .y { color: var(--on-light-1); font-weight: 600; }
+.lic-compare .n { color: var(--on-light-3); }
+.lic-compare a { color: var(--on-light-1); text-decoration: underline; text-underline-offset: 3px; }
+.lic-compare--prices .lic-compare__row > :not(:first-child) { font-family: var(--font-display); font-size: 1.25rem; color: var(--on-light-1); }
+.lic-list, .lic-steps { display: grid; gap: 10px; padding-left: 1.2em; }
+.lic-list { list-style: disc; }
+.lic-steps { list-style: decimal; }
+.lic-list li, .lic-steps li { color: var(--on-light-3); line-height: 1.6; }
+.lic-steps strong { color: var(--on-light-1); }
+.lic-small { color: var(--on-light-3); text-transform: none; letter-spacing: 0; }
+@media (max-width: 560px) {
+  .lic-compare__row { grid-template-columns: minmax(0, 1fr) 72px 88px; gap: 10px; font-size: 14px; }
+}

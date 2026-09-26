@@ -59,3 +59,10 @@ body.nav-on-dark .theme-toggle { color: var(--on-dark-1); }
 @media (prefers-reduced-motion: reduce) {
   .theme-toggle, .theme-toggle__knob, .theme-toggle__track { transition: none; }
 }
+
+/* the client marks and the Kraft wordmark are dark ink on transparent:
+   on the dark ground they vanished, so they flip to light ink */
+:root[data-theme="dark"] .client-row img,
+:root[data-theme="dark"] .agency-banner__logo {
+  filter: invert(1) hue-rotate(180deg);
+}
