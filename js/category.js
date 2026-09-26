@@ -2,8 +2,9 @@ import './scroll.js';
 import { initSite } from './site.js';
 import { workCategories } from './data.js';
 import { showcase } from './showcase.js';
-import { posters, POSTER_CATEGORY } from './catalog.js';
+import { pieces, POSTER_CATEGORY } from './catalog.js';
 import { cart, initCartUI, toast, BAG } from './cart.js';
+import { forSale, priceOf, money, PRICES, LICENSES } from './pricing.js';
 
 const slug = (s) => s.toLowerCase().replace(/[^a-z]+/g, '-').replace(/^-|-$/g, '');
 const esc = (s) => String(s).replace(/"/g, '&quot;');
@@ -68,15 +69,18 @@ function buildShowcase(item) {
   return sec;
 }
 
-/* ---------- posters: the reel and the cart ---------- */
+/* ---------- for sale: prices, the cart, and the poster reel ---------- */
 const isPosters = cat.category === POSTER_CATEGORY;
-if (isPosters) {
+const catPieces = pieces.filter((p) => p.cat === cat.category);
+const selling = catPieces.some(forSale);
+if (selling) {
+  const [pers, comm] = PRICES[cat.category];
   const row = document.createElement('div');
   row.className = 'cat-hero__actions';
   row.innerHTML = `
-    <a class="button-chip meta primary" href="posters.html" data-cursor="SWIPE">Browse posters &#8594;</a>
-    <a class="button-chip meta" href="work.html?c=poster-designs">Shop as a grid</a>
-    <span class="cat-hero__hint meta">Every poster is available as a print</span>`;
+    ${isPosters ? '<a class="button-chip meta primary" href="posters.html" data-cursor="SWIPE">Browse posters &#8594;</a>' : ''}
+    <a class="button-chip meta${isPosters ? '' : ' primary'}" href="work.html?c=${slug(cat.category)}">Shop as a grid</a>
+    <span class="cat-hero__hint meta">Digital files &middot; personal licence ${money(pers)} &middot; commercial ${money(comm)} &middot; <a href="license.html">terms</a></span>`;
   document.querySelector('.cat-hero .wrap').appendChild(row);
 }
 
@@ -97,13 +101,14 @@ cat.items.forEach((item) => {
   const figures = mids.map((src, i) => {
     const k = flat.length;
     flat.push({ full: fulls[i] || src, caption: `${item.title} — ${i + 1} / ${mids.length}` });
-    /* posters are sold as prints: each one gets its own cart button */
-    const p = isPosters && posters.find((x) => x.thumb === src);
-    const buy = p ? `
-        <button type="button" class="series__cart meta${cart.has(p.id) ? ' is-in' : ''}" data-poster="${esc(p.id)}"
-                aria-pressed="${cart.has(p.id)}" aria-label="Add ${esc(p.title)} to cart">${BAG}<span>${cart.has(p.id) ? 'In cart' : 'Add to cart'}</span></button>` : '';
+    /* every piece on sale gets its own cart button, with its price */
+    const p = catPieces.filter((x) => x.seriesSlug === slug(item.title))[i];
+    const on = p && forSale(p);
+    const buy = on ? `
+        <button type="button" class="series__cart meta${cart.has(p.id) ? ' is-in' : ''}" data-piece="${esc(p.id)}"
+                aria-pressed="${cart.has(p.id)}" aria-label="Add ${esc(p.title)} to cart, ${money(priceOf(p))}">${BAG}<span>${cart.has(p.id) ? 'In cart' : `Add &middot; ${money(priceOf(p))}`}</span></button>` : '';
     return `
-      <figure class="series__shot${p ? ' has-cart' : ''}" style="--i:${i}">
+      <figure class="series__shot${on ? ' has-cart' : ''}" style="--i:${i}">
         <button type="button" class="series__open" data-k="${k}" data-cursor="EXPAND"
                 aria-label="Open ${esc(item.title)} image ${i + 1} full size">
           <img src="${esc(src)}" alt="${esc(item.title)} — piece ${i + 1}" loading="lazy" decoding="async">
@@ -192,22 +197,23 @@ function close() {
 }
 
 host.addEventListener('click', (e) => {
-  const c = e.target.closest('[data-poster]');
+  const c = e.target.closest('[data-piece]');
   if (c) {
-    const p = posters.find((x) => x.id === c.dataset.poster);
+    const p = catPieces.find((x) => x.id === c.dataset.piece);
     const added = cart.toggle(p);
-    toast(added ? `Added “${p.title}” to cart` : `Removed “${p.title}”`);
+    toast(added ? `Added “${p.title}” · ${LICENSES[cart.tier(p.id)].label} licence · ${money(priceOf(p, cart.tier(p.id)))}` : `Removed “${p.title}”`);
     return;
   }
   const b = e.target.closest('.series__open');
   if (b) open(+b.dataset.k);
 });
 addEventListener('cartchange', () => {
-  host.querySelectorAll('[data-poster]').forEach((b) => {
-    const inCart = cart.has(b.dataset.poster);
+  host.querySelectorAll('[data-piece]').forEach((b) => {
+    const inCart = cart.has(b.dataset.piece);
+    const p = catPieces.find((x) => x.id === b.dataset.piece);
     b.classList.toggle('is-in', inCart);
     b.setAttribute('aria-pressed', String(inCart));
-    b.querySelector('span').textContent = inCart ? 'In cart' : 'Add to cart';
+    b.querySelector('span').textContent = inCart ? 'In cart' : `Add · ${money(priceOf(p))}`;
   });
 });
 box.querySelector('.lightbox__close').addEventListener('click', close);
@@ -244,4 +250,4 @@ imgs.forEach((img) => {
 });
 
 initSite();
-if (isPosters) initCartUI();
+if (selling) initCartUI();

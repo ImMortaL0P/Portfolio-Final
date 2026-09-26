@@ -48,7 +48,7 @@ const FIELDS = `
           <label class="cf__chip"><input type="radio" name="kind" value="Website or Product"><span>Website</span></label>
           <label class="cf__chip"><input type="radio" name="kind" value="Editorial &amp; Print"><span>Print</span></label>
           <label class="cf__chip"><input type="radio" name="kind" value="Photography"><span>Photography</span></label>
-          <label class="cf__chip"><input type="radio" name="kind" value="Poster prints"><span>Prints</span></label>
+          <label class="cf__chip"><input type="radio" name="kind" value="Licensing"><span>Licensing</span></label>
           <label class="cf__chip"><input type="radio" name="kind" value="Something else"><span>Other</span></label>
         </div>
       </fieldset>
@@ -97,7 +97,7 @@ function markup() {
 }
 
 async function deliver(data) {
-  const subject = `${data.kind === 'Poster prints' ? 'Print request' : 'New project'} — ${data.kind} — ${data.name}`;
+  const subject = `${data.kind === 'Licensing' ? 'Licensing enquiry' : 'New project'} — ${data.kind} — ${data.name}`;
   const body = [
     `Name:      ${data.name}`,
     `Email:     ${data.email}`,

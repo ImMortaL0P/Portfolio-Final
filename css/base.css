@@ -64,6 +64,9 @@
 *, *::before, *::after {
   box-sizing: border-box;
 }
+/* `hidden` must always win: a component's own display rule was overriding
+   it, leaving invisible overlays and empty states on screen */
+[hidden] { display: none !important; }
 body {
   margin: 0;
   font-family: var(--font-body);

@@ -2,7 +2,7 @@
    All Work — the store.
 
    Every piece in one grid, narrowed with checkbox filters (category,
-   series, year, prints), a search box and a sort, the way a shop
+   series, year, price, for sale), a search box and a sort, the way a shop
    catalogue works. State lives in the URL so a filtered view can be
    shared or bookmarked, and back/forward restores it.
 
@@ -12,7 +12,16 @@
 import './scroll.js';
 import { initSite } from './site.js';
 import { pieces, categories, POSTER_CATEGORY } from './catalog.js';
-import { cart, initCartUI, toast, BAG } from './cart.js';
+import { cart, initCartUI, toast, tierPicker, BAG } from './cart.js';
+import { forSale, priceOf, money, tiersFor, defaultTier, LICENSES } from './pricing.js';
+
+/* price bands for the filter, on the price a one-tap add uses */
+const BANDS = [
+  { v: 'lt500', label: 'Under ₹500', test: (n) => n < 500 },
+  { v: '500-999', label: '₹500 – ₹999', test: (n) => n >= 500 && n < 1000 },
+  { v: '1000', label: '₹1,000 and above', test: (n) => n >= 1000 },
+];
+const shownPrice = (p) => (forSale(p) ? priceOf(p, defaultTier(p)) : null);
 
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const $ = (s, r = document) => r.querySelector(s);
@@ -29,7 +38,7 @@ const filterBtn = $('.store__filter-btn');
 const sheetMQ = matchMedia('(max-width: 899.98px)');
 
 /* ---------------- state ---------------- */
-const state = { cats: new Set(), series: new Set(), years: new Set(), print: false, q: '', sort: 'featured' };
+const state = { cats: new Set(), series: new Set(), years: new Set(), price: new Set(), sale: false, q: '', sort: 'featured' };
 
 function readURL() {
   const p = new URLSearchParams(location.search);
@@ -37,7 +46,8 @@ function readURL() {
   state.cats = new Set(list('c'));
   state.series = new Set(list('s'));
   state.years = new Set(list('y'));
-  state.print = p.get('print') === '1';
+  state.price = new Set(list('p'));
+  state.sale = p.get('sale') === '1';
   state.q = p.get('q') || '';
   state.sort = p.get('sort') || 'featured';
 }
@@ -46,7 +56,8 @@ function writeURL() {
   if (state.cats.size) p.set('c', [...state.cats].join(','));
   if (state.series.size) p.set('s', [...state.series].join(','));
   if (state.years.size) p.set('y', [...state.years].join(','));
-  if (state.print) p.set('print', '1');
+  if (state.price.size) p.set('p', [...state.price].join(','));
+  if (state.sale) p.set('sale', '1');
   if (state.q) p.set('q', state.q);
   if (state.sort !== 'featured') p.set('sort', state.sort);
   const qs = p.toString();
@@ -60,7 +71,11 @@ function matches(p, skip) {
   if (skip !== 'cats' && state.cats.size && !state.cats.has(p.catSlug)) return false;
   if (skip !== 'series' && state.series.size && !state.series.has(p.seriesSlug)) return false;
   if (skip !== 'years' && state.years.size && !state.years.has(p.year)) return false;
-  if (state.print && !isPoster(p)) return false;
+  if (state.sale && !forSale(p)) return false;
+  if (skip !== 'price' && state.price.size) {
+    const n = shownPrice(p);
+    if (n == null || !BANDS.some((b) => state.price.has(b.v) && b.test(n))) return false;
+  }
   if (state.q) {
     const hay = norm(`${p.title} ${p.series} ${p.cat} ${p.catShort} ${p.kind} ${p.year}`);
     if (!norm(state.q).split(/\s+/).every((w) => hay.includes(w))) return false;
@@ -73,6 +88,9 @@ const sorters = {
   new: (a, b) => b.year - a.year || a.order - b.order,
   old: (a, b) => a.year - b.year || a.order - b.order,
   az: (a, b) => a.title.localeCompare(b.title),
+  /* pieces not for sale sink to the end of a price sort */
+  low: (a, b) => (shownPrice(a) ?? 1e9) - (shownPrice(b) ?? 1e9) || a.order - b.order,
+  high: (a, b) => (shownPrice(b) ?? -1) - (shownPrice(a) ?? -1) || a.order - b.order,
 };
 
 let results = [];
@@ -124,18 +142,23 @@ function renderGroups() {
     n: pieces.filter((p) => p.year === y && matches(p, 'years')).length,
   }));
 
-  const printN = pieces.filter((p) => isPoster(p) && matches({ ...p }, 'none')).length;
+  const pOpts = BANDS.map((b) => ({
+    value: b.v, label: b.label, on: state.price.has(b.v),
+    n: pieces.filter((p) => { const n = shownPrice(p); return n != null && b.test(n) && matches(p, 'price'); }).length,
+  }));
+  const saleN = pieces.filter((p) => forSale(p)).length;
 
   groups.innerHTML = `
     <div class="fgroup fgroup--flat">
       <label class="fchk fchk--toggle">
-        <input type="checkbox" data-key="print"${state.print ? ' checked' : ''}>
+        <input type="checkbox" data-key="sale"${state.sale ? ' checked' : ''}>
         <span class="fchk__box" aria-hidden="true"></span>
-        <span class="fchk__label">Available as a print</span>
-        <span class="fchk__n meta">${state.print ? printN : pieces.filter((p) => isPoster(p)).length}</span>
+        <span class="fchk__label">For sale only</span>
+        <span class="fchk__n meta">${saleN}</span>
       </label>
     </div>
     ${group('cats', 'Category', cOpts, isOpen('cats', true))}
+    ${group('price', 'Price', pOpts, isOpen('price', true))}
     ${group('series', `Series <span class="fgroup__hint">${sOpts.length}</span>`, sOpts, isOpen('series', state.series.size > 0))}
     ${group('years', 'Year', yOpts, isOpen('years', true))}`;
 }
@@ -144,7 +167,7 @@ groups.addEventListener('change', (e) => {
   const box = e.target.closest('input[type="checkbox"]');
   if (!box) return;
   const k = box.dataset.key;
-  if (k === 'print') state.print = box.checked;
+  if (k === 'sale') state.sale = box.checked;
   else {
     const set = state[k];
     box.checked ? set.add(box.value) : set.delete(box.value);
@@ -162,11 +185,12 @@ function renderChips() {
   const label = (k, v) => {
     if (k === 'cats') return categories.find((c) => c.slug === v)?.short || v;
     if (k === 'series') return pieces.find((p) => p.seriesSlug === v)?.series || v;
+    if (k === 'price') return BANDS.find((b) => b.v === v)?.label || v;
     return v;
   };
   const list = [];
-  ['cats', 'series', 'years'].forEach((k) => state[k].forEach((v) => list.push({ k, v, t: label(k, v) })));
-  if (state.print) list.push({ k: 'print', v: '1', t: 'Prints' });
+  ['cats', 'price', 'series', 'years'].forEach((k) => state[k].forEach((v) => list.push({ k, v, t: label(k, v) })));
+  if (state.sale) list.push({ k: 'sale', v: '1', t: 'For sale' });
   if (state.q) list.push({ k: 'q', v: state.q, t: `“${state.q}”` });
 
   chips.innerHTML = list.map((c) => `
@@ -174,7 +198,7 @@ function renderChips() {
       ${esc(c.t)} <span aria-hidden="true">&times;</span>
     </button>`).join('') + (list.length > 1 ? '<button class="fchip fchip--clear meta store__clear" type="button">Clear all</button>' : '');
 
-  const n = state.cats.size + state.series.size + state.years.size + (state.print ? 1 : 0);
+  const n = state.cats.size + state.series.size + state.years.size + state.price.size + (state.sale ? 1 : 0);
   $('.store__filter-n').textContent = n ? `(${n})` : '';
 }
 
@@ -182,7 +206,7 @@ chips.addEventListener('click', (e) => {
   const c = e.target.closest('.fchip[data-k]');
   if (!c) return;
   const { k, v } = c.dataset;
-  if (k === 'print') state.print = false;
+  if (k === 'sale') state.sale = false;
   else if (k === 'q') { state.q = ''; search.value = ''; }
   else state[k].delete(v);
   update();
@@ -190,19 +214,24 @@ chips.addEventListener('click', (e) => {
 
 document.addEventListener('click', (e) => {
   if (!e.target.closest('.store__clear')) return;
-  state.cats.clear(); state.series.clear(); state.years.clear();
-  state.print = false; state.q = ''; search.value = '';
+  state.cats.clear(); state.series.clear(); state.years.clear(); state.price.clear();
+  state.sale = false; state.q = ''; search.value = '';
   update();
 });
 
 /* ---------------- grid ---------------- */
 function card(p, i) {
-  const poster = isPoster(p);
-  const inCart = poster && cart.has(p.id);
-  const badge = poster ? '<span class="pc__badge meta">Print</span>'
-    : p.count > 1 ? `<span class="pc__badge pc__badge--ghost meta">${p.count} screens</span>` : '';
+  const sale = forSale(p);
+  const inCart = sale && cart.has(p.id);
+  const tiers = tiersFor(p);
+  const badge = p.count > 1 ? `<span class="pc__badge pc__badge--ghost meta">${p.count} screens</span>` : '';
+  const price = sale ? `
+        <p class="pc__price">
+          <strong>${money(shownPrice(p))}</strong>
+          <span class="meta">${tiers.length > 1 ? `Commercial &middot; ${money(priceOf(p, 'personal'))} personal` : 'Personal licence only'}</span>
+        </p>` : '<p class="pc__price pc__price--na meta">Client work &middot; not for sale</p>';
   return `
-    <li class="pc${poster ? ' pc--poster' : ''}${p.catSlug === 'photography' ? ' is-mono' : ''}" style="--d:${Math.min(i, 12)}">
+    <li class="pc${sale ? ' pc--sale' : ''}${p.catSlug === 'photography' ? ' is-mono' : ''}" style="--d:${Math.min(i, 12)}">
       <button class="pc__open" type="button" data-i="${i}" data-cursor="VIEW" aria-label="Quick view: ${esc(p.title)}">
         <span class="pc__media"><img src="${esc(p.thumb)}" alt="" loading="${i < 8 ? 'eager' : 'lazy'}" decoding="async"></span>
         ${badge}
@@ -211,7 +240,8 @@ function card(p, i) {
         <span class="pc__cat meta">${esc(p.catShort)} &middot; ${esc(p.year)}</span>
         <h3 class="pc__title"><a href="${esc(p.href)}">${esc(p.title)}</a></h3>
         <p class="pc__note">${esc(p.series)}</p>
-        ${poster ? `<button class="pc__cart meta${inCart ? ' is-in' : ''}" type="button" data-cart="${i}" aria-pressed="${inCart}">
+        ${price}
+        ${sale ? `<button class="pc__cart meta${inCart ? ' is-in' : ''}" type="button" data-cart="${i}" aria-pressed="${inCart}">
           ${BAG}<span>${inCart ? 'In cart' : 'Add to cart'}</span></button>` : ''}
       </div>
     </li>`;
@@ -239,7 +269,7 @@ function update({ keepFocus } = {}) {
   /* re-rendering the list would otherwise drop keyboard focus to <body> */
   if (focusKey) {
     const [k, v] = focusKey.split(':');
-    groups.querySelector(`input[data-key="${k}"]${k === 'print' ? '' : `[value="${CSS.escape(v)}"]`}`)?.focus();
+    groups.querySelector(`input[data-key="${k}"]${k === 'sale' ? '' : `[value="${CSS.escape(v)}"]`}`)?.focus();
   }
 }
 
@@ -255,7 +285,7 @@ grid.addEventListener('click', (e) => {
     const p = results[+b.dataset.cart];
     const added = cart.toggle(p);
     paintCartButton(b, added);
-    toast(added ? `Added “${p.title}” to cart` : `Removed “${p.title}”`);
+    toast(added ? `Added “${p.title}” · ${LICENSES[cart.tier(p.id)].label} licence` : `Removed “${p.title}”`);
     return;
   }
   const o = e.target.closest('.pc__open');
@@ -309,29 +339,40 @@ const qv = $('.qv');
 const qvImg = $('.qv__media img', qv);
 let qvIndex = 0;
 let qvOpener = null;
+let qvTier = null;   /* the licence picked in the quick view, before adding */
 
 function paintQV() {
   const p = results[qvIndex];
   if (!p) return;
   const poster = isPoster(p);
+  const sale = forSale(p);
   qv.classList.toggle('is-mono', p.catSlug === 'photography');
   qvImg.src = p.full;
   qvImg.alt = `${p.title} — ${p.series}`;
   $('.qv__cat', qv).textContent = `${p.catShort} · ${p.year} · ${p.kind}`;
   $('.qv__title', qv).textContent = p.title;
-  $('.qv__note', qv).textContent = poster
-    ? `${p.note}. Printed to order — add it to your cart and send the list; I'll reply with sizes and price.`
-    : p.note;
-  const inCart = poster && cart.has(p.id);
+  $('.qv__note', qv).textContent = sale
+    ? `${p.note}. Digital download — the high-resolution file with a licence certificate.`
+    : `${p.note}. Client work, shown as part of the portfolio; not for sale.`;
+  const inCart = sale && cart.has(p.id);
+  const tier = (inCart && cart.tier(p.id)) || qvTier || defaultTier(p);
   $('.qv__actions', qv).innerHTML = `
-    ${poster ? `<button class="button-chip meta primary qv__cart" type="button" aria-pressed="${inCart}">${inCart ? 'In cart &#10003;' : 'Add to cart'}</button>
-      <a class="button-chip meta" href="posters.html#${esc(p.id)}">See it in the reel &#8594;</a>` : ''}
-    <a class="button-chip meta" href="${esc(p.href)}">View the full series &#8594;</a>`;
+    ${sale ? `${tierPicker(p, tiersFor(p).includes(tier) ? tier : defaultTier(p), 'qv-tier')}
+      <div class="qv__buy">
+        <button class="button-chip meta primary qv__cart" type="button">${inCart ? 'Update cart' : 'Add to cart'}</button>
+        ${inCart ? '<button class="button-chip meta" type="button" data-cart-open>View cart</button>' : ''}
+      </div>
+      <a class="qv__terms meta" href="license.html" target="_blank" rel="noopener">What each licence allows &#8599;</a>` : ''}
+    <div class="qv__links">
+      ${poster ? `<a class="button-chip meta" href="posters.html#${esc(p.id)}">See it in the reel &#8594;</a>` : ''}
+      <a class="button-chip meta" href="${esc(p.href)}">View the full series &#8594;</a>
+    </div>`;
   $('.qv__pos', qv).textContent = `${qvIndex + 1} / ${results.length}`;
 }
 
 function openQV(i, from) {
   qvIndex = i;
+  qvTier = null;
   qvOpener = from;
   paintQV();
   qv.hidden = false;
@@ -349,17 +390,28 @@ function closeQV() {
 }
 function stepQV(d) {
   qvIndex = (qvIndex + d + results.length) % results.length;
+  qvTier = null;
   paintQV();
 }
 qv.addEventListener('click', (e) => {
   if (e.target.closest('[data-qv-close]')) return closeQV();
+  if (e.target.closest('[data-cart-open]')) { closeQV(); return; }
   const s = e.target.closest('[data-step]');
   if (s) return stepQV(+s.dataset.step);
   if (e.target.closest('.qv__cart')) {
     const p = results[qvIndex];
-    const added = cart.toggle(p);
-    toast(added ? `Added “${p.title}” to cart` : `Removed “${p.title}”`);
+    const tier = qv.querySelector('input[name="qv-tier"]:checked')?.value || defaultTier(p);
+    const was = cart.has(p.id);
+    cart.add(p, tier);
+    toast(`${was ? 'Updated' : 'Added'} “${p.title}” · ${LICENSES[tier].label} licence · ${money(priceOf(p, tier))}`);
   }
+});
+qv.addEventListener('change', (e) => {
+  if (e.target.name !== 'qv-tier') return;
+  qvTier = e.target.value;
+  const p = results[qvIndex];
+  /* already in the cart: switching the licence updates it straight away */
+  if (cart.has(p.id)) cart.setTier(p.id, qvTier);
 });
 addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && panel.classList.contains('is-open')) setSheet(false);

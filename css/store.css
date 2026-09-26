@@ -340,6 +340,7 @@
 .pc__cart.is-in { background: var(--ink); color: var(--ground); }
 .pc__cart.is-in:hover { background: transparent; color: var(--on-light-1); }
 
+.store__empty[hidden] { display: none; }
 .store__empty {
   display: grid;
   justify-items: start;
@@ -355,6 +356,19 @@
   color: var(--on-light-1);
 }
 .store__empty-note { color: var(--on-light-3); }
+
+/* ---------- price on a card ---------- */
+.pc__price { display: grid; gap: 1px; margin-top: 6px; }
+.pc__price strong {
+  font-family: var(--font-display);
+  font-weight: normal;
+  font-size: 1.35rem;
+  line-height: 1;
+  color: var(--on-light-1);
+  font-variant-numeric: tabular-nums;
+}
+.pc__price .meta { color: var(--on-light-3); font-size: 11px; text-transform: none; letter-spacing: 0; }
+.pc__price--na { color: var(--on-light-3); font-size: 11px; }
 
 /* ---------- quick view ---------- */
 .qv {
@@ -409,7 +423,12 @@
   color: var(--on-light-1);
 }
 .qv__note { color: var(--on-light-3); line-height: 1.55; }
-.qv__actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: var(--s-1); }
+.qv__actions { display: grid; gap: 12px; margin-top: var(--s-1); }
+.qv__buy, .qv__links { display: flex; flex-wrap: wrap; gap: 10px; }
+.qv__buy .qv__cart { flex: 1 1 auto; min-height: 48px; text-align: center; }
+.qv__terms { justify-self: start; color: var(--on-light-3); text-decoration: underline; text-underline-offset: 3px; text-transform: none; letter-spacing: 0; }
+.qv__terms:hover { color: var(--accent-text); }
+.qv__links { padding-top: 12px; border-top: 1px solid var(--rule-light); }
 .qv__nav {
   display: flex;
   align-items: center;

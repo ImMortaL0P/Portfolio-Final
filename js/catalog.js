@@ -51,6 +51,7 @@ function build() {
         catSlug: cslug,
         catShort: CATEGORY_SHORT[cat.category] || cat.category,
         series,
+        seriesRaw: item.title,
         seriesSlug: sslug,
         kind: item.kind,
         year: item.year,
