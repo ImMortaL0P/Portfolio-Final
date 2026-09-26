@@ -10,8 +10,10 @@ import { initTheme } from './theme.js';
 import { initContact } from './contact.js';
 import { initCursor } from './cursor.js';
 import { initFooter } from './layers.js';
+import { initProtect } from './protect.js';
 
 export function initSite() {
+  initProtect();
   initNav();
   initMobileNav();
   initTheme();

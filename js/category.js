@@ -117,7 +117,7 @@ cat.items.forEach((item) => {
       <h2 class="series__title">${item.title}</h2>
       ${item.note ? `<p class="series__note">${item.note}</p>` : ''}
       ${item.live ? `<a class="button-chip meta series__live" href="${esc(item.href)}" target="_blank" rel="noopener" data-cursor="VISIT">Visit live site &#8599;</a>` : ''}
-      ${item.video ? `<a class="button-chip meta series__live" href="${esc(item.video)}" target="_blank" rel="noopener" data-cursor="PLAY">Watch the reel &#8599;</a>` : ''}
+      ${item.video ? `<button class="button-chip meta series__live" type="button" data-video="${esc(item.video)}" data-cursor="PLAY">Watch the reel &#9656;</button>` : ''}
       ${item.page ? `<a class="button-chip meta series__live" href="${esc(item.page)}" data-cursor="READ">Read it as a comic &#8594;</a>` : ''}
     </div>
     <div class="series__grid">${figures}</div>`;
@@ -133,6 +133,37 @@ pPrev.href = `category.html?c=${slug(prev.category)}`;
 pNext.href = `category.html?c=${slug(next.category)}`;
 pPrev.querySelector('.cat-pager__name').textContent = prev.category;
 pNext.querySelector('.cat-pager__name').textContent = next.category;
+
+/* ---------- showreel player ----------
+   Played in place rather than linking the .mp4, which opens the
+   browser's own player with a download button. */
+host.addEventListener('click', (e) => {
+  const b = e.target.closest('[data-video]');
+  if (!b) return;
+  const box = document.createElement('div');
+  box.className = 'vplayer';
+  box.setAttribute('role', 'dialog');
+  box.setAttribute('aria-modal', 'true');
+  box.setAttribute('aria-label', 'Showreel');
+  box.innerHTML = `
+    <button class="vplayer__close meta" type="button" aria-label="Close">Close &times;</button>
+    <video src="${esc(b.dataset.video)}" controls autoplay playsinline
+           controlslist="nodownload noplaybackrate noremoteplayback" disablepictureinpicture disableremoteplayback></video>`;
+  document.body.appendChild(box);
+  document.documentElement.style.overflow = 'hidden';
+  if (window.lenis) window.lenis.stop();
+  const close = () => {
+    box.remove();
+    document.documentElement.style.overflow = '';
+    if (window.lenis) window.lenis.start();
+    removeEventListener('keydown', onKey);
+    b.focus();
+  };
+  const onKey = (ev) => { if (ev.key === 'Escape') close(); };
+  addEventListener('keydown', onKey);
+  box.addEventListener('click', (ev) => { if (ev.target === box || ev.target.closest('.vplayer__close')) close(); });
+  box.querySelector('.vplayer__close').focus();
+});
 
 /* ---------- lightbox ---------- */
 const box = document.querySelector('#lightbox');

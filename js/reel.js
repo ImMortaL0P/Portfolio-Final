@@ -14,6 +14,7 @@
 import { posters } from './catalog.js';
 import { cart, initCartUI, toast, BAG } from './cart.js';
 import { initContact } from './contact.js';
+import { initProtect } from './protect.js';
 
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const reel = document.querySelector('#reel');
@@ -236,6 +237,7 @@ hydrate(slides[0]);
 hydrate(slides[1]);
 reel.focus({ preventScroll: true });
 
+initProtect();
 initContact();
 initCartUI({ fab: false });
 
