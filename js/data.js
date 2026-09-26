@@ -19,8 +19,8 @@ export const workCategories = [
     n: '02', category: 'Illustrations', tags: 'Collage / Vector / Digital Art',
     items: [
       
-      { year: '2025', kind: 'Collage Series', title: 'PERSONALITY', href: '#',
-        shots: ['assets/thumbs/g13mwjgnbden63lexphu-33bfaf.webp','assets/thumbs/fhmflypufyrshkqytt9d-a9711a.webp','assets/thumbs/ruqyboi7zmrenrmbjf2l-491535.webp','assets/thumbs/wkl7w2yjn4yxipn6whrm-16175e.webp'], full: ['assets/Personality/g13mwjgnbden63lexphu.webp', 'assets/Personality/fhmflypufyrshkqytt9d.webp', 'assets/Personality/ruqyboi7zmrenrmbjf2l.webp', 'assets/Personality/wkl7w2yjn4yxipn6whrm.webp'], mid: ['assets/mid/g13mwjgnbden63lexphu-33bfaf.webp', 'assets/mid/fhmflypufyrshkqytt9d-a9711a.webp', 'assets/mid/ruqyboi7zmrenrmbjf2l-491535.webp', 'assets/mid/wkl7w2yjn4yxipn6whrm-16175e.webp'] },
+      { year: '2025', kind: 'Sketch Series', title: 'FREEHAND COMICS', href: '#',
+        shots: ['assets/thumbs/front-page.webp', 'assets/thumbs/front-page-back.webp', 'assets/thumbs/sqm-p-thumb.svg', 'assets/thumbs/main.webp', 'assets/thumbs/acme-dynamite.webp'], full: ['assets/Freehand Comics/front-page.webp', 'assets/Freehand Comics/front-page-back.webp', 'assets/Freehand Comics/sqm-p.svg', 'assets/Freehand Comics/main.webp', 'assets/Freehand Comics/acme-dynamite.webp'], mid: ['assets/mid/front-page.webp', 'assets/mid/front-page-back.webp', 'assets/mid/sqm-p-mid.svg', 'assets/mid/main.webp', 'assets/mid/acme-dynamite.webp'] },
       
       { year: '2025', kind: 'Vector Series', title: 'JAIPUR BLUES', href: '#',
         shots: ['assets/thumbs/jaipur-blues-title-b905c7.webp','assets/thumbs/jaipur-blues-8ce30a.webp','assets/thumbs/jaipur-blues-2-daf0af.webp','assets/thumbs/jaipur-blues-3-9f7cc6.webp'], full: ['assets/Jaipur Blues/Jaipur Blues Title.webp', 'assets/Jaipur Blues/Jaipur Blues.webp', 'assets/Jaipur Blues/Jaipur Blues 2.webp', 'assets/Jaipur Blues/Jaipur Blues 3.webp'], mid: ['assets/mid/jaipur-blues-title-b905c7.webp', 'assets/mid/jaipur-blues-8ce30a.webp', 'assets/mid/jaipur-blues-2-daf0af.webp', 'assets/mid/jaipur-blues-3-9f7cc6.webp'] },
