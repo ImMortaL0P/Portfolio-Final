@@ -36,6 +36,14 @@
 .nav-links li a:hover {
   opacity: 1;
 }
+/* where you are: full strength and underlined. Colour stays with nav.js,
+   which repaints the pill for dark grounds. */
+.nav-links li a[aria-current="page"] {
+  opacity: 1;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+}
 
 /* Button primitive */
 .button-chip {
@@ -259,7 +267,7 @@
   color: var(--on-light-3);
 }
 .cat-header__n {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 .cat-header__count {
   grid-column: 2;
@@ -384,7 +392,7 @@
 }
 .work-row:hover .work-row__icon {
   transform: translate(4px, -4px);
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 @media (max-width: 1100px) {
@@ -553,7 +561,7 @@
   color: var(--on-dark-3);
 }
 .about__now-index {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 .about__rail {
   display: grid;
@@ -593,7 +601,7 @@
 
 /* ---- experience ---- */
 .about__exp-label {
-  color: var(--accent);
+  color: var(--accent-text);
   display: block;
   margin-bottom: var(--s-2);
 }
@@ -618,7 +626,7 @@
   transform: translateX(4px);
 }
 .about__exp-item:hover .about__exp-role {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 .about__exp-years {
   display: block;
@@ -668,7 +676,7 @@
   flex-wrap: wrap;
 }
 .about__cap > .meta {
-  color: var(--accent);
+  color: var(--accent-text);
   flex: 0 0 86px;
 }
 .about__cap ul {
@@ -780,7 +788,7 @@
   transition: color 0.25s var(--ease-out);
 }
 .footer-links a:hover {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 .footer-legal {
   border-top: 1px solid var(--rule-light);
@@ -823,7 +831,7 @@
 }
 .genre-n {
   grid-area: n;
-  color: var(--accent);
+  color: var(--accent-text);
   align-self: center;
   font-size: 12px;
 }
@@ -932,7 +940,7 @@
   padding: 1px 5px;
   border: 1px solid var(--accent);
   border-radius: 2px;
-  color: var(--accent);
+  color: var(--accent-text);
   font-size: 9px;
   letter-spacing: 0.08em;
   line-height: 1.4;
@@ -1029,7 +1037,7 @@ body.nav-on-dark .nav-links li a {
     transform 0.3s var(--ease-out);
 }
 .cat-header__title a:hover {
-  color: var(--accent);
+  color: var(--accent-text);
   transform: translateX(6px);
 }
 
@@ -1135,7 +1143,7 @@ body.nav-on-dark .nav-scrim {
 }
 .eng-group {
   display: block;
-  color: var(--accent);
+  color: var(--accent-text);
   padding-bottom: var(--s-1);
   border-bottom: 1px solid var(--rule-light);
   margin-bottom: var(--s-1);
@@ -1207,7 +1215,7 @@ body.nav-on-dark .nav-scrim {
 }
 .eng-row:hover .eng-row__icon {
   transform: translateX(4px);
-  color: var(--accent);
+  color: var(--accent-text);
 }
 .eng-all {
   display: inline-block;
@@ -1248,7 +1256,7 @@ body.nav-on-dark .nav-scrim {
   border-bottom: 1px solid var(--rule-light);
 }
 .start__label {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 .start__lede {
   font-size: clamp(1rem, 1.6vw, 1.3rem);
@@ -1298,7 +1306,7 @@ body.nav-on-dark .nav-scrim {
 }
 
 .start__n {
-  color: var(--accent);
+  color: var(--accent-text);
   margin-bottom: var(--s-3);
 }
 .start__title {
@@ -1325,7 +1333,7 @@ body.nav-on-dark .nav-scrim {
     transform 0.3s var(--ease-out);
 }
 .start__card:hover .start__go {
-  color: var(--accent);
+  color: var(--accent-text);
   transform: translateX(4px);
 }
 
@@ -1455,7 +1463,7 @@ body.nav-on-dark .nav-scrim {
   align-items: center;
 }
 .agency-banner:hover .agency-banner__link {
-  color: var(--accent);
+  color: var(--accent-text);
   transform: translateX(4px);
 }
 
@@ -1493,7 +1501,7 @@ body.nav-on-dark .nav-scrim {
 }
 .process-row__principle {
   display: block;
-  color: var(--accent);
+  color: var(--accent-text);
   margin-bottom: 6px;
 }
 .process-row__note {

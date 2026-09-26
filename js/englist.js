@@ -1,10 +1,7 @@
 import './scroll.js';
-import { initNav } from './nav.js';
+import { initSite } from './site.js';
 import { projects, order, hrefOf } from './projects.js';
 import { papers, hrefOfPaper } from './papers.js';
-import { initTheme } from './theme.js';
-import { initContact } from './contact.js';
-import { initMobileNav } from './mobilenav.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const list = document.querySelector('.eng-list');
@@ -57,11 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const count = document.querySelector('.eng-count');
   if (count) count.textContent = `${order.length} projects · ${papers.length} papers`;
 
-  initNav();
-  initMobileNav();
-  initTheme();
-  initContact();
-  if (window.attachCursorEvents) window.attachCursorEvents();
+  initSite();
 
   if (window.gsap && window.ScrollTrigger) {
     gsap.from('.eng-row', {

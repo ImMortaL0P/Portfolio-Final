@@ -24,7 +24,7 @@
   color: var(--on-light-1);
   transition: color .3s var(--ease-out);
 }
-.footer-mark:hover { color: var(--accent); }
+.footer-mark:hover { color: var(--accent-text); }
 .footer-blurb {
   margin-top: var(--s-2);
   font-size: 14.5px;
@@ -42,7 +42,7 @@
 
 .footer-col__head {
   display: block;
-  color: var(--accent);
+  color: var(--accent-text);
   padding-bottom: var(--s-2);
   margin-bottom: var(--s-2);
   border-bottom: 1px solid var(--rule-light);
@@ -54,7 +54,7 @@
   display: inline-block;
   transition: color .25s var(--ease-out), transform .25s var(--ease-out);
 }
-.footer-links a:hover { color: var(--accent); transform: translateX(3px); }
+.footer-links a:hover { color: var(--accent-text); transform: translateX(3px); }
 
 .footer-clock { color: var(--on-light-1); font-variant-numeric: tabular-nums; }
 .footer-cta { margin-top: var(--s-3); }
@@ -78,7 +78,7 @@
   justify-self: end;
   transition: color .25s var(--ease-out);
 }
-.footer-top-link:hover { color: var(--accent); }
+.footer-top-link:hover { color: var(--accent-text); }
 
 /* ---- oversized sign-off, clipped by the page edge ---- */
 .footer-wordmark {

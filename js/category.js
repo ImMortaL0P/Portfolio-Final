@@ -1,10 +1,7 @@
 import './scroll.js';
+import { initSite } from './site.js';
 import { workCategories } from './data.js';
 import { showcase } from './showcase.js';
-import { initNav } from './nav.js';
-import { initTheme } from './theme.js';
-import { initContact } from './contact.js';
-import { initMobileNav } from './mobilenav.js';
 
 const slug = (s) => s.toLowerCase().replace(/[^a-z]+/g, '-').replace(/^-|-$/g, '');
 const esc = (s) => String(s).replace(/"/g, '&quot;');
@@ -181,21 +178,4 @@ imgs.forEach((img) => {
   }
 });
 
-const pill = document.querySelector('.cursor-pill');
-if (pill && matchMedia('(hover: hover)').matches && window.gsap) {
-  const xTo = gsap.quickTo(pill, 'x', { duration: 0.35, ease: 'power3' });
-  const yTo = gsap.quickTo(pill, 'y', { duration: 0.35, ease: 'power3' });
-  addEventListener('pointermove', (e) => { xTo(e.clientX); yTo(e.clientY); });
-  document.addEventListener('mouseover', (e) => {
-    const el = e.target.closest('[data-cursor]');
-    if (el) { pill.textContent = el.dataset.cursor; gsap.to(pill, { scale: 1, opacity: 1, duration: 0.2 }); }
-  });
-  document.addEventListener('mouseout', (e) => {
-    if (e.target.closest('[data-cursor]')) gsap.to(pill, { scale: 0.4, opacity: 0, duration: 0.2 });
-  });
-}
-
-initNav();
-initMobileNav();
-initTheme();
-initContact();
+initSite();

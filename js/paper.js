@@ -1,9 +1,6 @@
 import './scroll.js';
-import { initNav } from './nav.js';
+import { initSite } from './site.js';
 import { papers, hrefOfPaper } from './papers.js';
-import { initTheme } from './theme.js';
-import { initContact } from './contact.js';
-import { initMobileNav } from './mobilenav.js';
 
 const slug = document.body.dataset.paper;
 const i = papers.findIndex((p) => p.slug === slug);
@@ -132,11 +129,7 @@ function lightbox() {
 document.addEventListener('DOMContentLoaded', () => {
   render();
   lightbox();
-  initNav();
-  initMobileNav();
-  initTheme();
-  initContact();
-  if (window.attachCursorEvents) window.attachCursorEvents();
+  initSite();
 
   if (window.gsap && window.ScrollTrigger) {
     document.querySelectorAll('.proj-block, .paper__fig, .paper__finding').forEach((el) => {

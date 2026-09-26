@@ -8,8 +8,11 @@
 
 @font-face {
   font-family: 'Archivo';
-  src: url('../assets/fonts/archivo-500.woff2') format('woff2');
-  font-weight: 500;
+  /* variable (wght 100–900), Latin subset: one file covers the body
+     weight and the heavier weights used for emphasis */
+  src: url('../assets/fonts/archivo-var.woff2') format('woff2-variations'),
+       url('../assets/fonts/archivo-var.woff2') format('woff2');
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
@@ -107,6 +110,7 @@ img, video { max-width: 100%; height: auto; display: block; }
   margin: 0 auto;
 }
 .section--dark {
+  --accent-text: var(--accent);
   background: var(--panel);
   color: var(--on-dark-3);
 }

@@ -1,9 +1,6 @@
 import './scroll.js';
-import { initNav } from './nav.js';
+import { initSite } from './site.js';
 import { projects, order, hrefOf } from './projects.js';
-import { initTheme } from './theme.js';
-import { initContact } from './contact.js';
-import { initMobileNav } from './mobilenav.js';
 
 const key = document.body.dataset.project;
 const p = projects[key];
@@ -153,11 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
   render();
   wireBack();
   lightbox();
-  if (window.attachCursorEvents) window.attachCursorEvents();
-  initNav();
-  initMobileNav();
-  initTheme();
-  initContact();
+  initSite();
 
   if (window.gsap && window.ScrollTrigger) {
     gsap.from('.proj-block', {

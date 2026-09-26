@@ -1,14 +1,11 @@
 import './scroll.js';
+import { initSite } from './site.js';
 import './motion.js';
 import { workCategories } from './data.js';
 import { initGenreEngine } from './genre.js';
-import { initNav } from './nav.js';
 import { initCtaBg } from './ctabg.js';
 import { scrambleTo } from './scramble.js';
-import { initTheme } from './theme.js';
-import { initContact } from './contact.js';
 import { initLayers } from './layers.js';
-import { initMobileNav } from './mobilenav.js';
 
 const esc = (s) => String(s).replace(/"/g, '&quot;');
 
@@ -119,12 +116,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   initGenreEngine();
   initAboutTicker();
-  if (window.attachCursorEvents) window.attachCursorEvents();
   if (window.initWorkReveal) window.initWorkReveal();
-  initNav();
-  initMobileNav();
-  initTheme();
-  initContact();
+  initSite();
   initLayers();
   initCtaBg();
   if (window.ScrollTrigger) ScrollTrigger.refresh();
