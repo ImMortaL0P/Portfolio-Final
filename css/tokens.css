@@ -32,6 +32,17 @@
   --text-mono:     0.8125rem;
 
   --section-pad:   120px;
+
+  /* ---- Imagery ----
+     The work keeps its colour at rest — held back just enough that the
+     page still reads as one surface — and hover lifts it the rest of the
+     way. Photography opts out with .is-mono: that series is B&W work, so
+     draining it is the point rather than an effect. */
+  --img-rest:        grayscale(0.42) saturate(0.94) contrast(1.02);
+  --img-rest-op:     0.92;
+  --img-hover:       grayscale(0) saturate(1.04) contrast(1);
+  --img-mono:        grayscale(1) contrast(1.04);
+  --img-mono-op:     0.72;
 }
 
 @media (max-width: 900px) { :root { --section-pad: 72px; } }

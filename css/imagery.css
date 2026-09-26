@@ -1,0 +1,40 @@
+/* ------------------------------------------------------------------
+   MONO OPT-OUT
+   Photography is black-and-white work, so it keeps the original full
+   drain at rest and the colour lift does nothing to it. Everything else
+   runs on the --img-rest / --img-hover tokens in tokens.css.
+------------------------------------------------------------------ */
+
+.is-mono .shot img,
+.is-mono .series__open img,
+.is-mono .feat__shot img {
+  filter: var(--img-mono);
+  opacity: var(--img-mono-op);
+}
+.is-mono .work-row:hover .shot img,
+.is-mono .work-row:focus-visible .shot img,
+.is-mono .series__open:hover img,
+.is-mono .series__open:focus-visible img,
+.is-mono .feat__shot:hover img {
+  /* the reveal still fires — it just lands on a warmer grey, which is
+     what a B&W print does under a light, rather than turning colour */
+  filter: grayscale(1) contrast(1.1) brightness(1.06);
+  opacity: 1;
+}
+
+/* Touch devices never get hover, so nothing should be left drained there. */
+@media (hover: none) {
+  .shot img,
+  .series__open img,
+  .feat__shot img,
+  .writ-row__thumb {
+    filter: var(--img-hover);
+    opacity: 1;
+  }
+  .is-mono .shot img,
+  .is-mono .series__open img,
+  .is-mono .feat__shot img {
+    filter: var(--img-mono);
+    opacity: 0.94;
+  }
+}

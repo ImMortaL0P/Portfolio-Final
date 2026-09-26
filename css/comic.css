@@ -65,9 +65,53 @@
 }
 .panel:hover .panel__n { color: var(--accent); }
 
-/* the art is printed on a sheet of rough paper, in either theme */
-.panel__art {
+/* ------------------------------------------------------------------
+   THE SHEET
+   Every redraw is printed on white rough paper — a real grain layer
+   (fractal noise, multiplied) over an uneven white, plus fibre flecks
+   and a soft deckle edge. It holds its value in either theme, the same
+   way the dark furniture elsewhere holds --panel.
+------------------------------------------------------------------ */
+.sheet {
   position: relative;
+  background-color: #FBFAF6;
+  background-image:
+    /* fibre flecks caught in the pulp */
+    radial-gradient(circle at 18% 24%, rgba(17,17,17,0.05) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 72% 61%, rgba(17,17,17,0.045) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 41% 83%, rgba(17,17,17,0.04) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 87% 18%, rgba(17,17,17,0.035) 0 1px, transparent 1.5px),
+    /* the tooth of the stock */
+    repeating-linear-gradient(94deg, rgba(17,17,17,0.03) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(6deg, rgba(17,17,17,0.024) 0 1px, transparent 1px 5px),
+    /* the sheet is never evenly lit */
+    radial-gradient(130% 95% at 20% 10%, #FFFFFF 0%, rgba(255,255,255,0) 58%),
+    radial-gradient(130% 105% at 90% 96%, rgba(17,17,17,0.07) 0%, rgba(17,17,17,0) 62%);
+  background-size: 23px 23px, 31px 29px, 17px 19px, 41px 37px, auto, auto, auto, auto;
+}
+/* grain, multiplied into the sheet and sitting under the art */
+.sheet::before {
+  content: "";
+  position: absolute; inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.42'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+/* the deckle: a soft inner edge so the sheet reads as paper, not a swatch */
+.sheet::after {
+  content: "";
+  position: absolute; inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(17, 17, 17, 0.08),
+              inset 0 16px 30px -20px rgba(17, 17, 17, 0.32),
+              inset 0 -16px 30px -20px rgba(17, 17, 17, 0.26);
+}
+
+.panel__art {
   flex: 1 1 auto;
   min-height: 0;
   display: grid; place-items: center;
@@ -76,30 +120,9 @@
   font: inherit; color: inherit;
   cursor: pointer;
   overflow: hidden;
-  background-color: var(--paper-sheet, #F4F1E9);
-  background-image:
-    /* fibre flecks */
-    radial-gradient(circle at 18% 24%, rgba(17,17,17,0.035) 0 1px, transparent 1.4px),
-    radial-gradient(circle at 72% 61%, rgba(17,17,17,0.03) 0 1px, transparent 1.4px),
-    radial-gradient(circle at 41% 83%, rgba(17,17,17,0.025) 0 1px, transparent 1.4px),
-    /* laid-paper tooth */
-    repeating-linear-gradient(94deg, rgba(17,17,17,0.022) 0 1px, transparent 1px 4px),
-    repeating-linear-gradient(6deg, rgba(17,17,17,0.018) 0 1px, transparent 1px 5px),
-    /* uneven sheet: a little warmth in one corner, a little shade in the other */
-    radial-gradient(120% 90% at 22% 12%, #FBF8F1 0%, rgba(251,248,241,0) 55%),
-    radial-gradient(120% 100% at 88% 96%, rgba(17,17,17,0.05) 0%, rgba(17,17,17,0) 60%);
-  background-size: 23px 23px, 31px 29px, 17px 19px, auto, auto, auto, auto;
-}
-/* the deckle: a soft inner edge so the sheet reads as paper, not a swatch */
-.panel__art::after {
-  content: "";
-  position: absolute; inset: 0;
-  pointer-events: none;
-  box-shadow: inset 0 0 0 1px rgba(17, 17, 17, 0.06),
-              inset 0 14px 26px -18px rgba(17, 17, 17, 0.28),
-              inset 0 -14px 26px -18px rgba(17, 17, 17, 0.22);
 }
 .panel__art img {
+  position: relative; z-index: 1;      /* over the grain, under the deckle */
   display: block;
   max-width: 100%; max-height: 100%;
   width: auto; height: auto;

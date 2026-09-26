@@ -95,14 +95,14 @@
   width: 100%;
   height: auto;
   display: block;
-  filter: grayscale(1) contrast(1.04);
-  opacity: .88;
+  filter: var(--img-rest);
+  opacity: var(--img-rest-op);
   transform: scale(1);
   transition: filter .55s var(--ease-out), opacity .55s var(--ease-out), transform .7s var(--ease-out);
 }
 .series__open:hover img,
 .series__open:focus-visible img {
-  filter: grayscale(0);
+  filter: var(--img-hover);
   opacity: 1;
   transform: scale(1.05);
 }
@@ -284,11 +284,11 @@
 }
 .feat__shot img {
   width: 100%; height: auto; display: block;
-  filter: grayscale(1) contrast(1.03);
-  opacity: .9;
+  filter: var(--img-rest);
+  opacity: var(--img-rest-op);
   transition: filter .55s var(--ease-out), opacity .55s var(--ease-out);
 }
-.feat__shot:hover img { filter: grayscale(0); opacity: 1; }
+.feat__shot:hover img { filter: var(--img-hover); opacity: 1; }
 .feat__shot figcaption { display: none; }
 /* a feature whose screenshot isn't in yet degrades to a labelled placeholder */
 .feat__shot.is-missing { aspect-ratio: 16 / 10; display: grid; place-items: center; }

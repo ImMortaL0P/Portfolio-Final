@@ -15,6 +15,8 @@ const idx = Math.max(0, workCategories.findIndex((c) => slug(c.category) === wan
 const cat = workCategories[idx];
 
 /* ---------- header ---------- */
+/* photography is B&W work — it keeps the full mono treatment */
+if (slug(cat.category) === 'photography') document.body.classList.add('is-mono');
 document.title = `${cat.category} — K. Mangalam`;
 document.querySelector('.cat-hero__n').textContent = `${cat.n} / ${String(workCategories.length).padStart(2, '0')}`;
 document.querySelector('.cat-hero__tags').textContent = cat.tags;
@@ -126,6 +128,8 @@ function show(k) {
   at = (k + flat.length) % flat.length;
   boxImg.src = flat[at].full;
   boxImg.alt = flat[at].caption;
+  /* the redraw studies are transparent line art — give them the sheet */
+  boxImg.classList.toggle('is-sheet', flat[at].full.includes('assets/Redraws/'));
   boxCap.textContent = flat[at].caption;
 }
 function open(k) {

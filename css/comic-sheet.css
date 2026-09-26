@@ -1,0 +1,56 @@
+/* ------------------------------------------------------------------
+   The Redraw Lab sheet, reused outside comics.html.
+   The vector studies are transparent PNG-style artwork, so wherever
+   they appear they sit on the same white rough paper as the comic page
+   rather than floating on the site ground.
+------------------------------------------------------------------ */
+
+#redraw-lab .series__shot {
+  position: relative;
+  background-color: #FBFAF6;
+  background-image:
+    radial-gradient(circle at 18% 24%, rgba(17,17,17,0.05) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 72% 61%, rgba(17,17,17,0.045) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 41% 83%, rgba(17,17,17,0.04) 0 1px, transparent 1.6px),
+    repeating-linear-gradient(94deg, rgba(17,17,17,0.03) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(6deg, rgba(17,17,17,0.024) 0 1px, transparent 1px 5px),
+    radial-gradient(130% 95% at 20% 10%, #FFFFFF 0%, rgba(255,255,255,0) 58%),
+    radial-gradient(130% 105% at 90% 96%, rgba(17,17,17,0.07) 0%, rgba(17,17,17,0) 62%);
+  background-size: 23px 23px, 31px 29px, 17px 19px, auto, auto, auto, auto;
+  overflow: hidden;
+}
+#redraw-lab .series__shot::before {
+  content: "";
+  position: absolute; inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.42'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+#redraw-lab .series__shot::after {
+  content: "";
+  position: absolute; inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(17, 17, 17, 0.08),
+              inset 0 16px 30px -20px rgba(17, 17, 17, 0.32),
+              inset 0 -16px 30px -20px rgba(17, 17, 17, 0.26);
+}
+#redraw-lab .series__open {
+  position: relative; z-index: 1;
+  display: block;
+  padding: clamp(14px, 2.5vw, 30px);
+}
+#redraw-lab .series__open img {
+  width: 100%; height: auto;
+  object-fit: contain;
+}
+
+/* the studies are line art — the lightbox needs the sheet too, or they
+   sit as floating shapes on the scrim */
+.lightbox__img.is-sheet {
+  background: #FBFAF6;
+  padding: clamp(12px, 3vw, 40px);
+}

@@ -40,7 +40,8 @@ const slugify = (s) => s.toLowerCase().replace(/[^a-z]+/g, '-').replace(/^-|-$/g
 function buildCategory(cat) {
   const cslug = slugify(cat.category);
   const wrap = document.createElement('section');
-  wrap.className = 'work-category';
+  /* photography is B&W work — it keeps the full mono treatment */
+  wrap.className = 'work-category' + (cslug === 'photography' ? ' is-mono' : '');
   wrap.id = 'cat-' + cslug;
 
   const head = document.createElement('div');

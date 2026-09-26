@@ -42,7 +42,7 @@ PANELS.forEach((p, i) => {
   fig.innerHTML = `
     <span class="panel__n">${n}</span>
     <span class="panel__sfx">${esc(p.sfx)}</span>
-    <button type="button" class="panel__art" data-k="${i}" data-cursor="EXPAND"
+    <button type="button" class="panel__art sheet" data-k="${i}" data-cursor="EXPAND"
             aria-label="Open the ${esc(p.name)} study full size">
       <img src="${esc(mid)}" alt="${esc(p.name)} — vector redraw study" loading="lazy" decoding="async">
     </button>
@@ -73,6 +73,7 @@ function show(k) {
   at = (k + flat.length) % flat.length;
   boxImg.src = flat[at].full;
   boxImg.alt = flat[at].caption;
+  boxImg.classList.add('is-sheet');   /* line art needs paper under it */
   boxCap.textContent = flat[at].caption;
 }
 function open(k) {
